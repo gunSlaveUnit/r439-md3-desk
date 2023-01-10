@@ -2,6 +2,8 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 
+import "navigation.js" as Navigation
+
 Item {
     ColumnLayout {
         GridLayout {
@@ -9,8 +11,8 @@ Item {
             columns: 3
             flow: GridLayout.TopToBottom
 
-            Button {text: qsTr("1. Режим прибора"); onClicked: {display_stack.currentIndex = 4}}
-            Button {text: qsTr("2. ТЛФ1"); onClicked: {display_stack.currentIndex = 5}}
+            Button {text: qsTr("1. Режим прибора"); onClicked: {display_stack.currentIndex = Navigation.DEVICE_MODE_AGL_PAGE}}
+            Button {text: qsTr("2. ТЛФ1"); onClicked: {display_stack.currentIndex = Navigation.TLF1_PAGE}}
             Button {text: qsTr("3. ТЛФ2")}
             Button {text: qsTr("4. ТЛФ3")}
             Button {text: qsTr("5. ТЛФ4")}
@@ -26,6 +28,6 @@ Item {
             Button {text: qsTr("15. ТЛГ4")}
             Button {text: qsTr("16. Синх. вход")}
         }
-        Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = 2}}
+        Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.MODE_PAGE}}
     }
 }

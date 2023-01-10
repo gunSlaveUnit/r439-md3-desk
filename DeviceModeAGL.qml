@@ -2,6 +2,8 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 
+import "navigation.js" as Navigation
+
 Item {
     ColumnLayout {
         GridLayout {
@@ -20,6 +22,6 @@ Item {
             Text {text: qsTr("Режим РАТС")}
             ComboBox {model: [qsTr("отсутствует")]}
         }
-        Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = 3}}
+        Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.MODE_AGL_PAGE}}
     }
 }
