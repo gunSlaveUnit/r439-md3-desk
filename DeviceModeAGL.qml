@@ -12,10 +12,10 @@ Item {
             ComboBox {model: [qsTr("ППРЧ непрерывный"), qsTr("ПР")]}
 
             Text {text: qsTr("Скор ГС ПРМ кбит/c")}
-            ComboBox {model: [qsTr("нет ГС"), qsTr("6")]}
+            ComboBox {model: [qsTr("нет ГС"), 6]}
 
             Text {text: qsTr("Скор ГС ПРД кбит/c")}
-            ComboBox {model: [qsTr("нет ГС"), qsTr("6")]}
+            ComboBox {model: [qsTr("нет ГС"), 6]}
 
             Text {text: qsTr("Режим РАТС")}
             ComboBox {model: [qsTr("отсутствует")]}
