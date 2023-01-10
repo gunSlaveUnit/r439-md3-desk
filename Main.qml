@@ -15,7 +15,7 @@ Item {
         Button {text: qsTr("5. РАТС")}
         Button {text: qsTr("6. ПРД")}
         Button {text: qsTr("7. Установка")}
-        Button {text: qsTr("8. Регламент"); onClicked: {display_stack.push(regulations)}}
+        Button {text: qsTr("8. Регламент"); onClicked: {display_stack.currentIndex = 1}}
         Button {text: qsTr("9. Антенна")}
         Button {text: qsTr("0. Ок. сеанса"); Layout.row: 4; Layout.column: 1}
     }
