@@ -32,6 +32,10 @@ Item {
             Text {text: qsTr("Ft ПСП ШПС ПРД:")}
             ComboBox {model: [qsTr("Ft2")]}
         }
-        Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = 2}}
+
+        RowLayout {
+            Button {text: qsTr("<"); onClicked: {display_stack.currentIndex = Navigation.DEVICE_MODE_KLU_2_PAGE}}
+            Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.MODE_PAGE}}
+        }
     }
 }
