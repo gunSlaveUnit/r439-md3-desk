@@ -14,7 +14,7 @@ Item {
             Button {text: qsTr("3. КЛ-У")}
             Button {text: qsTr("4. ДМД, УЗОЗМ")}
             Button {text: qsTr("5. Тракты ПРД, ПРМ")}
-            Button {Layout.row: 0; Layout.column: 2; text: qsTr("6. Л807"); onClicked: {display_stack.currentIndex = 5}}
+            Button {Layout.row: 0; Layout.column: 2; text: qsTr("6. Л807"); onClicked: {display_stack.currentIndex = 6}}
         }
         Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = 1}}
     }
