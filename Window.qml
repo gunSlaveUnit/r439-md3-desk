@@ -5,4 +5,6 @@ Window {
     height: 600
     visible: true
     title: qsTr("MD3Desk")
+
+    Display {}
 }
