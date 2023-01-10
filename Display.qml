@@ -11,6 +11,12 @@ Item {
 
         Mode {}
 
+        ModeAGL {}
+
+        DeviceModeAGL {}
+
+        TLF1 {}
+
         L807 {}
     }
 }
