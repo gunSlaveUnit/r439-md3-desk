@@ -1,5 +1,3 @@
-.pragma library
-
 const MAIN_PAGE = 0;
 const REGULATIONS_PAGE = 1;
 const MODE_PAGE = 2;
