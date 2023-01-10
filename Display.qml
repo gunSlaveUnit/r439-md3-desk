@@ -23,6 +23,10 @@ Item {
 
         TLF1 {}
 
+        DeviceModeDMDUZOZM1 {}
+
+        DeviceModeDMDUZOZM2 {}
+
         L807 {}
     }
 }
