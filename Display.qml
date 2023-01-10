@@ -8,5 +8,7 @@ Item {
         Main {}
 
         Regulations {}
+
+        Mode {}
     }
 }
