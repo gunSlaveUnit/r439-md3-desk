@@ -30,7 +30,7 @@ Item {
             ComboBox {model: [qsTr(""), qsTr("УП (ППРЧ)")]}
 
             Text {text: qsTr("Ft ПСП ШПС ПРД:")}
-            ComboBox {model: [qsTr(Ft2)]}
+            ComboBox {model: [qsTr("Ft2")]}
         }
         Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = 2}}
     }
