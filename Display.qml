@@ -7,5 +7,7 @@ Item {
         initialItem: main
 
         Main {id: main}
+
+        Regulations {id: regulations}
     }
 }
