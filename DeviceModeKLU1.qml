@@ -2,6 +2,8 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 
+import "navigation.js" as Navigation
+
 Item {
     ColumnLayout {
         GridLayout {
@@ -32,6 +34,10 @@ Item {
             Text {text: qsTr("Ft ПСП ПРМ:")}
             ComboBox {model: [qsTr("Ft2")]}
         }
-        Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = 2}}
+
+        RowLayout {
+            Button {text: qsTr(">"); onClicked: {display_stack.currentIndex = Navigation.DEVICE_MODE_KLU_2_PAGE}}
+            Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.MODE_PAGE}}
+        }
     }
 }
