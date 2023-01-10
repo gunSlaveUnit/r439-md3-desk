@@ -15,6 +15,12 @@ Item {
 
         DeviceModeAGL {}
 
+        DeviceModeKLU1 {}
+
+        DeviceModeKLU2 {}
+
+        DeviceModeKLU3 {}
+
         TLF1 {}
 
         L807 {}
