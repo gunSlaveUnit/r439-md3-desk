@@ -21,10 +21,10 @@ Item {
             ComboBox {model: [qsTr("Вкл.")]}
 
             Text {text: qsTr("Номер ключа ПРМ:")}
-            ComboBox {model: [qsTr(0)]}
+            ComboBox {model: [0]}
 
             Text {text: qsTr("Номер подключа ПРМ:")}
-            ComboBox {model: [qsTr(1)]}
+            ComboBox {model: [1]}
 
             Text {text: qsTr("Полоса поиска ПРМ, кГц:")}
             ComboBox {model: [qsTr("+-1")]}

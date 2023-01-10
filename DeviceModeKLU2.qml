@@ -15,10 +15,10 @@ Item {
             ComboBox {model: [qsTr("Вкл.")]}
 
             Text {text: qsTr("Номер ключа ПРД:")}
-            ComboBox {model: [qsTr(0)]}
+            ComboBox {model: [0]}
 
             Text {text: qsTr("Номер подключа ПРД:")}
-            ComboBox {model: [qsTr(1)]}
+            ComboBox {model: [1]}
 
             Text {text: qsTr("Ft ПСП ПРД:")}
             ComboBox {model: [qsTr("Ft2")]}
