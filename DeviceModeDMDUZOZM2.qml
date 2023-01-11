@@ -14,7 +14,7 @@ Item {
             ComboBox {model: [qsTr("1"), qsTr("3")]}
 
             Text {text: qsTr("АРУ:")}
-            ComboBox {model: [qsTr("Вкл.")]}
+            ComboBox {model: [qsTr("АРУ.")]}
 
             Text {text: qsTr("Автопоиск:")}
             ComboBox {model: [qsTr("Вкл.")]}
