@@ -22,6 +22,6 @@ Item {
             Text {text: qsTr("Режим РАТС")}
             ComboBox {model: [qsTr("отсутствует")]}
         }
-        Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.MODE_AGL_PAGE}}
+        Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.REGULATIONS_PAGE}}
     }
 }
