@@ -27,6 +27,10 @@ Item {
 
         DeviceModeDMDUZOZM2 {}
 
+        DeviceModePRMPRD1 {}
+
+        DeviceModePRMPRD2 {}
+
         L807 {}
     }
 }
