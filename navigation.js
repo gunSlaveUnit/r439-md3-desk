@@ -1,6 +1,7 @@
 let startIndex = 0
 
 const MAIN_PAGE = startIndex++
+const MONITOR_PAGE = startIndex++
 const REGULATIONS_PAGE = startIndex++
 const MODE_PAGE = startIndex++
 const MODE_AGL_PAGE = startIndex++
