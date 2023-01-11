@@ -11,7 +11,7 @@ Item {
         flow: GridLayout.TopToBottom
 
         Button {text: qsTr("1. СХОС")}
-        Button {text: qsTr("2. Монитор")}
+        Button {text: qsTr("2. Монитор"); onClicked: {display_stack.currentIndex = Navigation.MONITOR_PAGE}}
         Button {text: qsTr("3. Сл. связь")}
         Button {text: qsTr("4. Архив команд")}
         Button {text: qsTr("5. РАТС")}
