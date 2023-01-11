@@ -13,6 +13,8 @@ Item {
 
         Status {}
 
+        StatusDMD {}
+
         Mode {}
 
         ModeAGL {}
