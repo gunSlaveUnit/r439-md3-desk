@@ -32,5 +32,7 @@ Item {
         DeviceModePRMPRD2 {}
 
         L807 {}
+
+        Plume {}
     }
 }
