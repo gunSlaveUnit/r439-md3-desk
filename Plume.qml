@@ -32,7 +32,7 @@ Item {
             columns: 4
 
             Text {text: qsTr("Ствол. фильтр:")}
-            TextField {
+            Text {
                 id: stem_filter
                 text: "1"
                 Connections {
@@ -42,7 +42,7 @@ Item {
             }
 
             Text {text: qsTr("№ волны ПРМ:")}
-            TextField {
+            Text {
                 id: prm_wave_number
                 text: "2500"
                 Connections {
@@ -52,7 +52,7 @@ Item {
             }
 
             Text {text: qsTr("Поддиап. приема:")}
-            TextField {
+            Text {
                 id: receive_subband
                 text: "1"
                 Connections {
@@ -62,7 +62,7 @@ Item {
             }
 
             Text {text: qsTr("№ фильтра ДМД:")}
-            TextField {
+            Text {
                 id: dmd_filter_number
                 text: "3"
                 Connections {
