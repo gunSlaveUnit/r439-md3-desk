@@ -11,6 +11,8 @@ Item {
 
         Regulations {}
 
+        Status {}
+
         Mode {}
 
         ModeAGL {}
