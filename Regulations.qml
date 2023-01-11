@@ -15,7 +15,7 @@ Item {
             Button {text: qsTr("2. Режим"); onClicked: {display_stack.currentIndex = Navigation.MODE_PAGE}}
             Button {text: qsTr("3. Режим АВУР")}
             Button {text: qsTr("4. Монитор")}
-            Button {text: qsTr("5. Шлейф")}
+            Button {text: qsTr("5. Шлейф"); onClicked: {display_stack.currentIndex = Navigation.PLUME_PAGE}}
             Button {text: qsTr("6. Управление")}
         }
         Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.MAIN_PAGE}}
