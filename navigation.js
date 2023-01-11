@@ -14,3 +14,4 @@ const DEVICE_MODE_DMD_UZOZM_2_PAGE = startIndex++
 const DEVICE_MODE_PRM_PRM_1_PAGE = startIndex++
 const DEVICE_MODE_PRM_PRM_2_PAGE = startIndex++
 const L807_PAGE = startIndex++
+const PLUME_PAGE = startIndex++
