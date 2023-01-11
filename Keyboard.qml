@@ -7,57 +7,58 @@ Item {
         rows: 6
         columns: 8
         flow: GridLayout.TopToBottom
+        anchors.fill: parent
 
-        Button {text: qsTr("ESC")}
-        Button {text: qsTr("РУС")}
-        Button {text: qsTr("РУС")}
-        Button {text: qsTr("ЛАТ")}
-        Button {text: qsTr("ЛАТ")}
-        Button {text: qsTr("ЦИФ")}
+        StretchedButton {text: qsTr("ESC")}
+        StretchedButton {text: qsTr("РУС")}
+        StretchedButton {text: qsTr("РУС")}
+        StretchedButton {text: qsTr("ЛАТ")}
+        StretchedButton {text: qsTr("ЛАТ")}
+        StretchedButton {text: qsTr("ЦИФ")}
 
-        Button {text: qsTr("F1")}
-        Button {text: qsTr("(")}
-        Button {text: qsTr("+")}
-        Button {text: qsTr("/")}
-        Button {text: qsTr("*")}
-        Button {text: qsTr("=")}
+        StretchedButton {text: qsTr("F1")}
+        StretchedButton {text: qsTr("(")}
+        StretchedButton {text: qsTr("+")}
+        StretchedButton {text: qsTr("/")}
+        StretchedButton {text: qsTr("*")}
+        StretchedButton {text: qsTr("=")}
 
-        Button {text: qsTr("F2")}
-        Button {text: qsTr(")")}
-        Button {text: qsTr("7")}
-        Button {text: qsTr("4")}
-        Button {text: qsTr("1")}
-        Button {text: qsTr("0")}
+        StretchedButton {text: qsTr("F2")}
+        StretchedButton {text: qsTr(")")}
+        StretchedButton {text: qsTr("7")}
+        StretchedButton {text: qsTr("4")}
+        StretchedButton {text: qsTr("1")}
+        StretchedButton {text: qsTr("0")}
 
-        Button {text: qsTr("F3")}
-        Button {text: qsTr("<")}
-        Button {text: qsTr("8")}
-        Button {text: qsTr("5")}
-        Button {text: qsTr("2")}
-        Button {text: qsTr(",")}
+        StretchedButton {text: qsTr("F3")}
+        StretchedButton {text: qsTr("<")}
+        StretchedButton {text: qsTr("8")}
+        StretchedButton {text: qsTr("5")}
+        StretchedButton {text: qsTr("2")}
+        StretchedButton {text: qsTr(",")}
 
-        Button {text: qsTr("F4")}
-        Button {text: qsTr(">")}
-        Button {text: qsTr("9")}
-        Button {text: qsTr("6")}
-        Button {text: qsTr("3")}
-        Button {text: qsTr("-")}
+        StretchedButton {text: qsTr("F4")}
+        StretchedButton {text: qsTr(">")}
+        StretchedButton {text: qsTr("9")}
+        StretchedButton {text: qsTr("6")}
+        StretchedButton {text: qsTr("3")}
+        StretchedButton {text: qsTr("-")}
 
-        Button {text: qsTr("<-->"); Layout.row: 1; Layout.column: 5}
-        Button {text: qsTr("BS")}
-        Button {text: qsTr("<")}
-        Button {text: qsTr("SPACE")}
-        Button {text: qsTr("ENTER"); Layout.row: 5; Layout.column: 5; Layout.columnSpan: 2; Layout.fillWidth: true}
+        StretchedButton {text: qsTr("<-->"); Layout.row: 1; Layout.column: 5}
+        StretchedButton {text: qsTr("BS")}
+        StretchedButton {text: qsTr("<")}
+        StretchedButton {text: qsTr("SPACE")}
+        StretchedButton {text: qsTr("ENTER"); Layout.row: 5; Layout.column: 5; Layout.columnSpan: 2; Layout.fillWidth: true}
 
-        Button {text: qsTr("PageUp"); Layout.row: 1; Layout.column: 6}
-        Button {text: qsTr("PageDown")}
-        Button {text: qsTr("^")}
-        Button {text: qsTr("!^")}
+        StretchedButton {text: qsTr("PageUp"); Layout.row: 1; Layout.column: 6}
+        StretchedButton {text: qsTr("PageDown")}
+        StretchedButton {text: qsTr("^")}
+        StretchedButton {text: qsTr("!^")}
 
-        Button {text: qsTr("^")}
-        Button {text: qsTr("-><-")}
-        Button {text: qsTr("DEL")}
-        Button {text: qsTr(">")}
-        Button {text: qsTr("ENTER"); Layout.row: 4; Layout.column: 7; Layout.rowSpan: 2; Layout.fillHeight: true}
+        StretchedButton {text: qsTr("^")}
+        StretchedButton {text: qsTr("-><-")}
+        StretchedButton {text: qsTr("DEL")}
+        StretchedButton {text: qsTr(">")}
+        StretchedButton {text: qsTr("ENTER"); Layout.row: 4; Layout.column: 7; Layout.rowSpan: 2; Layout.fillHeight: true}
     }
 }

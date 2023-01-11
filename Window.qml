@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 2.15
 
 Window {
+    id: main_window
     width: 1200
     height: 600
     visible: true
@@ -11,9 +12,17 @@ Window {
         rows: 2
         columns: 2
         anchors.fill: parent
+        anchors.margins: 8
+        columnSpacing: 16
 
-        Display {Layout.row: 1; Layout.column: 0}
+        Display {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+        }
 
-        Keyboard {Layout.row: 1; Layout.column: 1}
+        Keyboard {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+        }
     }
 }
