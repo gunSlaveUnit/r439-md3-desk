@@ -11,7 +11,7 @@ Item {
             columns: 2
             flow: GridLayout.TopToBottom
 
-            Button {text: qsTr("1. Состояние")}
+            Button {text: qsTr("1. Состояние"); onClicked: {display_stack.currentIndex = Navigation.STATUS_PAGE}}
             Button {text: qsTr("2. Режим"); onClicked: {display_stack.currentIndex = Navigation.MODE_PAGE}}
             Button {text: qsTr("3. Режим АВУР")}
             Button {text: qsTr("4. Монитор")}
