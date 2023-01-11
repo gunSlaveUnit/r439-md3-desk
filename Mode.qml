@@ -15,7 +15,7 @@ Item {
             Button {text: qsTr("2. ПГ-Л")}
             Button {text: qsTr("3. КЛ-У"); onClicked: {display_stack.currentIndex = Navigation.DEVICE_MODE_KLU_1_PAGE}}
             Button {text: qsTr("4. ДМД, УЗОЗМ"); onClicked: {display_stack.currentIndex = Navigation.DEVICE_MODE_DMD_UZOZM_1_PAGE}}
-            Button {text: qsTr("5. Тракты ПРД, ПРМ")}
+            Button {text: qsTr("5. Тракты ПРД, ПРМ"); onClicked: {display_stack.currentIndex = Navigation.DEVICE_MODE_PRM_PRM_1_PAGE}}
             Button {Layout.row: 0; Layout.column: 2; text: qsTr("6. Л807"); onClicked: {display_stack.currentIndex = Navigation.L807_PAGE}}
         }
         Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.REGULATIONS_PAGE}}
