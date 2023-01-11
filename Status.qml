@@ -15,7 +15,7 @@ Item {
             Button {text: qsTr("2. АГ-Л")}
             Button {text: qsTr("3. ПГ-Л")}
             Button {text: qsTr("4. КЛ-У")}
-            Button {text: qsTr("5. ДМД, УЗОЗМ")}
+            Button {text: qsTr("5. ДМД, УЗОЗМ"); onClicked: {display_stack.currentIndex = Navigation.STATUS_DMD_PAGE}}
             Button {text: qsTr("6. Тракты ПРД, ПРМ")}
         }
 
