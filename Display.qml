@@ -7,6 +7,8 @@ Item {
 
         Main {}
 
+        Monitor {}
+
         Regulations {}
 
         Mode {}
