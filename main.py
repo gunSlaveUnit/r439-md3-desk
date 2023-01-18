@@ -8,7 +8,7 @@ def main():
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
 
-    start_location_filename = "Window.qml"
+    start_location_filename = "gui/Window.qml"
     engine.load(start_location_filename)
 
     app.exec()
