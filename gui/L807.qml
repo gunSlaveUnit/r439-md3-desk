@@ -5,6 +5,10 @@ import QtQuick.Layouts 2.15
 import "navigation.js" as Navigation
 
 Item {
+    Connections {
+        target: l807
+    }
+
     ColumnLayout {
         anchors.fill: parent
 
@@ -15,7 +19,10 @@ Item {
             columns: 2
 
             TextMD3 {text: qsTr("Стык Л807:")}
-            ComboBoxMD3 {model: [qsTr("Выключен")]}
+            ComboBoxMD3 {
+                model: l807.joint_modes
+                onCurrentIndexChanged: {l807.joint = currentIndex}
+            }
             TextMD3 {text: qsTr("Источник сигнала: ")}
             ComboBoxMD3 {model: [qsTr("АГ-Л")]}
         }
