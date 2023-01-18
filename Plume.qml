@@ -10,29 +10,35 @@ Item {
     signal enteredPRDWaveNumber
 
     ColumnLayout {
+        anchors.fill: parent
+
         GridLayout {
+            anchors.fill: parent
+
             rows: 4
             columns: 2
 
-            Text {text: qsTr("Генератор сдвига:")}
-            ComboBox {model: [qsTr("Вкл.")]}
+            TextMD3 {text: qsTr("Генератор сдвига:")}
+            ComboBoxMD3 {model: [qsTr("Вкл.")]}
 
-            Text {text: qsTr("Усилитель мощности:")}
-            ComboBox {model: [qsTr("Откл.")]}
+            TextMD3 {text: qsTr("Усилитель мощности:")}
+            ComboBoxMD3 {model: [qsTr("Откл.")]}
 
-            Text {text: qsTr("Выход У205Д:")}
-            ComboBox {model: [qsTr("Вкл.")]}
+            TextMD3 {text: qsTr("Выход У205Д:")}
+            ComboBoxMD3 {model: [qsTr("Вкл.")]}
 
-            Text {text: qsTr("Номер волны ПРД:")}
-            TextField {text: "0"; onEditingFinished: {plume_page.enteredPRDWaveNumber()}}
+            TextMD3 {text: qsTr("Номер волны ПРД:")}
+            TextFieldMD3 {text: "0"; onEditingFinished: {plume_page.enteredPRDWaveNumber()}}
         }
+
+        Item {Layout.fillHeight: true}
 
         GridLayout {
             rows: 2
             columns: 4
 
-            Text {text: qsTr("Ствол. фильтр:")}
-            Text {
+            TextMD3 {text: qsTr("Ствол. фильтр:")}
+            TextMD3 {
                 id: stem_filter
                 text: "1"
                 Connections {
@@ -41,8 +47,8 @@ Item {
                 }
             }
 
-            Text {text: qsTr("№ волны ПРМ:")}
-            Text {
+            TextMD3 {text: qsTr("№ волны ПРМ:")}
+            TextMD3 {
                 id: prm_wave_number
                 text: "2500"
                 Connections {
@@ -51,8 +57,8 @@ Item {
                 }
             }
 
-            Text {text: qsTr("Поддиап. приема:")}
-            Text {
+            TextMD3 {text: qsTr("Поддиап. приема:")}
+            TextMD3 {
                 id: receive_subband
                 text: "1"
                 Connections {
@@ -61,8 +67,8 @@ Item {
                 }
             }
 
-            Text {text: qsTr("№ фильтра ДМД:")}
-            Text {
+            TextMD3 {text: qsTr("№ фильтра ДМД:")}
+            TextMD3 {
                 id: dmd_filter_number
                 text: "3"
                 Connections {
@@ -72,6 +78,8 @@ Item {
             }
         }
 
-        Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.REGULATIONS_PAGE}}
+        Item {Layout.fillHeight: true}
+
+        ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.REGULATIONS_PAGE}}
     }
 }

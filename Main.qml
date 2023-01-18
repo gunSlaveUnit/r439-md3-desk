@@ -11,15 +11,15 @@ Item {
         flow: GridLayout.TopToBottom
         anchors.fill: parent
 
-        StretchedButton {text: qsTr("1. СХОС")}
-        StretchedButton {text: qsTr("2. Монитор"); onClicked: {display_stack.currentIndex = Navigation.MONITOR_PAGE}}
-        StretchedButton {text: qsTr("3. Сл. связь")}
-        StretchedButton {text: qsTr("4. Архив команд")}
-        StretchedButton {text: qsTr("5. РАТС")}
-        StretchedButton {text: qsTr("6. ПРД")}
-        StretchedButton {text: qsTr("7. Установка")}
-        StretchedButton {text: qsTr("8. Регламент"); onClicked: {display_stack.currentIndex = Navigation.REGULATIONS_PAGE}}
-        StretchedButton {text: qsTr("9. Антенна")}
-        StretchedButton {text: qsTr("0. Ок. сеанса"); Layout.row: 4; Layout.column: 1}
+        ButtonMD3 {text: qsTr("1. СХОС")}
+        ButtonMD3 {text: qsTr("2. Монитор"); onClicked: {display_stack.currentIndex = Navigation.MONITOR_PAGE}}
+        ButtonMD3 {text: qsTr("3. Сл. связь")}
+        ButtonMD3 {text: qsTr("4. Архив команд")}
+        ButtonMD3 {text: qsTr("5. РАТС")}
+        ButtonMD3 {text: qsTr("6. ПРД")}
+        ButtonMD3 {text: qsTr("7. Установка")}
+        ButtonMD3 {text: qsTr("8. Регламент"); onClicked: {display_stack.currentIndex = Navigation.REGULATIONS_PAGE}}
+        ButtonMD3 {text: qsTr("9. Антенна")}
+        ButtonMD3 {text: qsTr("0. Ок. сеанса"); Layout.row: 4; Layout.column: 1}
     }
 }
