@@ -1,7 +1,7 @@
 from PySide6.QtQml import QQmlApplicationEngine
 
-from logic.AGL.AGL import AGL
-from logic.L807.L807 import L807
+from logic.AGL import AGL
+from logic.L807 import L807
 
 
 class Logic:
