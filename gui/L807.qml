@@ -24,7 +24,10 @@ Item {
                 onCurrentIndexChanged: {l807.joint = currentIndex}
             }
             TextMD3 {text: qsTr("Источник сигнала: ")}
-            ComboBoxMD3 {model: [qsTr("АГ-Л")]}
+            ComboBoxMD3 {
+                model: l807.signal_source_modes
+                onCurrentIndexChanged: {l807.signal_source = currentIndex}
+            }
         }
 
         Item {Layout.fillHeight: true}
