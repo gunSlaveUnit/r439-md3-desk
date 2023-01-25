@@ -20,11 +20,12 @@ class L807(QObject):
         self._joint = self.Joint.SWITCHED_OFF
         self._signal_source = self.SignalSource.AG_L
 
+    # region Joint
+
     @Property(list, constant=True)
     def joint_modes(self):
         return self.JOINT_MODES
 
-    # region Joint
     @Signal
     def joint_changed(self):
         pass
@@ -38,12 +39,15 @@ class L807(QObject):
         if self._joint == new_value:
             return
         self._joint = new_value
-        print(self._joint)
         self.joint_changed.emit()
 
     # endregion
 
     # region SignalSource
+
+    @Property(list, constant=True)
+    def signal_source_modes(self):
+        return self.SIGNAL_SOURCE_MODES
 
     @Signal
     def signal_source_changed(self):
