@@ -14,13 +14,13 @@ class AGL(QObject):
         NO_GS = 0
         SIX = 1
 
-    SPEED_GS_PRM_MODES = ["Нет ГС", "6"]
+    SPEED_GS_PRM_MODES = ["Нет ГС", "6.0"]
 
     class SpeedGSPRD(int, Enum):
         NO_GS = 0
         SIX = 1
 
-    SPEED_GS_PRD_MODES = ["Нет ГС", "6"]
+    SPEED_GS_PRD_MODES = ["Нет ГС", "6.0"]
 
     class RATSMode(int, Enum):
         NO = 0
