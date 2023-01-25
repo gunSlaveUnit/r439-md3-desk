@@ -1,5 +1,6 @@
 from PySide6.QtQml import QQmlApplicationEngine
 
+from logic.AGL.AGL import AGL
 from logic.L807.L807 import L807
 
 
@@ -13,8 +14,10 @@ class Logic:
         self._engine = engine
 
         self._l807 = L807()
+        self._agl = AGL()
 
         self._register_logics()
 
     def _register_logics(self):
         self._engine.rootContext().setContextProperty("l807", self._l807)
+        self._engine.rootContext().setContextProperty("agl", self._agl)
