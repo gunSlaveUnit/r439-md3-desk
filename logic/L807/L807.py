@@ -7,7 +7,7 @@ class L807(QObject):
     class Joint(int, Enum):
         SWITCHED_OFF = 0
 
-    JOINT_MODES = ["Выключен", "Включен"]
+    JOINT_MODES = ["Выключен"]
 
     class SignalSource(int, Enum):
         AG_L = 0
