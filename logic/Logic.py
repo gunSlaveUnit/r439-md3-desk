@@ -1,6 +1,7 @@
 from PySide6.QtQml import QQmlApplicationEngine
 
 from logic.AGL import AGL
+from logic.KLU import KLU
 from logic.L807 import L807
 from logic.TLF1 import TLF1
 
@@ -17,6 +18,7 @@ class Logic:
         self._l807 = L807()
         self._agl = AGL()
         self._tlf1 = TLF1()
+        self._klu = KLU()
 
         self._register_logics()
 
@@ -24,3 +26,4 @@ class Logic:
         self._engine.rootContext().setContextProperty("l807", self._l807)
         self._engine.rootContext().setContextProperty("agl", self._agl)
         self._engine.rootContext().setContextProperty("tlf1", self._tlf1)
+        self._engine.rootContext().setContextProperty("klu", self._klu)
