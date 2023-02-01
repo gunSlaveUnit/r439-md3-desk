@@ -5,36 +5,65 @@ import QtQuick.Layouts 2.15
 import "navigation.js" as Navigation
 
 Item {
+    Connections {
+        target: dmd_uzozm
+    }
+
     ColumnLayout {
+        anchors.fill: parent
+
         GridLayout {
+            anchors.fill: parent
+
             rows: 7
             columns: 2
 
-            Text {text: qsTr("Номер фильтра:")}
-            ComboBox {model: [qsTr("1"), qsTr("3")]}
+            TextMD3 {text: qsTr("Номер фильтра:")}
+            ComboBoxMD3 {
+                model: dmd_uzozm.filter_numbers
+                onCurrentIndexChanged: dmd_uzozm.filter_number = currentIndex
+            }
 
-            Text {text: qsTr("АРУ:")}
-            ComboBox {model: [qsTr("АРУ.")]}
+            TextMD3 {text: qsTr("АРУ:")}
+            ComboBoxMD3 {
+                model: dmd_uzozm.aru_variants
+                onCurrentIndexChanged: dmd_uzozm.aru = currentIndex
+            }
 
-            Text {text: qsTr("Автопоиск:")}
-            ComboBox {model: [qsTr("Вкл.")]}
+            TextMD3 {text: qsTr("Автопоиск:")}
+            ComboBoxMD3 {
+                model: dmd_uzozm.auto_search_variants
+                onCurrentIndexChanged: dmd_uzozm.auto_search = currentIndex
+            }
 
-            Text {text: qsTr("АСЧ:")}
-            ComboBox {model: [qsTr("Вкл.")]}
+            TextMD3 {text: qsTr("АСЧ:")}
+            ComboBoxMD3 {
+                model: dmd_uzozm.asch_variants
+                onCurrentIndexChanged: dmd_uzozm.asch = currentIndex
+            }
 
-            Text {text: qsTr("Диф. декодер:")}
-            ComboBox {model: [qsTr("Вкл.")]}
+            TextMD3 {text: qsTr("Диф. декодер:")}
+            ComboBoxMD3 {
+                model: dmd_uzozm.dif_decoder_variants
+                onCurrentIndexChanged: dmd_uzozm.dif_decoder = currentIndex
+            }
 
-            Text {text: qsTr("Полоса ДМД:")}
-            ComboBox {model: [qsTr("Широкая")]}
+            TextMD3 {text: qsTr("Полоса ДМД:")}
+            ComboBoxMD3 {
+                model: dmd_uzozm.dmd_bands
+                onCurrentIndexChanged: dmd_uzozm.dmd_band = currentIndex
+            }
 
-            Text {text: qsTr("Корректор:")}
-            ComboBox {model: [qsTr("Откл.")]}
+            TextMD3 {text: qsTr("Корректор:")}
+            ComboBoxMD3 {
+                model: dmd_uzozm.corrector_variants
+                onCurrentIndexChanged: dmd_uzozm.corrector = currentIndex
+            }
         }
 
         RowLayout {
-            Button {text: qsTr("<"); onClicked: {display_stack.currentIndex = Navigation.DEVICE_MODE_DMD_UZOZM_1_PAGE}}
-            Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.MODE_PAGE}}
+            ButtonMD3 {text: qsTr("<"); onClicked: {display_stack.currentIndex = Navigation.DEVICE_MODE_DMD_UZOZM_1_PAGE}}
+            ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.MODE_PAGE}}
         }
     }
 }
