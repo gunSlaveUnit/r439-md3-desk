@@ -7,17 +7,17 @@ class KLU(QObject):
     class TestCheckModes(int, Enum):
         OFF = 0
 
-    TEST_CHECK_MODES = ("Откл.")
+    TEST_CHECK_MODES = ["Откл."]
 
     class PRD70Modes(int, Enum):
         OFF = 0
 
-    RPD_70_MODES = ("Откл.")
+    RPD_70_MODES = ["Откл."]
 
     class PRDSignalTypes(int, Enum):
         UP_PPRCH = 0
 
-    PRD_SIGNAL_TYPES = ("УП (ППРЧ)")
+    PRD_SIGNAL_TYPES = ["УП (ППРЧ)"]
 
     def __init__(self):
         super().__init__()
