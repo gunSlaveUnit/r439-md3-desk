@@ -160,7 +160,7 @@ class TractPRMPRD(QObject):
 
     @Property(list, constant=True)
     def amplifier_variants(self):
-        return self.BARREL_FILTER_VARIANTS
+        return self.AMPLIFIER_VARIANTS
 
     @Signal
     def amplifier_changed(self):
