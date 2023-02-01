@@ -5,33 +5,59 @@ import QtQuick.Layouts 2.15
 import "navigation.js" as Navigation
 
 Item {
+    Connections {
+        target: tract_prm_prd
+    }
+
     ColumnLayout {
+        anchors.fill: parent
+
         GridLayout {
+            anchors.fill: parent
+
             rows: 6
             columns: 2
 
-            Text {text: qsTr("Тип радиосигнала:")}
-            ComboBox {model: [qsTr("УП")]}
+            TextMD3 {text: qsTr("Тип радиосигнала:")}
+            ComboBoxMD3 {
+                model: tract_prm_prd.radio_signal_types
+                onCurrentIndexChanged: {tract_prm_prd.radio_signal = currentIndex}
+            }
 
-            Text {text: qsTr("Вид сигнала ОФТ:")}
-            ComboBox {model: [qsTr("ОФТ")]}
+            TextMD3 {text: qsTr("Вид сигнала ОФТ:")}
+            ComboBoxMD3 {
+                model: tract_prm_prd.signal_types
+                onCurrentIndexChanged: {tract_prm_prd.signal_type = currentIndex}
+            }
 
-            Text {text: qsTr("Скорость ЗС:")}
-            ComboBox {model: [qsTr("6,0")]}
+            TextMD3 {text: qsTr("Скорость ЗС:")}
+            ComboBoxMD3 {
+                model: tract_prm_prd.zs_speeds
+                onCurrentIndexChanged: {tract_prm_prd.zs_speed = currentIndex}
+            }
 
-            Text {text: qsTr("Выход У205Д:")}
-            ComboBox {model: [qsTr("Вкл.")]}
+            TextMD3 {text: qsTr("Выход У205Д:")}
+            ComboBoxMD3 {
+                model: tract_prm_prd.outputs_u205d
+                onCurrentIndexChanged: {tract_prm_prd.output_u205d = currentIndex}
+            }
 
-            Text {text: qsTr("Номер волны ПРД:")}
-            ComboBox {model: [qsTr("0")]}
+            TextMD3 {text: qsTr("Номер волны ПРД:")}
+            TextFieldMD3 {
+                text: tract_prm_prd.prd_wave_number
+                onEditingFinished: {tract_prm_prd.prd_wave_number = text}
+            }
 
-            Text {text: qsTr("Номер волны ПРМ:")}
-            ComboBox {model: [qsTr("2500")]}
+            TextMD3 {text: qsTr("Номер волны ПРМ:")}
+            TextFieldMD3 {
+                text: tract_prm_prd.prm_wave_number
+                onEditingFinished: {tract_prm_prd.prm_wave_number = text}
+            }
         }
 
         RowLayout {
-            Button {text: qsTr("<"); onClicked: {display_stack.currentIndex = Navigation.DEVICE_MODE_PRM_PRM_1_PAGE}}
-            Button {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.MODE_PAGE}}
+            ButtonMD3 {text: qsTr("<"); onClicked: {display_stack.currentIndex = Navigation.DEVICE_MODE_PRM_PRM_1_PAGE}}
+            ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.MODE_PAGE}}
         }
     }
 }
