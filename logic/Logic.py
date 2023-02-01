@@ -33,4 +33,6 @@ class Logic:
         self._engine.rootContext().setContextProperty("agl", self._agl)
         self._engine.rootContext().setContextProperty("tlf1", self._tlf1)
         self._engine.rootContext().setContextProperty("klu", self._klu)
+        self._engine.rootContext().setContextProperty("dmd_uzozm", self._dmd_uzozm)
+        self._engine.rootContext().setContextProperty("tract_prm_prd", self._tract_prm_prd)
         self._engine.rootContext().setContextProperty("plume", self._plume)
