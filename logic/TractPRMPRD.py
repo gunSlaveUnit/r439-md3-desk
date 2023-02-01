@@ -183,7 +183,7 @@ class TractPRMPRD(QObject):
 
     @Property(list, constant=True)
     def radio_signal_types(self):
-        return self.BARREL_FILTER_VARIANTS
+        return self.RADIO_SIGNAL_TYPES
 
     @Signal
     def radio_signal_changed(self):
@@ -191,7 +191,7 @@ class TractPRMPRD(QObject):
 
     @Property(int, notify=radio_signal_changed)
     def radio_signal(self):
-        return self._amplifier
+        return self._radio_signal_type
 
     @radio_signal.setter
     def radio_signal(self, new_value: int):
