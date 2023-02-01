@@ -5,6 +5,7 @@ from logic.DMDUZOZM import DMDUZOZM
 from logic.KLU import KLU
 from logic.L807 import L807
 from logic.TLF1 import TLF1
+from logic.TractPRMPRD import TractPRMPRD
 
 
 class Logic:
@@ -21,6 +22,7 @@ class Logic:
         self._tlf1 = TLF1()
         self._klu = KLU()
         self._dmd_uzozm = DMDUZOZM()
+        self._tract_prm_prd = TractPRMPRD()
 
         self._register_logics()
 
@@ -29,4 +31,4 @@ class Logic:
         self._engine.rootContext().setContextProperty("agl", self._agl)
         self._engine.rootContext().setContextProperty("tlf1", self._tlf1)
         self._engine.rootContext().setContextProperty("klu", self._klu)
-        self._engine.rootContext().setContextProperty("dmd_uzozm", self._dmd_uzozm)
+        self._engine.rootContext().setContextProperty("tract_prm_prd", self._tract_prm_prd)
