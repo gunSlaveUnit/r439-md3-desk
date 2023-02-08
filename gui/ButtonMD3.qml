@@ -3,9 +3,21 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 
 Button {
-    Layout.fillWidth: true
-    Layout.fillHeight: true
-    Layout.maximumHeight: font.pointSize * 8
+    contentItem: Text {
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        text: parent.text
+        font.pointSize: 12
+        color: "#000"
+    }
 
-    font.pointSize: main_window.width / 100 + main_window.height / 100
+    background: Rectangle {
+        anchors.fill: parent
+        implicitWidth: 72
+        implicitHeight: implicitWidth
+        radius: 8
+        border.color: "#000"
+        border.width: 4
+        color: "#b4afac"
+    }
 }

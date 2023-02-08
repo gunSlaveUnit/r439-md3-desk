@@ -11,18 +11,9 @@ Window {
     GridLayout {
         rows: 2
         columns: 2
-        anchors.fill: parent
         anchors.margins: 8
         columnSpacing: 16
 
-        Display {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-        }
-
-        Keyboard {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-        }
+        Keyboard {}
     }
 }
