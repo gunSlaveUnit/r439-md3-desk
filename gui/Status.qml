@@ -16,7 +16,7 @@ Item {
             flow: GridLayout.TopToBottom
 
             ButtonMD3 {text: qsTr("1. Общее")}
-            ButtonMD3 {text: qsTr("2. АГ-Л")}
+            ButtonMD3 {text: qsTr("2. АГ-Л"); onClicked: display_stack.currentIndex = Navigation.AGL_PAGE}
             ButtonMD3 {text: qsTr("3. ПГ-Л")}
             ButtonMD3 {text: qsTr("4. КЛ-У")}
             ButtonMD3 {text: qsTr("5. ДМД, УЗОЗМ"); onClicked: {display_stack.currentIndex = Navigation.STATUS_DMD_PAGE}}
