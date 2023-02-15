@@ -34,6 +34,13 @@ Item {
                 border.width: 4
                 color: keyboard_grid.red_color
             }
+
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onEntered: parent.background.color = Qt.darker(keyboard_grid.red_color, 1.5)
+                onExited: parent.background.color = keyboard_grid.red_color
+            }
         }
         ButtonMD3 {
             text: qsTr("РУС")
@@ -54,6 +61,13 @@ Item {
                 border.color: "#000"
                 border.width: 4
                 color: keyboard_grid.blue_color
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onEntered: parent.background.color = Qt.darker(keyboard_grid.blue_color, 1.5)
+                onExited: parent.background.color = keyboard_grid.blue_color
             }
         }
         ButtonMD3 {
@@ -76,6 +90,13 @@ Item {
                 border.width: 4
                 color: keyboard_grid.red_color
             }
+
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onEntered: parent.background.color = Qt.darker(keyboard_grid.red_color, 1.5)
+                onExited: parent.background.color = keyboard_grid.red_color
+            }
         }
         ButtonMD3 {
             text: qsTr("ЛАТ")
@@ -96,6 +117,13 @@ Item {
                 border.color: "#000"
                 border.width: 4
                 color: keyboard_grid.blue_color
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onEntered: parent.background.color = Qt.darker(keyboard_grid.blue_color, 1.2)
+                onExited: parent.background.color = keyboard_grid.blue_color
             }
         }
         ButtonMD3 {
