@@ -3,17 +3,26 @@ import QtQuick.Layouts 2.15
 
 Window {
     id: main_window
-    width: 1200
-    height: 600
+    width: 1250
+    height: 480
     visible: true
     title: qsTr("MD3Desk")
 
     GridLayout {
         rows: 2
         columns: 2
+        anchors.fill: parent
         anchors.margins: 8
         columnSpacing: 16
 
-        Keyboard {}
+        Display {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+        }
+
+        Keyboard {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+        }
     }
 }
