@@ -5,32 +5,22 @@ Item {
     ColumnLayout {
         anchors.fill: parent
 
-        RowLayout {
-            HeadButtonMD3 {text: qsTr("(. Приборы - авария")}
-            HeadButtonMD3 {text: qsTr("15-02-2023")}
-            HeadButtonMD3 {text: qsTr("10:16:37")}
+        GridLayout {
+            rows: 2
+            columns: 3
+            ButtonMD3 {text: qsTr("(. Приборы - авария")}
+            ButtonMD3 {text: qsTr("15-02-2023")}
+            ButtonMD3 {text: qsTr("11:36:42")}
+
+            ButtonMD3 {text: qsTr("). Обмен")}
+            ButtonMD3 {text: qsTr("<. Запрет ПРД")}
+            ButtonMD3 {text: qsTr(">. Тракт ПРМ - не норма")}
         }
 
-        RowLayout {
-            HeadButtonMD3 {text: qsTr("). Обмен")}
-            HeadButtonMD3 {text: qsTr("<. Запрет ПРД")}
-            HeadButtonMD3 {text: qsTr(">. Тракт ПРМ - не норма")}
+        ButtonMD3 {
+            text: qsTr("ГЛАВНОЕ")
+            enabled: false
         }
-
-        Rectangle {
-            Layout.preferredWidth: 240
-            Layout.preferredHeight: 30
-            color: "transparent"
-            border.width: 2
-            border.color: "#ffaf00"
-
-            Text {
-                font.pointSize: 12
-                anchors.centerIn: parent
-                text: qsTr("ГЛАВНОЕ")
-                color: "#ffaf00"
-            }
-        }       
 
         StackLayout {
             id: display_stack

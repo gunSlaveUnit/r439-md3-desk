@@ -7,7 +7,7 @@ Button {
     Layout.preferredHeight: 30
     
     contentItem: Text {
-        font.pointSize: 12
+        font.pointSize: 14
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         text: parent.text
