@@ -9,6 +9,7 @@ Button {
         text: parent.text
         font.pointSize: 12
         color: "#000"
+        anchors.margins: 8
     }
 
     background: Rectangle {
