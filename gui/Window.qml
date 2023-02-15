@@ -4,7 +4,7 @@ import QtQuick.Layouts 2.15
 Window {
     id: main_window
     width: 1250
-    height: 930
+    height: 472
     visible: true
     title: qsTr("MD3Desk")
 
@@ -15,8 +15,8 @@ Window {
         anchors.margins: 8
         columnSpacing: 16
 
-        Display {}
+        Display {Layout.fillHeight: true}
 
-        Keyboard {}
+        Keyboard {Layout.fillHeight: true}
     }
 }
