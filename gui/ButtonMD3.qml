@@ -15,7 +15,7 @@ Button {
     }
 
     background: Rectangle {
-        color: "#000"
+        color: "transparent"
         border.width: 2
         border.color: "#ffaf00"
     }
