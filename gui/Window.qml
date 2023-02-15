@@ -15,10 +15,8 @@ Window {
         anchors.margins: 8
         columnSpacing: 16
 
-        Display {
-        }
+        Display {}
 
-        Keyboard {
-        }
+        Keyboard {}
     }
 }
