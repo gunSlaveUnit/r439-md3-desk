@@ -5,6 +5,18 @@ Item {
     ColumnLayout {
         anchors.fill: parent
 
+        RowLayout {
+            HeadButtonMD3 {text: qsTr("(. Приборы - авария")}
+            HeadButtonMD3 {text: qsTr("15-02-2023")}
+            HeadButtonMD3 {text: qsTr("10:16:37")}
+        }
+
+        RowLayout {
+            HeadButtonMD3 {text: qsTr("). Обмен")}
+            HeadButtonMD3 {text: qsTr("<. Запрет ПРД")}
+            HeadButtonMD3 {text: qsTr(">. Тракт ПРМ - не норма")}
+        }
+
         Rectangle {
             Layout.preferredWidth: 240
             Layout.preferredHeight: 30
