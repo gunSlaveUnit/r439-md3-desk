@@ -2,47 +2,66 @@ import QtQuick 2.15
 import QtQuick.Layouts 2.15
 
 Item {
-    StackLayout {
-        id: display_stack
-
+    ColumnLayout {
         anchors.fill: parent
 
-        Main {}
+        GridLayout {
+            rows: 2
+            columns: 3
+            ButtonMD3 {text: qsTr("(. Приборы - авария")}
+            ButtonMD3 {text: qsTr("15-02-2023")}
+            ButtonMD3 {text: qsTr("11:36:42")}
 
-        Monitor {}
+            ButtonMD3 {text: qsTr("). Обмен")}
+            ButtonMD3 {text: qsTr("<. Запрет ПРД")}
+            ButtonMD3 {text: qsTr(">. Тракт ПРМ - не норма")}
+        }
 
-        Regulations {}
+        ButtonMD3 {
+            text: qsTr("ГЛАВНОЕ")
+            enabled: false
+        }
 
-        Status {}
+        StackLayout {
+            id: display_stack
 
-        StatusDMD {}
+            Main {}
 
-        Mode {}
+            Monitor {}
 
-        ModeAGL {}
+            Regulations {}
 
-        DeviceModeAGL {}
+            Status {}
 
-        DeviceModeKLU1 {}
+            StatusDMD {}
 
-        DeviceModeKLU2 {}
+            Mode {}
 
-        DeviceModeKLU3 {}
+            ModeAGL {}
 
-        TLF1 {}
+            DeviceModeAGL {}
 
-        DeviceModeDMDUZOZM1 {}
+            DeviceModeKLU1 {}
 
-        DeviceModeDMDUZOZM2 {}
+            DeviceModeKLU2 {}
 
-        DeviceModePRMPRD1 {}
+            DeviceModeKLU3 {}
 
-        DeviceModePRMPRD2 {}
+            TLF1 {}
 
-        L807 {}
+            DeviceModeDMDUZOZM1 {}
 
-        Plume {}
+            DeviceModeDMDUZOZM2 {}
 
-        AGL {}
+            DeviceModePRMPRD1 {}
+
+            DeviceModePRMPRD2 {}
+
+            L807 {}
+
+            Plume {}
+
+            AGL {}
+        }
     }
 }
