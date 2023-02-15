@@ -2,45 +2,64 @@ import QtQuick 2.15
 import QtQuick.Layouts 2.15
 
 Item {
-    StackLayout {
-        id: display_stack
+    ColumnLayout {
+        anchors.fill: parent
 
-        Main {}
+        Rectangle {
+            Layout.preferredWidth: 240
+            Layout.preferredHeight: 30
+            color: "transparent"
+            border.width: 2
+            border.color: "#ffaf00"
 
-        Monitor {}
+            Text {
+                font.pointSize: 12
+                anchors.centerIn: parent
+                text: qsTr("ГЛАВНОЕ")
+                color: "#ffaf00"
+            }
+        }       
 
-        Regulations {}
+        StackLayout {
+            id: display_stack
 
-        Status {}
+            Main {}
 
-        StatusDMD {}
+            Monitor {}
 
-        Mode {}
+            Regulations {}
 
-        ModeAGL {}
+            Status {}
 
-        DeviceModeAGL {}
+            StatusDMD {}
 
-        DeviceModeKLU1 {}
+            Mode {}
 
-        DeviceModeKLU2 {}
+            ModeAGL {}
 
-        DeviceModeKLU3 {}
+            DeviceModeAGL {}
 
-        TLF1 {}
+            DeviceModeKLU1 {}
 
-        DeviceModeDMDUZOZM1 {}
+            DeviceModeKLU2 {}
 
-        DeviceModeDMDUZOZM2 {}
+            DeviceModeKLU3 {}
 
-        DeviceModePRMPRD1 {}
+            TLF1 {}
 
-        DeviceModePRMPRD2 {}
+            DeviceModeDMDUZOZM1 {}
 
-        L807 {}
+            DeviceModeDMDUZOZM2 {}
 
-        Plume {}
+            DeviceModePRMPRD1 {}
 
-        AGL {}
+            DeviceModePRMPRD2 {}
+
+            L807 {}
+
+            Plume {}
+
+            AGL {}
+        }
     }
 }
