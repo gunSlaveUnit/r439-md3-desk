@@ -285,9 +285,27 @@ Item {
             }
         }
 
-        ButtonMD3 {text: qsTr("<-->"); Layout.row: 1; Layout.column: 5}
+        ButtonMD3 {
+            Image {
+                anchors.fill: parent
+                anchors.margins: 16
+                source: "../resources/clockwise.png"
+                mipmap: true
+            }
+            Layout.row: 1; 
+            Layout.column: 5
+        }
         ButtonMD3 {text: qsTr("BS")}
-        ButtonMD3 {text: qsTr("<")}
+
+        ButtonMD3 {
+            Image {
+                anchors.fill: parent
+                anchors.margins: 20
+                source: "../resources/left_arrow.png"
+                mipmap: true
+            }
+        }
+
         ButtonMD3 {text: qsTr("SPACE")}
         ButtonMD3 {
             text: qsTr("ENTER");
@@ -326,13 +344,48 @@ Item {
 
         ButtonMD3 {text: qsTr("Page\nUp"); Layout.row: 1; Layout.column: 6}
         ButtonMD3 {text: qsTr("Page\nDown")}
-        ButtonMD3 {text: qsTr("^")}
-        ButtonMD3 {text: qsTr("!^")}
+        ButtonMD3 {
+            Image {
+                anchors.fill: parent
+                anchors.margins: 20
+                source: "../resources/up_arrow.png"
+                mipmap: true
+            }
+        }
+        ButtonMD3 {
+            Image {
+                anchors.fill: parent
+                anchors.margins: 20
+                source: "../resources/down_arrow.png"
+                mipmap: true
+            }
+        }
 
-        ButtonMD3 {text: qsTr("^")}
-        ButtonMD3 {text: qsTr("-><-")}
+        ButtonMD3 {
+            Image {
+                anchors.fill: parent
+                anchors.margins: 12
+                source: "../resources/up_triangle.png"
+                mipmap: true
+            }
+        }
+        ButtonMD3 {
+            Image {
+                anchors.fill: parent
+                anchors.margins: 16
+                source: "../resources/unclockwise.png"
+                mipmap: true
+            }
+        }
         ButtonMD3 {text: qsTr("DEL")}
-        ButtonMD3 {text: qsTr(">")}
+        ButtonMD3 {
+            Image {
+                anchors.fill: parent
+                anchors.margins: 20
+                source: "../resources/right_arrow.png"
+                mipmap: true
+            }
+        }
         ButtonMD3 {
             text: qsTr("ENTER");
             Layout.row: 4;
