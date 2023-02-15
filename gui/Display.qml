@@ -5,8 +5,6 @@ Item {
     StackLayout {
         id: display_stack
 
-        anchors.fill: parent
-
         Main {}
 
         Monitor {}

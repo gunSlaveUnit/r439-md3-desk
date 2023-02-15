@@ -8,12 +8,5 @@ Window {
     visible: true
     title: qsTr("MD3Desk")
 
-    GridLayout {
-        rows: 2
-        columns: 2
-        anchors.margins: 8
-        columnSpacing: 16
-
-        Keyboard {}
-    }
+    Display {}
 }
