@@ -13,6 +13,7 @@ Button {
     }
 
     background: Rectangle {
+        id: back
         anchors.fill: parent
         implicitWidth: 72
         implicitHeight: implicitWidth
@@ -20,5 +21,12 @@ Button {
         border.color: "#000"
         border.width: 4
         color: "#b4afac"
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        onEntered: parent.background.color = Qt.darker("#b4afac", 1.2)
+        onExited: parent.background.color = "#b4afac"
     }
 }
