@@ -3,5 +3,6 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 
 Text {
-    font.pointSize: 12
+    font.pointSize: 16
+    color: "#ffaf00"
 }
