@@ -19,8 +19,8 @@ Item {
 
         Item {height: 10}
 
-        TextMD3 {text: qsTr("Установленные интерфейсы:")}
-        TextMD3 {text: qsTr("Интерфейс не обеспечивается")}
+        TextMD3 {anchors.horizontalCenter: parent.horizontalCenter; text: qsTr("Установленные интерфейсы:")}
+        TextMD3 {anchors.horizontalCenter: parent.horizontalCenter; text: qsTr("Интерфейс не обеспечивается")}
 
         Item {height: 10}
 
