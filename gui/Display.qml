@@ -4,6 +4,7 @@ import QtQuick.Layouts 2.15
 Item {
     ColumnLayout {
         anchors.fill: parent
+        anchors.margins: 8
 
         RowLayout {
             ButtonMD3 {text: qsTr("(. Приборы - авария")}
