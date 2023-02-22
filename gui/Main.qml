@@ -8,7 +8,6 @@ Item {
     ColumnLayout {
         ButtonMD3 {
             anchors.horizontalCenter: parent.horizontalCenter
-            implicitWidth: 244
             text: qsTr("ГЛАВНОЕ")
         }
 
