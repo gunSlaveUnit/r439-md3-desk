@@ -13,9 +13,9 @@ Window {
     title: qsTr("MD3Desk")
 
     GridLayout {
+        anchors.fill: parent
         rows: 1
         columns: 2
-        anchors.fill: parent
 
         Column {
             Layout.fillHeight: true
@@ -26,6 +26,8 @@ Window {
                 border.width: 8
                 border.color: "#484848"
                 color: "#000"
+
+                Display {}
             }
         }
 
@@ -33,7 +35,7 @@ Window {
             Layout.fillHeight: true
             Layout.preferredWidth: parent.width * 0.5
 
-            Keyboard {Layout.fillHeight: true}
+            Keyboard {}
         }
     }
 }
