@@ -35,6 +35,6 @@ Item {
 
         Item {Layout.fillHeight: true}
 
-        ButtonMD3 {text: qsTr("0. Выход"); onClicked: display_stack.currentIndex = Navigation.REGULATIONS_PAGE}
+        ButtonMD3 {text: qsTr("0. Выход"); onClicked: display_stack.currentIndex = Navigation.MODE_PAGE}
     }
 }
