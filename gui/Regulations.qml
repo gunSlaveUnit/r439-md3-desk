@@ -8,6 +8,14 @@ Item {
     ColumnLayout {
         anchors.fill: parent
 
+        ButtonMD3 {
+            anchors.horizontalCenter: parent.horizontalCenter
+            implicitWidth: 244
+            text: qsTr("РЕГЛАМЕНТ")
+        }
+
+        Item {height: 10}
+
         GridLayout {
             rows: 3
             columns: 2
@@ -21,6 +29,6 @@ Item {
             ButtonMD3 {implicitWidth: 240; text: qsTr("6. Управление")}
         }
 
-        ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.MAIN_PAGE}}
+        ButtonMD3 {Layout.alignment: Qt.AlignRight; text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.MAIN_PAGE}}
     }
 }
