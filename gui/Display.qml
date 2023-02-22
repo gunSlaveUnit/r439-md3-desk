@@ -4,23 +4,21 @@ import QtQuick.Layouts 2.15
 Item {
     ColumnLayout {
         anchors.fill: parent
+        anchors.margins: 8
 
-        GridLayout {
-            rows: 2
-            columns: 3
+        RowLayout {
             ButtonMD3 {text: qsTr("(. Приборы - авария")}
             ButtonMD3 {text: qsTr("15-02-2023")}
             ButtonMD3 {text: qsTr("11:36:42")}
+        }
 
+        RowLayout {
             ButtonMD3 {text: qsTr("). Обмен")}
             ButtonMD3 {text: qsTr("<. Запрет ПРД")}
             ButtonMD3 {text: qsTr(">. Тракт ПРМ - не норма")}
         }
 
-        ButtonMD3 {
-            text: qsTr("ГЛАВНОЕ")
-            enabled: false
-        }
+        Item {height: 10}
 
         StackLayout {
             id: display_stack
