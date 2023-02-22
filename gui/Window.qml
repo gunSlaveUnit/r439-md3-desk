@@ -3,7 +3,7 @@ import QtQuick.Layouts 2.15
 
 Window {
     id: main_window
-    width: 1146
+    width: 1260
     height: 472
     maximumHeight: height
     maximumWidth: width
@@ -19,21 +19,19 @@ Window {
 
         Column {
             Layout.fillHeight: true
-            Layout.preferredWidth: parent.width * 0.45
+            Layout.preferredWidth: parent.width * 0.5
 
             Rectangle {
                 anchors.fill: parent
                 border.width: 8
                 border.color: "#484848"
                 color: "#000"
-
-                Display {Layout.fillHeight: true}
             }
         }
 
         Column {
             Layout.fillHeight: true
-            Layout.preferredWidth: parent.width * 0.55
+            Layout.preferredWidth: parent.width * 0.5
 
             Keyboard {Layout.fillHeight: true}
         }
