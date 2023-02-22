@@ -8,6 +8,7 @@ Item {
         rows: 6
         columns: 8
         flow: GridLayout.TopToBottom
+        anchors.margins: 8
         anchors.fill: parent
 
         property var red_color: "#bb534b"

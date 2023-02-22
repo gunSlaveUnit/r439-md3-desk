@@ -3,7 +3,7 @@ import QtQuick.Layouts 2.15
 
 Window {
     id: main_window
-    width: 1134
+    width: 1146
     height: 472
     maximumHeight: height
     maximumWidth: width
@@ -32,7 +32,6 @@ Window {
         }
 
         Column {
-            anchors.margins: 8
             Layout.fillHeight: true
             Layout.preferredWidth: parent.width * 0.55
 
