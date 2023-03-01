@@ -5,6 +5,7 @@ Window {
     visible: true
     title: qsTr("MD3Desk")
 
+    property int default_margin: 8
     property int main_width: row_layout.implicitWidth + default_margin * 2
     property int main_height: row_layout.implicitHeight + default_margin * 2
 
@@ -12,8 +13,6 @@ Window {
     height: main_height
     minimumWidth: main_width
     minimumHeight: main_height
-
-    property int default_margin: 8
 
     RowLayout {
         id: row_layout
