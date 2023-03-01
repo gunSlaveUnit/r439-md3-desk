@@ -8,6 +8,7 @@ from logic.DMDUZOZM import DMDUZOZM
 from logic.KLU import KLU
 from logic.L807 import L807
 from logic.TLF1 import TLF1
+from logic.TractPRMPRD import TractPRMPRD
 
 
 def main():
@@ -29,17 +30,13 @@ def main():
     dmd_uzozm = DMDUZOZM()
     engine.rootContext().setContextProperty("dmd_uzozm", dmd_uzozm)
 
+    tract_prm_prd = TractPRMPRD()
+    engine.rootContext().setContextProperty("tract_prm_prd", tract_prm_prd)
+
     start_location_filename = "gui/main.qml"
     engine.load(start_location_filename)
     """
-    
-    tract_prm_prd = TractPRMPRD()
     plume = Plume()
-
-    
-    
-    
-    engine.rootContext().setContextProperty("tract_prm_prd", self._tract_prm_prd)
     engine.rootContext().setContextProperty("plume", self._plume)"""
 
     app.exec()
