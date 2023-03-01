@@ -919,7 +919,10 @@ Window {
                         }
 
                         TextMD3 {text: qsTr("Номер волны ПРД:")}
-                        TextFieldMD3 {text: "0"}
+                        TextFieldMD3 {
+                            text: plume.prd_wave_number
+                            onEditingFinished: plume.prd_wave_number = text
+                        }
                     }
 
                     GridLayout {
@@ -928,24 +931,22 @@ Window {
 
                         TextMD3 {text: qsTr("Ствол. фильтр:")}
                         TextMD3 {
-                            text: "1"
+                            text: plume.stem_filter
                         }
 
                         TextMD3 {text: qsTr("№ волны ПРМ:")}
                         TextMD3 {
-                            id: prm_wave_number
-                            text: "2500"
+                            text: plume.prm_wave_number
                         }
 
                         TextMD3 {text: qsTr("Поддиап. приема:")}
                         TextMD3 {
-                            id: receive_subband
-                            text: "1"
+                            text: plume.receive_subband
                         }
 
                         TextMD3 {text: qsTr("№ фильтра ДМД:")}
                         TextMD3 {
-                            text: "3"
+                            text: plume.dmd_filter_number
                         }
                     }
 
