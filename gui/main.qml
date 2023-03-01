@@ -470,36 +470,54 @@ Window {
                 ColumnLayout {
                     // DMD UZOZM page 1
 
+                    Connections {
+                        target: dmd_uzozm
+                    }
+
                     GridLayout {
                         rows: 7
                         columns: 2
 
                         TextMD3 {text: qsTr("Тип радиосигнала ПРМ:")}
                         ComboBoxMD3 {
+                            model: dmd_uzozm.prm_signal_types
+                            onCurrentIndexChanged: dmd_uzozm.prm_signal_type = currentIndex
                         }
 
                         TextMD3 {text: qsTr("Декодер:")}
                         ComboBoxMD3 {
+                            model: dmd_uzozm.decoder_variants
+                            onCurrentIndexChanged: dmd_uzozm.decoder = currentIndex
                         }
 
                         TextMD3 {text: qsTr("Скорость ДМД, кбит/с:")}
                         ComboBoxMD3 {
+                            model: dmd_uzozm.dmd_speeds
+                            onCurrentIndexChanged: dmd_uzozm.dmd_speed = currentIndex
                         }
 
                         TextMD3 {text: qsTr("Режим ДМД:")}
                         ComboBoxMD3 {
+                            model: dmd_uzozm.dmd_modes
+                            onCurrentIndexChanged: dmd_uzozm.dmd_mode = currentIndex
                         }
 
                         TextMD3 {text: qsTr("Скорость ПРД УЗОЗМ, кбит/с:")}
                         ComboBoxMD3 {
+                            model: dmd_uzozm.prd_uzozm_speeds
+                            onCurrentIndexChanged: dmd_uzozm.prd_uzozm_speed = currentIndex
                         }
 
                         TextMD3 {text: qsTr("Режим УЗОЗМ:")}
                         ComboBoxMD3 {
+                            model: dmd_uzozm.uzozm_modes
+                            onCurrentIndexChanged: dmd_uzozm.uzozm_mode = currentIndex
                         }
 
                         TextMD3 {text: qsTr("Служебный канал в ФТ4:")}
                         ComboBoxMD3 {
+                            model: dmd_uzozm.service_channel_ft4_variants
+                            onCurrentIndexChanged: dmd_uzozm.service_channel_ft4 = currentIndex
                         }
                     }
 
@@ -512,36 +530,54 @@ Window {
                 ColumnLayout {
                     // DMD UZOZM page 2
 
+                    Connections {
+                        target: dmd_uzozm
+                    }
+
                     GridLayout {
                         rows: 7
                         columns: 2
 
                         TextMD3 {text: qsTr("Номер фильтра:")}
                         ComboBoxMD3 {
+                            model: dmd_uzozm.filter_numbers
+                            onCurrentIndexChanged: dmd_uzozm.filter_number = currentIndex
                         }
 
                         TextMD3 {text: qsTr("АРУ:")}
                         ComboBoxMD3 {
+                            model: dmd_uzozm.aru_variants
+                            onCurrentIndexChanged: dmd_uzozm.aru = currentIndex
                         }
 
                         TextMD3 {text: qsTr("Автопоиск:")}
                         ComboBoxMD3 {
+                            model: dmd_uzozm.auto_search_variants
+                            onCurrentIndexChanged: dmd_uzozm.auto_search = currentIndex
                         }
 
                         TextMD3 {text: qsTr("АСЧ:")}
                         ComboBoxMD3 {
+                            model: dmd_uzozm.asch_variants
+                            onCurrentIndexChanged: dmd_uzozm.asch = currentIndex
                         }
 
                         TextMD3 {text: qsTr("Диф. декодер:")}
                         ComboBoxMD3 {
+                            model: dmd_uzozm.dif_decoder_variants
+                            onCurrentIndexChanged: dmd_uzozm.dif_decoder = currentIndex
                         }
 
                         TextMD3 {text: qsTr("Полоса ДМД:")}
                         ComboBoxMD3 {
+                            model: dmd_uzozm.dmd_bands
+                            onCurrentIndexChanged: dmd_uzozm.dmd_band = currentIndex
                         }
 
                         TextMD3 {text: qsTr("Корректор:")}
                         ComboBoxMD3 {
+                            model: dmd_uzozm.corrector_variants
+                            onCurrentIndexChanged: dmd_uzozm.corrector = currentIndex
                         }
                     }
 
