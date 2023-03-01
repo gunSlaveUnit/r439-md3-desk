@@ -616,6 +616,10 @@ Window {
                 ColumnLayout {
                     // L807
 
+                    Connections {
+                        target: l807
+                    }
+
                     ButtonMD3 {
                         text: qsTr("Л807")
                     }
@@ -629,10 +633,14 @@ Window {
 
                         TextMD3 {text: qsTr("Стык Л807:")}
                         ComboBoxMD3 {
+                            model: l807.joint_modes
+                            onCurrentIndexChanged: l807.joint = currentIndex
                         }
 
                         TextMD3 {text: qsTr("Источник сигнала: ")}
                         ComboBoxMD3 {
+                            model: l807.signal_source_modes
+                            onCurrentIndexChanged: l807.signal_source = currentIndex
                         }
                     }
 
