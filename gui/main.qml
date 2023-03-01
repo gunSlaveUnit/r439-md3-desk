@@ -4,8 +4,14 @@ import QtQuick.Layouts 2.15
 Window {
     visible: true
     title: qsTr("MD3Desk")
-    width: row_layout.implicitWidth + default_margin * 2
-    height: row_layout.implicitHeight + default_margin * 2
+
+    property int main_width: row_layout.implicitWidth + default_margin * 2
+    property int main_height: row_layout.implicitHeight + default_margin * 2
+
+    width: main_width
+    height: main_height
+    minimumWidth: main_width
+    minimumHeight: main_height
 
     property int default_margin: 8
 
