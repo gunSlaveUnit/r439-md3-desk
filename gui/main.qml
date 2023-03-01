@@ -419,12 +419,18 @@ Window {
                 ColumnLayout {
                     // KLU page 3
 
+                    Connections {
+                        target: klu
+                    }
+
                     GridLayout {
                         rows: 8
                         columns: 2
 
                         TextMD3 {text: qsTr("Тестпроверка:")}
                         ComboBoxMD3 {
+                            model: klu.test_check_modes
+                            onCurrentIndexChanged: klu.test_check = currentIndex
                         }
 
                         TextMD3 {text: qsTr("Режим теста:")}
@@ -432,6 +438,8 @@ Window {
 
                         TextMD3 {text: qsTr("ПРД 70:")}
                         ComboBoxMD3 {
+                            model: klu.prd70_modes
+                            onCurrentIndexChanged: klu.prd70 = currentIndex
                         }
 
                         TextMD3 {text: qsTr("Сброс счетчика ошибок:")}
@@ -445,6 +453,8 @@ Window {
 
                         TextMD3 {text: qsTr("Тип сигнала ПРД:")}
                         ComboBoxMD3 {
+                            model: klu.prd_signal_types
+                            onCurrentIndexChanged: klu.prd_signal_type = currentIndex
                         }
 
                         TextMD3 {text: qsTr("Ft ПСП ШПС ПРД:")}
