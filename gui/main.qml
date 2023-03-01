@@ -4,11 +4,15 @@ import QtQuick.Layouts 2.15
 Window {
     visible: true
     title: qsTr("MD3Desk")
-    width: row_layout.implicitWidth
-    height: row_layout.implicitHeight
+    width: row_layout.implicitWidth + default_margin * 2
+    height: row_layout.implicitHeight + default_margin * 2
+
+    property int default_margin: 8
 
     RowLayout {
         id: row_layout
+        anchors.fill: parent
+        anchors.margins: default_margin
 
         ColumnLayout {
             GridLayout {
