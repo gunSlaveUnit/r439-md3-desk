@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Layouts 2.15
 
-import "../custom"
+import "./custom"
 
 Window {
     visible: true
