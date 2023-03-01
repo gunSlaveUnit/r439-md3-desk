@@ -7,6 +7,7 @@ from logic.AGL import AGL
 from logic.DMDUZOZM import DMDUZOZM
 from logic.KLU import KLU
 from logic.L807 import L807
+from logic.Plume import Plume
 from logic.TLF1 import TLF1
 from logic.TractPRMPRD import TractPRMPRD
 
@@ -33,11 +34,11 @@ def main():
     tract_prm_prd = TractPRMPRD()
     engine.rootContext().setContextProperty("tract_prm_prd", tract_prm_prd)
 
+    plume = Plume()
+    engine.rootContext().setContextProperty("plume", plume)
+
     start_location_filename = "gui/main.qml"
     engine.load(start_location_filename)
-    """
-    plume = Plume()
-    engine.rootContext().setContextProperty("plume", self._plume)"""
 
     app.exec()
 

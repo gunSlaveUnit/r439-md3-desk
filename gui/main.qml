@@ -892,21 +892,34 @@ Window {
                 ColumnLayout {
                     // Plume page
 
+                    Connections {
+                        target: plume
+                    }
+
                     GridLayout {
                         rows: 4
                         columns: 2
 
                         TextMD3 {text: qsTr("Генератор сдвига:")}
-                        ComboBoxMD3 {model: [qsTr("Вкл.")]}
+                        ComboBoxMD3 {
+                            model: plume.shift_generator_variants
+                            onCurrentIndexChanged: plume.shift_generator = currentIndex
+                        }
 
                         TextMD3 {text: qsTr("Усилитель мощности:")}
-                        ComboBoxMD3 {model: [qsTr("Откл.")]}
+                        ComboBoxMD3 {
+                            model: plume.amplifier_variants
+                            onCurrentIndexChanged: plume.amplifier = currentIndex
+                        }
 
                         TextMD3 {text: qsTr("Выход У205Д:")}
-                        ComboBoxMD3 {model: [qsTr("Вкл.")]}
+                        ComboBoxMD3 {
+                            model: plume.outputs_u205d
+                            onCurrentIndexChanged: plume.output_u205d = currentIndex
+                        }
 
                         TextMD3 {text: qsTr("Номер волны ПРД:")}
-                        TextFieldMD3 {text: "0"; onEditingFinished: {plume_page.enteredPRDWaveNumber()}}
+                        TextFieldMD3 {text: "0"}
                     }
 
                     GridLayout {
