@@ -1,6 +1,6 @@
 from enum import Enum
 
-from PySide6.QtCore import Signal, Property, QObject
+from PySide6.QtCore import Signal, Property, QObject, Slot
 
 
 class Plume(QObject):
@@ -26,6 +26,16 @@ class Plume(QObject):
         self._amplifier = self.AmplifierVariants.OFF
         self._output_u205d = self.OutputsU205D.ON
         self._prd_wave_number = 0
+        self._stem_filter = 1
+        self._prm_wave_number = 2500
+        self._receive_subband = 1
+        self._dmd_filter_number = 3
+
+    def _calculate_parameters(self):
+        self.stem_filter = 8
+        self.prm_wave_number = 2216
+        self.receive_subband = 34
+        self.dmd_filter_number = 3
 
     # region ShiftGenerator
 
@@ -111,6 +121,83 @@ class Plume(QObject):
         if self._prd_wave_number == new_value:
             return
         self._prd_wave_number = new_value
+        self._calculate_parameters()
         self.prd_wave_number_changed.emit()
+
+    # endregion
+
+    # region Stem filter
+
+    @Signal
+    def stem_filter_changed(self):
+        pass
+
+    @Property(int, notify=stem_filter_changed)
+    def stem_filter(self):
+        return self._stem_filter
+
+    @stem_filter.setter
+    def stem_filter(self, new_value: int):
+        if self._stem_filter == new_value:
+            return
+        self._stem_filter = new_value
+        self.stem_filter_changed.emit()
+
+    # endregion
+
+    # region PRMWaveNumber
+
+    @Signal
+    def prm_wave_number_changed(self):
+        pass
+
+    @Property(int, notify=prm_wave_number_changed)
+    def prm_wave_number(self):
+        return self._prm_wave_number
+
+    @prm_wave_number.setter
+    def prm_wave_number(self, new_value: int):
+        if self._prm_wave_number == new_value:
+            return
+        self._prm_wave_number = new_value
+        self.prm_wave_number_changed.emit()
+
+    # endregion
+
+    # region Receive subband
+
+    @Signal
+    def receive_subband_changed(self):
+        pass
+
+    @Property(int, notify=receive_subband_changed)
+    def receive_subband(self):
+        return self._receive_subband
+
+    @receive_subband.setter
+    def receive_subband(self, new_value: int):
+        if self._receive_subband == new_value:
+            return
+        self._receive_subband = new_value
+        self.receive_subband_changed.emit()
+
+    # endregion
+
+    # region DMD filter number
+
+    @Signal
+    def dmd_filter_number_changed(self):
+        pass
+
+    @Property(int, notify=dmd_filter_number_changed)
+    def dmd_filter_number(self):
+        return self._dmd_filter_number
+
+    @dmd_filter_number.setter
+    def dmd_filter_number(self, new_value: int):
+        if self._dmd_filter_number == new_value:
+            return
+        self._dmd_filter_number = new_value
+        self.dmd_filter_number_changed.emit()
 
     # endregion

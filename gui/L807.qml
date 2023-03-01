@@ -12,8 +12,20 @@ Item {
     ColumnLayout {
         anchors.fill: parent
 
+        ButtonMD3 {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("Л807")
+        }
+
+        Item {height: 10}
+
+        TextMD3 {anchors.horizontalCenter: parent.horizontalCenter; text: qsTr("Установленные интерфейсы:")}
+        TextMD3 {anchors.horizontalCenter: parent.horizontalCenter; text: qsTr("Интерфейс не обеспечивается")}
+
+        Item {height: 10}
+
         GridLayout {
-            anchors.fill: parent
+            Layout.fillWidth: true
 
             rows: 2
             columns: 2
@@ -31,8 +43,13 @@ Item {
             }
         }
 
-        Item {Layout.fillHeight: true}
+        Item {height: 10}
 
-        ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.MODE_PAGE}}
+        RowLayout {
+            Layout.fillWidth: true
+            ButtonMD3 {text: qsTr("1. Изм.")}
+            Item {Layout.fillWidth: true}
+            ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = Navigation.MODE_PAGE}}
+        }
     }
 }
