@@ -728,27 +728,41 @@ Window {
                 ColumnLayout {
                     // TLF1 page
 
+                    Connections {
+                        target: tlf1
+                    }
+
                     GridLayout {
                         columns: 2
 
                         Column {
                             TextMD3 {text: qsTr("Тип сигнала ПРМ")}
                             ComboBoxMD3 {
+                                model: tlf1.signal_prm_types
+                                onCurrentIndexChanged: tlf1.signal_prm_type = currentIndex
                             }
 
                             TextMD3 {text: qsTr("Скорость")}
                             ComboBoxMD3 {
+                                model: tlf1.prm_speeds
+                                onCurrentIndexChanged: tlf1.prm_speed = currentIndex
                             }
 
                             TextMD3 {text: qsTr("Адрес в ГС")}
                             RowLayout {
                                 ComboBoxMD3 {
+                                    model: tlf1.prm_addresses_one
+                                    onCurrentIndexChanged: tlf1.prm_address_one = currentIndex
                                 }
 
                                 ComboBoxMD3 {
+                                    model: tlf1.prm_addresses_two
+                                    onCurrentIndexChanged: tlf1.prm_address_two = currentIndex
                                 }
 
                                 ComboBoxMD3 {
+                                    model: tlf1.prm_addresses_three
+                                    onCurrentIndexChanged: tlf1.prm_address_three = currentIndex
                                 }
                             }
                         }
@@ -756,18 +770,26 @@ Window {
                         Column {
                             TextMD3 {text: qsTr("Тип сигнала ПРД")}
                             ComboBoxMD3 {
+                                model: tlf1.signal_prd_types
+                                onCurrentIndexChanged: tlf1.signal_prd_type = currentIndex
                             }
 
                             TextMD3 {text: qsTr("Скорость")}
                             ComboBoxMD3 {
+                                model: tlf1.prd_speeds
+                                onCurrentIndexChanged: tlf1.prd_speed = currentIndex
                             }
 
                             TextMD3 {text: qsTr("Адрес в ГС")}
                             RowLayout {
                                 ComboBoxMD3 {
+                                    model: tlf1.prd_addresses_one
+                                    onCurrentIndexChanged: tlf1.prd_address_one = currentIndex
                                 }
 
                                 ComboBoxMD3 {
+                                    model: tlf1.prd_addresses_two
+                                    onCurrentIndexChanged: tlf1.prd_address_two = currentIndex
                                 }
                             }
                         }
