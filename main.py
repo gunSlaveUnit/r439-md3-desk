@@ -1,5 +1,6 @@
 import sys
 
+import yaml
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
 
@@ -16,7 +17,12 @@ def main():
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
 
+    norms_file = open("norms.yaml", "r")
+    norms = yaml.safe_load(norms_file)
+    current_norm_name = 'small_plume'
+
     l807 = L807()
+    l807.current_norm = norms[current_norm_name]["l807"]
     engine.rootContext().setContextProperty("l807", l807)
 
     agl = AGL()
