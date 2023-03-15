@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Layouts 2.15
+import QtQuick.Dialogs
 
 import "./custom"
 
@@ -15,6 +16,22 @@ Window {
     height: main_height
     minimumWidth: main_width
     minimumHeight: main_height
+
+    MessageDialog {
+        id: dialog
+
+        Connections {
+            target: l807
+
+            function onStandard() {
+                dialog.visible = true
+            }
+        }
+
+        text: qsTr("Норматив успешно завершен за 37 секунд")
+        visible: false
+        buttons: MessageDialog.Ok
+    }
 
     RowLayout {
         id: row_layout
@@ -726,6 +743,7 @@ Window {
                         TextMD3 {text: qsTr("Стык Л807:")}
                         ComboBoxMD3 {
                             model: l807.joint_modes
+                            currentIndex: l807.joint
                             onCurrentIndexChanged: l807.joint = currentIndex
                         }
 
