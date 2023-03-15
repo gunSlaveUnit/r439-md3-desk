@@ -750,6 +750,7 @@ Window {
                         TextMD3 {text: qsTr("Источник сигнала: ")}
                         ComboBoxMD3 {
                             model: l807.signal_source_modes
+                            currentIndex: l807.signal_source
                             onCurrentIndexChanged: l807.signal_source = currentIndex
                         }
                     }
