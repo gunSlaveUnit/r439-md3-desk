@@ -10,7 +10,7 @@ class L807(QObject):
         ANOTHER = 2
         ONE_MORE_ANOTHER = 3
 
-    JOINT_MODES = ["Выключен", "Включен", "Другое", "Еще один вариант"]
+    JOINT_MODES = ["Выключен"]
 
     class SignalSource(int, Enum):
         AG_L = 0
@@ -82,6 +82,7 @@ class L807(QObject):
         if self._signal_source == new_value:
             return
         self._signal_source = new_value
+        self.check_standard()
         self.signal_source_changed.emit()
 
     # endregion
