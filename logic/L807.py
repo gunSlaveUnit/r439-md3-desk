@@ -22,14 +22,22 @@ class L807(QObject):
 
         self._joint = self.Joint.SWITCHED_OFF
         self._signal_source = self.SignalSource.AG_L
+        self.current_norm = None
 
     @Signal
     def standard(self):
         pass
 
     def check_standard(self):
-        if self._joint == self.Joint.SWITCHED_OFF:
-            self.standard.emit()
+        if self.current_norm is not None:
+            is_standard_passed = True
+            for device_states in self.current_norm:
+                for device_name, state in device_states.items():
+                    if getattr(self, device_name) != state:
+                        is_standard_passed = False
+
+            if is_standard_passed:
+                self.standard.emit()
 
     # region Joint
 
