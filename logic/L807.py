@@ -6,8 +6,11 @@ from PySide6.QtCore import Signal, Property, QObject
 class L807(QObject):
     class Joint(int, Enum):
         SWITCHED_OFF = 0
+        SWITCHED_ON = 1
+        ANOTHER = 2
+        ONE_MORE_ANOTHER = 3
 
-    JOINT_MODES = ["Выключен"]
+    JOINT_MODES = ["Выключен", "Включен", "Другое", "Еще один вариант"]
 
     class SignalSource(int, Enum):
         AG_L = 0
@@ -19,6 +22,14 @@ class L807(QObject):
 
         self._joint = self.Joint.SWITCHED_OFF
         self._signal_source = self.SignalSource.AG_L
+
+    @Signal
+    def standard(self):
+        pass
+
+    def check_standard(self):
+        if self._joint == self.Joint.SWITCHED_OFF:
+            self.standard.emit()
 
     # region Joint
 
@@ -39,6 +50,7 @@ class L807(QObject):
         if self._joint == new_value:
             return
         self._joint = new_value
+        self.check_standard()
         self.joint_changed.emit()
 
     # endregion
