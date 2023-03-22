@@ -6,3 +6,13 @@ small_plume:
     - speed_gs_prm: 1
     - speed_gs_prd: 1
     - rats_mode: 0
+  tlf1:
+    - signal_prm_type: 1
+    - prm_speed: 0
+    - prm_address_one: 0
+    - prm_address_two: 0
+    - prm_address_three: 1
+    - signal_prd_type: 1
+    - prd_speed: 0
+    - prd_address_one: 0
+    - prd_address_two: 1
