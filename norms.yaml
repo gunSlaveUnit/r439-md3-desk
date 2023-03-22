@@ -16,3 +16,7 @@ small_plume:
     - prd_speed: 0
     - prd_address_one: 0
     - prd_address_two: 1
+  klu:
+    - test_check: 0
+    - prd70: 0
+    - prd_signal_type: 0
