@@ -17,9 +17,16 @@ Window {
     minimumWidth: main_width
     minimumHeight: main_height
 
+    Connections {
+        target: norm
+
+        function onPassed() {
+            dialog.visible = true
+        }
+    }
+
     MessageDialog {
         id: dialog
-
         text: qsTr("Норматив успешно завершен за 37 секунд")
         visible: false
         buttons: MessageDialog.Ok
@@ -736,14 +743,20 @@ Window {
                         ComboBoxMD3 {
                             model: l807.joint_modes
                             currentIndex: l807.joint
-                            onCurrentIndexChanged: l807.joint = currentIndex
+                            onCurrentIndexChanged: {
+                                l807.joint = currentIndex
+                                norm.check()
+                            }
                         }
 
                         TextMD3 {text: qsTr("Источник сигнала: ")}
                         ComboBoxMD3 {
                             model: l807.signal_source_modes
                             currentIndex: l807.signal_source
-                            onCurrentIndexChanged: l807.signal_source = currentIndex
+                            onCurrentIndexChanged: {
+                                l807.signal_source = currentIndex
+                                norm.check()
+                            }
                         }
                     }
 
@@ -800,25 +813,37 @@ Window {
                         TextMD3 {text: qsTr("Режим работы ЗС")}
                         ComboBoxMD3 {
                             model: agl.zs_operating_mode_variants
-                            onCurrentIndexChanged: agl.zs_operating_mode = currentIndex
+                            onCurrentIndexChanged: {
+                                agl.zs_operating_mode = currentIndex
+                                norm.check()
+                            }
                         }
 
                         TextMD3 {text: qsTr("Скор ГС ПРМ кбит/c")}
                         ComboBoxMD3 {
                             model: agl.speed_gs_prm_variants
-                            onCurrentIndexChanged: agl.speed_gs_prm = currentIndex
+                            onCurrentIndexChanged: {
+                                agl.speed_gs_prm = currentIndex
+                                norm.check()
+                            }
                         }
 
                         TextMD3 {text: qsTr("Скор ГС ПРД кбит/c")}
                         ComboBoxMD3 {
                             model: agl.speed_gs_prd_variants
-                            onCurrentIndexChanged: agl.speed_gs_prd = currentIndex
+                            onCurrentIndexChanged: {
+                                agl.speed_gs_prd = currentIndex
+                                norm.check()
+                            }
                         }
 
                         TextMD3 {text: qsTr("Режим РАТС")}
                         ComboBoxMD3 {
                             model: agl.rats_mode_variants
-                            onCurrentIndexChanged: agl.rats_mode = currentIndex
+                            onCurrentIndexChanged: {
+                                agl.rats_mode = currentIndex
+                                norm.check()
+                            }
                         }
                     }
 
