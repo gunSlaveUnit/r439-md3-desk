@@ -22,7 +22,7 @@ class Norm(QObject):
         self.config = config
 
     @Signal
-    def checked(self):
+    def passed(self):
         pass
 
     @Slot()
@@ -36,7 +36,7 @@ class Norm(QObject):
                         is_standard_passed = False
 
         if is_standard_passed:
-            self.checked.emit()
+            self.passed.emit()
 
 
 app = QGuiApplication(sys.argv)
