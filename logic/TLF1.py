@@ -174,19 +174,19 @@ class TLF1(QObject):
         return self.PRD_SPEEDS
 
     @Signal
-    def signal_prd_type_changed(self):
+    def prd_speed_changed(self):
         pass
 
-    @Property(int, notify=signal_prd_type_changed)
-    def signal_prd_type(self):
-        return self._signal_prd_type
+    @Property(int, notify=prd_speed_changed)
+    def prd_speed(self):
+        return self._prd_speed
 
-    @signal_prd_type.setter
-    def signal_prd_type(self, new_value: int):
-        if self._signal_prd_type == new_value:
+    @prd_speed.setter
+    def prd_speed(self, new_value: int):
+        if self._prd_speed == new_value:
             return
-        self._signal_prd_type = new_value
-        self.signal_prd_type_changed.emit()
+        self._prd_speed = new_value
+        self.prd_speed_changed.emit()
 
     # endregion
 
