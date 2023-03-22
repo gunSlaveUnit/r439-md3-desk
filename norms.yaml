@@ -1,3 +1,8 @@
 small_plume:
   l807:
     - signal_source: 0
+  agl:
+    - zs_operating_mode: 1
+    - speed_gs_prm: 1
+    - speed_gs_prd: 1
+    - rats_mode: 0
