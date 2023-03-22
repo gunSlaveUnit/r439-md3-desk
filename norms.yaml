@@ -20,3 +20,18 @@ small_plume:
     - test_check: 0
     - prd70: 0
     - prd_signal_type: 0
+  dmd_uzozm:
+    - prm_signal_type: 0
+    - decoder: 1
+    - dmd_speed: 0
+    - dmd_mode: 0
+    # No check - prd_uzozm_speed: 0
+    - uzozm_mode: 0
+    - service_channel_ft4: 0
+    - filter_number: 1
+    - aru: 0
+    - auto_search: 0
+    - asch: 0
+    - dif_decoder: 0
+    - dmd_band: 0
+    - corrector: 0
