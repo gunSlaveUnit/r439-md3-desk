@@ -20,14 +20,6 @@ Window {
     MessageDialog {
         id: dialog
 
-        Connections {
-            target: l807
-
-            function onStandard() {
-                dialog.visible = true
-            }
-        }
-
         text: qsTr("Норматив успешно завершен за 37 секунд")
         visible: false
         buttons: MessageDialog.Ok

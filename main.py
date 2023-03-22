@@ -25,7 +25,7 @@ class Norm(QObject):
     def checked(self):
         pass
 
-    @Slot
+    @Slot()
     def check(self):
         is_standard_passed = True
         for device_name, state in self.config.items():
