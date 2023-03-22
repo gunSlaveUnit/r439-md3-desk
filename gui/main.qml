@@ -448,7 +448,10 @@ Window {
                         TextMD3 {text: qsTr("Тестпроверка:")}
                         ComboBoxMD3 {
                             model: klu.test_check_modes
-                            onCurrentIndexChanged: klu.test_check = currentIndex
+                            onCurrentIndexChanged: {
+                                klu.test_check = currentIndex
+                                norm.check()
+                            }
                         }
 
                         TextMD3 {text: qsTr("Режим теста:")}
@@ -457,7 +460,10 @@ Window {
                         TextMD3 {text: qsTr("ПРД 70:")}
                         ComboBoxMD3 {
                             model: klu.prd70_modes
-                            onCurrentIndexChanged: klu.prd70 = currentIndex
+                            onCurrentIndexChanged: {
+                                klu.prd70 = currentIndex
+                                norm.check()
+                            }
                         }
 
                         TextMD3 {text: qsTr("Сброс счетчика ошибок:")}
@@ -472,7 +478,10 @@ Window {
                         TextMD3 {text: qsTr("Тип сигнала ПРД:")}
                         ComboBoxMD3 {
                             model: klu.prd_signal_types
-                            onCurrentIndexChanged: klu.prd_signal_type = currentIndex
+                            onCurrentIndexChanged: {
+                                klu.prd_signal_type = currentIndex
+                                norm.check()
+                            }
                         }
 
                         TextMD3 {text: qsTr("Ft ПСП ШПС ПРД:")}
