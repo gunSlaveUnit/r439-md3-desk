@@ -25,7 +25,7 @@ small_plume:
     - decoder: 1
     - dmd_speed: 0
     - dmd_mode: 0
-    # No check - prd_uzozm_speed: 0
+    - prd_uzozm_speed: 0
     - uzozm_mode: 0
     - service_channel_ft4: 0
     - filter_number: 1

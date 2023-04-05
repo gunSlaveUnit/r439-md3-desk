@@ -11,7 +11,7 @@ from logic.KLU import KLU
 from logic.L807 import L807
 from logic.Plume import Plume
 from logic.TLF1 import TLF1
-from logic.TractPRMPRD import TractPRMPRD
+from logic.TractsPRMPRD import TractsPRMPRD
 
 
 class Norm(QObject):
@@ -56,7 +56,7 @@ engine.rootContext().setContextProperty("klu", klu)
 dmd_uzozm = DMDUZOZM()
 engine.rootContext().setContextProperty("dmd_uzozm", dmd_uzozm)
 
-tract_prm_prd = TractPRMPRD()
+tract_prm_prd = TractsPRMPRD()
 engine.rootContext().setContextProperty("tract_prm_prd", tract_prm_prd)
 
 plume = Plume()

@@ -3,7 +3,7 @@ from enum import Enum
 from PySide6.QtCore import Signal, Property, QObject
 
 
-class TractPRMPRD(QObject):
+class TractsPRMPRD(QObject):
     class AutoCheckCANVariants(int, Enum):
         NO = 0
 

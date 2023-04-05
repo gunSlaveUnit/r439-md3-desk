@@ -459,6 +459,7 @@ Window {
 
                         TextMD3 {text: qsTr("ПРД 70:")}
                         ComboBoxMD3 {
+                          currentIndex: klu.prd70
                             model: klu.prd70_modes
                             onCurrentIndexChanged: {
                                 klu.prd70 = currentIndex
@@ -507,6 +508,7 @@ Window {
 
                         TextMD3 {text: qsTr("Тип радиосигнала ПРМ:")}
                         ComboBoxMD3 {
+                          currentIndex: dmd_uzozm.prm_signal_type
                             model: dmd_uzozm.prm_signal_types
                             onCurrentIndexChanged: {
                                 dmd_uzozm.prm_signal_type = currentIndex
@@ -516,6 +518,7 @@ Window {
 
                         TextMD3 {text: qsTr("Декодер:")}
                         ComboBoxMD3 {
+                          currentIndex: dmd_uzozm.decoder
                             model: dmd_uzozm.decoder_variants
                             onCurrentIndexChanged: {
                                 dmd_uzozm.decoder = currentIndex
@@ -525,6 +528,7 @@ Window {
 
                         TextMD3 {text: qsTr("Скорость ДМД, кбит/с:")}
                         ComboBoxMD3 {
+                          currentIndex: dmd_uzozm.dmd_speed
                             model: dmd_uzozm.dmd_speeds
                             onCurrentIndexChanged: {
                                 dmd_uzozm.dmd_speed = currentIndex

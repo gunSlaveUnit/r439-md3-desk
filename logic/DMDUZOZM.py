@@ -152,7 +152,7 @@ class DMDUZOZM(QObject):
 
     @Property(int, notify=dmd_speed_changed)
     def dmd_speed(self):
-        return self._decoder
+        return self._dmd_speed
 
     @dmd_speed.setter
     def dmd_speed(self, new_value: int):
