@@ -27,7 +27,7 @@ Window {
 
     MessageDialog {
         id: dialog
-        text: qsTr("Норматив успешно завершен за 37 секунд")
+        text: qsTr("Норматив успешно завершен")
         visible: false
         buttons: MessageDialog.Ok
     }
