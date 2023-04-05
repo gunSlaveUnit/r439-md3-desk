@@ -47,3 +47,8 @@ small_plume:
     - output_u205d: 0
     - prd_wave_number: 0
     - prm_wave_number: 2500
+  plume:
+    - shift_generator: 0
+    - amplifier: 0
+    - output_u205d: 0
+    - prd_wave_number: 65432

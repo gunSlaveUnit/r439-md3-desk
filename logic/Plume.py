@@ -1,6 +1,6 @@
 from enum import Enum
 
-from PySide6.QtCore import Signal, Property, QObject, Slot
+from PySide6.QtCore import Signal, Property, QObject
 
 
 class Plume(QObject):
@@ -26,6 +26,7 @@ class Plume(QObject):
         self._amplifier = self.AmplifierVariants.OFF
         self._output_u205d = self.OutputsU205D.ON
         self._prd_wave_number = 0
+
         self._stem_filter = 1
         self._prm_wave_number = 2500
         self._receive_subband = 1

@@ -1065,25 +1065,40 @@ Window {
                         TextMD3 {text: qsTr("Генератор сдвига:")}
                         ComboBoxMD3 {
                             model: plume.shift_generator_variants
-                            onCurrentIndexChanged: plume.shift_generator = currentIndex
+                            currentIndex: plume.shift_generator
+                            onCurrentIndexChanged: {
+                                plume.shift_generator = currentIndex
+                                norm.check()
+                            }
                         }
 
                         TextMD3 {text: qsTr("Усилитель мощности:")}
                         ComboBoxMD3 {
                             model: plume.amplifier_variants
-                            onCurrentIndexChanged: plume.amplifier = currentIndex
+                            currentIndex: plume.amplifier
+                            onCurrentIndexChanged: {
+                                plume.amplifier = currentIndex
+                                norm.check()
+                            }
                         }
 
                         TextMD3 {text: qsTr("Выход У205Д:")}
                         ComboBoxMD3 {
                             model: plume.outputs_u205d
-                            onCurrentIndexChanged: plume.output_u205d = currentIndex
+                            currentIndex: plume.output_u205d
+                            onCurrentIndexChanged: {
+                                plume.output_u205d = currentIndex
+                                norm.check()
+                            }
                         }
 
                         TextMD3 {text: qsTr("Номер волны ПРД:")}
                         TextFieldMD3 {
                             text: plume.prd_wave_number
-                            onEditingFinished: plume.prd_wave_number = text
+                            onEditingFinished: {
+                              plume.prd_wave_number = text
+                              norm.check()
+                            }
                         }
                     }
 
