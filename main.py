@@ -1,5 +1,4 @@
 import sys
-from enum import Enum
 
 import yaml
 from PySide6.QtCore import Signal, Slot, QObject
