@@ -16,8 +16,9 @@ class TractsPRMPRD(QObject):
 
     class ShiftGeneratorVariants(int, Enum):
         ON = 0
+        OFF = 1
 
-    SHIFT_GENERATOR_VARIANTS = ["Вкл."]
+    SHIFT_GENERATOR_VARIANTS = ["Вкл.", "Выкл."]
 
     class BarrelFilterVariants(int, Enum):
         ONE = 0
@@ -99,7 +100,7 @@ class TractsPRMPRD(QObject):
 
     @Property(int, notify=receive_subband_changed)
     def receive_subband(self):
-        return self._auto_check_can
+        return self._receive_subband
 
     @receive_subband.setter
     def receive_subband(self, new_value: int):

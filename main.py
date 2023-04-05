@@ -56,8 +56,8 @@ engine.rootContext().setContextProperty("klu", klu)
 dmd_uzozm = DMDUZOZM()
 engine.rootContext().setContextProperty("dmd_uzozm", dmd_uzozm)
 
-tract_prm_prd = TractsPRMPRD()
-engine.rootContext().setContextProperty("tract_prm_prd", tract_prm_prd)
+tracts_prm_prd = TractsPRMPRD()
+engine.rootContext().setContextProperty("tracts_prm_prd", tracts_prm_prd)
 
 plume = Plume()
 engine.rootContext().setContextProperty("plume", plume)

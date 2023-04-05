@@ -35,3 +35,13 @@ small_plume:
     - dif_decoder: 0
     - dmd_band: 0
     - corrector: 0
+  tracts_prm_prd:
+    - auto_check_can: 0
+    - receive_subband: 0
+    - shift_generator: 0
+    - barrel_filter: 0
+    - amplifier: 0
+    - radio_signal: 0
+    - signal_type: 0
+    - zs_speed: 0
+    - output_u205d: 0
