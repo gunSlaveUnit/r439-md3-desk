@@ -789,13 +789,19 @@ Window {
                         TextMD3 {text: qsTr("Номер волны ПРД:")}
                         TextFieldMD3 {
                             text: tracts_prm_prd.prd_wave_number
-                            onEditingFinished: tracts_prm_prd.prd_wave_number = text
+                            onEditingFinished: {
+                              tracts_prm_prd.prd_wave_number = text
+                              norm.check()
+                            }
                         }
 
                         TextMD3 {text: qsTr("Номер волны ПРМ:")}
                         TextFieldMD3 {
                             text: tracts_prm_prd.prm_wave_number
-                            onEditingFinished: tracts_prm_prd.prm_wave_number = text
+                            onEditingFinished: {
+                              tracts_prm_prd.prm_wave_number = text
+                              norm.check()
+                            }
                         }
                     }
 

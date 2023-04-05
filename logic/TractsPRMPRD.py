@@ -16,9 +16,8 @@ class TractsPRMPRD(QObject):
 
     class ShiftGeneratorVariants(int, Enum):
         ON = 0
-        OFF = 1
 
-    SHIFT_GENERATOR_VARIANTS = ["Вкл.", "Выкл."]
+    SHIFT_GENERATOR_VARIANTS = ["Вкл."]
 
     class BarrelFilterVariants(int, Enum):
         ONE = 0
@@ -63,7 +62,7 @@ class TractsPRMPRD(QObject):
         self._zs_speed = self.ZSSpeeds.SIX
         self._output_u205d = self.OutputsU205D.ON
         self._prd_wave_number = 0
-        self._prm_wave_number = 2500
+        self._prm_wave_number = 0
 
     # region AutoCheckCAN
 
@@ -299,7 +298,7 @@ class TractsPRMPRD(QObject):
 
     @Property(int, notify=prm_wave_number_changed)
     def prm_wave_number(self):
-        return self._prd_wave_number
+        return self._prm_wave_number
 
     @prm_wave_number.setter
     def prm_wave_number(self, new_value: int):

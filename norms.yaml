@@ -45,3 +45,5 @@ small_plume:
     - signal_type: 0
     - zs_speed: 0
     - output_u205d: 0
+    - prd_wave_number: 0
+    - prm_wave_number: 2500
