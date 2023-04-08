@@ -1435,6 +1435,15 @@ Window {
             }
             KeyBoardButtonMD3 {
                 contentItem: GridLayout {
+                    Text {text: qsTr("Ю"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
+                    Text {text: qsTr("Я"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
+                    Text {text: qsTr("3"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                    Text {text: qsTr("."); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
+                    Text {text: qsTr(";"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
+                }
+            }
+            KeyBoardButtonMD3 {
+                contentItem: GridLayout {
                     Text {text: qsTr(":"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
                     Text {text: qsTr("-"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
                     Text {text: qsTr("%"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
