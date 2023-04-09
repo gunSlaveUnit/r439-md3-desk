@@ -4,41 +4,13 @@ from PySide6.QtCore import Signal, Property, QObject
 
 
 class DMDUZOZM(QObject):
-    class PRMSignalTypes(int, Enum):
-        UP = 0
-
-    PRM_SIGNAL_TYPES = ["УП"]
-
-    class DecoderVariants(int, Enum):
-        K5R12 = 0
-        OFF = 0
-
-    DECODER_VARIANTS = ["K=5; R=1/2", "Откл."]
-
-    class DMDSpeeds(int, Enum):
-        SIX = 0
-
-    DMD_SPEEDS = ["6.0"]
-
-    class DMDModes(int, Enum):
-        WORK = 0
-
-    DMD_MODES = ["Работа"]
-
-    class PRDUZOZMSpeedS(int, Enum):
-        OFT15 = 0
-
-    PRD_UZOZM_SPEEDS = ["1.5 ОФТ"]
-
-    class UZOZMModes(int, Enum):
-        WORK = 0
-
-    UZOZM_MODES = ["Работа"]
-
-    class ServiceChannelFT4Variants(int, Enum):
-        ONE_TWO = 0
-
-    SERVICE_CHANNEL_FT4_VARIANTS = ["1.2 кБод"]
+    prm_signal_type_changed = Signal()
+    decoder_changed = Signal()
+    dmd_speed_changed = Signal()
+    dmd_mode_changed = Signal()
+    prd_uzozm_speed_changed = Signal()
+    uzozm_mode_changed = Signal()
+    service_channel_ft4_changed = Signal()
 
     class FilterNumbers(int, Enum):
         ONE = 0
@@ -79,13 +51,13 @@ class DMDUZOZM(QObject):
     def __init__(self):
         super().__init__()
 
-        self._prm_signal_type = self.PRMSignalTypes.UP
-        self._decoder = self.DecoderVariants.K5R12
-        self._dmd_speed = self.DMDSpeeds.SIX
-        self._dmd_mode = self.DMDModes.WORK
-        self._prd_uzozm_speed = self.PRDUZOZMSpeedS.OFT15
-        self._uzozm_mode = self.UZOZMModes.WORK
-        self._service_channel_ft4 = self.ServiceChannelFT4Variants.ONE_TWO
+        self._prm_signal_type = 0
+        self._decoder = 0
+        self._dmd_speed = 0
+        self._dmd_mode = 0
+        self._prd_uzozm_speed = 0
+        self._uzozm_mode = 0
+        self._service_channel_ft4 = 0
         self._filter_number = self.FilterNumbers.ONE
         self._aru = self.ARUVariants.ARU
         self._auto_search = self.AutoSearchVariants.ON
@@ -95,14 +67,6 @@ class DMDUZOZM(QObject):
         self._corrector = self.CorrectorVariants.OFF
 
     # region RPMSignalType
-
-    @Property(list, constant=True)
-    def prm_signal_types(self):
-        return self.PRM_SIGNAL_TYPES
-
-    @Signal
-    def prm_signal_type_changed(self):
-        pass
 
     @Property(int, notify=prm_signal_type_changed)
     def prm_signal_type(self):
@@ -119,14 +83,6 @@ class DMDUZOZM(QObject):
 
     # region Decoder
 
-    @Property(list, constant=True)
-    def decoder_variants(self):
-        return self.DECODER_VARIANTS
-
-    @Signal
-    def decoder_changed(self):
-        pass
-
     @Property(int, notify=decoder_changed)
     def decoder(self):
         return self._decoder
@@ -141,14 +97,6 @@ class DMDUZOZM(QObject):
     # endregion
 
     # region DMDSpeed
-
-    @Property(list, constant=True)
-    def dmd_speeds(self):
-        return self.DMD_SPEEDS
-
-    @Signal
-    def dmd_speed_changed(self):
-        pass
 
     @Property(int, notify=dmd_speed_changed)
     def dmd_speed(self):
@@ -165,14 +113,6 @@ class DMDUZOZM(QObject):
 
     # region DMDMode
 
-    @Property(list, constant=True)
-    def dmd_modes(self):
-        return self.DMD_MODES
-
-    @Signal
-    def dmd_mode_changed(self):
-        pass
-
     @Property(int, notify=dmd_speed_changed)
     def dmd_mode(self):
         return self._dmd_mode
@@ -187,14 +127,6 @@ class DMDUZOZM(QObject):
     # endregion
 
     # region PRDUZOZMSpeed
-
-    @Property(list, constant=True)
-    def prd_uzozm_speeds(self):
-        return self.PRD_UZOZM_SPEEDS
-
-    @Signal
-    def prd_uzozm_speed_changed(self):
-        pass
 
     @Property(int, notify=dmd_speed_changed)
     def prd_uzozm_speed(self):
@@ -211,14 +143,6 @@ class DMDUZOZM(QObject):
 
     # region UZOZMMode
 
-    @Property(list, constant=True)
-    def uzozm_modes(self):
-        return self.UZOZM_MODES
-
-    @Signal
-    def uzozm_mode_changed(self):
-        pass
-
     @Property(int, notify=uzozm_mode_changed)
     def uzozm_mode(self):
         return self._uzozm_mode
@@ -233,14 +157,6 @@ class DMDUZOZM(QObject):
     # endregion
 
     # region ServiceChannelFT4
-
-    @Property(list, constant=True)
-    def service_channel_ft4_variants(self):
-        return self.SERVICE_CHANNEL_FT4_VARIANTS
-
-    @Signal
-    def service_channel_ft4_changed(self):
-        pass
 
     @Property(int, notify=service_channel_ft4_changed)
     def service_channel_ft4(self):

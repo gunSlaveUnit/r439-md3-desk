@@ -306,14 +306,16 @@ Window {
               }
             }
 
-            # TODO: if exit, changeKLU3Button.visible = true
-
             ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage2Index}
             ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
         }
 
         ColumnLayout {
+          Connections {
+            target: dmd_uzozm
+          }
+
 					ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ДМД, УЗОЗМ")}
 
 					GridLayout {
@@ -321,32 +323,113 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип радиосигнала ПРМ:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: dmdUZOZMPRMSignalType
+              enabled: !changeDMDUZOZM1Button.visible
+              Layout.fillWidth: true
+              currentIndex: dmd_uzozm.prm_signal_type
+							model: ["УП"]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Декодер:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: dmdUZOZMDecoder
+              enabled: !changeDMDUZOZM1Button.visible
+              Layout.fillWidth: true
+              currentIndex: dmd_uzozm.decoder
+							model: ["K=5; R=1/2", "Откл."]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ДМД, кбит/с:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: dmdUZOZMDMDSpeed
+              enabled: !changeDMDUZOZM1Button.visible
+              Layout.fillWidth: true
+              currentIndex: dmd_uzozm.dmd_speed
+							model: ["6.0"]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ДМД:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: dmdUZOZMDMDMode
+              enabled: !changeDMDUZOZM1Button.visible
+              Layout.fillWidth: true
+              currentIndex: dmd_uzozm.dmd_mode
+							model: ["Работа"]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ПРД УЗОЗМ, кбит/с:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: dmdUZOZMPRDUZOZMSpeed
+              enabled: !changeDMDUZOZM1Button.visible
+              Layout.fillWidth: true
+              currentIndex: dmd_uzozm.prd_uzozm_speed
+							model: ["1.5 ОФТ"]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим УЗОЗМ:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: dmdUZOZMUZOZMMode
+              enabled: !changeDMDUZOZM1Button.visible
+              Layout.fillWidth: true
+              currentIndex: dmd_uzozm.uzozm_mode
+							model: ["Работа"]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный канал в ФТ4:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: dmdUZOZMServiceChannelFT4
+              enabled: !changeDMDUZOZM1Button.visible
+              Layout.fillWidth: true
+              currentIndex: dmd_uzozm.service_channel_ft4
+							model: ["1.2 кБод"]
+            }
           }
 
 					Item {Layout.fillHeight: true}
 
           RowLayout {
-            ButtonMD3 {text: qsTr("1. Изм.")}
+            ButtonMD3 {
+              id: changeDMDUZOZM1Button
+              text: qsTr("1. Изм.")
+              onClicked: visible = false
+            }
+
             Item {Layout.fillWidth: true}
+
+            ButtonMD3 {
+              visible: !changeDMDUZOZM1Button.visible
+              text: qsTr("2. Запись")
+              onClicked: {
+	              dmd_uzozm.prm_signal_type = dmdUZOZMPRMSignalType.currentIndex
+	              dmd_uzozm.decoder = dmdUZOZMDecoder.currentIndex
+	              dmd_uzozm.dmd_speed = dmdUZOZMDMDSpeed.currentIndex
+	              dmd_uzozm.dmd_mode = dmdUZOZMDMDMode.currentIndex
+	              dmd_uzozm.prd_uzozm_speed = dmdUZOZMPRDUZOZMSpeed.currentIndex
+                dmd_uzozm.uzozm_mode = dmdUZOZMUZOZMMode.currentIndex
+	              dmd_uzozm.service_channel_ft4 = dmdUZOZMServiceChannelFT4.currentIndex
+
+                changeDMDUZOZM1Button.visible = true
+              }
+            }
+
+            ButtonMD3 {
+              visible: !changeDMDUZOZM1Button.visible
+              text: qsTr("3. Отмена")
+
+              onClicked: {
+                dmdUZOZMPRMSignalType.currentIndex = dmd_uzozm.prm_signal_type
+	              dmdUZOZMDecoder.currentIndex = dmd_uzozm.decoder
+	              dmdUZOZMDMDSpeed.currentIndex = dmd_uzozm.dmd_speed
+	              dmdUZOZMDMDMode.currentIndex = dmd_uzozm.dmd_mode
+	              dmdUZOZMPRDUZOZMSpeed.currentIndex = dmd_uzozm.prd_uzozm_speed
+                dmdUZOZMUZOZMMode.currentIndex = dmd_uzozm.uzozm_mode
+	              dmdUZOZMServiceChannelFT4.currentIndex = dmd_uzozm.service_channel_ft4
+
+                changeDMDUZOZM1Button.visible = true
+              }
+            }
+
             ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage2Index}
             ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
@@ -386,7 +469,7 @@ Window {
           RowLayout {
             ButtonMD3 {text: qsTr("1. Изм.")}
             Item {Layout.fillWidth: true}
-            Button {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage1Index}
+            ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage1Index}
             ButtonMD3 {text: qsTr(">")}
             ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
