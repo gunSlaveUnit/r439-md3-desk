@@ -148,28 +148,28 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРМ:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Код Баркера ПРМ:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Инверсия кода Баркера:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ДСЧ:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер ключа ПРМ:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер подключа ПРМ:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Полоса поиска ПРМ, кГц:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРМ:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
           }
 
           Item {Layout.fillHeight: true}
@@ -190,19 +190,19 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРД:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Код Баркера ПРД:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер ключа ПРД:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер подключа ПРД:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРД:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
           }
 
           Item {Layout.fillHeight: true}
@@ -224,28 +224,28 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тестпроверка:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим теста:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ПРД 70:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сброс счетчика ошибок:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный 1:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный 2:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ШПС ПРД:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
           }
 
           Item {Layout.fillHeight: true}
@@ -266,25 +266,25 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип радиосигнала ПРМ:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Декодер:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ДМД, кбит/с:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ДМД:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ПРД УЗОЗМ, кбит/с:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим УЗОЗМ:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный канал в ФТ4:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
           }
 
 					Item {Layout.fillHeight: true}
@@ -305,25 +305,25 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер фильтра:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("АРУ:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Автопоиск:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("АСЧ:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Диф. декодер:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Полоса ДМД:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Корректор:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
           }
 
 					Item {Layout.fillHeight: true}
@@ -345,19 +345,19 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Автоконтроль CAN:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Поддиппазон приема:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ствольный фильтр:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
           }
 
 					Item {Layout.fillHeight: true}
@@ -378,16 +378,16 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип радиосигнала:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ОФТ:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ЗС:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
             TextFieldMD3 {Layout.fillWidth: true}
@@ -417,10 +417,10 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Стык Л807:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Источник сигнала: ")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
           }
 
           Item {Layout.fillHeight: true}
@@ -471,16 +471,16 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим работы ЗС")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скор ГС ПРМ кбит/c")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скор ГС ПРД кбит/c")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим РАТС")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
           }
 
           Item {Layout.fillHeight: true}
@@ -496,32 +496,32 @@ Window {
 
             Column {
               DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРМ")}
-              ComboBox {Layout.fillWidth: true}
+              ComboBoxMD3 {Layout.fillWidth: true}
 
               DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость")}
-              ComboBox {Layout.fillWidth: true}
+              ComboBoxMD3 {Layout.fillWidth: true}
 
               DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
 
               RowLayout {
-                ComboBox {Layout.fillWidth: true}
-                ComboBox {Layout.fillWidth: true}
-                ComboBox {Layout.fillWidth: true}
+                ComboBoxMD3 {Layout.fillWidth: true}
+                ComboBoxMD3 {Layout.fillWidth: true}
+                ComboBoxMD3 {Layout.fillWidth: true}
               }
             }
 
             Column {
               DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД")}
-              ComboBox {Layout.fillWidth: true}
+              ComboBoxMD3 {Layout.fillWidth: true}
 
               DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость")}
-              ComboBox {Layout.fillWidth: true}
+              ComboBoxMD3 {Layout.fillWidth: true}
 
               DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
 
               RowLayout {
-                ComboBox {Layout.fillWidth: true}
-                ComboBox {Layout.fillWidth: true}
+                ComboBoxMD3 {Layout.fillWidth: true}
+                ComboBoxMD3 {Layout.fillWidth: true}
               }
             }
           }
@@ -543,13 +543,17 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              currentIndex: 0
+              Layout.fillWidth: true
+              model: [qsTr("Yes"), qsTr("Yes 1"), qsTr("Yes 2")]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
-            ComboBox {Layout.fillWidth: true}
+            ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
             TextFieldMD3 {Layout.fillWidth: true}
