@@ -524,6 +524,7 @@ Window {
               id: aglZSOperatingMode
               Layout.fillWidth: true
               enabled: !changeAGLButton.visible
+              currentIndex: agl.zs_operating_mode
               model: [qsTr("ППРЧ непрерывный"), qsTr("ПР")]
             }
 
@@ -532,6 +533,7 @@ Window {
               id: aglGSPRMSpeed
               Layout.fillWidth: true
               enabled: !changeAGLButton.visible
+              currentIndex: agl.speed_gs_prm
               model: [qsTr("Нет ГС"), qsTr("6.0")]
             }
 
@@ -540,6 +542,7 @@ Window {
               id: aglGSPRDSpeed
               Layout.fillWidth: true
               enabled: !changeAGLButton.visible
+              currentIndex: agl.speed_gs_prd
               model: [qsTr("Нет ГС"), qsTr("6.0")]
             }
 
@@ -548,6 +551,7 @@ Window {
               id: aglRATSMode
               Layout.fillWidth: true
               enabled: !changeAGLButton.visible
+              currentIndex: agl.rats_mode
               model: [qsTr("Отсутствует")]
             }
           }
@@ -595,6 +599,10 @@ Window {
         }
 
         ColumnLayout {
+          Connections {
+            target: tlf1
+          }
+
           ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режим ТЛФ1")}
 
           GridLayout {
@@ -602,32 +610,89 @@ Window {
 
             Column {
               DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРМ")}
-              ComboBoxMD3 {Layout.fillWidth: true}
+              ComboBoxMD3 {
+                id: tlf1SignalPRMType
+                Layout.fillWidth: true
+                enabled: !changeTLF1Button.visible
+                currentIndex: tlf1.signal_prm_type
+                model: ["Канал не задан", "Закреп. непрер."]
+              }
 
               DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость")}
-              ComboBoxMD3 {Layout.fillWidth: true}
+              ComboBoxMD3 {
+                id: tlf1PRMSpeed
+                Layout.fillWidth: true
+                enabled: !changeTLF1Button.visible
+                currentIndex: tlf1.prm_speed
+                model: ["4.8", "9.6"]
+              }
 
               DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
 
               RowLayout {
-                ComboBoxMD3 {Layout.fillWidth: true}
-                ComboBoxMD3 {Layout.fillWidth: true}
-                ComboBoxMD3 {Layout.fillWidth: true}
+                ComboBoxMD3 {
+                  id: tlf1PRMAddressOne
+                  Layout.fillWidth: true
+                  enabled: !changeTLF1Button.visible
+                  currentIndex: tlf1.prm_address_one
+                  model: ["0"]
+                }
+
+                ComboBoxMD3 {
+                  id: tlf1PRMAddressTwo
+                  Layout.fillWidth: true
+                  enabled: !changeTLF1Button.visible
+                  currentIndex: tlf1.prm_address_two
+                  model: ["0"]
+                }
+
+                ComboBoxMD3 {
+                  id: tlf1PRMAddressThree
+                  Layout.fillWidth: true
+                  enabled: !changeTLF1Button.visible
+                  currentIndex: tlf1.prm_address_three
+                  model: ["", "1"]
+                }
               }
             }
 
             Column {
               DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД")}
-              ComboBoxMD3 {Layout.fillWidth: true}
+              ComboBoxMD3 {
+                id: tlf1SignalPRDType
+                Layout.fillWidth: true
+                enabled: !changeTLF1Button.visible
+                currentIndex: tlf1.signal_prd_type
+                model: ["Канал не задан", "Закреп. непрер."]
+              }
 
               DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость")}
-              ComboBoxMD3 {Layout.fillWidth: true}
+              ComboBoxMD3 {
+                id: tlf1PRDSpeed
+                Layout.fillWidth: true
+                enabled: !changeTLF1Button.visible
+                currentIndex: tlf1.prd_speed
+                model: ["4.8", "9.6"]
+              }
 
               DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
 
               RowLayout {
-                ComboBoxMD3 {Layout.fillWidth: true}
-                ComboBoxMD3 {Layout.fillWidth: true}
+                id: tlf1PRDAddressOne
+                ComboBoxMD3 {
+                  Layout.fillWidth: true
+                  enabled: !changeTLF1Button.visible
+                  currentIndex: tlf1.prd_address_one
+                  model: ["0"]
+                }
+
+                ComboBoxMD3 {
+                  id: tlf1PRDAddressTwo
+                  Layout.fillWidth: true
+                  enabled: !changeTLF1Button.visible
+                  currentIndex: tlf1.prd_address_twp
+                  model: ["", "1"]
+                }
               }
             }
           }
@@ -635,8 +700,51 @@ Window {
 					Item {Layout.fillHeight: true}
 
           RowLayout {
-            ButtonMD3 {text: qsTr("1. Изм.")}
+            ButtonMD3 {
+              id: changeTLF1Button
+              text: qsTr("1. Изм.")
+              onClicked: visible = false
+            }
+
             Item {Layout.fillWidth: true}
+
+            ButtonMD3 {
+              visible: !changeTLF1Button.visible
+              text: qsTr("2. Запись")
+              onClicked: {
+                tlf1.signal_prm_type = tlf1SignalPRMType.currentIndex
+                tlf1.prm_speed = tlf1PRMSpeed.currentIndex
+                tlf1.prm_address_one = tlf1PRMAddressOne.currentIndex
+                tlf1.prm_address_two = tlf1PRMAddressTwo.currentIndex
+                tlf1.prm_address_three = tlf1PRMAddressThree.currentIndex
+                tlf1.signal_prd_type = tlf1SignalPRDType.currentIndex
+                tlf1.prd_speed = tlf1PRDSpeed.currentIndex
+                tlf1.prd_address_one = tlf1PRDAddressOne.currentIndex
+                tlf1.prd_address_two = tlf1PRDAddressTwo.currentIndex
+
+                changeTLF1Button.visible = true
+              }
+            }
+
+            ButtonMD3 {
+              visible: !changeTLF1Button.visible
+              text: qsTr("3. Отмена")
+
+              onClicked: {
+                tlf1SignalPRMType.currentIndex = tlf1.signal_prm_type
+                tlf1PRMSpeed.currentIndex = tlf1.prm_speed
+                tlf1PRMAddressOne.currentIndex = tlf1.prm_address_one
+                tlf1PRMAddressTwo.currentIndex = tlf1.prm_address_two
+                tlf1PRMAddressThree.currentIndex = tlf1.prm_address_three
+                tlf1SignalPRDType.currentIndex = tlf1.signal_prd_type
+                tlf1PRDSpeed.currentIndex = tlf1.prd_speed
+                tlf1PRDAddressOne.currentIndex = tlf1.prd_address_one
+                tlf1PRDAddressTwo.currentIndex = tlf1.prd_address_two
+
+                changeTLF1Button.visible = true
+              }
+            }
+
             ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
           }
         }

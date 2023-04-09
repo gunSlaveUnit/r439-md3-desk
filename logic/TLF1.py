@@ -1,19 +1,16 @@
-from enum import Enum
-
 from PySide6.QtCore import Signal, Property, QObject
 
 
 class TLF1(QObject):
-    SIGNAL_PRM_TYPES = ("Канал не задан", "Закреп. непрер.")
-    PRM_SPEEDS = ("4.8", "9.6")
-    PRM_GS_ADDRESSES_ONE = ("0")
-    PRM_GS_ADDRESSES_TWO = ("0")
-    PRM_GS_ADDRESSES_THREE = ("", "1")
-
-    SIGNAL_PRD_TYPES = ("Канал не задан", "Закреп. непрер.")
-    PRD_SPEEDS = ("4.8", "9.6")
-    PRD_GS_ADDRESSES_ONE = ("0")
-    PRD_GS_ADDRESSES_TWO = ("", "1")
+    signal_prm_type_changed = Signal()
+    prm_speed_changed = Signal()
+    prm_address_one_changed = Signal()
+    prm_address_two_changed = Signal()
+    prm_address_three_changed = Signal()
+    signal_prd_type_changed = Signal()
+    prd_speed_changed = Signal()
+    prd_address_one_changed = Signal()
+    prd_address_two_changed = Signal()
 
     def __init__(self):
         super().__init__()
@@ -31,14 +28,6 @@ class TLF1(QObject):
 
     # region SignalPRMType
 
-    @Property(list, constant=True)
-    def signal_prm_types(self):
-        return self.SIGNAL_PRM_TYPES
-
-    @Signal
-    def signal_prm_type_changed(self):
-        pass
-
     @Property(int, notify=signal_prm_type_changed)
     def signal_prm_type(self):
         return self._signal_prm_type
@@ -53,14 +42,6 @@ class TLF1(QObject):
     # endregion
 
     # region PRMSpeed
-
-    @Property(list, constant=True)
-    def prm_speeds(self):
-        return self.PRM_SPEEDS
-
-    @Signal
-    def prm_speed_changed(self):
-        pass
 
     @Property(int, notify=prm_speed_changed)
     def prm_speed(self):
@@ -77,14 +58,6 @@ class TLF1(QObject):
 
     # region PRMGSAddressOne
 
-    @Property(list, constant=True)
-    def prm_addresses_one(self):
-        return self.PRM_GS_ADDRESSES_ONE
-
-    @Signal
-    def prm_address_one_changed(self):
-        pass
-
     @Property(int, notify=prm_address_one_changed)
     def prm_address_one(self):
         return self._prm_address_one
@@ -99,14 +72,6 @@ class TLF1(QObject):
     # endregion
 
     # region PRMGSAddressTwo
-
-    @Property(list, constant=True)
-    def prm_addresses_two(self):
-        return self.PRM_GS_ADDRESSES_TWO
-
-    @Signal
-    def prm_address_two_changed(self):
-        pass
 
     @Property(int, notify=prm_address_two_changed)
     def prm_address_two(self):
@@ -123,14 +88,6 @@ class TLF1(QObject):
 
     # region PRMGSAddressThree
 
-    @Property(list, constant=True)
-    def prm_addresses_three(self):
-        return self.PRM_GS_ADDRESSES_THREE
-
-    @Signal
-    def prm_address_three_changed(self):
-        pass
-
     @Property(int, notify=prm_address_three_changed)
     def prm_address_three(self):
         return self._prm_address_three
@@ -145,14 +102,6 @@ class TLF1(QObject):
     # endregion
 
     # region SignalPRDType
-
-    @Property(list, constant=True)
-    def signal_prd_types(self):
-        return self.SIGNAL_PRD_TYPES
-
-    @Signal
-    def signal_prd_type_changed(self):
-        pass
 
     @Property(int, notify=signal_prd_type_changed)
     def signal_prd_type(self):
@@ -169,14 +118,6 @@ class TLF1(QObject):
 
     # region PRDSpeed
 
-    @Property(list, constant=True)
-    def prd_speeds(self):
-        return self.PRD_SPEEDS
-
-    @Signal
-    def prd_speed_changed(self):
-        pass
-
     @Property(int, notify=prd_speed_changed)
     def prd_speed(self):
         return self._prd_speed
@@ -192,14 +133,6 @@ class TLF1(QObject):
 
     # region PRDGSAddressOne
 
-    @Property(list, constant=True)
-    def prd_addresses_one(self):
-        return self.PRD_GS_ADDRESSES_ONE
-
-    @Signal
-    def prd_address_one_changed(self):
-        pass
-
     @Property(int, notify=prd_address_one_changed)
     def prd_address_one(self):
         return self._prd_address_one
@@ -214,14 +147,6 @@ class TLF1(QObject):
     # endregion
 
     # region PRDGSAddressTwo
-
-    @Property(list, constant=True)
-    def prd_addresses_two(self):
-        return self.PRD_GS_ADDRESSES_TWO
-
-    @Signal
-    def prd_address_two_changed(self):
-        pass
 
     @Property(int, notify=prd_address_two_changed)
     def prd_address_two(self):
