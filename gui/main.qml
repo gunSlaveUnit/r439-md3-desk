@@ -390,10 +390,10 @@ Window {
             ComboBox {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
-            TextField {Layout.fillWidth: true}
+            TextFieldMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРМ:")}
-            TextField {Layout.fillWidth: true}
+            TextFieldMD3 {Layout.fillWidth: true}
           }
 
 					Item {Layout.fillHeight: true}
@@ -552,7 +552,7 @@ Window {
             ComboBox {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
-            TextField {Layout.fillWidth: true}
+            TextFieldMD3 {Layout.fillWidth: true}
           }
 
 	        GridLayout {
