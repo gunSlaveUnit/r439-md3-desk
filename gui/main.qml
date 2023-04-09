@@ -668,7 +668,7 @@ Window {
               id: tractsPRDPRDRadioSignalType
               enabled: !changeTractsPRMPRDButton2.visible
               Layout.fillWidth: true
-              currentIndex: tracts_prm_prd.radio_signal_type
+              currentIndex: tracts_prm_prd.radio_signal
 							model: ["УП"]
             }
 
@@ -731,7 +731,7 @@ Window {
               visible: !changeTractsPRMPRDButton2.visible
               text: qsTr("2. Запись")
               onClicked: {
-	              tracts_prm_prd.radio_signal_type = tractsPRDPRDRadioSignalType.currentIndex
+	              tracts_prm_prd.radio_signal = tractsPRDPRDRadioSignalType.currentIndex
 	              tracts_prm_prd.signal_type = tractsPRDPRDOFTSignalType.currentIndex
 	              tracts_prm_prd.zs_speed = tractsPRDPRDZSSpeed.currentIndex
 	              tracts_prm_prd.output_u205d = tractsPRDPRDOutputU205D.currentIndex
@@ -747,7 +747,7 @@ Window {
               text: qsTr("3. Отмена")
 
               onClicked: {
-                tractsPRDPRDRadioSignalType.currentIndex = tracts_prm_prd.radio_signal_type
+                tractsPRDPRDRadioSignalType.currentIndex = tracts_prm_prd.radio_signal
 	              tractsPRDPRDOFTSignalType.currentIndex = tracts_prm_prd.signal_type
 	              tractsPRDPRDZSSpeed.currentIndex = tracts_prm_prd.zs_speed
 	              tractsPRDPRDOutputU205D.currentIndex = tracts_prm_prd.output_u205d
