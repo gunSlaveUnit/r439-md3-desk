@@ -509,6 +509,10 @@ Window {
         }
 
         ColumnLayout {
+          Connections {
+            target: agl
+          }
+
           ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режим прибора АГ-Л")}
 
           GridLayout {
@@ -516,21 +520,78 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим работы ЗС")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: aglZSOperatingMode
+              Layout.fillWidth: true
+              enabled: !changeAGLButton.visible
+              model: [qsTr("ППРЧ непрерывный"), qsTr("ПР")]
+            }
 
-            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скор ГС ПРМ кбит/c")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скор ГС ПРМ, кбит/c")}
+            ComboBoxMD3 {
+              id: aglGSPRMSpeed
+              Layout.fillWidth: true
+              enabled: !changeAGLButton.visible
+              model: [qsTr("Нет ГС"), qsTr("6.0")]
+            }
 
-            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скор ГС ПРД кбит/c")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скор ГС ПРД, кбит/c")}
+            ComboBoxMD3 {
+              id: aglGSPRDSpeed
+              Layout.fillWidth: true
+              enabled: !changeAGLButton.visible
+              model: [qsTr("Нет ГС"), qsTr("6.0")]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим РАТС")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: aglRATSMode
+              Layout.fillWidth: true
+              enabled: !changeAGLButton.visible
+              model: [qsTr("Отсутствует")]
+            }
           }
 
           Item {Layout.fillHeight: true}
 
-          ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
+          RowLayout {
+            ButtonMD3 {
+              id: changeAGLButton
+              text: qsTr("1. Изм.")
+              onClicked: visible = false
+            }
+
+            Item {Layout.fillWidth: true}
+
+            ButtonMD3 {
+              visible: !changeAGLButton.visible
+              text: qsTr("2. Запись")
+              onClicked: {
+	              agl.zs_operating_mode = aglZSOperatingMode.currentIndex
+	              agl.speed_gs_prm = aglGSPRMSpeed.currentIndex
+	              agl.speed_gs_prd = aglGSPRDSpeed.currentIndex
+	              agl.rats_mode = aglRATSMode.currentIndex
+
+                changeAGLButton.visible = true
+              }
+            }
+
+            ButtonMD3 {
+              visible: !changeAGLButton.visible
+              text: qsTr("3. Отмена")
+
+              onClicked: {
+                aglZSOperatingMode.currentIndex = agl.zs_operating_mode
+	              aglGSPRMSpeed.currentIndex = agl.speed_gs_prm
+	              aglGSPRDSpeed.currentIndex = agl.speed_gs_prd
+	              aglRATSMode.currentIndex = agl.rats_mode
+
+                changeAGLButton.visible = true
+              }
+            }
+
+            ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
+          }
         }
 
         ColumnLayout {
