@@ -1107,6 +1107,10 @@ Window {
         }
 
         ColumnLayout {
+          Connections {
+            target: plume
+          }
+
 					ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Шлейф ПР")}
 
 					GridLayout {
@@ -1115,19 +1119,38 @@ Window {
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
             ComboBoxMD3 {
-              currentIndex: 0
+              id: plumeShiftGenerator
+              enabled: !changePlumeButton.visible
+              currentIndex: plume.shift_generator
               Layout.fillWidth: true
-              model: [qsTr("Yes"), qsTr("Yes 1"), qsTr("Yes 2")]
+              model: ["Вкл."]
             }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: plumeAmplifier
+              enabled: !changePlumeButton.visible
+              currentIndex: plume.amplifier
+              Layout.fillWidth: true
+              model: ["Откл."]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: plumeOutputU205D
+              enabled: !changePlumeButton.visible
+              currentIndex: plume.output_u205d
+              Layout.fillWidth: true
+              model: ["Откл."]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
-            TextFieldMD3 {Layout.fillWidth: true}
+            TextFieldMD3 {
+              id: plumePRDWaveNumber
+              enabled: !changePlumeButton.visible
+              text: plume.prd_wave_number
+              Layout.fillWidth: true
+            }
           }
 
 	        GridLayout {
@@ -1135,23 +1158,58 @@ Window {
 	          columns: 4
 
 	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ствол. фильтр:")}
-	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("1")}
+	          DisplayTextMD3 {Layout.fillWidth: true; text: plume.stem_filter}
 
 	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("№ волны ПРМ:")}
-	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("2500")}
+	          DisplayTextMD3 {Layout.fillWidth: true; text:  plume.prm_wave_number}
 
 	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Поддиап. приема:")}
-	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("1")}
+	          DisplayTextMD3 {Layout.fillWidth: true; text:  plume.receive_subband}
 
 	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("№ фильтра ДМД:")}
-	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("3")}
+	          DisplayTextMD3 {Layout.fillWidth: true; text: plume.dmd_filter_number}
 	        }
 
 					Item {Layout.fillHeight: true}
 
           RowLayout {
-            ButtonMD3 {text: qsTr("1. Изм.")}
+            ButtonMD3 {
+              id: changePlumeButton
+              text: qsTr("1. Изм.")
+              onClicked: visible = false
+            }
+
             Item {Layout.fillWidth: true}
+
+            ButtonMD3 {
+              visible: !changePlumeButton.visible
+              text: qsTr("2. Запись")
+              onClicked: {
+	              plume.shift_generator = plumeShiftGenerator.currentIndex
+	              plume.amplifier = plumeAmplifier.currentIndex
+	              plume.output_u205d = plumeOutputU205D.currentIndex
+	              plume.prd_wave_number = plumePRDWaveNumber.text
+
+								plume.calculate_parameters()
+
+                changePlumeButton.visible = true
+              }
+            }
+
+            ButtonMD3 {
+              visible: !changePlumeButton.visible
+              text: qsTr("3. Отмена")
+
+              onClicked: {
+                plumeShiftGenerator.currentIndex = plume.shift_generator
+	              plumeAmplifier.currentIndex = plume.amplifier
+	              plumeOutputU205D.currentIndex = plume.output_u205d
+	              plumePRDWaveNumber.text = plume.prd_wave_number
+
+                changePlumeButton.visible = true
+              }
+            }
+
             ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
           }
 				}

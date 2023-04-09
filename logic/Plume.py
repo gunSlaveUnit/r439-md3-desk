@@ -1,30 +1,22 @@
-from enum import Enum
-
-from PySide6.QtCore import Signal, Property, QObject
+from PySide6.QtCore import Signal, Property, QObject, Slot
 
 
 class Plume(QObject):
-    class ShiftGeneratorVariants(int, Enum):
-        ON = 0
-
-    SHIFT_GENERATOR_VARIANTS = ["Вкл."]
-
-    class AmplifierVariants(int, Enum):
-        OFF = 0
-
-    AMPLIFIER_VARIANTS = ["Откл."]
-
-    class OutputsU205D(int, Enum):
-        ON = 0
-
-    OUTPUTS_U205D = ["Вкл."]
+    shift_generator_changed = Signal()
+    amplifier_changed = Signal()
+    output_u205d_changed = Signal()
+    prd_wave_number_changed = Signal()
+    stem_filter_changed = Signal()
+    prm_wave_number_changed = Signal()
+    receive_subband_changed = Signal()
+    dmd_filter_number_changed = Signal()
 
     def __init__(self):
         super().__init__()
 
-        self._shift_generator = self.ShiftGeneratorVariants.ON
-        self._amplifier = self.AmplifierVariants.OFF
-        self._output_u205d = self.OutputsU205D.ON
+        self._shift_generator = 0
+        self._amplifier = 0
+        self._output_u205d = 0
         self._prd_wave_number = 0
 
         self._stem_filter = 1
@@ -32,21 +24,14 @@ class Plume(QObject):
         self._receive_subband = 1
         self._dmd_filter_number = 3
 
-    def _calculate_parameters(self):
+    @Slot()
+    def calculate_parameters(self):
         self.stem_filter = 8
         self.prm_wave_number = 2216
         self.receive_subband = 34
         self.dmd_filter_number = 3
 
     # region ShiftGenerator
-
-    @Property(list, constant=True)
-    def shift_generator_variants(self):
-        return self.SHIFT_GENERATOR_VARIANTS
-
-    @Signal
-    def shift_generator_changed(self):
-        pass
 
     @Property(int, notify=shift_generator_changed)
     def shift_generator(self):
@@ -63,14 +48,6 @@ class Plume(QObject):
 
     # region Amplifier
 
-    @Property(list, constant=True)
-    def amplifier_variants(self):
-        return self.AMPLIFIER_VARIANTS
-
-    @Signal
-    def amplifier_changed(self):
-        pass
-
     @Property(int, notify=amplifier_changed)
     def amplifier(self):
         return self._amplifier
@@ -85,14 +62,6 @@ class Plume(QObject):
     # endregion
 
     # region OutputU205D
-
-    @Property(list, constant=True)
-    def outputs_u205d(self):
-        return self.OUTPUTS_U205D
-
-    @Signal
-    def output_u205d_changed(self):
-        pass
 
     @Property(int, notify=output_u205d_changed)
     def output_u205d(self):
@@ -109,10 +78,6 @@ class Plume(QObject):
 
     # region PRDWaveNumber
 
-    @Signal
-    def prd_wave_number_changed(self):
-        pass
-
     @Property(int, notify=prd_wave_number_changed)
     def prd_wave_number(self):
         return self._prd_wave_number
@@ -122,16 +87,11 @@ class Plume(QObject):
         if self._prd_wave_number == new_value:
             return
         self._prd_wave_number = new_value
-        self._calculate_parameters()
         self.prd_wave_number_changed.emit()
 
     # endregion
 
     # region Stem filter
-
-    @Signal
-    def stem_filter_changed(self):
-        pass
 
     @Property(int, notify=stem_filter_changed)
     def stem_filter(self):
@@ -148,10 +108,6 @@ class Plume(QObject):
 
     # region PRMWaveNumber
 
-    @Signal
-    def prm_wave_number_changed(self):
-        pass
-
     @Property(int, notify=prm_wave_number_changed)
     def prm_wave_number(self):
         return self._prm_wave_number
@@ -167,10 +123,6 @@ class Plume(QObject):
 
     # region Receive subband
 
-    @Signal
-    def receive_subband_changed(self):
-        pass
-
     @Property(int, notify=receive_subband_changed)
     def receive_subband(self):
         return self._receive_subband
@@ -185,10 +137,6 @@ class Plume(QObject):
     # endregion
 
     # region DMD filter number
-
-    @Signal
-    def dmd_filter_number_changed(self):
-        pass
 
     @Property(int, notify=dmd_filter_number_changed)
     def dmd_filter_number(self):
