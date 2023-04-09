@@ -12,13 +12,14 @@ ComboBox {
 
     contentItem: Text {
       text: modelData
-      color: "#d4a009"
+      color: hovered ? "#000" : "#d4a009"
       font: control.font
       elide: Text.ElideRight
       verticalAlignment: Text.AlignVCenter
     }
 
     background: Rectangle {
+      id: variantBackground
       anchors.fill: parent
       color: hovered ? "#d4a009" : "black"
     }
