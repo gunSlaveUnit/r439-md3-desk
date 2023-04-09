@@ -436,6 +436,10 @@ Window {
         }
 
         ColumnLayout {
+					Connections {
+            target: dmd_uzozm
+          }
+
 					ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ДМД")}
 
 					GridLayout {
@@ -443,32 +447,113 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер фильтра:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: dmdUZOZMFilterNumber
+              enabled: !changeDMDUZOZM2Button.visible
+              Layout.fillWidth: true
+              currentIndex: dmd_uzozm.filter_number
+							model: ["1", "3"]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("АРУ:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: dmdUZOZMARU
+              enabled: !changeDMDUZOZM2Button.visible
+              Layout.fillWidth: true
+              currentIndex: dmd_uzozm.aru
+							model: ["АРУ"]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Автопоиск:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: dmdUZOZMAutoSearch
+              enabled: !changeDMDUZOZM2Button.visible
+              Layout.fillWidth: true
+              currentIndex: dmd_uzozm.auto_search
+							model: ["Вкл."]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("АСЧ:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: dmdUZOZMASCH
+              enabled: !changeDMDUZOZM2Button.visible
+              Layout.fillWidth: true
+              currentIndex: dmd_uzozm.asch
+							model: ["Вкл."]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Диф. декодер:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: dmdUZOZMDifDecoder
+              enabled: !changeDMDUZOZM2Button.visible
+              Layout.fillWidth: true
+              currentIndex: dmd_uzozm.dif_decoder
+							model: ["Вкл."]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Полоса ДМД:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: dmdUZOZMDMDBand
+              enabled: !changeDMDUZOZM2Button.visible
+              Layout.fillWidth: true
+              currentIndex: dmd_uzozm.dmd_band
+							model: ["Широкая"]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Корректор:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: dmdUZOZMCorrector
+              enabled: !changeDMDUZOZM2Button.visible
+              Layout.fillWidth: true
+              currentIndex: dmd_uzozm.corrector
+							model: ["Откл."]
+            }
           }
 
 					Item {Layout.fillHeight: true}
 
           RowLayout {
-            ButtonMD3 {text: qsTr("1. Изм.")}
+            ButtonMD3 {
+              id: changeDMDUZOZM2Button
+              text: qsTr("1. Изм.")
+              onClicked: visible = false
+            }
+
             Item {Layout.fillWidth: true}
+
+            ButtonMD3 {
+              visible: !changeDMDUZOZM2Button.visible
+              text: qsTr("2. Запись")
+              onClicked: {
+	              dmd_uzozm.filter_number = dmdUZOZMFilterNumber.currentIndex
+	              dmd_uzozm.aru = dmdUZOZMARU.currentIndex
+	              dmd_uzozm.auto_search = dmdUZOZMAutoSearch.currentIndex
+	              dmd_uzozm.asch = dmdUZOZMASCH.currentIndex
+	              dmd_uzozm.dif_decoder = dmdUZOZMDifDecoder.currentIndex
+	              dmd_uzozm.dmd_band = dmdUZOZMDMDBand.currentIndex
+	              dmd_uzozm.corrector = dmdUZOZMCorrector.currentIndex
+
+                changeDMDUZOZM2Button.visible = true
+              }
+            }
+
+            ButtonMD3 {
+              visible: !changeDMDUZOZM2Button.visible
+              text: qsTr("3. Отмена")
+
+              onClicked: {
+                dmdUZOZMFilterNumber.currentIndex = dmd_uzozm.filter_number
+	              dmdUZOZMARU.currentIndex = dmd_uzozm.aru
+	              dmdUZOZMAutoSearch.currentIndex = dmd_uzozm.auto_search
+	              dmdUZOZMASCH.currentIndex = dmd_uzozm.asch
+	              dmdUZOZMDifDecoder.currentIndex = dmd_uzozm.dif_decoder
+	              dmdUZOZMDMDBand.currentIndex = dmd_uzozm.dmd_band
+	              dmdUZOZMCorrector.currentIndex = dmd_uzozm.corrector
+
+                changeDMDUZOZM2Button.visible = true
+              }
+            }
+
             ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage1Index}
             ButtonMD3 {text: qsTr(">")}
             ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}

@@ -12,41 +12,13 @@ class DMDUZOZM(QObject):
     uzozm_mode_changed = Signal()
     service_channel_ft4_changed = Signal()
 
-    class FilterNumbers(int, Enum):
-        ONE = 0
-        THREE = 1
-
-    FILTER_NUMBERS = ["1", "3"]
-
-    class ARUVariants(int, Enum):
-        ARU = 0
-
-    ARU_VARIANTS = ["АРУ"]
-
-    class AutoSearchVariants(int, Enum):
-        ON = 0
-
-    AUTO_SEARCH_VARIANTS = ["Вкл."]
-
-    class ASCHVariants(int, Enum):
-        ON = 0
-
-    ASCH_VARIANTS = ["Вкл."]
-
-    class DifDecoderVariants(int, Enum):
-        ON = 0
-
-    DIF_DECODER_VARIANTS = ["Вкл."]
-
-    class DMDBands(int, Enum):
-        WIDE = 0
-
-    DMD_BANDS = ["Широкая"]
-
-    class CorrectorVariants(int, Enum):
-        OFF = 0
-
-    CORRECTOR_VARIANTS = ["Откл."]
+    filter_number_changed = Signal()
+    aru_changed = Signal()
+    auto_search_changed = Signal()
+    asch_changed = Signal()
+    dif_decoder_changed = Signal()
+    dmd_band_changed = Signal()
+    corrector_changed = Signal()
 
     def __init__(self):
         super().__init__()
@@ -58,13 +30,13 @@ class DMDUZOZM(QObject):
         self._prd_uzozm_speed = 0
         self._uzozm_mode = 0
         self._service_channel_ft4 = 0
-        self._filter_number = self.FilterNumbers.ONE
-        self._aru = self.ARUVariants.ARU
-        self._auto_search = self.AutoSearchVariants.ON
-        self._asch = self.ASCHVariants.ON
-        self._dif_decoder = self.DifDecoderVariants.ON
-        self._dmd_band = self.DMDBands.WIDE
-        self._corrector = self.CorrectorVariants.OFF
+        self._filter_number = 0
+        self._aru = 0
+        self._auto_search = 0
+        self._asch = 0
+        self._dif_decoder = 0
+        self._dmd_band = 0
+        self._corrector = 0
 
     # region RPMSignalType
 
@@ -173,14 +145,6 @@ class DMDUZOZM(QObject):
 
     # region FilterNumber
 
-    @Property(list, constant=True)
-    def filter_numbers(self):
-        return self.FILTER_NUMBERS
-
-    @Signal
-    def filter_number_changed(self):
-        pass
-
     @Property(int, notify=filter_number_changed)
     def filter_number(self):
         return self._filter_number
@@ -195,14 +159,6 @@ class DMDUZOZM(QObject):
     # endregion
 
     # region ARU
-
-    @Property(list, constant=True)
-    def aru_variants(self):
-        return self.ARU_VARIANTS
-
-    @Signal
-    def aru_changed(self):
-        pass
 
     @Property(int, notify=aru_changed)
     def aru(self):
@@ -219,14 +175,6 @@ class DMDUZOZM(QObject):
 
     # region AutoSearch
 
-    @Property(list, constant=True)
-    def auto_search_variants(self):
-        return self.AUTO_SEARCH_VARIANTS
-
-    @Signal
-    def auto_search_changed(self):
-        pass
-
     @Property(int, notify=auto_search_changed)
     def auto_search(self):
         return self._auto_search
@@ -241,14 +189,6 @@ class DMDUZOZM(QObject):
     # endregion
 
     # region ASCH
-
-    @Property(list, constant=True)
-    def asch_variants(self):
-        return self.ASCH_VARIANTS
-
-    @Signal
-    def asch_changed(self):
-        pass
 
     @Property(int, notify=asch_changed)
     def asch(self):
@@ -265,14 +205,6 @@ class DMDUZOZM(QObject):
 
     # region DifDecoder
 
-    @Property(list, constant=True)
-    def dif_decoder_variants(self):
-        return self.DIF_DECODER_VARIANTS
-
-    @Signal
-    def dif_decoder_changed(self):
-        pass
-
     @Property(int, notify=dif_decoder_changed)
     def dif_decoder(self):
         return self._dif_decoder
@@ -288,14 +220,6 @@ class DMDUZOZM(QObject):
 
     # region DMDBand
 
-    @Property(list, constant=True)
-    def dmd_bands(self):
-        return self.DMD_BANDS
-
-    @Signal
-    def dmd_band_changed(self):
-        pass
-
     @Property(int, notify=dmd_band_changed)
     def dmd_band(self):
         return self._dmd_band
@@ -310,14 +234,6 @@ class DMDUZOZM(QObject):
     # endregion
 
     # region Corrector
-
-    @Property(list, constant=True)
-    def corrector_variants(self):
-        return self.CORRECTOR_VARIANTS
-
-    @Signal
-    def corrector_changed(self):
-        pass
 
     @Property(int, notify=corrector_changed)
     def corrector(self):
