@@ -1,78 +1,35 @@
-from enum import Enum
-
 from PySide6.QtCore import Signal, Property, QObject
 
 
 class TractsPRMPRD(QObject):
-    class AutoCheckCANVariants(int, Enum):
-        NO = 0
-
-    AUTO_CHECK_CAN_VARIANTS = ["Откл."]
-
-    class ReceiveSubbands(int, Enum):
-        ONE = 0
-
-    RECEIVE_SUBBANDS = ["1"]
-
-    class ShiftGeneratorVariants(int, Enum):
-        ON = 0
-
-    SHIFT_GENERATOR_VARIANTS = ["Вкл."]
-
-    class BarrelFilterVariants(int, Enum):
-        ONE = 0
-
-    BARREL_FILTER_VARIANTS = ["1"]
-
-    class AmplifierVariants(int, Enum):
-        OFF = 0
-
-    AMPLIFIER_VARIANTS = ["Откл."]
-
-    class RadioSignalTypes(int, Enum):
-        UP = 0
-
-    RADIO_SIGNAL_TYPES = ["УП"]
-
-    class SignalTypes(int, Enum):
-        OFT = 0
-
-    SIGNAL_TYPES = ["ОФТ"]
-
-    class ZSSpeeds(int, Enum):
-        SIX = 0
-
-    ZS_SPEEDS = ["6.0"]
-
-    class OutputsU205D(int, Enum):
-        ON = 0
-
-    OUTPUTS_U205D = ["Вкл."]
+    auto_check_can_changed = Signal()
+    receive_subband_changed = Signal()
+    shift_generator_changed = Signal()
+    barrel_filter_changed = Signal()
+    amplifier_changed = Signal()
+    radio_signal_changed = Signal()
+    signal_type_changed = Signal()
+    zs_speed_changed = Signal()
+    output_u205d_changed = Signal()
+    prd_wave_number_changed = Signal()
+    prm_wave_number_changed = Signal()
 
     def __init__(self):
         super().__init__()
 
-        self._auto_check_can = self.AutoCheckCANVariants.NO
-        self._receive_subband = self.ReceiveSubbands.ONE
-        self._shift_generator = self.ShiftGeneratorVariants.ON
-        self._barrel_filter = self.BarrelFilterVariants.ONE
-        self._amplifier = self.AmplifierVariants.OFF
-        self._radio_signal_type = self.RadioSignalTypes.UP
-        self._signal_type = self.SignalTypes.OFT
-        self._zs_speed = self.ZSSpeeds.SIX
-        self._output_u205d = self.OutputsU205D.ON
+        self._auto_check_can = 0
+        self._receive_subband = 0
+        self._shift_generator = 0
+        self._barrel_filter = 0
+        self._amplifier = 0
+        self._radio_signal_type = 0
+        self._signal_type = 0
+        self._zs_speed = 0
+        self._output_u205d = 0
         self._prd_wave_number = 0
         self._prm_wave_number = 0
 
     # region AutoCheckCAN
-
-    @Property(list, constant=True)
-    def auto_check_can_variants(self):
-        return self.AUTO_CHECK_CAN_VARIANTS
-
-    @Signal
-    def auto_check_can_changed(self):
-        pass
 
     @Property(int, notify=auto_check_can_changed)
     def auto_check_can(self):
@@ -89,14 +46,6 @@ class TractsPRMPRD(QObject):
 
     # region ReceiveSubband
 
-    @Property(list, constant=True)
-    def receive_subbands(self):
-        return self.RECEIVE_SUBBANDS
-
-    @Signal
-    def receive_subband_changed(self):
-        pass
-
     @Property(int, notify=receive_subband_changed)
     def receive_subband(self):
         return self._receive_subband
@@ -111,14 +60,6 @@ class TractsPRMPRD(QObject):
     # endregion
 
     # region ShiftGenerator
-
-    @Property(list, constant=True)
-    def shift_generator_variants(self):
-        return self.SHIFT_GENERATOR_VARIANTS
-
-    @Signal
-    def shift_generator_changed(self):
-        pass
 
     @Property(int, notify=shift_generator_changed)
     def shift_generator(self):
@@ -135,14 +76,6 @@ class TractsPRMPRD(QObject):
 
     # region BarrelFilter
 
-    @Property(list, constant=True)
-    def barrel_filter_variants(self):
-        return self.BARREL_FILTER_VARIANTS
-
-    @Signal
-    def barrel_filter_changed(self):
-        pass
-
     @Property(int, notify=barrel_filter_changed)
     def barrel_filter(self):
         return self._barrel_filter
@@ -157,14 +90,6 @@ class TractsPRMPRD(QObject):
     # endregion
 
     # region Amplifier
-
-    @Property(list, constant=True)
-    def amplifier_variants(self):
-        return self.AMPLIFIER_VARIANTS
-
-    @Signal
-    def amplifier_changed(self):
-        pass
 
     @Property(int, notify=amplifier_changed)
     def amplifier(self):
@@ -181,14 +106,6 @@ class TractsPRMPRD(QObject):
 
     # region RadioSignalType
 
-    @Property(list, constant=True)
-    def radio_signal_types(self):
-        return self.RADIO_SIGNAL_TYPES
-
-    @Signal
-    def radio_signal_changed(self):
-        pass
-
     @Property(int, notify=radio_signal_changed)
     def radio_signal(self):
         return self._radio_signal_type
@@ -203,14 +120,6 @@ class TractsPRMPRD(QObject):
     # endregion
 
     # region SignalType
-
-    @Property(list, constant=True)
-    def signal_types(self):
-        return self.SIGNAL_TYPES
-
-    @Signal
-    def signal_type_changed(self):
-        pass
 
     @Property(int, notify=signal_type_changed)
     def signal_type(self):
@@ -227,14 +136,6 @@ class TractsPRMPRD(QObject):
 
     # region ZSSpeed
 
-    @Property(list, constant=True)
-    def zs_speeds(self):
-        return self.ZS_SPEEDS
-
-    @Signal
-    def zs_speed_changed(self):
-        pass
-
     @Property(int, notify=zs_speed_changed)
     def zs_speed(self):
         return self._zs_speed
@@ -249,14 +150,6 @@ class TractsPRMPRD(QObject):
     # endregion
 
     # region OutputU205D
-
-    @Property(list, constant=True)
-    def outputs_u205d(self):
-        return self.OUTPUTS_U205D
-
-    @Signal
-    def output_u205d_changed(self):
-        pass
 
     @Property(int, notify=output_u205d_changed)
     def output_u205d(self):
@@ -273,10 +166,6 @@ class TractsPRMPRD(QObject):
 
     # region PRDWaveNumber
 
-    @Signal
-    def prd_wave_number_changed(self):
-        pass
-
     @Property(int, notify=prd_wave_number_changed)
     def prd_wave_number(self):
         return self._prd_wave_number
@@ -291,10 +180,6 @@ class TractsPRMPRD(QObject):
     # endregion
 
     # region PRMWaveNumber
-
-    @Signal
-    def prm_wave_number_changed(self):
-        pass
 
     @Property(int, notify=prm_wave_number_changed)
     def prm_wave_number(self):

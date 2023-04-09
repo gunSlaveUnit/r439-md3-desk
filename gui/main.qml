@@ -561,6 +561,10 @@ Window {
         }
 
         ColumnLayout {
+          Connections {
+            target: tracts_prm_prd
+          }
+
 					ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ПРМ, ПРД")}
 
 					GridLayout {
@@ -568,32 +572,91 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Автоконтроль CAN:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: tractsPRDPRDAutoCheckCAN
+              enabled: !changeTractsPRMPRDButton1.visible
+              Layout.fillWidth: true
+              currentIndex: tracts_prm_prd.auto_check_can
+							model: ["Откл."]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Поддиппазон приема:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: tractsPRDPRDReceiveSubband
+              enabled: !changeTractsPRMPRDButton1.visible
+              Layout.fillWidth: true
+              currentIndex: tracts_prm_prd.receive_subband
+							model: ["1"]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: tractsPRDPRDShiftGenerator
+              enabled: !changeTractsPRMPRDButton1.visible
+              Layout.fillWidth: true
+              currentIndex: tracts_prm_prd.shift_generator
+							model: ["Вкл."]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ствольный фильтр:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: tractsPRDPRDBarrelFilter
+              enabled: !changeTractsPRMPRDButton1.visible
+              Layout.fillWidth: true
+              currentIndex: tracts_prm_prd.barrel_filter
+							model: ["1"]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: tractsPRDPRDAmplifier
+              enabled: !changeTractsPRMPRDButton1.visible
+              Layout.fillWidth: true
+              currentIndex: tracts_prm_prd.amplifier
+							model: ["Откл."]
+            }
           }
 
 					Item {Layout.fillHeight: true}
 
           RowLayout {
-            ButtonMD3 {text: qsTr("1. Изм.")}
+            ButtonMD3 {
+              id: changeTractsPRMPRDButton1
+              text: qsTr("1. Изм.")
+              onClicked: visible = false
+            }
+
             Item {Layout.fillWidth: true}
+
+            ButtonMD3 {
+              visible: !changeTractsPRMPRDButton1.visible
+              text: qsTr("2. Запись")
+              onClicked: {
+
+                changeTractsPRMPRDButton1.visible = true
+              }
+            }
+
+            ButtonMD3 {
+              visible: !changeTractsPRMPRDButton1.visible
+              text: qsTr("3. Отмена")
+
+              onClicked: {
+
+                changeTractsPRMPRDButton1.visible = true
+              }
+            }
+
             ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage2Index}
             ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
 				}
 
 				ColumnLayout {
+					Connections {
+            target: tracts_prm_prd
+          }
+
 					ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ПРМ, ПРД")}
 
 					GridLayout {
@@ -601,29 +664,100 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип радиосигнала:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: tractsPRDPRDRadioSignalType
+              enabled: !changeTractsPRMPRDButton2.visible
+              Layout.fillWidth: true
+              currentIndex: tracts_prm_prd.radio_signal_type
+							model: ["УП"]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ОФТ:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: tractsPRDPRDOFTSignalType
+              enabled: !changeTractsPRMPRDButton2.visible
+              Layout.fillWidth: true
+              currentIndex: tracts_prm_prd.signal_type
+							model: ["ОФТ"]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ЗС:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: tractsPRDPRDZSSpeed
+              enabled: !changeTractsPRMPRDButton2.visible
+              Layout.fillWidth: true
+              currentIndex: tracts_prm_prd.zs_speed
+							model: ["6.0"]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: tractsPRDPRDOutputU205D
+              enabled: !changeTractsPRMPRDButton2.visible
+              Layout.fillWidth: true
+              currentIndex: tracts_prm_prd.output_u205d
+							model: ["Вкл."]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
-            TextFieldMD3 {Layout.fillWidth: true}
+            TextFieldMD3 {
+              id: tractsPRDPRDPRDWaveNumber
+              enabled: !changeTractsPRMPRDButton2.visible
+              Layout.fillWidth: true
+              text: tracts_prm_prd.prd_wave_number
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРМ:")}
-            TextFieldMD3 {Layout.fillWidth: true}
+            TextFieldMD3 {
+              id: tractsPRDPRDPRMWaveNumber
+              enabled: !changeTractsPRMPRDButton2.visible
+              Layout.fillWidth: true
+              text: tracts_prm_prd.prm_wave_number
+            }
           }
 
 					Item {Layout.fillHeight: true}
 
           RowLayout {
-            ButtonMD3 {text: qsTr("1. Изм.")}
+            ButtonMD3 {
+              id: changeTractsPRMPRDButton2
+              text: qsTr("1. Изм.")
+              onClicked: visible = false
+            }
+
             Item {Layout.fillWidth: true}
+
+            ButtonMD3 {
+              visible: !changeTractsPRMPRDButton2.visible
+              text: qsTr("2. Запись")
+              onClicked: {
+	              tracts_prm_prd.radio_signal_type = tractsPRDPRDRadioSignalType.currentIndex
+	              tracts_prm_prd.signal_type = tractsPRDPRDOFTSignalType.currentIndex
+	              tracts_prm_prd.zs_speed = tractsPRDPRDZSSpeed.currentIndex
+	              tracts_prm_prd.output_u205d = tractsPRDPRDOutputU205D.currentIndex
+	              tracts_prm_prd.prd_wave_number = tractsPRDPRDPRDWaveNumber.text
+	              tracts_prm_prd.prm_wave_number = tractsPRDPRDPRMWaveNumber.text
+
+                changeTractsPRMPRDButton2.visible = true
+              }
+            }
+
+            ButtonMD3 {
+              visible: !changeTractsPRMPRDButton2.visible
+              text: qsTr("3. Отмена")
+
+              onClicked: {
+                tractsPRDPRDRadioSignalType.currentIndex = tracts_prm_prd.radio_signal_type
+	              tractsPRDPRDOFTSignalType.currentIndex = tracts_prm_prd.signal_type
+	              tractsPRDPRDZSSpeed.currentIndex = tracts_prm_prd.zs_speed
+	              tractsPRDPRDOutputU205D.currentIndex = tracts_prm_prd.output_u205d
+	              tractsPRDPRDPRDWaveNumber.text = tracts_prm_prd.prd_wave_number
+	              tractsPRDPRDPRMWaveNumber.text = tracts_prm_prd.prm_wave_number
+
+                changeTractsPRMPRDButton2.visible = true
+              }
+            }
+
             ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage1Index}
             ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
