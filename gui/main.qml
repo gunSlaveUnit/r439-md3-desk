@@ -407,6 +407,10 @@ Window {
 				}
 
         ColumnLayout {
+          Connections {
+            target: l807
+          }
+
           ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Л807")}
 
           DisplayTextMD3 {Layout.alignment: Qt.AlignHCenter; text: qsTr("Установленные интерфейсы:")}
@@ -417,17 +421,58 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Стык Л807:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+							id: l807Joint
+							enabled: !changeL807Button.visible
+              Layout.fillWidth: true
+              currentIndex: l807.joint
+							model: [qsTr("Выключен"), qsTr("Включен")]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Источник сигнала: ")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: l807SignalSource
+              enabled: !changeL807Button.visible
+              Layout.fillWidth: true
+              currentIndex: l807.signal_source
+							model: [qsTr("АГ-Л"), qsTr("АГ-Б")]
+            }
           }
 
           Item {Layout.fillHeight: true}
 
           RowLayout {
-            ButtonMD3 {text: qsTr("1. Изм.")}
+            ButtonMD3 {
+              id: changeL807Button
+              text: qsTr("1. Изм.")
+              onClicked: visible = false
+            }
+
             Item {Layout.fillWidth: true}
+
+            ButtonMD3 {
+              visible: !changeL807Button.visible
+              text: qsTr("2. Запись")
+              onClicked: {
+                l807.joint = l807Joint.currentIndex
+                l807.signal_source = l807SignalSource.currentIndex
+
+                changeL807Button.visible = true
+              }
+            }
+
+            ButtonMD3 {
+              visible: !changeL807Button.visible
+              text: qsTr("3. Отмена")
+
+              onClicked: {
+                l807Joint.currentIndex = l807.joint
+                l807SignalSource.currentIndex = l807.signal_source
+
+                changeL807Button.visible = true
+              }
+            }
+
             ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
         }
