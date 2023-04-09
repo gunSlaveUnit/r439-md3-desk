@@ -690,7 +690,7 @@ Window {
                   id: tlf1PRDAddressTwo
                   Layout.fillWidth: true
                   enabled: !changeTLF1Button.visible
-                  currentIndex: tlf1.prd_address_twp
+                  currentIndex: tlf1.prd_address_two
                   model: ["", "1"]
                 }
               }
