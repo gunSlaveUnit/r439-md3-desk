@@ -217,6 +217,10 @@ Window {
         }
 
         ColumnLayout {
+          Connections {
+            target: klu
+          }
+
           ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
 
           GridLayout {
@@ -224,13 +228,25 @@ Window {
             columns: 2
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тестпроверка:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: kluTestCheck
+              enabled: !changeKLU3Button.visible
+              Layout.fillWidth: true
+              currentIndex: klu.test_check
+							model: ["Откл."]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим теста:")}
             ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ПРД 70:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: kluPRD70
+              enabled: !changeKLU3Button.visible
+              Layout.fillWidth: true
+              currentIndex: klu.prd70
+							model: ["Откл."]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сброс счетчика ошибок:")}
             ComboBoxMD3 {Layout.fillWidth: true}
@@ -242,7 +258,13 @@ Window {
             ComboBoxMD3 {Layout.fillWidth: true}
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД:")}
-            ComboBoxMD3 {Layout.fillWidth: true}
+            ComboBoxMD3 {
+              id: kluPRDSignalType
+              enabled: !changeKLU3Button.visible
+              Layout.fillWidth: true
+              currentIndex: klu.prd_signal_type
+							model: ["УП (ППРЧ)"]
+            }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ШПС ПРД:")}
             ComboBoxMD3 {Layout.fillWidth: true}
@@ -251,8 +273,41 @@ Window {
           Item {Layout.fillHeight: true}
 
           RowLayout {
-            ButtonMD3 {text: qsTr("1. Изм.")}
+            ButtonMD3 {
+              id: changeKLU3Button
+              text: qsTr("1. Изм.")
+              onClicked: visible = false
+            }
+
             Item {Layout.fillWidth: true}
+
+            ButtonMD3 {
+              visible: !changeKLU3Button.visible
+              text: qsTr("2. Запись")
+              onClicked: {
+                klu.test_check = kluTestCheck.currentIndex
+								klu.prd70 = kluPRD70.currentIndex
+								klu.prd_signal_type = kluPRDSignalType.currentIndex
+
+                changeKLU3Button.visible = true
+              }
+            }
+
+            ButtonMD3 {
+              visible: !changeKLU3Button.visible
+              text: qsTr("3. Отмена")
+
+              onClicked: {
+								kluTestCheck.currentIndex = klu.test_check
+								kluPRD70.currentIndex = klu.prd70
+								kluPRDSignalType.currentIndex = klu.prd_signal_type
+
+                changeKLU3Button.visible = true
+              }
+            }
+
+            # TODO: if exit, changeKLU3Button.visible = true
+
             ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage2Index}
             ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
