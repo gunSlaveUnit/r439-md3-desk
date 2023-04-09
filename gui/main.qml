@@ -1,1591 +1,1177 @@
 import QtQuick 2.15
+import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
-import QtQuick.Dialogs
 
 import "./custom"
 
 Window {
-    visible: true
-    title: qsTr("MD3Desk")
+  visible: true
+  title: qsTr("MD3Desk")
 
-    property int default_margin: 8
-    property int main_width: row_layout.implicitWidth + default_margin * 2
-    property int main_height: row_layout.implicitHeight + default_margin * 2
+  property int defaultMargin: 8
 
-    width: main_width
-    height: main_height
-    minimumWidth: main_width
-    minimumHeight: main_height
+  color: "#969392"
 
-    Connections {
-        target: norm
+  minimumWidth: mainLayout.implicitWidth + 2 * defaultMargin
+  minimumHeight: mainLayout.implicitHeight + 2 * defaultMargin
 
-        function onPassed() {
-            dialog.visible = true
-        }
-    }
+  GridLayout {
+    id: mainLayout
 
-    MessageDialog {
-        id: dialog
-        text: qsTr("Норматив успешно завершен")
-        visible: false
-        buttons: MessageDialog.Ok
-    }
+    anchors.fill: parent
+    anchors.margins: defaultMargin
 
-    RowLayout {
-        id: row_layout
+    rows: 2
+    columns: 2
+
+    ColumnLayout {
+      Rectangle {
         anchors.fill: parent
-        anchors.margins: default_margin
+        color: "black"
+      }
+
+      GridLayout {
+        rows: 2
+        columns: 3
+
+				// TODO: current date and time from config
+
+        Button {Layout.fillWidth: true; text: qsTr("(. Приборы - авария")}
+        Button {Layout.fillWidth: true; text: qsTr("15-02-2023")}
+        Button {Layout.fillWidth: true; text: qsTr("11:36:42")}
+        Button {Layout.fillWidth: true; text: qsTr("). Обмен")}
+        Button {Layout.fillWidth: true; text: qsTr("<. Запрет ПРД")}
+        Button {Layout.fillWidth: true; text: qsTr(">. Тракт ПРМ - не норма")}
+      }
+
+			StackLayout {
+        id: displayStackLayout
+
+        property int mainPageIndex: 0
+        property int regulationsPageIndex: mainPageIndex + 1
+        property int regulationsModePageIndex: regulationsPageIndex + 1
+        property int regulationsModeKLUPage1Index: regulationsModePageIndex + 1
+        property int regulationsModeKLUPage2Index: regulationsModeKLUPage1Index + 1
+        property int regulationsModeKLUPage3Index: regulationsModeKLUPage2Index + 1
+        property int regulationsModeDMDUZOZMPage1Index: regulationsModeKLUPage3Index + 1
+        property int regulationsModeDMDUZOZMPage2Index: regulationsModeDMDUZOZMPage1Index + 1
+        property int regulationsModeTractsPRMPRDPage1Index: regulationsModeDMDUZOZMPage2Index + 1
+        property int regulationsModeTractsPRMPRDPage2Index: regulationsModeTractsPRMPRDPage1Index + 1
+        property int regulationsModeL807PageIndex: regulationsModeTractsPRMPRDPage2Index + 1
+        property int regulationsModeAGLPageIndex: regulationsModeL807PageIndex + 1
+        property int regulationModeAGLDeviceModePageIndex: regulationsModeAGLPageIndex + 1
+        property int regulationsModeAGLTLF1PageIndex: regulationModeAGLDeviceModePageIndex + 1
+        property int regulationsPlumePageIndex: regulationsModeAGLTLF1PageIndex + 1
+
+				ColumnLayout {
+          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("ГЛАВНОЕ")}
+
+          GridLayout {
+            rows: 6
+            columns: 2
+            flow: GridLayout.TopToBottom
+
+						// TODO: not equal width
+
+            Button {Layout.fillWidth: true; text: qsTr("1. СХОС")}
+            Button {Layout.fillWidth: true; text: qsTr("2. Монитор")}
+            Button {Layout.fillWidth: true; text: qsTr("3. Сл. связь")}
+            Button {Layout.fillWidth: true; text: qsTr("4. Архив команд")}
+            Button {Layout.fillWidth: true; text: qsTr("5. РАТС")}
+            Button {Layout.fillWidth: true; text: qsTr("6. ПРД")}
+            Button {Layout.fillWidth: true; text: qsTr("7. Установка")}
+            Button {Layout.fillWidth: true; text: qsTr("8. Регламент"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
+            Button {Layout.fillWidth: true; text: qsTr("9. Антенна")}
+            Button {Layout.fillWidth: true; text: qsTr("0. Ок. сеанса"); Layout.row: 4; Layout.column: 1}
+          }
+        }
+
+				ColumnLayout {
+          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("РЕГЛАМЕНТ")}
+
+          GridLayout {
+            rows: 3
+            columns: 2
+            flow: GridLayout.TopToBottom
+
+            Button {Layout.fillWidth: true; text: qsTr("1. Состояние")}
+            Button {Layout.fillWidth: true; text: qsTr("2. Режим"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+            Button {Layout.fillWidth: true; text: qsTr("3. Режим АГ-Л"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
+            Button {Layout.fillWidth: true; text: qsTr("4. Монитор")}
+            Button {Layout.fillWidth: true; text: qsTr("5. Шлейф"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPlumePageIndex}
+            Button {Layout.fillWidth: true; text: qsTr("6. Управление")}
+          }
+
+          Item {Layout.fillHeight: true}
+
+          Button {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.mainPageIndex}
+        }
 
         ColumnLayout {
-            GridLayout {
-                rows: 2
-                columns: 3
+          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("ВВОД РЕЖИМНЫХ ПАРАМЕТРОВ")}
 
-                ButtonMD3 {Layout.fillWidth: true; text: qsTr("(. Приборы - авария")}
-                ButtonMD3 {Layout.fillWidth: true; text: qsTr("15-02-2023")}
-                ButtonMD3 {Layout.fillWidth: true; text: qsTr("11:36:42")}
-                ButtonMD3 {Layout.fillWidth: true; text: qsTr("). Обмен")}
-                ButtonMD3 {Layout.fillWidth: true; text: qsTr("<. Запрет ПРД")}
-                ButtonMD3 {Layout.fillWidth: true; text: qsTr(">. Тракт ПРМ - не норма")}
-            }
-
-            StackLayout {
-                id: display_stack
-
-                property int main_page_index: 0
-                property int monitor_page_index: 1
-                property int regulations_page_index: 2
-                property int regulations_status_page_index: 3
-                property int regulations_status_agl_1_page_index: 4
-                property int regulations_status_agl_2_page_index: 5
-                property int regulations_status_dmd_uzozm_page_index: 6
-                property int regulations_mode_page_index: 7
-                property int regulations_mode_klu_1_page_index: 8
-                property int regulations_mode_klu_2_page_index: 9
-                property int regulations_mode_klu_3_page_index: 10
-                property int regulations_mode_dmd_uzozm_1_page_index: 11
-                property int regulations_mode_dmd_uzozm_2_page_index: 12
-                property int regulations_mode_tracts_prm_prd_1_page_index: 13
-                property int regulations_mode_tracts_prm_prd_2_page_index: 14
-                property int regulations_mode_l807_page_index: 15
-                property int regulations_mode_agl_page_index: 16
-                property int regulations_mode_agl_device_page_index: 17
-                property int regulations_mode_agl_tlf1_page_index: 18
-                property int regulations_plume_page_index: 19
-
-                ColumnLayout {
-                    // Main page
-
-                    ButtonMD3 {text: qsTr("ГЛАВНОЕ")}
-
-                    GridLayout {
-                        rows: 6
-                        columns: 2
-                        flow: GridLayout.TopToBottom
-
-                        ButtonMD3 {text: qsTr("1. СХОС")}
-                        ButtonMD3 {text: qsTr("2. Монитор"); onClicked: {display_stack.currentIndex = display_stack.monitor_page_index}}
-                        ButtonMD3 {text: qsTr("3. Сл. связь")}
-                        ButtonMD3 {text: qsTr("4. Архив команд")}
-                        ButtonMD3 {text: qsTr("5. РАТС")}
-                        ButtonMD3 {text: qsTr("6. ПРД")}
-                        ButtonMD3 {text: qsTr("7. Установка")}
-                        ButtonMD3 {text: qsTr("8. Регламент"); onClicked: {display_stack.currentIndex = display_stack.regulations_page_index}}
-                        ButtonMD3 {text: qsTr("9. Антенна")}
-                        ButtonMD3 {text: qsTr("0. Ок. сеанса"); Layout.row: 4; Layout.column: 1}
-                    }
-                }
-
-                ColumnLayout {
-                    // Monitor page
-
-                    GridLayout {
-                        rows: 3
-                        columns: 2
-
-                        GridLayout {
-                            rows: 3
-                            columns: 2
-
-                            TextMD3 {text: qsTr("Прием ШПС:")}
-                            TextMD3 {text: qsTr("Не задан")}
-
-                            TextMD3 {text: qsTr("Уровень:")}
-                            TextMD3 {text: qsTr("257")}
-
-                            ButtonMD3 {text: qsTr("1. Тест")}
-                            ButtonMD3 {text: qsTr("2. Поиск")}
-                        }
-
-                        GridLayout {
-                            rows: 3
-                            columns: 2
-
-                            TextMD3 {text: qsTr("Прием УП:")}
-                            TextMD3 {text: qsTr("Есть")}
-
-                            TextMD3 {text: qsTr("Уровень:")}
-                            TextMD3 {text: qsTr("16325")}
-
-                            ButtonMD3 {text: qsTr("3. Поиск"); Layout.row: 2; Layout.column: 1}
-                        }
-
-                        GridLayout {
-                            rows: 3
-                            columns: 2
-
-                            TextMD3 {text: qsTr("Качество ДМД:")}
-                            TextMD3 {text: qsTr("Норма")}
-
-                            TextMD3 {text: qsTr("ГС 6 кБод:")}
-                            TextMD3 {text: qsTr("Нет СЦС")}
-
-                            TextMD3 {text: qsTr("ГС доп:")}
-                            TextMD3 {text: qsTr("Не задан")}
-                        }
-
-                        GridLayout {
-                            rows: 2
-                            columns: 2
-
-                            Layout.row: 2
-                            Layout.column: 0
-
-                            TextMD3 {text: qsTr("ППРЧ:")}
-                            TextMD3 {text: qsTr("Не задан")}
-
-                            TextMD3 {text: qsTr("Мощность:")}
-                            TextMD3 {text: qsTr("Запрет")}
-                        }
-
-                        GridLayout {
-                            rows: 2
-                            columns: 2
-
-                            ButtonMD3 {text: qsTr("4. Пуск")}
-                            ButtonMD3 {text: qsTr("5. АГ-Л")}
-                            ButtonMD3 {text: qsTr("6. Стоп")}
-                            ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.main_page_index}}
-                        }
-                    }
-                }
-
-                ColumnLayout {
-                    // Regulations page
-
-                    ButtonMD3 {text: qsTr("РЕГЛАМЕНТ")}
-
-                    GridLayout {
-                        rows: 3
-                        columns: 2
-                        flow: GridLayout.TopToBottom
-
-                        ButtonMD3 {text: qsTr("1. Состояние"); onClicked: {display_stack.currentIndex = display_stack.regulations_status_page_index}}
-                        ButtonMD3 {text: qsTr("2. Режим"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_page_index}}
-                        ButtonMD3 {text: qsTr("3. Режим АГ-Л"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_agl_page_index}}
-                        ButtonMD3 {text: qsTr("4. Монитор")}
-                        ButtonMD3 {text: qsTr("5. Шлейф"); onClicked: {display_stack.currentIndex = display_stack.regulations_plume_page_index}}
-                        ButtonMD3 {text: qsTr("6. Управление")}
-                    }
-
-                    ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.main_page_index}}
-                }
-
-                ColumnLayout {
-                    // Status page
-
-                    GridLayout {
-                        rows: 4
-                        columns: 2
-                        flow: GridLayout.TopToBottom
-
-                        ButtonMD3 {text: qsTr("1. Общее")}
-                        ButtonMD3 {text: qsTr("2. АГ-Л"); onClicked: display_stack.currentIndex = display_stack.regulations_status_agl_1_page_index}
-                        ButtonMD3 {text: qsTr("3. ПГ-Л")}
-                        ButtonMD3 {text: qsTr("4. КЛ-У")}
-                        ButtonMD3 {text: qsTr("5. ДМД, УЗОЗМ"); onClicked: {display_stack.currentIndex = display_stack.regulations_status_dmd_uzozm_page_index}}
-                        ButtonMD3 {text: qsTr("6. Тракты ПРД, ПРМ")}
-                    }
-
-                    ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.regulations_page_index}}
-                }
-
-                ColumnLayout {
-                    // Status AGL page 1
-
-                    GridLayout {
-                        rows: 11
-                        columns: 2
-
-                        TextMD3 {text: qsTr("Норма ТЭЗ АГ-БЛ:")}
-                        TextMD3 {text: "Есть"}
-
-                        TextMD3 {text: qsTr("Норма ТЭЗ АГ-АЛ:")}
-                        TextMD3 {text: "Есть"}
-
-                        TextMD3 {text: qsTr("Корректность режима:")}
-                        TextMD3 {text: "Есть"}
-
-                        TextMD3 {text: qsTr("Норма каналов:")}
-                        TextMD3 {text: "Есть"}
-
-                        TextMD3 {text: qsTr("Синхронизация с РТР:")}
-                        TextMD3 {text: "Пусто"}
-
-                        TextMD3 {text: qsTr("Запрос КАУ ПРМ:")}
-                        TextMD3 {text: "Нет"}
-
-                        TextMD3 {text: qsTr("Запрос РАТС:")}
-                        TextMD3 {text: "Нет"}
-
-                        TextMD3 {text: qsTr("Прием ГС основного:")}
-                        TextMD3 {text: "Норма"}
-
-                        TextMD3 {text: qsTr("Ошибки в ГС основном:")}
-                        TextMD3 {text: "0"}
-
-                        TextMD3 {text: qsTr("Прием ГС дополнительного:")}
-                        TextMD3 {text: "Не задан"}
-
-                        TextMD3 {text: qsTr("Ошибки в ГС дополнительном:")}
-                        TextMD3 {text: "Пусто"}
-                    }
-
-                    RowLayout {
-                        ButtonMD3 {text: qsTr(">"); onClicked: display_stack.currentIndex = display_stack.regulations_status_agl_2_page_index}
-                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.regulations_status_page_index}}
-                    }
-                }
-
-                ColumnLayout {
-                    // Status AGL page 2
-
-                    GridLayout {
-                        rows: 9
-                        columns: 2
-
-                        TextMD3 {text: qsTr("Режим ПРМ:")}
-                        TextMD3 {text: "Задан"}
-
-                        TextMD3 {text: qsTr("Сигнал на входе РТР:")}
-                        TextMD3 {text: "Есть"}
-
-                        TextMD3 {text: qsTr("Сигнал абонента:")}
-                        TextMD3 {text: "Есть"}
-
-                        TextMD3 {text: qsTr("Информация:")}
-                        TextMD3 {text: "Есть"}
-
-                        TextMD3 {text: qsTr("Ошибки:")}
-                        TextMD3 {text: "0"}
-
-                        TextMD3 {text: qsTr("Режим ПРД:")}
-                        TextMD3 {text: "Задан"}
-
-                        TextMD3 {text: qsTr("Синхронизация:")}
-                        TextMD3 {text: "Есть"}
-
-                        TextMD3 {text: qsTr("Сигнал на входе:")}
-                        TextMD3 {text: "Есть"}
-
-                        TextMD3 {text: qsTr("Информация на входе:")}
-                        TextMD3 {text: "Есть"}
-                    }
-
-                    RowLayout {
-                        ButtonMD3 {text: qsTr("<"); onClicked: display_stack.currentIndex = display_stack.regulations_status_agl_1_page_index}
-                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.regulations_status_page_index}}
-                    }
-                }
-
-                ColumnLayout {
-                    // Status DMD UZOZM page
-
-                    GridLayout {
-                        rows: 8
-                        columns: 2
-
-                        TextMD3 {text: qsTr("Норма УПЧ:")}
-                        TextMD3 {text: qsTr("Есть")}
-
-                        TextMD3 {text: qsTr("Норма ДМД:")}
-                        TextMD3 {text: qsTr("Есть")}
-
-                        TextMD3 {text: qsTr("Захват ПЧ")}
-                        TextMD3 {text: qsTr("Есть")}
-
-                        TextMD3 {text: qsTr("Захват ТЧ:")}
-                        TextMD3 {text: qsTr("Есть")}
-
-                        TextMD3 {text: qsTr("Поиск:")}
-                        TextMD3 {text: qsTr("Нет")}
-
-                        TextMD3 {text: qsTr("Качество сигнала:")}
-                        TextMD3 {text: qsTr("Норма")}
-
-                        TextMD3 {text: qsTr("Расстройка, Гц:")}
-                        TextMD3 {text: qsTr("-100")}
-
-                        TextMD3 {text: qsTr("Уровень ПРМ:")}
-                        TextMD3 {text: qsTr("16513")}
-                    }
-
-                    RowLayout {
-                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.regulations_status_page_index}}
-                    }
-                }
-
-                ColumnLayout {
-                    // Mode page
-
-                    ButtonMD3 {text: qsTr("ВВОД РЕЖИМНЫХ ПАРАМЕТРОВ")}
-
-                    GridLayout {
-                        rows: 6
-                        columns: 3
-
-                        ButtonMD3 {Layout.row: 0; Layout.column: 0; text: qsTr("1. Общее")}
-                        ButtonMD3 {Layout.row: 1; Layout.column: 0; text: qsTr("2. ПГ-Л")}
-                        ButtonMD3 {Layout.row: 2; Layout.column: 0; text: qsTr("3. КЛ-У"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_klu_1_page_index}}
-                        ButtonMD3 {Layout.row: 0; Layout.column: 1; text: qsTr("4. ДМД, УЗОЗМ"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_dmd_uzozm_1_page_index}}
-                        ButtonMD3 {Layout.row: 1; Layout.column: 1; text: qsTr("5. Тракты ПРД, ПРМ"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_tracts_prm_prd_1_page_index}}
-                        ButtonMD3 {Layout.row: 0; Layout.column: 2; text: qsTr("6. Л807"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_l807_page_index}}
-
-                        ColumnLayout {
-                            Layout.row: 2;
-                            Layout.column: 1
-                            Layout.rowSpan: 4;
-                            Layout.columnSpan: 2
-
-                            TextMD3 {text: qsTr("Внимание!")}
-                            TextMD3 {text: qsTr("Вы вошли в технологический режим\nуправления станцией.\nКоррекция режимных параметров\nможет привести к нарушению\n рабочего режима")}
-                        }
-                    }
-
-                    ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.regulations_page_index}}
-                }
-
-                ColumnLayout {
-                    // KLU page 1
-
-                    GridLayout {
-                        rows: 8
-                        columns: 2
-
-                        TextMD3 {text: qsTr("Вид сигнала ПРМ:")}
-                        ComboBoxMD3 {model: [qsTr("Спец. ГС")]}
-
-                        TextMD3 {text: qsTr("Код Баркера ПРМ:")}
-                        ComboBoxMD3 {model: [qsTr("Вкл.")]}
-
-                        TextMD3 {text: qsTr("Инверсия кода Баркера:")}
-                        ComboBoxMD3 {model: [qsTr("Вкл.")]}
-
-                        TextMD3 {text: qsTr("ДСЧ:")}
-                        ComboBoxMD3 {model: [qsTr("Вкл.")]}
-
-                        TextMD3 {text: qsTr("Номер ключа ПРМ:")}
-                        ComboBoxMD3 {model: [0]}
-
-                        TextMD3 {text: qsTr("Номер подключа ПРМ:")}
-                        ComboBoxMD3 {model: [1]}
-
-                        TextMD3 {text: qsTr("Полоса поиска ПРМ, кГц:")}
-                        ComboBoxMD3 {model: [qsTr("+-1")]}
-
-                        TextMD3 {text: qsTr("Ft ПСП ПРМ:")}
-                        ComboBoxMD3 {model: [qsTr("Ft2")]}
-                    }
-
-                    RowLayout {
-                        ButtonMD3 {text: qsTr(">"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_klu_2_page_index}}
-                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_page_index}}
-                    }
-                }
-
-                ColumnLayout {
-                    // KLU page 2
-
-                    GridLayout {
-                        rows: 5
-                        columns: 2
-
-                        TextMD3 {text: qsTr("Вид сигнала ПРД:")}
-                        ComboBoxMD3 {model: [qsTr("Спец. ГС")]}
-
-                        TextMD3 {text: qsTr("Код Баркера ПРД:")}
-                        ComboBoxMD3 {model: [qsTr("Вкл.")]}
-
-                        TextMD3 {text: qsTr("Номер ключа ПРД:")}
-                        ComboBoxMD3 {model: [0]}
-
-                        TextMD3 {text: qsTr("Номер подключа ПРД:")}
-                        ComboBoxMD3 {model: [1]}
-
-                        TextMD3 {text: qsTr("Ft ПСП ПРД:")}
-                        ComboBoxMD3 {model: [qsTr("Ft2")]}
-                    }
-
-                    RowLayout {
-                        ButtonMD3 {text: qsTr("<"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_klu_1_page_index}}
-                        ButtonMD3 {text: qsTr(">"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_klu_3_page_index}}
-                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_page_index}}
-                    }
-                }
-
-                ColumnLayout {
-                    // KLU page 3
-
-                    Connections {
-                        target: klu
-                    }
-
-                    GridLayout {
-                        rows: 8
-                        columns: 2
-
-                        TextMD3 {text: qsTr("Тестпроверка:")}
-                        ComboBoxMD3 {
-                            model: klu.test_check_modes
-                            onCurrentIndexChanged: {
-                                klu.test_check = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Режим теста:")}
-                        ComboBoxMD3 {model: [qsTr("ПР")]}
-
-                        TextMD3 {text: qsTr("ПРД 70:")}
-                        ComboBoxMD3 {
-                          currentIndex: klu.prd70
-                            model: klu.prd70_modes
-                            onCurrentIndexChanged: {
-                                klu.prd70 = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Сброс счетчика ошибок:")}
-                        ComboBoxMD3 {model: [qsTr("Откл.")]}
-
-                        TextMD3 {text: qsTr("Служебный 1:")}
-                        ComboBoxMD3 {model: [qsTr("Откл.")]}
-
-                        TextMD3 {text: qsTr("Служебный 2:")}
-                        ComboBoxMD3 {model: [qsTr("Откл.")]}
-
-                        TextMD3 {text: qsTr("Тип сигнала ПРД:")}
-                        ComboBoxMD3 {
-                            model: klu.prd_signal_types
-                            onCurrentIndexChanged: {
-                                klu.prd_signal_type = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Ft ПСП ШПС ПРД:")}
-                        ComboBoxMD3 {model: [qsTr("Ft2")]}
-                    }
-
-                    RowLayout {
-                        ButtonMD3 {text: qsTr("<"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_klu_2_page_index}}
-                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_page_index}}
-                    }
-                }
-
-                ColumnLayout {
-                    // DMD UZOZM page 1
-
-                    Connections {
-                        target: dmd_uzozm
-                    }
-
-                    GridLayout {
-                        rows: 7
-                        columns: 2
-
-                        TextMD3 {text: qsTr("Тип радиосигнала ПРМ:")}
-                        ComboBoxMD3 {
-                          currentIndex: dmd_uzozm.prm_signal_type
-                            model: dmd_uzozm.prm_signal_types
-                            onCurrentIndexChanged: {
-                                dmd_uzozm.prm_signal_type = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Декодер:")}
-                        ComboBoxMD3 {
-                          currentIndex: dmd_uzozm.decoder
-                            model: dmd_uzozm.decoder_variants
-                            onCurrentIndexChanged: {
-                                dmd_uzozm.decoder = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Скорость ДМД, кбит/с:")}
-                        ComboBoxMD3 {
-                          currentIndex: dmd_uzozm.dmd_speed
-                            model: dmd_uzozm.dmd_speeds
-                            onCurrentIndexChanged: {
-                                dmd_uzozm.dmd_speed = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Режим ДМД:")}
-                        ComboBoxMD3 {
-                            model: dmd_uzozm.dmd_modes
-                            onCurrentIndexChanged: {
-                                dmd_uzozm.dmd_mode = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Скорость ПРД УЗОЗМ, кбит/с:")}
-                        ComboBoxMD3 {
-                            model: dmd_uzozm.prd_uzozm_speeds
-                            onCurrentIndexChanged: {
-                                dmd_uzozm.prd_uzozm_speed = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Режим УЗОЗМ:")}
-                        ComboBoxMD3 {
-                            model: dmd_uzozm.uzozm_modes
-                            onCurrentIndexChanged: {
-                                dmd_uzozm.uzozm_mode = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Служебный канал в ФТ4:")}
-                        ComboBoxMD3 {
-                            model: dmd_uzozm.service_channel_ft4_variants
-                            onCurrentIndexChanged: {
-                                dmd_uzozm.service_channel_ft4 = currentIndex
-                                norm.check()
-                            }
-                        }
-                    }
-
-                    RowLayout {
-                        ButtonMD3 {text: qsTr(">"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_dmd_uzozm_2_page_index}}
-                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_page_index}}
-                    }
-                }
-
-                ColumnLayout {
-                    // DMD UZOZM page 2
-
-                    Connections {
-                        target: dmd_uzozm
-                    }
-
-                    GridLayout {
-                        rows: 7
-                        columns: 2
-
-                        TextMD3 {text: qsTr("Номер фильтра:")}
-                        ComboBoxMD3 {
-                            model: dmd_uzozm.filter_numbers
-                            onCurrentIndexChanged: {
-                                dmd_uzozm.filter_number = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("АРУ:")}
-                        ComboBoxMD3 {
-                            model: dmd_uzozm.aru_variants
-                            onCurrentIndexChanged: {
-                                dmd_uzozm.aru = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Автопоиск:")}
-                        ComboBoxMD3 {
-                            model: dmd_uzozm.auto_search_variants
-                            onCurrentIndexChanged: {
-                                dmd_uzozm.auto_search = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("АСЧ:")}
-                        ComboBoxMD3 {
-                            model: dmd_uzozm.asch_variants
-                            onCurrentIndexChanged: {
-                                dmd_uzozm.asch = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Диф. декодер:")}
-                        ComboBoxMD3 {
-                            model: dmd_uzozm.dif_decoder_variants
-                            onCurrentIndexChanged: {
-                                dmd_uzozm.dif_decoder = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Полоса ДМД:")}
-                        ComboBoxMD3 {
-                            model: dmd_uzozm.dmd_bands
-                            onCurrentIndexChanged: {
-                                dmd_uzozm.dmd_band = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Корректор:")}
-                        ComboBoxMD3 {
-                            model: dmd_uzozm.corrector_variants
-                            onCurrentIndexChanged: {
-                                dmd_uzozm.corrector = currentIndex
-                                norm.check()
-                            }
-                        }
-                    }
-
-                    RowLayout {
-                        ButtonMD3 {text: qsTr("<"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_dmd_uzozm_1_page_index}}
-                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_page_index}}
-                    }
-                }
-
-                ColumnLayout {
-                    // Tracts PRM PRD page 1
-
-                    Connections {
-                        target: tracts_prm_prd
-                    }
-
-                    GridLayout {
-                        rows: 5
-                        columns: 2
-
-                        TextMD3 {text: qsTr("Автоконтроль CAN:")}
-                        ComboBoxMD3 {
-                          currentIndex: tracts_prm_prd.auto_check_can
-                            model: tracts_prm_prd.auto_check_can_variants
-                            onCurrentIndexChanged: {
-                                tracts_prm_prd.auto_check_can = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Поддиппазон приема:")}
-                        ComboBoxMD3 {
-                          currentIndex: tracts_prm_prd.receive_subband
-                            model: tracts_prm_prd.receive_subbands
-                            onCurrentIndexChanged: {
-                                tracts_prm_prd.receive_subband = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Генератор сдвига:")}
-                        ComboBoxMD3 {
-                          currentIndex: tracts_prm_prd.shift_generator
-                            model: tracts_prm_prd.shift_generator_variants
-                            onCurrentIndexChanged: {
-                                tracts_prm_prd.shift_generator = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Ствольный фильтр:")}
-                        ComboBoxMD3 {
-                          currentIndex: tracts_prm_prd.barrel_filter
-                            model: tracts_prm_prd.barrel_filter_variants
-                            onCurrentIndexChanged: {
-                                tracts_prm_prd.barrel_filter = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Усилитель мощности:")}
-                        ComboBoxMD3 {
-                          currentIndex: tracts_prm_prd.amplifier
-                            model: tracts_prm_prd.amplifier_variants
-                            onCurrentIndexChanged: {
-                                tracts_prm_prd.amplifier = currentIndex
-                                norm.check()
-                            }
-                        }
-                    }
-
-                    RowLayout {
-                        ButtonMD3 {
-                            text: qsTr(">")
-                            onClicked: display_stack.currentIndex = display_stack.regulations_mode_tracts_prm_prd_2_page_index
-                        }
-
-                        ButtonMD3 {
-                            text: qsTr("0. Выход")
-                            onClicked: display_stack.currentIndex = display_stack.regulations_mode_page_index
-                        }
-                    }
-                }
-
-                ColumnLayout {
-                    // Tracts PRM PRD page 2
-
-                    Connections {
-                        target: tracts_prm_prd
-                    }
-
-                    GridLayout {
-                        rows: 6
-                        columns: 2
-
-                        TextMD3 {text: qsTr("Тип радиосигнала:")}
-                        ComboBoxMD3 {
-                          currentIndex: tracts_prm_prd.radio_signal
-                            model: tracts_prm_prd.radio_signal_types
-                            onCurrentIndexChanged: {
-                                tracts_prm_prd.radio_signal = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Вид сигнала ОФТ:")}
-                        ComboBoxMD3 {
-                          currentIndex: tracts_prm_prd.signal_type
-                            model: tracts_prm_prd.signal_types
-                            onCurrentIndexChanged: {
-                                tracts_prm_prd.signal_type = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Скорость ЗС:")}
-                        ComboBoxMD3 {
-                          currentIndex: tracts_prm_prd.zs_speed
-                            model: tracts_prm_prd.zs_speeds
-                            onCurrentIndexChanged: {
-                                tracts_prm_prd.zs_speed = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Выход У205Д:")}
-                        ComboBoxMD3 {
-                          currentIndex: tracts_prm_prd.output_u205d
-                            model: tracts_prm_prd.outputs_u205d
-                            onCurrentIndexChanged: {
-                                tracts_prm_prd.output_u205d = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Номер волны ПРД:")}
-                        TextFieldMD3 {
-                            text: tracts_prm_prd.prd_wave_number
-                            onEditingFinished: {
-                              tracts_prm_prd.prd_wave_number = text
-                              norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Номер волны ПРМ:")}
-                        TextFieldMD3 {
-                            text: tracts_prm_prd.prm_wave_number
-                            onEditingFinished: {
-                              tracts_prm_prd.prm_wave_number = text
-                              norm.check()
-                            }
-                        }
-                    }
-
-                    RowLayout {
-                        ButtonMD3 {
-                            text: qsTr("<")
-                            onClicked: display_stack.currentIndex = display_stack.regulations_mode_tracts_prm_prd_1_page_index
-                        }
-
-                        ButtonMD3 {
-                            text: qsTr("0. Выход")
-                            onClicked: display_stack.currentIndex = display_stack.regulations_mode_page_index
-                        }
-                    }
-                }
-
-                ColumnLayout {
-                    // L807
-
-                    Connections {
-                        target: l807
-                    }
-
-                    ButtonMD3 {
-                        text: qsTr("Л807")
-                    }
-
-                    TextMD3 {text: qsTr("Установленные интерфейсы:")}
-                    TextMD3 {text: qsTr("Интерфейс не обеспечивается")}
-
-                    GridLayout {
-                        rows: 2
-                        columns: 2
-
-                        TextMD3 {text: qsTr("Стык Л807:")}
-                        ComboBoxMD3 {
-                            model: l807.joint_modes
-                            currentIndex: l807.joint
-                            onCurrentIndexChanged: {
-                                l807.joint = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Источник сигнала: ")}
-                        ComboBoxMD3 {
-                            model: l807.signal_source_modes
-                            currentIndex: l807.signal_source
-                            onCurrentIndexChanged: {
-                                l807.signal_source = currentIndex
-                                norm.check()
-                            }
-                        }
-                    }
-
-                    RowLayout {
-                        ButtonMD3 {text: qsTr("1. Изм.")}
-                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_page_index}}
-                    }
-                }
-
-                ColumnLayout {
-                    // Mode AGL page
-
-                    ButtonMD3 {
-                        text: qsTr("РЕЖИМ АГ-Л")
-                    }
-
-                    GridLayout {
-                        rows: 6
-                        columns: 3
-                        flow: GridLayout.TopToBottom
-
-                        ButtonMD3 {text: qsTr("1. Режим прибора"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_agl_device_page_index}}
-                        ButtonMD3 {text: qsTr("2. ТЛФ1"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_agl_tlf1_page_index}}
-                        ButtonMD3 {text: qsTr("3. ТЛФ2")}
-                        ButtonMD3 {text: qsTr("4. ТЛФ3")}
-                        ButtonMD3 {text: qsTr("5. ТЛФ4")}
-                        ButtonMD3 {text: qsTr("6. ТЛФ5")}
-                        ButtonMD3 {text: qsTr("7. КАУ1")}
-                        ButtonMD3 {text: qsTr("8. КАУ2")}
-                        ButtonMD3 {text: qsTr("9. КАУ3")}
-                        ButtonMD3 {text: qsTr("10. КАУ4")}
-                        ButtonMD3 {text: qsTr("11. КАУ5")}
-                        ButtonMD3 {text: qsTr("12. ТЛГ1")}
-                        ButtonMD3 {text: qsTr("13. ТЛГ2")}
-                        ButtonMD3 {text: qsTr("14. ТЛГ3")}
-                        ButtonMD3 {text: qsTr("15. ТЛГ4")}
-                        ButtonMD3 {text: qsTr("16. Синх. вход")}
-                    }
-
-                    ButtonMD3 {text: qsTr("0. Выход"); onClicked: display_stack.currentIndex = display_stack.regulations_page_index}
-                }
-
-                ColumnLayout {
-                    // Device mode page
-
-                    Connections {
-                        target: agl
-                    }
-
-                    GridLayout {
-                        rows: 4
-                        columns: 2
-
-                        TextMD3 {text: qsTr("Режим работы ЗС")}
-                        ComboBoxMD3 {
-                            model: agl.zs_operating_mode_variants
-                            onCurrentIndexChanged: {
-                                agl.zs_operating_mode = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Скор ГС ПРМ кбит/c")}
-                        ComboBoxMD3 {
-                            model: agl.speed_gs_prm_variants
-                            onCurrentIndexChanged: {
-                                agl.speed_gs_prm = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Скор ГС ПРД кбит/c")}
-                        ComboBoxMD3 {
-                            model: agl.speed_gs_prd_variants
-                            onCurrentIndexChanged: {
-                                agl.speed_gs_prd = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Режим РАТС")}
-                        ComboBoxMD3 {
-                            model: agl.rats_mode_variants
-                            onCurrentIndexChanged: {
-                                agl.rats_mode = currentIndex
-                                norm.check()
-                            }
-                        }
-                    }
-
-                    ButtonMD3 {
-                        text: qsTr("0. Выход")
-                        onClicked: display_stack.currentIndex = display_stack.regulations_mode_agl_page_index
-                    }
-                }
-
-                ColumnLayout {
-                    // TLF1 page
-
-                    Connections {
-                        target: tlf1
-                    }
-
-                    GridLayout {
-                        columns: 2
-
-                        Column {
-                            TextMD3 {text: qsTr("Тип сигнала ПРМ")}
-                            ComboBoxMD3 {
-                                model: tlf1.signal_prm_types
-                                onCurrentIndexChanged: {
-                                    tlf1.signal_prm_type = currentIndex
-                                    norm.check()
-                                }
-                            }
-
-                            TextMD3 {text: qsTr("Скорость")}
-                            ComboBoxMD3 {
-                                model: tlf1.prm_speeds
-                                onCurrentIndexChanged: {
-                                    tlf1.prm_speed = currentIndex
-                                    norm.check()
-                                }
-                            }
-
-                            TextMD3 {text: qsTr("Адрес в ГС")}
-                            RowLayout {
-                                ComboBoxMD3 {
-                                    model: tlf1.prm_addresses_one
-                                    onCurrentIndexChanged: {
-                                        tlf1.prm_address_one = currentIndex
-                                        norm.check()
-                                    }
-                                }
-
-                                ComboBoxMD3 {
-                                    model: tlf1.prm_addresses_two
-                                    onCurrentIndexChanged: {
-                                        tlf1.prm_address_two = currentIndex
-                                        norm.check()
-                                    }
-                                }
-
-                                ComboBoxMD3 {
-                                    model: tlf1.prm_addresses_three
-                                    onCurrentIndexChanged: {
-                                        tlf1.prm_address_three = currentIndex
-                                        norm.check()
-                                    }
-                                }
-                            }
-                        }
-
-                        Column {
-                            TextMD3 {text: qsTr("Тип сигнала ПРД")}
-                            ComboBoxMD3 {
-                                model: tlf1.signal_prd_types
-                                onCurrentIndexChanged: {
-                                    tlf1.signal_prd_type = currentIndex
-                                    norm.check()
-                                }
-                            }
-
-                            TextMD3 {text: qsTr("Скорость")}
-                            ComboBoxMD3 {
-                                model: tlf1.prd_speeds
-                                onCurrentIndexChanged: {
-                                    tlf1.prd_speed = currentIndex
-                                    norm.check()
-                                }
-                            }
-
-                            TextMD3 {text: qsTr("Адрес в ГС")}
-                            RowLayout {
-                                ComboBoxMD3 {
-                                    model: tlf1.prd_addresses_one
-                                    onCurrentIndexChanged: {
-                                        tlf1.prd_address_one = currentIndex
-                                        norm.check()
-                                    }
-                                }
-
-                                ComboBoxMD3 {
-                                    model: tlf1.prd_addresses_two
-                                    onCurrentIndexChanged: {
-                                        tlf1.prd_address_two = currentIndex
-                                        norm.check()
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-
-                    ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.regulations_mode_agl_page_index}}
-                }
-
-                ColumnLayout {
-                    // Plume page
-
-                    Connections {
-                        target: plume
-                    }
-
-                    GridLayout {
-                        rows: 4
-                        columns: 2
-
-                        TextMD3 {text: qsTr("Генератор сдвига:")}
-                        ComboBoxMD3 {
-                            model: plume.shift_generator_variants
-                            currentIndex: plume.shift_generator
-                            onCurrentIndexChanged: {
-                                plume.shift_generator = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Усилитель мощности:")}
-                        ComboBoxMD3 {
-                            model: plume.amplifier_variants
-                            currentIndex: plume.amplifier
-                            onCurrentIndexChanged: {
-                                plume.amplifier = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Выход У205Д:")}
-                        ComboBoxMD3 {
-                            model: plume.outputs_u205d
-                            currentIndex: plume.output_u205d
-                            onCurrentIndexChanged: {
-                                plume.output_u205d = currentIndex
-                                norm.check()
-                            }
-                        }
-
-                        TextMD3 {text: qsTr("Номер волны ПРД:")}
-                        TextFieldMD3 {
-                            text: plume.prd_wave_number
-                            onEditingFinished: {
-                              plume.prd_wave_number = text
-                              norm.check()
-                            }
-                        }
-                    }
-
-                    GridLayout {
-                        rows: 2
-                        columns: 4
-
-                        TextMD3 {text: qsTr("Ствол. фильтр:")}
-                        TextMD3 {
-                            text: plume.stem_filter
-                        }
-
-                        TextMD3 {text: qsTr("№ волны ПРМ:")}
-                        TextMD3 {
-                            text: plume.prm_wave_number
-                        }
-
-                        TextMD3 {text: qsTr("Поддиап. приема:")}
-                        TextMD3 {
-                            text: plume.receive_subband
-                        }
-
-                        TextMD3 {text: qsTr("№ фильтра ДМД:")}
-                        TextMD3 {
-                            text: plume.dmd_filter_number
-                        }
-                    }
-
-                    ButtonMD3 {text: qsTr("0. Выход"); onClicked: {display_stack.currentIndex = display_stack.regulations_page_index}}
-                }
-            }
-        }
-
-        GridLayout {
-            id: keyboard_grid
+          GridLayout {
             rows: 6
-            columns: 8
+            columns: 3
             flow: GridLayout.TopToBottom
-            anchors.margins: 8
 
-            property var red_color: "#bb534b"
-            property var blue_color: "#335e89"
+            Button {Layout.fillWidth: true; text: qsTr("1. Общее")}
+            Button {Layout.fillWidth: true; text: qsTr("2. ПГ-Л")}
+            Button {Layout.fillWidth: true; text: qsTr("3. КЛ-У"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage1Index}
+            Button {Layout.fillWidth: true; text: qsTr("4. ДМД, УЗОЗМ"); Layout.column: 1; onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage1Index}
+            Button {Layout.fillWidth: true; text: qsTr("5. Тракты ПРД, ПРМ"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage1Index}
+            Button {Layout.fillWidth: true; text: qsTr("6. Л807"); Layout.column: 2; onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeL807PageIndex}
 
-            KeyBoardButtonMD3 {text: qsTr("ESC")}
-            KeyBoardButtonMD3 {
-                text: qsTr("РУС")
+            ColumnLayout {
+              Layout.row: 2;
+              Layout.column: 1
+              Layout.rowSpan: 4;
+              Layout.columnSpan: 2
 
-                contentItem: Text {
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignTop
-                    text: parent.text
-                    font.pointSize: 12
-                    color: "#000"
-                }
+							// TODO: stretch text
 
-                background: Rectangle {
-                    anchors.fill: parent
-                    implicitWidth: 72
-                    implicitHeight: implicitWidth
-                    radius: 8
-                    border.color: "#000"
-                    border.width: 4
-                    color: keyboard_grid.red_color
-                }
+              Text {Layout.alignment: Qt.AlignHCenter; text: qsTr("Внимание!")}
+              Text {text: qsTr("Вы вошли в технологический режим\nуправления станцией.\nКоррекция режимных параметров\nможет привести к нарушению\n рабочего режима")}
+            }
+          }
 
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: parent.background.color = Qt.darker(keyboard_grid.red_color, 1.5)
-                    onExited: parent.background.color = keyboard_grid.red_color
-                }
-            }
-            KeyBoardButtonMD3 {
-                text: qsTr("РУС")
+          Item {Layout.fillHeight: true}
 
-                contentItem: Text {
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignTop
-                    text: parent.text
-                    font.pointSize: 12
-                    color: "#000"
-                }
-
-                background: Rectangle {
-                    anchors.fill: parent
-                    implicitWidth: 72
-                    implicitHeight: implicitWidth
-                    radius: 8
-                    border.color: "#000"
-                    border.width: 4
-                    color: keyboard_grid.blue_color
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: parent.background.color = Qt.darker(keyboard_grid.blue_color, 1.5)
-                    onExited: parent.background.color = keyboard_grid.blue_color
-                }
-            }
-            KeyBoardButtonMD3 {
-                text: qsTr("ЛАТ")
-
-                contentItem: Text {
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignBottom
-                    text: parent.text
-                    font.pointSize: 12
-                    color: "#000"
-                }
-
-                background: Rectangle {
-                    anchors.fill: parent
-                    implicitWidth: 72
-                    implicitHeight: implicitWidth
-                    radius: 8
-                    border.color: "#000"
-                    border.width: 4
-                    color: keyboard_grid.red_color
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: parent.background.color = Qt.darker(keyboard_grid.red_color, 1.5)
-                    onExited: parent.background.color = keyboard_grid.red_color
-                }
-            }
-            KeyBoardButtonMD3 {
-                text: qsTr("ЛАТ")
-
-                contentItem: Text {
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignBottom
-                    text: parent.text
-                    font.pointSize: 12
-                    color: "#000"
-                }
-
-                background: Rectangle {
-                    anchors.fill: parent
-                    implicitWidth: 72
-                    implicitHeight: implicitWidth
-                    radius: 8
-                    border.color: "#000"
-                    border.width: 4
-                    color: keyboard_grid.blue_color
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: parent.background.color = Qt.darker(keyboard_grid.blue_color, 1.2)
-                    onExited: parent.background.color = keyboard_grid.blue_color
-                }
-            }
-            KeyBoardButtonMD3 {
-                text: qsTr("ЦИФ")
-
-                contentItem: Text {
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignTop
-                    text: parent.text
-                    font.pointSize: 12
-                    color: "#000"
-                }
-            }
-
-            KeyBoardButtonMD3 {text: qsTr("F1")}
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("А"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("Б"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("("); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("A"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("B"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("И"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("Й"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("+"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("I"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("J"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("Р"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("С"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("/"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("Q"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("R"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("Ш"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("Щ"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("*"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("Y"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("Z"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr(""); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("="); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("/"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("\\"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-
-            KeyBoardButtonMD3 {text: qsTr("F2")}
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("В"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("Г"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr(")"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("C"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("D"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color:  keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("К"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("Л"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("7"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("K"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("L"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("Т"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("У"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("4"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("S"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("T"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("Ъ"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("Ы"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("1"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("("); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr(")"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr(""); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("0"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("@"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("*"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-
-            KeyBoardButtonMD3 {text: qsTr("F3")}
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("Д"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("Е"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("<"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("E"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("F"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("М"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("Н"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("8"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("M"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("N"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("Ф"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("Х"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("5"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("U"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("V"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("Ь"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("Э"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("2"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("!"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("?"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr(""); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr(","); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("\""); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("\""); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-
-            KeyBoardButtonMD3 {text: qsTr("F4")}
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("Ж"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("З"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr(">"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("G"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("H"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("О"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("П"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("9"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("O"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("P"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("Ц"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("Ч"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("6"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("W"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("X"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr("Ю"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 0; Layout.column: 0}
-                    Text {text: qsTr("Я"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("3"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("."); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr(";"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-            KeyBoardButtonMD3 {
-                contentItem: GridLayout {
-                    Text {text: qsTr(":"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 0; Layout.column: 1}
-                    Text {text: qsTr("-"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                    Text {text: qsTr("%"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.red_color; Layout.row: 2; Layout.column: 0}
-                    Text {text: qsTr("&"); font.pointSize: 12; Layout.alignment: Qt.AlignCenter; color: keyboard_grid.blue_color; Layout.row: 2; Layout.column: 1}
-                }
-            }
-
-            KeyBoardButtonMD3 {
-                Image {
-                    anchors.fill: parent
-                    anchors.margins: 16
-                    source: "../resources/clockwise.png"
-                    mipmap: true
-                }
-                Layout.row: 1;
-                Layout.column: 5
-            }
-            KeyBoardButtonMD3 {text: qsTr("BS")}
-
-            KeyBoardButtonMD3 {
-                Image {
-                    anchors.fill: parent
-                    anchors.margins: 20
-                    source: "../resources/left_arrow.png"
-                    mipmap: true
-                }
-            }
-
-            KeyBoardButtonMD3 {text: qsTr("SPACE")}
-            KeyBoardButtonMD3 {
-                text: qsTr("ENTER");
-                Layout.row: 5;
-                Layout.column: 5;
-                Layout.columnSpan: 2;
-                Layout.fillWidth: true
-
-                contentItem: Text {
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignVCenter
-                    text: parent.text
-                    font.pointSize: 12
-                    color: "#000"
-                }
-
-                background: Rectangle {
-                    anchors.fill: parent
-                    implicitWidth: 72
-                    implicitHeight: implicitWidth
-                    radius: 8
-                    border.color: "#000"
-                    border.width: 4
-                    color: "#b4afac"
-
-                    Column {
-                        anchors.centerIn: parent
-                        spacing: 10
-                        Repeater {
-                            model: 3
-                            Rectangle {width: 2; height: 10; color: "#000"}
-                        }
-                    }
-                }
-            }
-
-            KeyBoardButtonMD3 {text: qsTr("Page\nUp"); Layout.row: 1; Layout.column: 6}
-            KeyBoardButtonMD3 {text: qsTr("Page\nDown")}
-            KeyBoardButtonMD3 {
-                Image {
-                    anchors.fill: parent
-                    anchors.margins: 20
-                    source: "../resources/up_arrow.png"
-                    mipmap: true
-                }
-            }
-            KeyBoardButtonMD3 {
-                Image {
-                    anchors.fill: parent
-                    anchors.margins: 20
-                    source: "../resources/down_arrow.png"
-                    mipmap: true
-                }
-            }
-
-            KeyBoardButtonMD3 {
-                Image {
-                    anchors.fill: parent
-                    anchors.margins: 12
-                    source: "../resources/up_triangle.png"
-                    mipmap: true
-                }
-            }
-            KeyBoardButtonMD3 {
-                Image {
-                    anchors.fill: parent
-                    anchors.margins: 16
-                    source: "../resources/unclockwise.png"
-                    mipmap: true
-                }
-            }
-            KeyBoardButtonMD3 {text: qsTr("DEL")}
-            KeyBoardButtonMD3 {
-                Image {
-                    anchors.fill: parent
-                    anchors.margins: 20
-                    source: "../resources/right_arrow.png"
-                    mipmap: true
-                }
-            }
-            KeyBoardButtonMD3 {
-                text: qsTr("ENTER");
-                Layout.row: 4;
-                Layout.column: 7;
-                Layout.rowSpan: 2;
-                Layout.fillHeight: true
-
-                contentItem: Text {
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignTop
-                    text: parent.text
-                    font.pointSize: 12
-                    color: "#000"
-                }
-
-                background: Rectangle {
-                    anchors.fill: parent
-                    implicitWidth: 72
-                    implicitHeight: implicitWidth
-                    radius: 8
-                    border.color: "#000"
-                    border.width: 4
-                    color: "#b4afac"
-
-                    Row {
-                        anchors.centerIn: parent
-                        spacing: 10
-                        Repeater {
-                            model: 3
-                            Rectangle {width: 10; height: 2; color: "#000"}
-                        }
-                    }
-                }
-            }
+          Button {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
         }
+
+        ColumnLayout {
+          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
+
+          GridLayout {
+            rows: 8
+            columns: 2
+
+            Text {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРМ:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Код Баркера ПРМ:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Инверсия кода Баркера:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("ДСЧ:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Номер ключа ПРМ:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Номер подключа ПРМ:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Полоса поиска ПРМ, кГц:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРМ:")}
+            ComboBox {Layout.fillWidth: true}
+          }
+
+          Item {Layout.fillHeight: true}
+
+          RowLayout {
+            Button {text: qsTr("1. Изм.")}
+            Item {Layout.fillWidth: true}
+            Button {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage2Index}
+            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+          }
+        }
+
+        ColumnLayout {
+          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
+
+          GridLayout {
+            rows: 5
+            columns: 2
+
+            Text {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРД:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Код Баркера ПРД:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Номер ключа ПРД:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Номер подключа ПРД:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРД:")}
+            ComboBox {Layout.fillWidth: true}
+          }
+
+          Item {Layout.fillHeight: true}
+
+          RowLayout {
+            Button {text: qsTr("1. Изм.")}
+            Item {Layout.fillWidth: true}
+            Button {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage1Index}
+            Button {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage3Index}
+            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+          }
+        }
+
+        ColumnLayout {
+          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
+
+          GridLayout {
+            rows: 8
+            columns: 2
+
+            Text {Layout.fillWidth: true; text: qsTr("Тестпроверка:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Режим теста:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("ПРД 70:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Сброс счетчика ошибок:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Служебный 1:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Служебный 2:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Ft ПСП ШПС ПРД:")}
+            ComboBox {Layout.fillWidth: true}
+          }
+
+          Item {Layout.fillHeight: true}
+
+          RowLayout {
+            Button {text: qsTr("1. Изм.")}
+            Item {Layout.fillWidth: true}
+            Button {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage2Index}
+            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+          }
+        }
+
+        ColumnLayout {
+					Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ДМД, УЗОЗМ")}
+
+					GridLayout {
+            rows: 7
+            columns: 2
+
+            Text {Layout.fillWidth: true; text: qsTr("Тип радиосигнала ПРМ:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Декодер:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Скорость ДМД, кбит/с:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Режим ДМД:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Скорость ПРД УЗОЗМ, кбит/с:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Режим УЗОЗМ:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Служебный канал в ФТ4:")}
+            ComboBox {Layout.fillWidth: true}
+          }
+
+					Item {Layout.fillHeight: true}
+
+          RowLayout {
+            Button {text: qsTr("1. Изм.")}
+            Item {Layout.fillWidth: true}
+            Button {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage2Index}
+            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+          }
+        }
+
+        ColumnLayout {
+					Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ДМД")}
+
+					GridLayout {
+            rows: 7
+            columns: 2
+
+            Text {Layout.fillWidth: true; text: qsTr("Номер фильтра:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("АРУ:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Автопоиск:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("АСЧ:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Диф. декодер:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Полоса ДМД:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Корректор:")}
+            ComboBox {Layout.fillWidth: true}
+          }
+
+					Item {Layout.fillHeight: true}
+
+          RowLayout {
+            Button {text: qsTr("1. Изм.")}
+            Item {Layout.fillWidth: true}
+            Button {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage1Index}
+            Button {text: qsTr(">")}
+            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+          }
+        }
+
+        ColumnLayout {
+					Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ПРМ, ПРД")}
+
+					GridLayout {
+            rows: 5
+            columns: 2
+
+            Text {Layout.fillWidth: true; text: qsTr("Автоконтроль CAN:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Поддиппазон приема:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Ствольный фильтр:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
+            ComboBox {Layout.fillWidth: true}
+          }
+
+					Item {Layout.fillHeight: true}
+
+          RowLayout {
+            Button {text: qsTr("1. Изм.")}
+            Item {Layout.fillWidth: true}
+            Button {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage2Index}
+            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+          }
+				}
+
+				ColumnLayout {
+					Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ПРМ, ПРД")}
+
+					GridLayout {
+            rows: 6
+            columns: 2
+
+            Text {Layout.fillWidth: true; text: qsTr("Тип радиосигнала:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Вид сигнала ОФТ:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Скорость ЗС:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
+            TextField {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Номер волны ПРМ:")}
+            TextField {Layout.fillWidth: true}
+          }
+
+					Item {Layout.fillHeight: true}
+
+          RowLayout {
+            Button {text: qsTr("1. Изм.")}
+            Item {Layout.fillWidth: true}
+            Button {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage1Index}
+            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+          }
+				}
+
+        ColumnLayout {
+          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Л807")}
+
+          Text {Layout.alignment: Qt.AlignHCenter; text: qsTr("Установленные интерфейсы:")}
+          Text {Layout.alignment: Qt.AlignHCenter; text: qsTr("Интерфейс не обеспечивается")}
+
+          GridLayout {
+            rows: 2
+            columns: 2
+
+            Text {Layout.fillWidth: true; text: qsTr("Стык Л807:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Источник сигнала: ")}
+            ComboBox {Layout.fillWidth: true}
+          }
+
+          Item {Layout.fillHeight: true}
+
+          RowLayout {
+            Button {text: qsTr("1. Изм.")}
+            Item {Layout.fillWidth: true}
+            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+          }
+        }
+
+        ColumnLayout {
+          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("РЕЖИМ АГ-Л")}
+
+          GridLayout {
+            rows: 6
+            columns: 3
+            flow: GridLayout.TopToBottom
+
+            Button {Layout.fillWidth: true; text: qsTr("1. Режим прибора"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationModeAGLDeviceModePageIndex}
+            Button {Layout.fillWidth: true; text: qsTr("2. ТЛФ1"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLTLF1PageIndex}
+            Button {Layout.fillWidth: true; text: qsTr("3. ТЛФ2")}
+            Button {Layout.fillWidth: true; text: qsTr("4. ТЛФ3")}
+            Button {Layout.fillWidth: true; text: qsTr("5. ТЛФ4")}
+            Button {Layout.fillWidth: true; text: qsTr("6. ТЛФ5")}
+            Button {Layout.fillWidth: true; text: qsTr("7. КАУ1")}
+            Button {Layout.fillWidth: true; text: qsTr("8. КАУ2")}
+            Button {Layout.fillWidth: true; text: qsTr("9. КАУ3")}
+            Button {Layout.fillWidth: true; text: qsTr("10. КАУ4")}
+            Button {Layout.fillWidth: true; text: qsTr("11. КАУ5")}
+            Button {Layout.fillWidth: true; text: qsTr("12. ТЛГ1")}
+            Button {Layout.fillWidth: true; text: qsTr("13. ТЛГ2")}
+            Button {Layout.fillWidth: true; text: qsTr("14. ТЛГ3")}
+            Button {Layout.fillWidth: true; text: qsTr("15. ТЛГ4")}
+            Button {Layout.fillWidth: true; text: qsTr("16. Синх. вход")}
+          }
+
+          Item {Layout.fillWidth: true}
+
+          Button {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
+        }
+
+        ColumnLayout {
+          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режим прибора АГ-Л")}
+
+          GridLayout {
+            rows: 4
+            columns: 2
+
+            Text {Layout.fillWidth: true; text: qsTr("Режим работы ЗС")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Скор ГС ПРМ кбит/c")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Скор ГС ПРД кбит/c")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Режим РАТС")}
+            ComboBox {Layout.fillWidth: true}
+          }
+
+          Item {Layout.fillHeight: true}
+
+          Button {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
+        }
+
+        ColumnLayout {
+          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режим ТЛФ1")}
+
+          GridLayout {
+            columns: 2
+
+            Column {
+              Text {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРМ")}
+              ComboBox {Layout.fillWidth: true}
+
+              Text {Layout.fillWidth: true; text: qsTr("Скорость")}
+              ComboBox {Layout.fillWidth: true}
+
+              Text {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
+
+              RowLayout {
+                ComboBox {Layout.fillWidth: true}
+                ComboBox {Layout.fillWidth: true}
+                ComboBox {Layout.fillWidth: true}
+              }
+            }
+
+            Column {
+              Text {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД")}
+              ComboBox {Layout.fillWidth: true}
+
+              Text {Layout.fillWidth: true; text: qsTr("Скорость")}
+              ComboBox {Layout.fillWidth: true}
+
+              Text {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
+
+              RowLayout {
+                ComboBox {Layout.fillWidth: true}
+                ComboBox {Layout.fillWidth: true}
+              }
+            }
+          }
+
+					Item {Layout.fillHeight: true}
+
+          RowLayout {
+            Button {text: qsTr("1. Изм.")}
+            Item {Layout.fillWidth: true}
+            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
+          }
+        }
+
+        ColumnLayout {
+					Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Шлейф ПР")}
+
+					GridLayout {
+            rows: 4
+            columns: 2
+
+            Text {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
+            ComboBox {Layout.fillWidth: true}
+
+            Text {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
+            TextField {Layout.fillWidth: true}
+          }
+
+	        GridLayout {
+	          rows: 2
+	          columns: 4
+
+	          Text {Layout.fillWidth: true; text: qsTr("Ствол. фильтр:")}
+	          Text {Layout.fillWidth: true; text: qsTr("1")}
+
+	          Text {Layout.fillWidth: true; text: qsTr("№ волны ПРМ:")}
+	          Text {Layout.fillWidth: true; text: qsTr("2500")}
+
+	          Text {Layout.fillWidth: true; text: qsTr("Поддиап. приема:")}
+	          Text {Layout.fillWidth: true; text: qsTr("1")}
+
+	          Text {Layout.fillWidth: true; text: qsTr("№ фильтра ДМД:")}
+	          Text {Layout.fillWidth: true; text: qsTr("3")}
+	        }
+
+					Item {Layout.fillHeight: true}
+
+          RowLayout {
+            Button {text: qsTr("1. Изм.")}
+            Item {Layout.fillWidth: true}
+            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
+          }
+				}
+      }
     }
+
+    ColumnLayout {
+      id: keyboard
+
+			Layout.rowSpan: 2
+
+			property int borderWidthSection: 4
+			property int sectionRadius: 8
+			property string neutralButtonColor: "#aeada8"
+			property string redButtonColor: "#ba5e51"
+			property string blueButtonColor: "#495f8f"
+
+			Rectangle {
+				implicitWidth: mainKeyboardSection.implicitWidth
+				implicitHeight: helpKeyboardSectionLayout.implicitHeight + 2 * defaultMargin
+				color: "transparent"
+				radius: keyboard.sectionRadius
+				border.width: keyboard.borderWidthSection
+				border.color: "black"
+
+				RowLayout {
+					id: helpKeyboardSectionLayout
+
+					anchors.fill: parent
+					anchors.margins: defaultMargin
+
+					KeyboardButtonMD3 {text: qsTr("ESC")}
+
+					Item {implicitWidth: 3 * defaultMargin}
+
+					RowLayout {
+						KeyboardButtonMD3 {text: qsTr("F1")}
+						KeyboardButtonMD3 {text: qsTr("F2")}
+						KeyboardButtonMD3 {text: qsTr("F3")}
+						KeyboardButtonMD3 {text: qsTr("F4")}
+					}
+
+					Item {Layout.fillWidth: true}
+
+					KeyboardButtonMD3 {
+						Image {
+              anchors.fill: parent
+              anchors.margins: 8
+              source: "../resources/up_triangle.png"
+              mipmap: true
+            }
+					}
+				}
+			}
+
+			Item {
+				implicitHeight: defaultMargin
+			}
+
+			RowLayout {
+				id: mainKeyboardSection
+
+				Rectangle {
+					implicitWidth: selectedKeyboardModeLayout.implicitWidth + 2 * defaultMargin
+					implicitHeight: selectedKeyboardModeLayout.implicitHeight + 2 * defaultMargin
+					color: "transparent"
+					radius: keyboard.sectionRadius
+					border.width: keyboard.borderWidthSection
+					border.color: "black"
+
+					ColumnLayout {
+						id: selectedKeyboardModeLayout
+
+						anchors.fill: parent
+						anchors.margins: defaultMargin
+
+						KeyboardButtonMD3 {
+							backgroundColor: keyboard.redButtonColor
+							text: qsTr("РУС")
+							textVerticalAlignment: Text.AlignTop
+
+							KeyboardModeIndicatorMD3 {id: rusRedModeIndicator}
+						}
+
+						KeyboardButtonMD3 {
+							backgroundColor: keyboard.blueButtonColor
+							text: qsTr("РУС")
+							textVerticalAlignment: Text.AlignTop
+
+							KeyboardModeIndicatorMD3 {id: rusBlueModeIndicator}
+						}
+
+						KeyboardButtonMD3 {
+							backgroundColor: keyboard.redButtonColor
+							text: qsTr("ЛАТ")
+							textVerticalAlignment: Text.AlignBottom
+
+							KeyboardModeIndicatorMD3 {id: latRedModeIndicator}
+						}
+
+						KeyboardButtonMD3 {
+							backgroundColor: keyboard.blueButtonColor
+							text: qsTr("ЛАТ")
+							textVerticalAlignment: Text.AlignBottom
+
+							KeyboardModeIndicatorMD3 {id: latBlueModeIndicator}
+						}
+
+						KeyboardButtonMD3 {
+							textVerticalAlignment: Text.AlignTop
+							text: qsTr("ЦИФ")
+
+							KeyboardModeIndicatorMD3 {
+								id: digitsModeIndicator
+								isSelected: true
+							}
+						}
+					}
+				}
+
+				Item {
+					implicitWidth: defaultMargin
+				}
+
+				Rectangle {
+					implicitWidth: numbersSymbolsKeyboardSectionLayout.implicitWidth + 2 * defaultMargin
+					implicitHeight: numbersSymbolsKeyboardSectionLayout.implicitHeight + 2 * defaultMargin
+					color: "transparent"
+					radius: keyboard.sectionRadius
+					border.width: keyboard.borderWidthSection
+					border.color: "black"
+
+					GridLayout {
+						id: numbersSymbolsKeyboardSectionLayout
+						rows: 5
+						columns: 4
+
+						anchors.fill: parent
+						anchors.margins: defaultMargin
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("А"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("Б"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr("("); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("A"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("B"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("В"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("Г"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr(")"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("C"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("D"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("Д"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("Е"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr("<"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("E"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("F"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("Ж"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("З"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr(">"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("G"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("H"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("И"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("й"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr("+"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("I"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("J"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("К"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("Л"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr("7"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("K"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("L"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("М"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("Н"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr("8"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("M"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("N"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("О"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("П"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr("9"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("O"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("P"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("Р"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("С"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr("/"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("Q"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("R"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("Т"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("У"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr("4"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("С"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("Т"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("Ф"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("Ч"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr("5"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("U"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("V"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("Ц"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("Ч"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr("6"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("W"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("X"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("Ш"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("Щ"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr("*"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("Y"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("Z"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("Ъ"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("Ы"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr("1"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("("); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr(")"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("Ь"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("Э"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr("2"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("!"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("?"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+							contentItem: GridLayout {
+								rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr("Ю"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("Я"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+                Text {text: qsTr("3"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("."); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr(";"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+						}
+
+						KeyboardButtonMD3 {
+              contentItem: GridLayout {
+                rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr(""); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("="); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("/"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("\\"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+            }
+
+            KeyboardButtonMD3 {
+              contentItem: GridLayout {
+                rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr(""); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("0"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("@"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("*"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+            }
+
+            KeyboardButtonMD3 {
+              contentItem: GridLayout {
+                rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr(""); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr(","); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("\""); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("\""); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+            }
+
+            KeyboardButtonMD3 {
+              contentItem: GridLayout {
+                rowSpacing: 0
+								columnSpacing: 0
+
+                Text {text: qsTr(":"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+                Text {text: qsTr("-"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+                Text {text: qsTr("%"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+                Text {text: qsTr("&"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+              }
+            }
+					}
+				}
+
+				Item {
+					implicitWidth: defaultMargin
+				}
+
+				Rectangle {
+					implicitWidth: navigationKeyboardSectionLayout.implicitWidth + 2 * defaultMargin
+					implicitHeight: navigationKeyboardSectionLayout.implicitHeight + 2 * defaultMargin
+					color: "transparent"
+					radius: keyboard.sectionRadius
+					border.width: keyboard.borderWidthSection
+					border.color: "black"
+
+					GridLayout {
+						id: navigationKeyboardSectionLayout
+						rows: 5
+						columns: 3
+
+						anchors.fill: parent
+						anchors.margins: defaultMargin
+
+						KeyboardButtonMD3 {
+							Image {
+                anchors.fill: parent
+                anchors.margins: 16
+                source: "../resources/clockwise.png"
+                mipmap: true
+              }
+						}
+						KeyboardButtonMD3 {text: qsTr("Page\nUp")}
+						KeyboardButtonMD3 {
+							Image {
+                anchors.fill: parent
+                anchors.margins: 16
+                source: "../resources/unclockwise.png"
+                mipmap: true
+              }
+						}
+						KeyboardButtonMD3 {text: qsTr("BS")}
+						KeyboardButtonMD3 {text: qsTr("Page\nDown")}
+						KeyboardButtonMD3 {text: qsTr("DEL")}
+						KeyboardButtonMD3 {
+							Image {
+                anchors.fill: parent
+                anchors.margins: 16
+                source: "../resources/left_arrow.png"
+                mipmap: true
+              }
+						}
+						KeyboardButtonMD3 {
+							Image {
+                anchors.fill: parent
+                anchors.margins: 16
+                source: "../resources/up_arrow.png"
+                mipmap: true
+              }
+            }
+						KeyboardButtonMD3 {
+							Image {
+                anchors.fill: parent
+                anchors.margins: 16
+                source: "../resources/right_arrow.png"
+                mipmap: true
+              }
+						}
+						KeyboardButtonMD3 {text: qsTr("SPACE")}
+						KeyboardButtonMD3 {
+							Image {
+                anchors.fill: parent
+                anchors.margins: 16
+                source: "../resources/down_arrow.png"
+                mipmap: true
+              }
+						}
+
+						KeyboardButtonMD3 {
+							text: qsTr("ENTER")
+							Layout.rowSpan: 2
+							Layout.fillHeight: true
+
+							contentItem: Text {
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignTop
+                text: parent.text
+                color: "#000"
+              }
+
+              background: Rectangle {
+                anchors.fill: parent
+                implicitWidth: 64
+                implicitHeight: implicitWidth
+                radius: 8
+                border.color: "#000"
+                border.width: 4
+                color: "#aeada8"
+
+                Row {
+                  anchors.centerIn: parent
+                  spacing: 10
+                  Repeater {
+                      model: 3
+                      Rectangle {width: 10; height: 2; color: "#000"}
+                  }
+                }
+
+                MouseArea {
+							    anchors.fill: parent
+							    hoverEnabled: true
+							    onEntered: parent.color = Qt.darker("#aeada8", 1.5)
+							    onExited: parent.color = "#aeada8"
+							  }
+              }
+						}
+
+						KeyboardButtonMD3 {
+							text: qsTr("ENTER")
+							Layout.columnSpan: 2
+							Layout.fillWidth: true
+							contentItem: Text {
+	              horizontalAlignment: Text.AlignLeft
+                verticalAlignment: Text.AlignVCenter
+                text: parent.text
+                color: "#000"
+              }
+
+              background: Rectangle {
+                anchors.fill: parent
+                implicitWidth: 64
+                implicitHeight: implicitWidth
+                radius: 8
+                border.color: "#000"
+                border.width: 4
+                color: "#aeada8"
+
+                Column {
+                  anchors.centerIn: parent
+                  spacing: 10
+                  Repeater {
+                    model: 3
+                    Rectangle {width: 2; height: 10; color: "#000"}
+                  }
+                }
+
+                MouseArea {
+							    anchors.fill: parent
+							    hoverEnabled: true
+							    onEntered: parent.color = Qt.darker("#aeada8", 1.5)
+							    onExited: parent.color = "#aeada8"
+							  }
+              }
+						}
+					}
+				}
+			}
+    }
+
+    Rectangle {
+			implicitWidth: selectModeSmallKeyboardLayout.implicitWidth + 2 * defaultMargin
+			implicitHeight: selectModeSmallKeyboardLayout.implicitHeight + 2 * defaultMargin
+			color: "transparent"
+			radius: 8
+			border.width: 3
+			border.color: "black"
+
+			GridLayout {
+				id: selectModeSmallKeyboardLayout
+
+				anchors.fill: parent
+				anchors.margins: defaultMargin
+
+	      rows: 2
+	      columns: 3
+
+	      KeyboardButtonMD3 {
+		      backgroundColor: keyboard.redButtonColor
+		      text: qsTr("РУС")
+	      }
+
+	      KeyboardButtonMD3 {
+	        backgroundColor: keyboard.blueButtonColor
+	        text: qsTr("РУС")
+	      }
+
+	      KeyboardButtonMD3 {
+		      backgroundColor: keyboard.redButtonColor
+		      Layout.row: 1
+		      text: qsTr("ЛАТ")
+	      }
+
+	      KeyboardButtonMD3 {
+		      backgroundColor: keyboard.blueButtonColor
+		      text: qsTr("ЛАТ")
+	      }
+
+	      KeyboardButtonMD3 {
+	        text: qsTr("ЦИФ")
+	      }
+	    }
+		}
+  }
 }
