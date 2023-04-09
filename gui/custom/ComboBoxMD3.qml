@@ -25,7 +25,7 @@ ComboBox {
   }
 
   contentItem: Text {
-    text: control.displayText
+    text: parent.displayText
     color: "#d4a009"
   }
 
