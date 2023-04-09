@@ -36,12 +36,12 @@ Window {
 
 				// TODO: current date and time from config
 
-        Button {Layout.fillWidth: true; text: qsTr("(. Приборы - авария")}
-        Button {Layout.fillWidth: true; text: qsTr("15-02-2023")}
-        Button {Layout.fillWidth: true; text: qsTr("11:36:42")}
-        Button {Layout.fillWidth: true; text: qsTr("). Обмен")}
-        Button {Layout.fillWidth: true; text: qsTr("<. Запрет ПРД")}
-        Button {Layout.fillWidth: true; text: qsTr(">. Тракт ПРМ - не норма")}
+        ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("(. Приборы - авария")}
+        ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("15-02-2023")}
+        ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("11:36:42")}
+        ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("). Обмен")}
+        ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("<. Запрет ПРД")}
+        ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr(">. Тракт ПРМ - не норма")}
       }
 
 			StackLayout {
@@ -64,7 +64,7 @@ Window {
         property int regulationsPlumePageIndex: regulationsModeAGLTLF1PageIndex + 1
 
 				ColumnLayout {
-          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("ГЛАВНОЕ")}
+          ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("ГЛАВНОЕ")}
 
           GridLayout {
             rows: 6
@@ -73,54 +73,54 @@ Window {
 
 						// TODO: not equal width
 
-            Button {Layout.fillWidth: true; text: qsTr("1. СХОС")}
-            Button {Layout.fillWidth: true; text: qsTr("2. Монитор")}
-            Button {Layout.fillWidth: true; text: qsTr("3. Сл. связь")}
-            Button {Layout.fillWidth: true; text: qsTr("4. Архив команд")}
-            Button {Layout.fillWidth: true; text: qsTr("5. РАТС")}
-            Button {Layout.fillWidth: true; text: qsTr("6. ПРД")}
-            Button {Layout.fillWidth: true; text: qsTr("7. Установка")}
-            Button {Layout.fillWidth: true; text: qsTr("8. Регламент"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
-            Button {Layout.fillWidth: true; text: qsTr("9. Антенна")}
-            Button {Layout.fillWidth: true; text: qsTr("0. Ок. сеанса"); Layout.row: 4; Layout.column: 1}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. СХОС")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. Монитор")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. Сл. связь")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. Архив команд")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. РАТС")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. ПРД")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("7. Установка")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("8. Регламент"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("9. Антенна")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("0. Ок. сеанса"); Layout.row: 4; Layout.column: 1}
           }
         }
 
 				ColumnLayout {
-          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("РЕГЛАМЕНТ")}
+          ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("РЕГЛАМЕНТ")}
 
           GridLayout {
             rows: 3
             columns: 2
             flow: GridLayout.TopToBottom
 
-            Button {Layout.fillWidth: true; text: qsTr("1. Состояние")}
-            Button {Layout.fillWidth: true; text: qsTr("2. Режим"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
-            Button {Layout.fillWidth: true; text: qsTr("3. Режим АГ-Л"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
-            Button {Layout.fillWidth: true; text: qsTr("4. Монитор")}
-            Button {Layout.fillWidth: true; text: qsTr("5. Шлейф"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPlumePageIndex}
-            Button {Layout.fillWidth: true; text: qsTr("6. Управление")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Состояние")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. Режим"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. Режим АГ-Л"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. Монитор")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. Шлейф"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPlumePageIndex}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. Управление")}
           }
 
           Item {Layout.fillHeight: true}
 
-          Button {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.mainPageIndex}
+          ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.mainPageIndex}
         }
 
         ColumnLayout {
-          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("ВВОД РЕЖИМНЫХ ПАРАМЕТРОВ")}
+          ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("ВВОД РЕЖИМНЫХ ПАРАМЕТРОВ")}
 
           GridLayout {
             rows: 6
             columns: 3
             flow: GridLayout.TopToBottom
 
-            Button {Layout.fillWidth: true; text: qsTr("1. Общее")}
-            Button {Layout.fillWidth: true; text: qsTr("2. ПГ-Л")}
-            Button {Layout.fillWidth: true; text: qsTr("3. КЛ-У"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage1Index}
-            Button {Layout.fillWidth: true; text: qsTr("4. ДМД, УЗОЗМ"); Layout.column: 1; onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage1Index}
-            Button {Layout.fillWidth: true; text: qsTr("5. Тракты ПРД, ПРМ"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage1Index}
-            Button {Layout.fillWidth: true; text: qsTr("6. Л807"); Layout.column: 2; onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeL807PageIndex}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Общее")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. ПГ-Л")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. КЛ-У"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage1Index}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. ДМД, УЗОЗМ"); Layout.column: 1; onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage1Index}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. Тракты ПРД, ПРМ"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage1Index}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. Л807"); Layout.column: 2; onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeL807PageIndex}
 
             ColumnLayout {
               Layout.row: 2;
@@ -130,378 +130,378 @@ Window {
 
 							// TODO: stretch text
 
-              Text {Layout.alignment: Qt.AlignHCenter; text: qsTr("Внимание!")}
-              Text {text: qsTr("Вы вошли в технологический режим\nуправления станцией.\nКоррекция режимных параметров\nможет привести к нарушению\n рабочего режима")}
+              DisplayTextMD3 {Layout.alignment: Qt.AlignHCenter; text: qsTr("Внимание!")}
+              DisplayTextMD3 {text: qsTr("Вы вошли в технологический режим\nуправления станцией.\nКоррекция режимных параметров\nможет привести к нарушению\n рабочего режима")}
             }
           }
 
           Item {Layout.fillHeight: true}
 
-          Button {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
+          ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
         }
 
         ColumnLayout {
-          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
+          ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
 
           GridLayout {
             rows: 8
             columns: 2
 
-            Text {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРМ:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРМ:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Код Баркера ПРМ:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Код Баркера ПРМ:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Инверсия кода Баркера:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Инверсия кода Баркера:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("ДСЧ:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ДСЧ:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Номер ключа ПРМ:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер ключа ПРМ:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Номер подключа ПРМ:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер подключа ПРМ:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Полоса поиска ПРМ, кГц:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Полоса поиска ПРМ, кГц:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРМ:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРМ:")}
             ComboBox {Layout.fillWidth: true}
           }
 
           Item {Layout.fillHeight: true}
 
           RowLayout {
-            Button {text: qsTr("1. Изм.")}
+            ButtonMD3 {text: qsTr("1. Изм.")}
             Item {Layout.fillWidth: true}
-            Button {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage2Index}
-            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+            ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage2Index}
+            ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
         }
 
         ColumnLayout {
-          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
+          ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
 
           GridLayout {
             rows: 5
             columns: 2
 
-            Text {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРД:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРД:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Код Баркера ПРД:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Код Баркера ПРД:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Номер ключа ПРД:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер ключа ПРД:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Номер подключа ПРД:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер подключа ПРД:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРД:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРД:")}
             ComboBox {Layout.fillWidth: true}
           }
 
           Item {Layout.fillHeight: true}
 
           RowLayout {
-            Button {text: qsTr("1. Изм.")}
+            ButtonMD3 {text: qsTr("1. Изм.")}
             Item {Layout.fillWidth: true}
-            Button {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage1Index}
-            Button {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage3Index}
-            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+            ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage1Index}
+            ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage3Index}
+            ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
         }
 
         ColumnLayout {
-          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
+          ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
 
           GridLayout {
             rows: 8
             columns: 2
 
-            Text {Layout.fillWidth: true; text: qsTr("Тестпроверка:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тестпроверка:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Режим теста:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим теста:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("ПРД 70:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ПРД 70:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Сброс счетчика ошибок:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сброс счетчика ошибок:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Служебный 1:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный 1:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Служебный 2:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный 2:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Ft ПСП ШПС ПРД:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ШПС ПРД:")}
             ComboBox {Layout.fillWidth: true}
           }
 
           Item {Layout.fillHeight: true}
 
           RowLayout {
-            Button {text: qsTr("1. Изм.")}
+            ButtonMD3 {text: qsTr("1. Изм.")}
             Item {Layout.fillWidth: true}
-            Button {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage2Index}
-            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+            ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage2Index}
+            ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
         }
 
         ColumnLayout {
-					Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ДМД, УЗОЗМ")}
+					ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ДМД, УЗОЗМ")}
 
 					GridLayout {
             rows: 7
             columns: 2
 
-            Text {Layout.fillWidth: true; text: qsTr("Тип радиосигнала ПРМ:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип радиосигнала ПРМ:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Декодер:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Декодер:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Скорость ДМД, кбит/с:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ДМД, кбит/с:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Режим ДМД:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ДМД:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Скорость ПРД УЗОЗМ, кбит/с:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ПРД УЗОЗМ, кбит/с:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Режим УЗОЗМ:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим УЗОЗМ:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Служебный канал в ФТ4:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный канал в ФТ4:")}
             ComboBox {Layout.fillWidth: true}
           }
 
 					Item {Layout.fillHeight: true}
 
           RowLayout {
-            Button {text: qsTr("1. Изм.")}
+            ButtonMD3 {text: qsTr("1. Изм.")}
             Item {Layout.fillWidth: true}
-            Button {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage2Index}
-            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+            ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage2Index}
+            ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
         }
 
         ColumnLayout {
-					Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ДМД")}
+					ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ДМД")}
 
 					GridLayout {
             rows: 7
             columns: 2
 
-            Text {Layout.fillWidth: true; text: qsTr("Номер фильтра:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер фильтра:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("АРУ:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("АРУ:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Автопоиск:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Автопоиск:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("АСЧ:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("АСЧ:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Диф. декодер:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Диф. декодер:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Полоса ДМД:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Полоса ДМД:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Корректор:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Корректор:")}
             ComboBox {Layout.fillWidth: true}
           }
 
 					Item {Layout.fillHeight: true}
 
           RowLayout {
-            Button {text: qsTr("1. Изм.")}
+            ButtonMD3 {text: qsTr("1. Изм.")}
             Item {Layout.fillWidth: true}
             Button {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage1Index}
-            Button {text: qsTr(">")}
-            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+            ButtonMD3 {text: qsTr(">")}
+            ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
         }
 
         ColumnLayout {
-					Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ПРМ, ПРД")}
+					ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ПРМ, ПРД")}
 
 					GridLayout {
             rows: 5
             columns: 2
 
-            Text {Layout.fillWidth: true; text: qsTr("Автоконтроль CAN:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Автоконтроль CAN:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Поддиппазон приема:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Поддиппазон приема:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Ствольный фильтр:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ствольный фильтр:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
             ComboBox {Layout.fillWidth: true}
           }
 
 					Item {Layout.fillHeight: true}
 
           RowLayout {
-            Button {text: qsTr("1. Изм.")}
+            ButtonMD3 {text: qsTr("1. Изм.")}
             Item {Layout.fillWidth: true}
-            Button {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage2Index}
-            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+            ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage2Index}
+            ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
 				}
 
 				ColumnLayout {
-					Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ПРМ, ПРД")}
+					ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ПРМ, ПРД")}
 
 					GridLayout {
             rows: 6
             columns: 2
 
-            Text {Layout.fillWidth: true; text: qsTr("Тип радиосигнала:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип радиосигнала:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Вид сигнала ОФТ:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ОФТ:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Скорость ЗС:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ЗС:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
             TextField {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Номер волны ПРМ:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРМ:")}
             TextField {Layout.fillWidth: true}
           }
 
 					Item {Layout.fillHeight: true}
 
           RowLayout {
-            Button {text: qsTr("1. Изм.")}
+            ButtonMD3 {text: qsTr("1. Изм.")}
             Item {Layout.fillWidth: true}
-            Button {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage1Index}
-            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+            ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage1Index}
+            ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
 				}
 
         ColumnLayout {
-          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Л807")}
+          ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Л807")}
 
-          Text {Layout.alignment: Qt.AlignHCenter; text: qsTr("Установленные интерфейсы:")}
-          Text {Layout.alignment: Qt.AlignHCenter; text: qsTr("Интерфейс не обеспечивается")}
+          DisplayTextMD3 {Layout.alignment: Qt.AlignHCenter; text: qsTr("Установленные интерфейсы:")}
+          DisplayTextMD3 {Layout.alignment: Qt.AlignHCenter; text: qsTr("Интерфейс не обеспечивается")}
 
           GridLayout {
             rows: 2
             columns: 2
 
-            Text {Layout.fillWidth: true; text: qsTr("Стык Л807:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Стык Л807:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Источник сигнала: ")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Источник сигнала: ")}
             ComboBox {Layout.fillWidth: true}
           }
 
           Item {Layout.fillHeight: true}
 
           RowLayout {
-            Button {text: qsTr("1. Изм.")}
+            ButtonMD3 {text: qsTr("1. Изм.")}
             Item {Layout.fillWidth: true}
-            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+            ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
           }
         }
 
         ColumnLayout {
-          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("РЕЖИМ АГ-Л")}
+          ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("РЕЖИМ АГ-Л")}
 
           GridLayout {
             rows: 6
             columns: 3
             flow: GridLayout.TopToBottom
 
-            Button {Layout.fillWidth: true; text: qsTr("1. Режим прибора"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationModeAGLDeviceModePageIndex}
-            Button {Layout.fillWidth: true; text: qsTr("2. ТЛФ1"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLTLF1PageIndex}
-            Button {Layout.fillWidth: true; text: qsTr("3. ТЛФ2")}
-            Button {Layout.fillWidth: true; text: qsTr("4. ТЛФ3")}
-            Button {Layout.fillWidth: true; text: qsTr("5. ТЛФ4")}
-            Button {Layout.fillWidth: true; text: qsTr("6. ТЛФ5")}
-            Button {Layout.fillWidth: true; text: qsTr("7. КАУ1")}
-            Button {Layout.fillWidth: true; text: qsTr("8. КАУ2")}
-            Button {Layout.fillWidth: true; text: qsTr("9. КАУ3")}
-            Button {Layout.fillWidth: true; text: qsTr("10. КАУ4")}
-            Button {Layout.fillWidth: true; text: qsTr("11. КАУ5")}
-            Button {Layout.fillWidth: true; text: qsTr("12. ТЛГ1")}
-            Button {Layout.fillWidth: true; text: qsTr("13. ТЛГ2")}
-            Button {Layout.fillWidth: true; text: qsTr("14. ТЛГ3")}
-            Button {Layout.fillWidth: true; text: qsTr("15. ТЛГ4")}
-            Button {Layout.fillWidth: true; text: qsTr("16. Синх. вход")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Режим прибора"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationModeAGLDeviceModePageIndex}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. ТЛФ1"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLTLF1PageIndex}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. ТЛФ2")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. ТЛФ3")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. ТЛФ4")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. ТЛФ5")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("7. КАУ1")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("8. КАУ2")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("9. КАУ3")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("10. КАУ4")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("11. КАУ5")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("12. ТЛГ1")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("13. ТЛГ2")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("14. ТЛГ3")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("15. ТЛГ4")}
+            ButtonMD3 {Layout.fillWidth: true; text: qsTr("16. Синх. вход")}
           }
 
           Item {Layout.fillWidth: true}
 
-          Button {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
+          ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
         }
 
         ColumnLayout {
-          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режим прибора АГ-Л")}
+          ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режим прибора АГ-Л")}
 
           GridLayout {
             rows: 4
             columns: 2
 
-            Text {Layout.fillWidth: true; text: qsTr("Режим работы ЗС")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим работы ЗС")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Скор ГС ПРМ кбит/c")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скор ГС ПРМ кбит/c")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Скор ГС ПРД кбит/c")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скор ГС ПРД кбит/c")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Режим РАТС")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим РАТС")}
             ComboBox {Layout.fillWidth: true}
           }
 
           Item {Layout.fillHeight: true}
 
-          Button {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
+          ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
         }
 
         ColumnLayout {
-          Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Режим ТЛФ1")}
+          ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режим ТЛФ1")}
 
           GridLayout {
             columns: 2
 
             Column {
-              Text {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРМ")}
+              DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРМ")}
               ComboBox {Layout.fillWidth: true}
 
-              Text {Layout.fillWidth: true; text: qsTr("Скорость")}
+              DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость")}
               ComboBox {Layout.fillWidth: true}
 
-              Text {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
+              DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
 
               RowLayout {
                 ComboBox {Layout.fillWidth: true}
@@ -511,13 +511,13 @@ Window {
             }
 
             Column {
-              Text {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД")}
+              DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД")}
               ComboBox {Layout.fillWidth: true}
 
-              Text {Layout.fillWidth: true; text: qsTr("Скорость")}
+              DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость")}
               ComboBox {Layout.fillWidth: true}
 
-              Text {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
+              DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
 
               RowLayout {
                 ComboBox {Layout.fillWidth: true}
@@ -529,29 +529,29 @@ Window {
 					Item {Layout.fillHeight: true}
 
           RowLayout {
-            Button {text: qsTr("1. Изм.")}
+            ButtonMD3 {text: qsTr("1. Изм.")}
             Item {Layout.fillWidth: true}
-            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
+            ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
           }
         }
 
         ColumnLayout {
-					Button {Layout.alignment: Qt.AlignHCenter; text: qsTr("Шлейф ПР")}
+					ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Шлейф ПР")}
 
 					GridLayout {
             rows: 4
             columns: 2
 
-            Text {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
             ComboBox {Layout.fillWidth: true}
 
-            Text {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
+            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
             TextField {Layout.fillWidth: true}
           }
 
@@ -559,25 +559,25 @@ Window {
 	          rows: 2
 	          columns: 4
 
-	          Text {Layout.fillWidth: true; text: qsTr("Ствол. фильтр:")}
-	          Text {Layout.fillWidth: true; text: qsTr("1")}
+	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ствол. фильтр:")}
+	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("1")}
 
-	          Text {Layout.fillWidth: true; text: qsTr("№ волны ПРМ:")}
-	          Text {Layout.fillWidth: true; text: qsTr("2500")}
+	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("№ волны ПРМ:")}
+	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("2500")}
 
-	          Text {Layout.fillWidth: true; text: qsTr("Поддиап. приема:")}
-	          Text {Layout.fillWidth: true; text: qsTr("1")}
+	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Поддиап. приема:")}
+	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("1")}
 
-	          Text {Layout.fillWidth: true; text: qsTr("№ фильтра ДМД:")}
-	          Text {Layout.fillWidth: true; text: qsTr("3")}
+	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("№ фильтра ДМД:")}
+	          DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("3")}
 	        }
 
 					Item {Layout.fillHeight: true}
 
           RowLayout {
-            Button {text: qsTr("1. Изм.")}
+            ButtonMD3 {text: qsTr("1. Изм.")}
             Item {Layout.fillWidth: true}
-            Button {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
+            ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
           }
 				}
       }

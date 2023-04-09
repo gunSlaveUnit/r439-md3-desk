@@ -3,17 +3,39 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 
 Button {
-    contentItem: Text {
-        font.pointSize: 16
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        text: parent.text
-        color: "#ffaf00"
+	hoverEnabled: false
+
+	property bool hoverable: true
+
+  contentItem: Text {
+    font.pointSize: 10
+    horizontalAlignment: Text.AlignHCenter
+    verticalAlignment: Text.AlignVCenter
+    text: parent.text
+    color: "#d4a009"
+    font.bold: true
+  }
+
+  background: Rectangle {
+    color: "transparent"
+    border.width: 1
+    border.color: "#d4a009"
+
+    Rectangle {
+      id: dottedSelectionBorder
+      visible: false
+      anchors.fill: parent
+      anchors.margins: 3
+      color: "transparent"
+	    border.width: 1
+	    border.color: "#d4a009"
     }
 
-    background: Rectangle {
-        color: "transparent"
-        border.width: 2
-        border.color: "#ffaf00"
-    }
+    MouseArea {
+	    anchors.fill: parent
+	    hoverEnabled: hoverable
+	    onEntered: dottedSelectionBorder.visible = true
+	    onExited: dottedSelectionBorder.visible = false
+	  }
+  }
 }
