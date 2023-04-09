@@ -678,8 +678,8 @@ Window {
               DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
 
               RowLayout {
-                id: tlf1PRDAddressOne
                 ComboBoxMD3 {
+                  id: tlf1PRDAddressOne
                   Layout.fillWidth: true
                   enabled: !changeTLF1Button.visible
                   currentIndex: tlf1.prd_address_one
