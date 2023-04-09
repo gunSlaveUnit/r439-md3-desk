@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
+import QtQuick.Dialogs
 
 import "./custom"
 
@@ -14,6 +15,21 @@ Window {
 
   minimumWidth: mainLayout.implicitWidth + 2 * defaultMargin
   minimumHeight: mainLayout.implicitHeight + 2 * defaultMargin
+
+  Connections {
+    target: norm
+
+    function onPassed() {
+      dialog.visible = true
+    }
+  }
+
+  MessageDialog {
+    id: dialog
+    text: qsTr("Норматив успешно завершен")
+    visible: false
+    buttons: MessageDialog.Ok
+  }
 
   GridLayout {
     id: mainLayout
@@ -290,6 +306,8 @@ Window {
 								klu.prd_signal_type = kluPRDSignalType.currentIndex
 
                 changeKLU3Button.visible = true
+
+                norm.check()
               }
             }
 
@@ -410,6 +428,8 @@ Window {
 	              dmd_uzozm.service_channel_ft4 = dmdUZOZMServiceChannelFT4.currentIndex
 
                 changeDMDUZOZM1Button.visible = true
+
+                norm.check()
               }
             }
 
@@ -534,6 +554,8 @@ Window {
 	              dmd_uzozm.corrector = dmdUZOZMCorrector.currentIndex
 
                 changeDMDUZOZM2Button.visible = true
+
+                norm.check()
               }
             }
 
@@ -632,8 +654,15 @@ Window {
               visible: !changeTractsPRMPRDButton1.visible
               text: qsTr("2. Запись")
               onClicked: {
+                tracts_prm_prd.auto_check_can = tractsPRDPRDAutoCheckCAN.currentIndex
+                tracts_prm_prd.receive_subband = tractsPRDPRDReceiveSubband.currentIndex
+                tracts_prm_prd.shift_generator = tractsPRDPRDShiftGenerator.currentIndex
+                tracts_prm_prd.barrel_filter = tractsPRDPRDBarrelFilter.currentIndex
+	              tracts_prm_prd.amplifier = tractsPRDPRDAmplifier.currentIndex
 
                 changeTractsPRMPRDButton1.visible = true
+
+                norm.check()
               }
             }
 
@@ -642,8 +671,15 @@ Window {
               text: qsTr("3. Отмена")
 
               onClicked: {
+                tractsPRDPRDAutoCheckCAN.currentIndex = tracts_prm_prd.auto_check_can
+                tractsPRDPRDReceiveSubband.currentIndex = tracts_prm_prd.receive_subband
+                tractsPRDPRDShiftGenerator.currentIndex = tracts_prm_prd.shift_generator
+                tractsPRDPRDBarrelFilter.currentIndex = tracts_prm_prd.barrel_filter
+	              tractsPRDPRDAmplifier.currentIndex = tracts_prm_prd.amplifier
 
                 changeTractsPRMPRDButton1.visible = true
+
+                norm.check()
               }
             }
 
@@ -739,6 +775,8 @@ Window {
 	              tracts_prm_prd.prm_wave_number = tractsPRDPRDPRMWaveNumber.text
 
                 changeTractsPRMPRDButton2.visible = true
+
+                norm.check()
               }
             }
 
@@ -815,6 +853,8 @@ Window {
                 l807.signal_source = l807SignalSource.currentIndex
 
                 changeL807Button.visible = true
+
+                norm.check()
               }
             }
 
@@ -934,6 +974,8 @@ Window {
 	              agl.rats_mode = aglRATSMode.currentIndex
 
                 changeAGLButton.visible = true
+
+                norm.check()
               }
             }
 
@@ -1080,6 +1122,8 @@ Window {
                 tlf1.prd_address_two = tlf1PRDAddressTwo.currentIndex
 
                 changeTLF1Button.visible = true
+
+                norm.check()
               }
             }
 
@@ -1141,7 +1185,7 @@ Window {
               enabled: !changePlumeButton.visible
               currentIndex: plume.output_u205d
               Layout.fillWidth: true
-              model: ["Откл."]
+              model: ["Вкл."]
             }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
@@ -1193,6 +1237,8 @@ Window {
 								plume.calculate_parameters()
 
                 changePlumeButton.visible = true
+
+                norm.check()
               }
             }
 
