@@ -426,7 +426,7 @@ Window {
 							enabled: !changeL807Button.visible
               Layout.fillWidth: true
               currentIndex: l807.joint
-							model: [qsTr("Выключен"), qsTr("Включен")]
+							model: [qsTr("Выключен")]
             }
 
             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Источник сигнала: ")}
@@ -435,7 +435,7 @@ Window {
               enabled: !changeL807Button.visible
               Layout.fillWidth: true
               currentIndex: l807.signal_source
-							model: [qsTr("АГ-Л"), qsTr("АГ-Б")]
+							model: [qsTr("АГ-Л")]
             }
           }
 
