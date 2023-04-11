@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 import QtQuick.Dialogs
+import QtMultimedia
 
 import "./custom"
 
@@ -26,16 +27,48 @@ Window {
 			font.bold: true
 		}
 
-		Button {
-			Layout.alignment: Qt.AlignHCenter
-			text: qsTr("Сборка и развертывание")
-			onClicked: emulator.visible = true
-		}
+		StackLayout {
+			id: menuStack
 
-		Button {
-			Layout.alignment: Qt.AlignHCenter
-			text: qsTr("Эмулятор")
-			onClicked: emulator.visible = true
+			property int startPageIndex: 0
+			property int buildDeployPageIndex: 1
+
+			ColumnLayout {
+				Button {
+					Layout.alignment: Qt.AlignHCenter
+					text: qsTr("Сборка и развертывание")
+					onClicked: menuStack.currentIndex = menuStack.buildDeployPageIndex
+				}
+
+				Button {
+					Layout.alignment: Qt.AlignHCenter
+					text: qsTr("Эмулятор")
+					onClicked: emulator.visible = true
+				}
+			}
+
+			ColumnLayout {
+				Video {
+			    id: video
+			    width : 800
+			    height : 600
+			    source: "file://1.avi"
+
+			    MouseArea {
+		        anchors.fill: parent
+		        onClicked: {
+	            video.play()
+		        }
+			    }
+
+			    focus: true
+			    Keys.onSpacePressed: video.playbackState == MediaPlayer.PlayingState ? video.pause() : video.play()
+			    Keys.onLeftPressed: video.position = video.position - 5000
+			    Keys.onRightPressed: video.position = video.position + 5000
+				}
+
+				Button {text: qsTr("Назад")}
+			}
 		}
 	}
 
