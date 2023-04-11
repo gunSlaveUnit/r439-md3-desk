@@ -44,7 +44,10 @@ Window {
 				Button {
 					Layout.alignment: Qt.AlignHCenter
 					text: qsTr("Эмулятор")
-					onClicked: emulator.visible = true
+					onClicked: {
+						emulator.visible = true
+						startTime = new Date().getTime()
+					}
 				}
 			}
 
@@ -58,6 +61,8 @@ Window {
 		id: emulator
 
 	  visible: false
+
+	  property double startTime: 0
 
 	  x: Screen.width / 2 - minimumWidth / 2
 	  y: Screen.height / 2 - minimumHeight / 2
@@ -76,13 +81,17 @@ Window {
 	    target: norm
 
 	    function onPassed() {
+	      let delta = new Date().getTime() - startTime
+	      dialog.text = "Норматив успешно завершен за " + delta + " с"
+
 	      dialog.visible = true
+
+        startTime = 0
 	    }
 	  }
 
 	  MessageDialog {
 	    id: dialog
-	    text: qsTr("Норматив успешно завершен")
 	    visible: false
 	    buttons: MessageDialog.Ok
 	  }
