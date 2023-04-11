@@ -34,6 +34,8 @@ Window {
 			property int buildDeployPageIndex: 1
 
 			ColumnLayout {
+				anchors.centerIn: parent
+
 				Button {
 					Layout.alignment: Qt.AlignHCenter
 					text: qsTr("Сборка и развертывание")
