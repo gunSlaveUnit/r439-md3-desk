@@ -244,28 +244,52 @@ Window {
 		            columns: 2
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРМ:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["Спец. ГС в ПР", "Спец. ГС в ГС", "ОСБ"]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Код Баркера ПРМ:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["Откл.", "Вкл."]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Инверсия кода Баркера:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["Откл.", "Вкл."]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ДСЧ:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["Откл.", "Вкл."]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер ключа ПРМ:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["0", "1"]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер подключа ПРМ:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["0", "1", "2", "3", "4", "5", "6", "7"]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Полоса поиска ПРМ, кГц:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["+-1", "+-4", "+-8", "+-10", "+-100"]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРМ:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["Ft 1", "Ft 2"]
+		            }
 		          }
 
 		          Item {Layout.fillHeight: true}
@@ -426,7 +450,7 @@ Window {
 		              enabled: !changeDMDUZOZM1Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.prm_signal_type
-									model: ["УП"]
+									model: ["УП", "ШПС"]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Декодер:")}
@@ -444,7 +468,11 @@ Window {
 		              enabled: !changeDMDUZOZM1Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.dmd_speed
-									model: ["6.0"]
+									model: [
+										"1.2", "1.5", "2.4", "3", "4.8", "6",
+										"9.6","12",	"24",	"30",	"48",	"60",	"96", "120",
+										"144","180","240","300","480","600"
+									]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ДМД:")}
@@ -552,7 +580,7 @@ Window {
 		              enabled: !changeDMDUZOZM2Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.filter_number
-									model: ["1", "3"]
+									model: ["Не задан", "1", "2", "3", "4", "5"]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("АРУ:")}
@@ -579,7 +607,7 @@ Window {
 		              enabled: !changeDMDUZOZM2Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.asch
-									model: ["Вкл."]
+									model: ["Откл.", "Вкл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Диф. декодер:")}
@@ -588,7 +616,7 @@ Window {
 		              enabled: !changeDMDUZOZM2Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.dif_decoder
-									model: ["Вкл."]
+									model: ["Откл.", "Вкл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Полоса ДМД:")}
@@ -679,7 +707,7 @@ Window {
 		              enabled: !changeTractsPRMPRDButton1.visible
 		              Layout.fillWidth: true
 		              currentIndex: tracts_prm_prd.auto_check_can
-									model: ["Откл."]
+									model: ["Откл.", "Вкл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Поддиппазон приема:")}
@@ -697,7 +725,7 @@ Window {
 		              enabled: !changeTractsPRMPRDButton1.visible
 		              Layout.fillWidth: true
 		              currentIndex: tracts_prm_prd.shift_generator
-									model: ["Вкл."]
+									model: ["Откл.", "Вкл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ствольный фильтр:")}
@@ -706,7 +734,7 @@ Window {
 		              enabled: !changeTractsPRMPRDButton1.visible
 		              Layout.fillWidth: true
 		              currentIndex: tracts_prm_prd.barrel_filter
-									model: ["1"]
+									model: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
@@ -715,7 +743,7 @@ Window {
 		              enabled: !changeTractsPRMPRDButton1.visible
 		              Layout.fillWidth: true
 		              currentIndex: tracts_prm_prd.amplifier
-									model: ["Откл."]
+									model: ["Откл.", "Вкл."]
 		            }
 		          }
 
@@ -1002,7 +1030,14 @@ Window {
 		              Layout.fillWidth: true
 		              enabled: !changeAGLButton.visible
 		              currentIndex: agl.zs_operating_mode
-		              model: [qsTr("ППРЧ непрерывный"), qsTr("ПР")]
+		              model: [
+			              qsTr("Транзит ТЛФ"),
+			              qsTr("ОСБ ШПС"),
+			              qsTr("ППРЧ пакетный"),
+			              qsTr("ППРЧ непрерывный"),
+			              qsTr("ОСБ без ППРЧ"),
+			              qsTr("ПР")
+		              ]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скор ГС ПРМ, кбит/c")}
@@ -1011,7 +1046,19 @@ Window {
 		              Layout.fillWidth: true
 		              enabled: !changeAGLButton.visible
 		              currentIndex: agl.speed_gs_prm
-		              model: [qsTr("Нет ГС"), qsTr("6.0")]
+		              model: [
+		                qsTr("Нет ГС"),
+		                qsTr("1.5"),
+		                qsTr("3.0"),
+		                qsTr("6.0"),
+		                qsTr("12.0"),
+		                qsTr("30.0"),
+		                qsTr("60.0"),
+		                qsTr("120.0"),
+		                qsTr("180.0"),
+		                qsTr("300.0"),
+		                qsTr("600.0")
+		              ]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скор ГС ПРД, кбит/c")}
@@ -1020,7 +1067,13 @@ Window {
 		              Layout.fillWidth: true
 		              enabled: !changeAGLButton.visible
 		              currentIndex: agl.speed_gs_prd
-		              model: [qsTr("Нет ГС"), qsTr("6.0")]
+		              model: [
+		                qsTr("Нет ГС"),
+		                qsTr("1.5"),
+		                qsTr("3.0"),
+		                qsTr("6.0"),
+		                qsTr("12.0")
+		              ]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим РАТС")}
@@ -1029,7 +1082,11 @@ Window {
 		              Layout.fillWidth: true
 		              enabled: !changeAGLButton.visible
 		              currentIndex: agl.rats_mode
-		              model: [qsTr("Отсутствует")]
+		              model: [
+		                qsTr("Отсутствует"),
+		                qsTr("Закрепл. напр."),
+		                qsTr("Незакрепл. напр."),
+		              ]
 		            }
 		          }
 
@@ -1247,7 +1304,7 @@ Window {
 		              enabled: !changePlumeButton.visible
 		              currentIndex: plume.shift_generator
 		              Layout.fillWidth: true
-		              model: ["Вкл."]
+		              model: ["Откл.", "Вкл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
@@ -1256,7 +1313,7 @@ Window {
 		              enabled: !changePlumeButton.visible
 		              currentIndex: plume.amplifier
 		              Layout.fillWidth: true
-		              model: ["Откл."]
+		              model: ["Откл.", "Вкл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
@@ -1265,7 +1322,7 @@ Window {
 		              enabled: !changePlumeButton.visible
 		              currentIndex: plume.output_u205d
 		              Layout.fillWidth: true
-		              model: ["Вкл."]
+		              model: ["Откл.", "Вкл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
