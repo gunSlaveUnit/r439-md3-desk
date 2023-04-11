@@ -37,7 +37,6 @@ Window {
 				Button {
 					Layout.alignment: Qt.AlignHCenter
 					text: qsTr("Сборка и развертывание")
-					onClicked: menuStack.currentIndex = menuStack.buildDeployPageIndex
 				}
 
 				Button {
@@ -48,25 +47,6 @@ Window {
 			}
 
 			ColumnLayout {
-				Video {
-			    id: video
-			    width : 800
-			    height : 600
-			    source: "file://1.avi"
-
-			    MouseArea {
-		        anchors.fill: parent
-		        onClicked: {
-	            video.play()
-		        }
-			    }
-
-			    focus: true
-			    Keys.onSpacePressed: video.playbackState == MediaPlayer.PlayingState ? video.pause() : video.play()
-			    Keys.onLeftPressed: video.position = video.position - 5000
-			    Keys.onRightPressed: video.position = video.position + 5000
-				}
-
 				Button {text: qsTr("Назад")}
 			}
 		}
