@@ -6,42 +6,82 @@ import QtQuick.Dialogs
 import "./custom"
 
 Window {
-  visible: true
-  title: qsTr("MD3Desk")
+	minimumWidth: menu.implicitWidth + 2 * defaultMargin
+	minimumHeight: menu.implicitHeight + 2 * defaultMargin
+	title: qsTr("MD3Desk")
+	visible: true
 
-  property int defaultMargin: 8
+	property int defaultMargin: 8
 
-  color: "#969392"
+	ColumnLayout {
+		id: menu
 
-  minimumWidth: mainLayout.implicitWidth + 2 * defaultMargin
-  minimumHeight: mainLayout.implicitHeight + 2 * defaultMargin
+		anchors.fill: parent
+		anchors.margins: defaultMargin
 
-  Connections {
-    target: norm
+		Text {
+			Layout.alignment: Qt.AlignHCenter
+			text: qsTr("Р-439-МД3")
+			font.pointSize: 20
+			font.bold: true
+		}
 
-    function onPassed() {
-      dialog.visible = true
-    }
-  }
+		Button {
+			Layout.alignment: Qt.AlignHCenter
+			text: qsTr("Сборка и развертывание")
+			onClicked: emulator.visible = true
+		}
 
-  MessageDialog {
-    id: dialog
-    text: qsTr("Норматив успешно завершен")
-    visible: false
-    buttons: MessageDialog.Ok
-  }
+		Button {
+			Layout.alignment: Qt.AlignHCenter
+			text: qsTr("Эмулятор")
+			onClicked: emulator.visible = true
+		}
+	}
 
-  GridLayout {
-    id: mainLayout
+	Window {
+		id: emulator
 
-    anchors.fill: parent
-    anchors.margins: defaultMargin
+	  visible: false
 
-    rows: 2
-    columns: 2
+	  x: Screen.width / 2 - minimumWidth / 2
+	  y: Screen.height / 2 - minimumHeight / 2
 
+	  title: qsTr("MD3Desk - Эмулятор")
 
-      Rectangle {
+	  minimumWidth: mainLayout.implicitWidth + 2 * defaultMargin
+	  minimumHeight: mainLayout.implicitHeight + 2 * defaultMargin
+
+	  width: minimumWidth
+	  height: minimumHeight
+
+	  color: "#969392"
+
+	  Connections {
+	    target: norm
+
+	    function onPassed() {
+	      dialog.visible = true
+	    }
+	  }
+
+	  MessageDialog {
+	    id: dialog
+	    text: qsTr("Норматив успешно завершен")
+	    visible: false
+	    buttons: MessageDialog.Ok
+	  }
+
+	  GridLayout {
+	    id: mainLayout
+
+			anchors.fill: parent
+	    anchors.margins: defaultMargin
+
+	    rows: 2
+	    columns: 2
+
+	    Rectangle {
         width: display.implicitWidth
         height: display.implicitHeight
         color: "black"
@@ -64,7 +104,7 @@ Window {
 		        ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr(">. Тракт ПРМ - не норма")}
 		      }
 
-					StackLayout {
+		      StackLayout {
 		        id: displayStackLayout
 
 		        property int mainPageIndex: 0
@@ -904,7 +944,7 @@ Window {
 		            ButtonMD3 {Layout.fillWidth: true; text: qsTr("16. Синх. вход")}
 		          }
 
-		          Item {Layout.fillWidth: true}
+		          Item {Layout.fillHeight: true}
 
 		          ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
 		        }
@@ -1264,598 +1304,599 @@ Window {
 		          }
 						}
 		      }
-        }
+	      }
       }
 
-    ColumnLayout {
-      id: keyboard
+      ColumnLayout {
+	      id: keyboard
 
-			Layout.rowSpan: 2
+				Layout.rowSpan: 2
 
-			property int borderWidthSection: 4
-			property int sectionRadius: 8
-			property string neutralButtonColor: "#aeada8"
-			property string redButtonColor: "#ba5e51"
-			property string blueButtonColor: "#495f8f"
-
-			Rectangle {
-				implicitWidth: mainKeyboardSection.implicitWidth
-				implicitHeight: helpKeyboardSectionLayout.implicitHeight + 2 * defaultMargin
-				color: "transparent"
-				radius: keyboard.sectionRadius
-				border.width: keyboard.borderWidthSection
-				border.color: "black"
-
-				RowLayout {
-					id: helpKeyboardSectionLayout
-
-					anchors.fill: parent
-					anchors.margins: defaultMargin
-
-					KeyboardButtonMD3 {text: qsTr("ESC")}
-
-					Item {implicitWidth: 3 * defaultMargin}
-
-					RowLayout {
-						KeyboardButtonMD3 {text: qsTr("F1")}
-						KeyboardButtonMD3 {text: qsTr("F2")}
-						KeyboardButtonMD3 {text: qsTr("F3")}
-						KeyboardButtonMD3 {text: qsTr("F4")}
-					}
-
-					Item {Layout.fillWidth: true}
-
-					KeyboardButtonMD3 {
-						Image {
-              anchors.fill: parent
-              anchors.margins: 8
-              source: "../resources/up_triangle.png"
-              mipmap: true
-            }
-					}
-				}
-			}
-
-			Item {
-				implicitHeight: defaultMargin
-			}
-
-			RowLayout {
-				id: mainKeyboardSection
+				property int borderWidthSection: 4
+				property int sectionRadius: 8
+				property string neutralButtonColor: "#aeada8"
+				property string redButtonColor: "#ba5e51"
+				property string blueButtonColor: "#495f8f"
 
 				Rectangle {
-					implicitWidth: selectedKeyboardModeLayout.implicitWidth + 2 * defaultMargin
-					implicitHeight: selectedKeyboardModeLayout.implicitHeight + 2 * defaultMargin
+					implicitWidth: mainKeyboardSection.implicitWidth
+					implicitHeight: helpKeyboardSectionLayout.implicitHeight + 2 * defaultMargin
 					color: "transparent"
 					radius: keyboard.sectionRadius
 					border.width: keyboard.borderWidthSection
 					border.color: "black"
 
-					ColumnLayout {
-						id: selectedKeyboardModeLayout
+					RowLayout {
+						id: helpKeyboardSectionLayout
 
 						anchors.fill: parent
 						anchors.margins: defaultMargin
 
-						KeyboardButtonMD3 {
-							backgroundColor: keyboard.redButtonColor
-							text: qsTr("РУС")
-							textVerticalAlignment: Text.AlignTop
+						KeyboardButtonMD3 {text: qsTr("ESC")}
 
-							KeyboardModeIndicatorMD3 {id: rusRedModeIndicator}
+						Item {implicitWidth: 3 * defaultMargin}
+
+						RowLayout {
+							KeyboardButtonMD3 {text: qsTr("F1")}
+							KeyboardButtonMD3 {text: qsTr("F2")}
+							KeyboardButtonMD3 {text: qsTr("F3")}
+							KeyboardButtonMD3 {text: qsTr("F4")}
 						}
 
-						KeyboardButtonMD3 {
-							backgroundColor: keyboard.blueButtonColor
-							text: qsTr("РУС")
-							textVerticalAlignment: Text.AlignTop
+						Item {Layout.fillWidth: true}
 
-							KeyboardModeIndicatorMD3 {id: rusBlueModeIndicator}
+						KeyboardButtonMD3 {
+							Image {
+	              anchors.fill: parent
+	              anchors.margins: 8
+	              source: "../resources/up_triangle.png"
+	              mipmap: true
+	            }
 						}
+					}
+				}
 
-						KeyboardButtonMD3 {
-							backgroundColor: keyboard.redButtonColor
-							text: qsTr("ЛАТ")
-							textVerticalAlignment: Text.AlignBottom
+				Item {
+					implicitHeight: defaultMargin
+				}
 
-							KeyboardModeIndicatorMD3 {id: latRedModeIndicator}
+				RowLayout {
+					id: mainKeyboardSection
+
+					Rectangle {
+						implicitWidth: selectedKeyboardModeLayout.implicitWidth + 2 * defaultMargin
+						implicitHeight: selectedKeyboardModeLayout.implicitHeight + 2 * defaultMargin
+						color: "transparent"
+						radius: keyboard.sectionRadius
+						border.width: keyboard.borderWidthSection
+						border.color: "black"
+
+						ColumnLayout {
+							id: selectedKeyboardModeLayout
+
+							anchors.fill: parent
+							anchors.margins: defaultMargin
+
+							KeyboardButtonMD3 {
+								backgroundColor: keyboard.redButtonColor
+								text: qsTr("РУС")
+								textVerticalAlignment: Text.AlignTop
+
+								KeyboardModeIndicatorMD3 {id: rusRedModeIndicator}
+							}
+
+							KeyboardButtonMD3 {
+								backgroundColor: keyboard.blueButtonColor
+								text: qsTr("РУС")
+								textVerticalAlignment: Text.AlignTop
+
+								KeyboardModeIndicatorMD3 {id: rusBlueModeIndicator}
+							}
+
+							KeyboardButtonMD3 {
+								backgroundColor: keyboard.redButtonColor
+								text: qsTr("ЛАТ")
+								textVerticalAlignment: Text.AlignBottom
+
+								KeyboardModeIndicatorMD3 {id: latRedModeIndicator}
+							}
+
+							KeyboardButtonMD3 {
+								backgroundColor: keyboard.blueButtonColor
+								text: qsTr("ЛАТ")
+								textVerticalAlignment: Text.AlignBottom
+
+								KeyboardModeIndicatorMD3 {id: latBlueModeIndicator}
+							}
+
+							KeyboardButtonMD3 {
+								textVerticalAlignment: Text.AlignTop
+								text: qsTr("ЦИФ")
+
+								KeyboardModeIndicatorMD3 {
+									id: digitsModeIndicator
+									isSelected: true
+								}
+							}
 						}
+					}
 
-						KeyboardButtonMD3 {
-							backgroundColor: keyboard.blueButtonColor
-							text: qsTr("ЛАТ")
-							textVerticalAlignment: Text.AlignBottom
+					Item {
+						implicitWidth: defaultMargin
+					}
 
-							KeyboardModeIndicatorMD3 {id: latBlueModeIndicator}
+					Rectangle {
+						implicitWidth: numbersSymbolsKeyboardSectionLayout.implicitWidth + 2 * defaultMargin
+						implicitHeight: numbersSymbolsKeyboardSectionLayout.implicitHeight + 2 * defaultMargin
+						color: "transparent"
+						radius: keyboard.sectionRadius
+						border.width: keyboard.borderWidthSection
+						border.color: "black"
+
+						GridLayout {
+							id: numbersSymbolsKeyboardSectionLayout
+							rows: 5
+							columns: 4
+
+							anchors.fill: parent
+							anchors.margins: defaultMargin
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("А"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("Б"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr("("); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("A"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("B"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("В"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("Г"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr(")"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("C"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("D"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("Д"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("Е"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr("<"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("E"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("F"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("Ж"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("З"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr(">"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("G"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("H"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("И"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("й"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr("+"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("I"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("J"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("К"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("Л"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr("7"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("K"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("L"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("М"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("Н"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr("8"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("M"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("N"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("О"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("П"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr("9"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("O"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("P"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("Р"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("С"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr("/"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("Q"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("R"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("Т"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("У"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr("4"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("С"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("Т"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("Ф"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("Ч"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr("5"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("U"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("V"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("Ц"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("Ч"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr("6"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("W"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("X"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("Ш"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("Щ"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr("*"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("Y"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("Z"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("Ъ"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("Ы"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr("1"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("("); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr(")"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("Ь"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("Э"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr("2"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("!"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("?"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								contentItem: GridLayout {
+									rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr("Ю"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("Я"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
+	                Text {text: qsTr("3"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("."); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr(";"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+							}
+
+							KeyboardButtonMD3 {
+	              contentItem: GridLayout {
+	                rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr(""); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("="); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("/"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("\\"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+	            }
+
+	            KeyboardButtonMD3 {
+	              contentItem: GridLayout {
+	                rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr(""); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("0"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("@"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("*"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+	            }
+
+	            KeyboardButtonMD3 {
+	              contentItem: GridLayout {
+	                rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr(""); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr(","); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("\""); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("\""); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+	            }
+
+	            KeyboardButtonMD3 {
+	              contentItem: GridLayout {
+	                rowSpacing: 0
+									columnSpacing: 0
+
+	                Text {text: qsTr(":"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
+	                Text {text: qsTr("-"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
+	                Text {text: qsTr("%"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
+	                Text {text: qsTr("&"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
+	              }
+	            }
 						}
+					}
 
-						KeyboardButtonMD3 {
-							textVerticalAlignment: Text.AlignTop
-							text: qsTr("ЦИФ")
+					Item {
+						implicitWidth: defaultMargin
+					}
 
-							KeyboardModeIndicatorMD3 {
-								id: digitsModeIndicator
-								isSelected: true
+					Rectangle {
+						implicitWidth: navigationKeyboardSectionLayout.implicitWidth + 2 * defaultMargin
+						implicitHeight: navigationKeyboardSectionLayout.implicitHeight + 2 * defaultMargin
+						color: "transparent"
+						radius: keyboard.sectionRadius
+						border.width: keyboard.borderWidthSection
+						border.color: "black"
+
+						GridLayout {
+							id: navigationKeyboardSectionLayout
+							rows: 5
+							columns: 3
+
+							anchors.fill: parent
+							anchors.margins: defaultMargin
+
+							KeyboardButtonMD3 {
+								Image {
+	                anchors.fill: parent
+	                anchors.margins: 16
+	                source: "../resources/clockwise.png"
+	                mipmap: true
+	              }
+							}
+							KeyboardButtonMD3 {text: qsTr("Page\nUp")}
+							KeyboardButtonMD3 {
+								Image {
+	                anchors.fill: parent
+	                anchors.margins: 16
+	                source: "../resources/unclockwise.png"
+	                mipmap: true
+	              }
+							}
+							KeyboardButtonMD3 {text: qsTr("BS")}
+							KeyboardButtonMD3 {text: qsTr("Page\nDown")}
+							KeyboardButtonMD3 {text: qsTr("DEL")}
+							KeyboardButtonMD3 {
+								Image {
+	                anchors.fill: parent
+	                anchors.margins: 16
+	                source: "../resources/left_arrow.png"
+	                mipmap: true
+	              }
+							}
+							KeyboardButtonMD3 {
+								Image {
+	                anchors.fill: parent
+	                anchors.margins: 16
+	                source: "../resources/up_arrow.png"
+	                mipmap: true
+	              }
+	            }
+							KeyboardButtonMD3 {
+								Image {
+	                anchors.fill: parent
+	                anchors.margins: 16
+	                source: "../resources/right_arrow.png"
+	                mipmap: true
+	              }
+							}
+							KeyboardButtonMD3 {text: qsTr("SPACE")}
+							KeyboardButtonMD3 {
+								Image {
+	                anchors.fill: parent
+	                anchors.margins: 16
+	                source: "../resources/down_arrow.png"
+	                mipmap: true
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								text: qsTr("ENTER")
+								Layout.rowSpan: 2
+								Layout.fillHeight: true
+
+								contentItem: Text {
+	                horizontalAlignment: Text.AlignHCenter
+	                verticalAlignment: Text.AlignTop
+	                text: parent.text
+	                color: "#000"
+	              }
+
+	              background: Rectangle {
+	                anchors.fill: parent
+	                implicitWidth: 64
+	                implicitHeight: implicitWidth
+	                radius: 8
+	                border.color: "#000"
+	                border.width: 4
+	                color: "#aeada8"
+
+	                Row {
+	                  anchors.centerIn: parent
+	                  spacing: 10
+	                  Repeater {
+	                      model: 3
+	                      Rectangle {width: 10; height: 2; color: "#000"}
+	                  }
+	                }
+
+	                MouseArea {
+								    anchors.fill: parent
+								    hoverEnabled: true
+								    onEntered: parent.color = Qt.darker("#aeada8", 1.5)
+								    onExited: parent.color = "#aeada8"
+								  }
+	              }
+							}
+
+							KeyboardButtonMD3 {
+								text: qsTr("ENTER")
+								Layout.columnSpan: 2
+								Layout.fillWidth: true
+								contentItem: Text {
+		              horizontalAlignment: Text.AlignLeft
+	                verticalAlignment: Text.AlignVCenter
+	                text: parent.text
+	                color: "#000"
+	              }
+
+	              background: Rectangle {
+	                anchors.fill: parent
+	                implicitWidth: 64
+	                implicitHeight: implicitWidth
+	                radius: 8
+	                border.color: "#000"
+	                border.width: 4
+	                color: "#aeada8"
+
+	                Column {
+	                  anchors.centerIn: parent
+	                  spacing: 10
+	                  Repeater {
+	                    model: 3
+	                    Rectangle {width: 2; height: 10; color: "#000"}
+	                  }
+	                }
+
+	                MouseArea {
+								    anchors.fill: parent
+								    hoverEnabled: true
+								    onEntered: parent.color = Qt.darker("#aeada8", 1.5)
+								    onExited: parent.color = "#aeada8"
+								  }
+	              }
 							}
 						}
 					}
 				}
+			}
 
-				Item {
-					implicitWidth: defaultMargin
-				}
+      Rectangle {
+				implicitWidth: selectModeSmallKeyboardLayout.implicitWidth + 2 * defaultMargin
+				implicitHeight: selectModeSmallKeyboardLayout.implicitHeight + 2 * defaultMargin
+				color: "transparent"
+				radius: 8
+				border.width: 3
+				border.color: "black"
 
-				Rectangle {
-					implicitWidth: numbersSymbolsKeyboardSectionLayout.implicitWidth + 2 * defaultMargin
-					implicitHeight: numbersSymbolsKeyboardSectionLayout.implicitHeight + 2 * defaultMargin
-					color: "transparent"
-					radius: keyboard.sectionRadius
-					border.width: keyboard.borderWidthSection
-					border.color: "black"
+				GridLayout {
+					id: selectModeSmallKeyboardLayout
 
-					GridLayout {
-						id: numbersSymbolsKeyboardSectionLayout
-						rows: 5
-						columns: 4
+					anchors.fill: parent
+					anchors.margins: defaultMargin
 
-						anchors.fill: parent
-						anchors.margins: defaultMargin
+		      rows: 2
+		      columns: 3
 
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
+		      KeyboardButtonMD3 {
+			      backgroundColor: keyboard.redButtonColor
+			      text: qsTr("РУС")
+		      }
 
-                Text {text: qsTr("А"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("Б"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr("("); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("A"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("B"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
+		      KeyboardButtonMD3 {
+		        backgroundColor: keyboard.blueButtonColor
+		        text: qsTr("РУС")
+		      }
 
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
+		      KeyboardButtonMD3 {
+			      backgroundColor: keyboard.redButtonColor
+			      Layout.row: 1
+			      text: qsTr("ЛАТ")
+		      }
 
-                Text {text: qsTr("В"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("Г"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr(")"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("C"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("D"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
+		      KeyboardButtonMD3 {
+			      backgroundColor: keyboard.blueButtonColor
+			      text: qsTr("ЛАТ")
+		      }
 
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr("Д"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("Е"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr("<"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("E"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("F"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
-
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr("Ж"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("З"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr(">"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("G"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("H"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
-
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr("И"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("й"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr("+"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("I"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("J"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
-
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr("К"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("Л"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr("7"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("K"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("L"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
-
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr("М"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("Н"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr("8"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("M"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("N"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
-
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr("О"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("П"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr("9"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("O"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("P"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
-
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr("Р"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("С"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr("/"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("Q"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("R"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
-
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr("Т"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("У"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr("4"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("С"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("Т"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
-
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr("Ф"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("Ч"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr("5"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("U"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("V"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
-
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr("Ц"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("Ч"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr("6"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("W"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("X"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
-
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr("Ш"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("Щ"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr("*"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("Y"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("Z"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
-
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr("Ъ"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("Ы"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr("1"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("("); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr(")"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
-
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr("Ь"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("Э"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr("2"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("!"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("?"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
-
-						KeyboardButtonMD3 {
-							contentItem: GridLayout {
-								rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr("Ю"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("Я"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 0; Layout.column: 1}
-                Text {text: qsTr("3"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("."); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr(";"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-						}
-
-						KeyboardButtonMD3 {
-              contentItem: GridLayout {
-                rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr(""); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("="); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("/"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("\\"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-            }
-
-            KeyboardButtonMD3 {
-              contentItem: GridLayout {
-                rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr(""); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("0"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("@"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("*"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-            }
-
-            KeyboardButtonMD3 {
-              contentItem: GridLayout {
-                rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr(""); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr(","); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("\""); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("\""); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-            }
-
-            KeyboardButtonMD3 {
-              contentItem: GridLayout {
-                rowSpacing: 0
-								columnSpacing: 0
-
-                Text {text: qsTr(":"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 0; Layout.column: 0}
-                Text {text: qsTr("-"); Layout.alignment: Qt.AlignCenter; color: "#000"; Layout.row: 1; Layout.column: 0; Layout.columnSpan: 2}
-                Text {text: qsTr("%"); Layout.alignment: Qt.AlignCenter; color: keyboard.redButtonColor; Layout.row: 2; Layout.column: 0}
-                Text {text: qsTr("&"); Layout.alignment: Qt.AlignCenter; color: keyboard.blueButtonColor; Layout.row: 2; Layout.column: 1}
-              }
-            }
-					}
-				}
-
-				Item {
-					implicitWidth: defaultMargin
-				}
-
-				Rectangle {
-					implicitWidth: navigationKeyboardSectionLayout.implicitWidth + 2 * defaultMargin
-					implicitHeight: navigationKeyboardSectionLayout.implicitHeight + 2 * defaultMargin
-					color: "transparent"
-					radius: keyboard.sectionRadius
-					border.width: keyboard.borderWidthSection
-					border.color: "black"
-
-					GridLayout {
-						id: navigationKeyboardSectionLayout
-						rows: 5
-						columns: 3
-
-						anchors.fill: parent
-						anchors.margins: defaultMargin
-
-						KeyboardButtonMD3 {
-							Image {
-                anchors.fill: parent
-                anchors.margins: 16
-                source: "../resources/clockwise.png"
-                mipmap: true
-              }
-						}
-						KeyboardButtonMD3 {text: qsTr("Page\nUp")}
-						KeyboardButtonMD3 {
-							Image {
-                anchors.fill: parent
-                anchors.margins: 16
-                source: "../resources/unclockwise.png"
-                mipmap: true
-              }
-						}
-						KeyboardButtonMD3 {text: qsTr("BS")}
-						KeyboardButtonMD3 {text: qsTr("Page\nDown")}
-						KeyboardButtonMD3 {text: qsTr("DEL")}
-						KeyboardButtonMD3 {
-							Image {
-                anchors.fill: parent
-                anchors.margins: 16
-                source: "../resources/left_arrow.png"
-                mipmap: true
-              }
-						}
-						KeyboardButtonMD3 {
-							Image {
-                anchors.fill: parent
-                anchors.margins: 16
-                source: "../resources/up_arrow.png"
-                mipmap: true
-              }
-            }
-						KeyboardButtonMD3 {
-							Image {
-                anchors.fill: parent
-                anchors.margins: 16
-                source: "../resources/right_arrow.png"
-                mipmap: true
-              }
-						}
-						KeyboardButtonMD3 {text: qsTr("SPACE")}
-						KeyboardButtonMD3 {
-							Image {
-                anchors.fill: parent
-                anchors.margins: 16
-                source: "../resources/down_arrow.png"
-                mipmap: true
-              }
-						}
-
-						KeyboardButtonMD3 {
-							text: qsTr("ENTER")
-							Layout.rowSpan: 2
-							Layout.fillHeight: true
-
-							contentItem: Text {
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignTop
-                text: parent.text
-                color: "#000"
-              }
-
-              background: Rectangle {
-                anchors.fill: parent
-                implicitWidth: 64
-                implicitHeight: implicitWidth
-                radius: 8
-                border.color: "#000"
-                border.width: 4
-                color: "#aeada8"
-
-                Row {
-                  anchors.centerIn: parent
-                  spacing: 10
-                  Repeater {
-                      model: 3
-                      Rectangle {width: 10; height: 2; color: "#000"}
-                  }
-                }
-
-                MouseArea {
-							    anchors.fill: parent
-							    hoverEnabled: true
-							    onEntered: parent.color = Qt.darker("#aeada8", 1.5)
-							    onExited: parent.color = "#aeada8"
-							  }
-              }
-						}
-
-						KeyboardButtonMD3 {
-							text: qsTr("ENTER")
-							Layout.columnSpan: 2
-							Layout.fillWidth: true
-							contentItem: Text {
-	              horizontalAlignment: Text.AlignLeft
-                verticalAlignment: Text.AlignVCenter
-                text: parent.text
-                color: "#000"
-              }
-
-              background: Rectangle {
-                anchors.fill: parent
-                implicitWidth: 64
-                implicitHeight: implicitWidth
-                radius: 8
-                border.color: "#000"
-                border.width: 4
-                color: "#aeada8"
-
-                Column {
-                  anchors.centerIn: parent
-                  spacing: 10
-                  Repeater {
-                    model: 3
-                    Rectangle {width: 2; height: 10; color: "#000"}
-                  }
-                }
-
-                MouseArea {
-							    anchors.fill: parent
-							    hoverEnabled: true
-							    onEntered: parent.color = Qt.darker("#aeada8", 1.5)
-							    onExited: parent.color = "#aeada8"
-							  }
-              }
-						}
-					}
-				}
+		      KeyboardButtonMD3 {
+		        text: qsTr("ЦИФ")
+		      }
+		    }
 			}
     }
-
-    Rectangle {
-			implicitWidth: selectModeSmallKeyboardLayout.implicitWidth + 2 * defaultMargin
-			implicitHeight: selectModeSmallKeyboardLayout.implicitHeight + 2 * defaultMargin
-			color: "transparent"
-			radius: 8
-			border.width: 3
-			border.color: "black"
-
-			GridLayout {
-				id: selectModeSmallKeyboardLayout
-
-				anchors.fill: parent
-				anchors.margins: defaultMargin
-
-	      rows: 2
-	      columns: 3
-
-	      KeyboardButtonMD3 {
-		      backgroundColor: keyboard.redButtonColor
-		      text: qsTr("РУС")
-	      }
-
-	      KeyboardButtonMD3 {
-	        backgroundColor: keyboard.blueButtonColor
-	        text: qsTr("РУС")
-	      }
-
-	      KeyboardButtonMD3 {
-		      backgroundColor: keyboard.redButtonColor
-		      Layout.row: 1
-		      text: qsTr("ЛАТ")
-	      }
-
-	      KeyboardButtonMD3 {
-		      backgroundColor: keyboard.blueButtonColor
-		      text: qsTr("ЛАТ")
-	      }
-
-	      KeyboardButtonMD3 {
-	        text: qsTr("ЦИФ")
-	      }
-	    }
-		}
   }
 }
