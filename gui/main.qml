@@ -12,6 +12,8 @@ Window {
 	title: qsTr("MD3Desk")
 	visible: true
 
+  property double startTime: 0
+
 	property int defaultMargin: 8
 
 	ColumnLayout {
@@ -62,8 +64,6 @@ Window {
 
 	  visible: false
 
-	  property double startTime: 0
-
 	  x: Screen.width / 2 - minimumWidth / 2
 	  y: Screen.height / 2 - minimumHeight / 2
 
@@ -80,9 +80,21 @@ Window {
 	  Connections {
 	    target: norm
 
+	    function toHHMMSS(sec_num) {
+		    var hours   = Math.floor(sec_num / 3600);
+		    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+		    var seconds = Math.floor(sec_num - (hours * 3600) - (minutes * 60));
+
+		    if (hours   < 10) {hours   = "0"+hours;}
+		    if (minutes < 10) {minutes = "0"+minutes;}
+		    if (seconds < 10) {seconds = "0"+seconds;}
+		    return hours+':'+minutes+':'+seconds;
+			}
+
 	    function onPassed() {
-	      let delta = new Date().getTime() - startTime
-	      dialog.text = "Норматив успешно завершен за " + delta + " с"
+	      let delta = (new Date().getTime() - startTime) / 1000
+
+	      dialog.text = "Норматив успешно завершен за " + toHHMMSS(delta)
 
 	      dialog.visible = true
 
