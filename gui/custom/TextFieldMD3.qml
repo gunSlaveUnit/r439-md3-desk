@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 
 TextField {
-  font.pointSize: 10
+  font.pointSize: 14
   color: "#d4a009"
 
   background: Rectangle {
