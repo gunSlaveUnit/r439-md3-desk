@@ -246,49 +246,51 @@ Window {
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРМ:")}
 		            ComboBoxMD3 {
 		              Layout.fillWidth: true
-		              model: ["Спец. ГС в ПР", "Спец. ГС в ГС", "ОСБ"]
+		              model: ["Спец. ГС", "Спец. ГС и ГС"]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Код Баркера ПРМ:")}
 		            ComboBoxMD3 {
 		              Layout.fillWidth: true
-		              model: ["Откл.", "Вкл."]
+		              model: ["Вкл.", "Откл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Инверсия кода Баркера:")}
 		            ComboBoxMD3 {
 		              Layout.fillWidth: true
-		              model: ["Откл.", "Вкл."]
+		              model: ["Вкл.", "Откл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ДСЧ:")}
 		            ComboBoxMD3 {
 		              Layout.fillWidth: true
-		              model: ["Откл.", "Вкл."]
+		              model: ["Вкл.", "Откл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер ключа ПРМ:")}
 		            ComboBoxMD3 {
 		              Layout.fillWidth: true
-		              model: ["0", "1"]
+		              model: ["0", "1", "2", "3", "4", "5", "6",
+		              "7", "8", "9", "10", "11", "12",
+		               "13", "14", "15"]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер подключа ПРМ:")}
 		            ComboBoxMD3 {
 		              Layout.fillWidth: true
-		              model: ["0", "1", "2", "3", "4", "5", "6", "7"]
+		              model: ["1", "2", "3", "4", "5", "6"]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Полоса поиска ПРМ, кГц:")}
 		            ComboBoxMD3 {
 		              Layout.fillWidth: true
-		              model: ["+-1", "+-4", "+-8", "+-10", "+-100"]
+		              model: ["+-1", "+-4", "+-8"]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРМ:")}
 		            ComboBoxMD3 {
 		              Layout.fillWidth: true
-		              model: ["Ft 1", "Ft 2"]
+		              model: ["Fт1", "Fт2"]
 		            }
 		          }
 
@@ -310,19 +312,36 @@ Window {
 		            columns: 2
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРД:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["Спец. ГС", "Спец. ГС и ГС"]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Код Баркера ПРД:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["Вкл.", "Откл."]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер ключа ПРД:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["0", "1", "2", "3", "4", "5", "6",
+		              "7", "8", "9", "10", "11", "12",
+		               "13", "14", "15"]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер подключа ПРД:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["1", "2", "3", "4", "5", "6"]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРД:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["Fт1", "Fт2"]
+		            }
 		          }
 
 		          Item {Layout.fillHeight: true}
@@ -353,11 +372,14 @@ Window {
 		              enabled: !changeKLU3Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: klu.test_check
-									model: ["Откл."]
+									model: ["Вкл.", "Откл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим теста:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["ПР", "ОСБ"]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ПРД 70:")}
 		            ComboBoxMD3 {
@@ -365,17 +387,26 @@ Window {
 		              enabled: !changeKLU3Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: klu.prd70
-									model: ["Откл."]
+									model: ["Вкл.", "Откл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сброс счетчика ошибок:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["Вкл.", "Откл."]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный 1:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["Вкл.", "Откл."]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный 2:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["Вкл.", "Откл."]
+		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД:")}
 		            ComboBoxMD3 {
@@ -383,11 +414,23 @@ Window {
 		              enabled: !changeKLU3Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: klu.prd_signal_type
-									model: ["УП (ППРЧ)"]
+									model: [
+										"УП (ППРЧ)",
+										"ШПС 1",
+										"ШПС 2",
+										"ШПС 3",
+										"Несущая 1",
+										"Несущая 2",
+										"Несущая 3",
+										"Несущая 4"
+									]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ШПС ПРД:")}
-		            ComboBoxMD3 {Layout.fillWidth: true}
+		            ComboBoxMD3 {
+		              Layout.fillWidth: true
+		              model: ["Fт1", "Fт2"]
+		            }
 		          }
 
 		          Item {Layout.fillHeight: true}
@@ -450,7 +493,7 @@ Window {
 		              enabled: !changeDMDUZOZM1Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.prm_signal_type
-									model: ["УП", "ШПС"]
+									model: ["ШПС", "УП"]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Декодер:")}
@@ -459,7 +502,14 @@ Window {
 		              enabled: !changeDMDUZOZM1Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.decoder
-									model: ["K=5; R=1/2", "Откл."]
+									model: [
+										"K=5; R=1/2",
+										"K=7; R=1/2",
+										"K=7; R=3/4",
+										"K=7; R=3/4 инв.",
+										"Откл.",
+										""
+									]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ДМД, кбит/с:")}
@@ -469,9 +519,26 @@ Window {
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.dmd_speed
 									model: [
-										"1.2", "1.5", "2.4", "3", "4.8", "6",
-										"9.6","12",	"24",	"30",	"48",	"60",	"96", "120",
-										"144","180","240","300","480","600"
+										"1.5",
+										"3",
+										"6",
+										"12",
+										"30",
+										"60",
+										"120",
+										"180",
+										"300",
+										"600",
+										"1.2",
+										"2.4",
+										"4.8",
+										"9.6",
+										"24",
+										"48",
+										"96",
+										"144",
+										"240",
+										"480",
 									]
 		            }
 
@@ -481,13 +548,13 @@ Window {
 		              enabled: !changeDMDUZOZM1Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.dmd_mode
-									model: ["Работа"]
+									model: ["Работа", "Проверка"]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ПРД УЗОЗМ, кбит/с:")}
 		            ComboBoxMD3 {
 		              id: dmdUZOZMPRDUZOZMSpeed
-		              enabled: !changeDMDUZOZM1Button.visible
+		              enabled: false
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.prd_uzozm_speed
 									model: ["1.5 ОФТ"]
@@ -499,7 +566,7 @@ Window {
 		              enabled: !changeDMDUZOZM1Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.uzozm_mode
-									model: ["Работа"]
+									model: ["Работа", "Проверка"]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный канал в ФТ4:")}
@@ -508,7 +575,7 @@ Window {
 		              enabled: !changeDMDUZOZM1Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.service_channel_ft4
-									model: ["1.2 кБод"]
+									model: ["1.2 кБод", "4.8 кБод"]
 		            }
 		          }
 
@@ -580,7 +647,7 @@ Window {
 		              enabled: !changeDMDUZOZM2Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.filter_number
-									model: ["Не задан", "1", "2", "3", "4", "5"]
+									model: ["1", "2", "3", "4", "5", "Не задан"]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("АРУ:")}
@@ -589,7 +656,7 @@ Window {
 		              enabled: !changeDMDUZOZM2Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.aru
-									model: ["АРУ"]
+									model: ["АРУ", "РРУ"]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Автопоиск:")}
@@ -598,7 +665,7 @@ Window {
 		              enabled: !changeDMDUZOZM2Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.auto_search
-									model: ["Вкл."]
+									model: ["Вкл.", "Откл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("АСЧ:")}
@@ -607,7 +674,7 @@ Window {
 		              enabled: !changeDMDUZOZM2Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.asch
-									model: ["Откл.", "Вкл."]
+									model: ["Вкл.", "Откл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Диф. декодер:")}
@@ -625,7 +692,7 @@ Window {
 		              enabled: !changeDMDUZOZM2Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.dmd_band
-									model: ["Широкая"]
+									model: ["Узкая", "Широкая"]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Корректор:")}
@@ -634,7 +701,7 @@ Window {
 		              enabled: !changeDMDUZOZM2Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: dmd_uzozm.corrector
-									model: ["Откл."]
+									model: ["Вкл.", "Откл."]
 		            }
 		          }
 
@@ -716,7 +783,9 @@ Window {
 		              enabled: !changeTractsPRMPRDButton1.visible
 		              Layout.fillWidth: true
 		              currentIndex: tracts_prm_prd.receive_subband
-									model: ["1"]
+									model: [ // TODO: [1; 46]
+										"1"
+									]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
@@ -813,7 +882,11 @@ Window {
 		              enabled: !changeTractsPRMPRDButton2.visible
 		              Layout.fillWidth: true
 		              currentIndex: tracts_prm_prd.radio_signal
-									model: ["УП"]
+									model: [
+										"УП",
+										"ППРЧ", // TODO: if this next value is empty
+										"ШПС"
+									]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ОФТ:")}
@@ -822,7 +895,12 @@ Window {
 		              enabled: !changeTractsPRMPRDButton2.visible
 		              Layout.fillWidth: true
 		              currentIndex: tracts_prm_prd.signal_type
-									model: ["ОФТ"]
+									model: [
+										"ОФТ",
+										"K=5; R=1/2",
+										"K=7; R=1/2",
+										"K=7; R=3/4",
+									]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ЗС:")}
@@ -831,7 +909,46 @@ Window {
 		              enabled: !changeTractsPRMPRDButton2.visible
 		              Layout.fillWidth: true
 		              currentIndex: tracts_prm_prd.zs_speed
-									model: ["6.0"]
+									model: (tractsPRDPRDOFTSignalType.currentIndex === 0  || tractsPRDPRDOFTSignalType.currentIndex === 1) ? [
+										"1.5",
+										"3",
+										"6",
+										"12",
+										"30",
+										"60",
+										"1.2",
+										"2.4",
+										"4.8",
+										"9.6",
+										"48"
+									] : tractsPRDPRDOFTSignalType.currentIndex === 2 ? [
+										"16 MX",
+										"32 MX",
+										"48 MX",
+										"64 MX",
+										"64 MX",
+										"64 HDB СНС",
+										"64 HDB ПНС",
+										"128 HDB",
+										"256 HDB",
+										"144 HDB",
+										"48 RS232",
+										"64 RS232",
+										"128 RS232",
+										"144 RS232",
+									] : tractsPRDPRDOFTSignalType.currentIndex === 2 ? [
+										"64 HDB СНС",
+										"64 HDB ПНС",
+										"128 HDB",
+										"256 HDB",
+										"384 HDB",
+										"512 HDB",
+										"1024 HDB",
+										"2048 HDB",
+										"256 RS422/530",
+										"384 RS422/530",
+										"512 RS422/530",
+									] : []
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
@@ -840,7 +957,7 @@ Window {
 		              enabled: !changeTractsPRMPRDButton2.visible
 		              Layout.fillWidth: true
 		              currentIndex: tracts_prm_prd.output_u205d
-									model: ["Вкл."]
+									model: ["Вкл.", "Откл."]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
@@ -929,7 +1046,19 @@ Window {
 									enabled: !changeL807Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: l807.joint
-									model: [qsTr("Выключен")]
+									model: [
+										qsTr("Выключен"),
+										qsTr("ОЦК СН"),
+										qsTr("ОЦК ПН"),
+										qsTr("Т1"),
+										qsTr("Е1"),
+										qsTr("С1-ФЛ-КИ"),
+										qsTr("RS-232"),
+										qsTr("RS-422/530"),
+										qsTr("V-35"),
+										qsTr("RS-232 синхр."),
+										qsTr("Выключен"),
+									]
 		            }
 
 		            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Источник сигнала: ")}
@@ -938,7 +1067,7 @@ Window {
 		              enabled: !changeL807Button.visible
 		              Layout.fillWidth: true
 		              currentIndex: l807.signal_source
-									model: [qsTr("АГ-Л")]
+									model: [qsTr("Л807"), qsTr("АГ-Л")]
 		            }
 		          }
 
@@ -1031,12 +1160,11 @@ Window {
 		              enabled: !changeAGLButton.visible
 		              currentIndex: agl.zs_operating_mode
 		              model: [
-			              qsTr("Транзит ТЛФ"),
-			              qsTr("ОСБ ШПС"),
-			              qsTr("ППРЧ пакетный"),
-			              qsTr("ППРЧ непрерывный"),
+			              qsTr("ПР"),
 			              qsTr("ОСБ без ППРЧ"),
-			              qsTr("ПР")
+			              qsTr("ППРЧ непрерывный"),
+			              qsTr("ОСБ ШПС"),
+			              qsTr("Транзит ТЛФ")
 		              ]
 		            }
 
@@ -1049,15 +1177,15 @@ Window {
 		              model: [
 		                qsTr("Нет ГС"),
 		                qsTr("1.5"),
-		                qsTr("3.0"),
-		                qsTr("6.0"),
-		                qsTr("12.0"),
-		                qsTr("30.0"),
-		                qsTr("60.0"),
-		                qsTr("120.0"),
-		                qsTr("180.0"),
-		                qsTr("300.0"),
-		                qsTr("600.0")
+		                qsTr("3"),
+		                qsTr("6"),
+		                qsTr("12"),
+		                qsTr("30"),
+		                qsTr("60"),
+		                qsTr("120"),
+		                qsTr("180"),
+		                qsTr("300"),
+		                qsTr("600")
 		              ]
 		            }
 
@@ -1070,9 +1198,9 @@ Window {
 		              model: [
 		                qsTr("Нет ГС"),
 		                qsTr("1.5"),
-		                qsTr("3.0"),
-		                qsTr("6.0"),
-		                qsTr("12.0")
+		                qsTr("3"),
+		                qsTr("6"),
+		                qsTr("12")
 		              ]
 		            }
 
@@ -1151,7 +1279,12 @@ Window {
 		                Layout.fillWidth: true
 		                enabled: !changeTLF1Button.visible
 		                currentIndex: tlf1.signal_prm_type
-		                model: ["Канал не задан", "Закреп. непрер."]
+		                model: [
+		                  "Канал не задан",
+		                  "РАТС", // TODO: this changes one field
+		                  "Закреп. непрер.",
+		                  "Из спец. ГС"
+	                  ]
 		              }
 
 		              DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость")}
@@ -1160,7 +1293,12 @@ Window {
 		                Layout.fillWidth: true
 		                enabled: !changeTLF1Button.visible
 		                currentIndex: tlf1.prm_speed
-		                model: ["4.8", "9.6"]
+		                model: [
+		                  "9.6",
+		                  "4.8",
+		                  "2.4",
+		                  "1.2"
+	                  ]
 		              }
 
 		              DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
@@ -1171,7 +1309,7 @@ Window {
 		                  Layout.fillWidth: true
 		                  enabled: !changeTLF1Button.visible
 		                  currentIndex: tlf1.prm_address_one
-		                  model: ["0"]
+		                  model: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 		                }
 
 		                ComboBoxMD3 {
@@ -1179,7 +1317,7 @@ Window {
 		                  Layout.fillWidth: true
 		                  enabled: !changeTLF1Button.visible
 		                  currentIndex: tlf1.prm_address_two
-		                  model: ["0"]
+		                  model: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 		                }
 
 		                ComboBoxMD3 {
@@ -1187,7 +1325,7 @@ Window {
 		                  Layout.fillWidth: true
 		                  enabled: !changeTLF1Button.visible
 		                  currentIndex: tlf1.prm_address_three
-		                  model: ["", "1"]
+		                  model: ["1", "2", "3", "4"]
 		                }
 		              }
 		            }
@@ -1199,7 +1337,11 @@ Window {
 		                Layout.fillWidth: true
 		                enabled: !changeTLF1Button.visible
 		                currentIndex: tlf1.signal_prd_type
-		                model: ["Канал не задан", "Закреп. непрер."]
+		                model: [
+		                  "Канал не задан",
+		                  "РАТС",
+	                    "Закреп. непрер."
+	                  ]
 		              }
 
 		              DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость")}
@@ -1208,7 +1350,15 @@ Window {
 		                Layout.fillWidth: true
 		                enabled: !changeTLF1Button.visible
 		                currentIndex: tlf1.prd_speed
-		                model: ["4.8", "9.6"]
+		                model: [
+		                  "9.6",
+		                  "4.8",
+		                  "2.4",
+		                  "1.2",
+		                  "1.2 СБД",
+		                  "1.5",
+		                  "3",
+	                  ]
 		              }
 
 		              DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
@@ -1219,7 +1369,7 @@ Window {
 		                  Layout.fillWidth: true
 		                  enabled: !changeTLF1Button.visible
 		                  currentIndex: tlf1.prd_address_one
-		                  model: ["0"]
+		                  model: ["0", "1", "2"]
 		                }
 
 		                ComboBoxMD3 {
@@ -1227,7 +1377,7 @@ Window {
 		                  Layout.fillWidth: true
 		                  enabled: !changeTLF1Button.visible
 		                  currentIndex: tlf1.prd_address_two
-		                  model: ["", "1"]
+		                  model: ["1", "2", "3", "4"]
 		                }
 		              }
 		            }
