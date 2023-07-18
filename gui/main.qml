@@ -78,7 +78,7 @@ Window {
 	  color: "#969392"
 
 	  Connections {
-	    target: norm
+	    target: checker
 
 	    function toHHMMSS(sec_num) {
 		    var hours   = Math.floor(sec_num / 3600);
@@ -454,7 +454,7 @@ Window {
 
 		                changeKLU3Button.visible = true
 
-		                norm.check()
+		                checker.check()
 		              }
 		            }
 
@@ -603,7 +603,7 @@ Window {
 
 		                changeDMDUZOZM1Button.visible = true
 
-		                norm.check()
+		                checker.check()
 		              }
 		            }
 
@@ -729,7 +729,7 @@ Window {
 
 		                changeDMDUZOZM2Button.visible = true
 
-		                norm.check()
+		                checker.check()
 		              }
 		            }
 
@@ -838,7 +838,7 @@ Window {
 
 		                changeTractsPRMPRDButton1.visible = true
 
-		                norm.check()
+		                checker.check()
 		              }
 		            }
 
@@ -855,7 +855,7 @@ Window {
 
 		                changeTractsPRMPRDButton1.visible = true
 
-		                norm.check()
+		                checker.check()
 		              }
 		            }
 
@@ -1000,7 +1000,7 @@ Window {
 
 		                changeTractsPRMPRDButton2.visible = true
 
-		                norm.check()
+		                checker.check()
 		              }
 		            }
 
@@ -1090,7 +1090,7 @@ Window {
 
 		                changeL807Button.visible = true
 
-		                norm.check()
+		                checker.check()
 		              }
 		            }
 
@@ -1239,7 +1239,7 @@ Window {
 
 		                changeAGLButton.visible = true
 
-		                norm.check()
+		                checker.check()
 		              }
 		            }
 
@@ -1409,7 +1409,7 @@ Window {
 
 		                changeTLF1Button.visible = true
 
-		                norm.check()
+		                checker.check()
 		              }
 		            }
 
@@ -1524,7 +1524,7 @@ Window {
 
 		                changePlumeButton.visible = true
 
-		                norm.check()
+		                checker.check()
 		              }
 		            }
 
