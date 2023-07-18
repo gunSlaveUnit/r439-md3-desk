@@ -1,6 +1,5 @@
 import sys
 
-import yaml
 from PySide6.QtCore import Signal, Slot, QObject
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
@@ -14,11 +13,20 @@ from logic.TLF1 import TLF1
 from logic.TractsPRMPRD import TractsPRMPRD
 
 
-class Norm(QObject):
-    def __init__(self, config=None):
-        super().__init__()
+class Norm:
+    def check(self):
+        raise NotImplementedError()
 
-        self.config = config
+
+class SmallPlumeNorm(Norm):
+    def check(self):
+        return l807.signal_source == 0
+
+
+class NormChecker(QObject):
+    def __init__(self, norm: Norm):
+        super().__init__()
+        self._norm = norm
 
     @Signal
     def passed(self):
@@ -26,15 +34,7 @@ class Norm(QObject):
 
     @Slot()
     def check(self):
-        is_standard_passed = True
-        for device_name, state in self.config.items():
-            device = engine.rootContext().contextProperty(device_name)
-            for setting_item in state:
-                for setting_name in setting_item:
-                    if getattr(device, setting_name) != setting_item[setting_name]:
-                        is_standard_passed = False
-
-        if is_standard_passed:
+        if self._norm.check():
             self.passed.emit()
 
 
@@ -62,13 +62,9 @@ engine.rootContext().setContextProperty("tracts_prm_prd", tracts_prm_prd)
 plume = Plume()
 engine.rootContext().setContextProperty("plume", plume)
 
-norms_file = open("norms.yaml", "r")
-norms = yaml.safe_load(norms_file)
-current_norm_name = 'small_plume'
-current_norm = norms[current_norm_name]
-
-norm = Norm(current_norm)
-engine.rootContext().setContextProperty("norm", norm)
+current_norm = SmallPlumeNorm()
+checker = NormChecker(current_norm)
+engine.rootContext().setContextProperty("checker", checker)
 
 start_location_filename = "gui/main.qml"
 engine.load(start_location_filename)
