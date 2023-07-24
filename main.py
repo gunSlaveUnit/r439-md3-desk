@@ -5,6 +5,8 @@ from PySide6.QtQml import QQmlApplicationEngine
 
 from devices import l807, agl, tlf1, klu, dmd_uzozm, tracts_prm_prd, plume
 from norms.checker import NormChecker
+from norms.small_plume.components import L807SmallPlumeComponent, AGLSmallPlumeComponent, TLF1SmallPlumeComponent, \
+    KLUSmallPlumeComponent, DMDUZOZMSmallPlumeComponent, TractsPRMPRDSmallPlumeComponent, PlumeSmallPlumeComponent
 from norms.small_plume.small_plume import SmallPlumeNorm
 
 
@@ -24,7 +26,17 @@ if __name__ == '__main__':
 
     register_devices(engine)
 
-    current_norm = SmallPlumeNorm()
+    current_norm = SmallPlumeNorm(
+        [
+            L807SmallPlumeComponent(l807),
+            AGLSmallPlumeComponent(agl),
+            TLF1SmallPlumeComponent(tlf1),
+            KLUSmallPlumeComponent(klu),
+            DMDUZOZMSmallPlumeComponent(dmd_uzozm),
+            TractsPRMPRDSmallPlumeComponent(tracts_prm_prd),
+            PlumeSmallPlumeComponent(plume)
+        ]
+    )
     checker = NormChecker(current_norm)
     engine.rootContext().setContextProperty("checker", checker)
 
