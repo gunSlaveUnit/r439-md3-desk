@@ -4,13 +4,7 @@ from PySide6.QtCore import Signal, Slot, QObject
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
 
-from logic.AGL import AGL
-from logic.DMDUZOZM import DMDUZOZM
-from logic.KLU import KLU
-from logic.L807 import L807
-from logic.Plume import Plume
-from logic.TLF1 import TLF1
-from logic.TractsPRMPRD import TractsPRMPRD
+from devices import l807, agl, tlf1, klu, dmd_uzozm, tracts_prm_prd, plume
 
 
 class Norm:
@@ -64,7 +58,7 @@ class SmallPlumeNorm(Norm):
             and plume.shift_generator == 1 \
             and plume.amplifier == 0 \
             and plume.output_u205d == 1 \
-            and plume.prd_wave_number == 65432 \
+            and plume.prd_wave_number == 65432
 
 
 class NormChecker(QObject):
@@ -82,35 +76,27 @@ class NormChecker(QObject):
             self.passed.emit()
 
 
-app = QGuiApplication(sys.argv)
-engine = QQmlApplicationEngine()
+def register_devices(app_engine: QQmlApplicationEngine):
+    app_engine.rootContext().setContextProperty("l807", l807)
+    app_engine.rootContext().setContextProperty("agl", agl)
+    app_engine.rootContext().setContextProperty("tlf1", tlf1)
+    app_engine.rootContext().setContextProperty("klu", klu)
+    app_engine.rootContext().setContextProperty("dmd_uzozm", dmd_uzozm)
+    app_engine.rootContext().setContextProperty("tracts_prm_prd", tracts_prm_prd)
+    app_engine.rootContext().setContextProperty("plume", plume)
 
-l807 = L807()
-engine.rootContext().setContextProperty("l807", l807)
 
-agl = AGL()
-engine.rootContext().setContextProperty("agl", agl)
+if __name__ == '__main__':
+    app = QGuiApplication(sys.argv)
+    engine = QQmlApplicationEngine()
 
-tlf1 = TLF1()
-engine.rootContext().setContextProperty("tlf1", tlf1)
+    register_devices(engine)
 
-klu = KLU()
-engine.rootContext().setContextProperty("klu", klu)
+    current_norm = SmallPlumeNorm()
+    checker = NormChecker(current_norm)
+    engine.rootContext().setContextProperty("checker", checker)
 
-dmd_uzozm = DMDUZOZM()
-engine.rootContext().setContextProperty("dmd_uzozm", dmd_uzozm)
+    start_location_filename = "gui/main.qml"
+    engine.load(start_location_filename)
 
-tracts_prm_prd = TractsPRMPRD()
-engine.rootContext().setContextProperty("tracts_prm_prd", tracts_prm_prd)
-
-plume = Plume()
-engine.rootContext().setContextProperty("plume", plume)
-
-current_norm = SmallPlumeNorm()
-checker = NormChecker(current_norm)
-engine.rootContext().setContextProperty("checker", checker)
-
-start_location_filename = "gui/main.qml"
-engine.load(start_location_filename)
-
-app.exec()
+    app.exec()
