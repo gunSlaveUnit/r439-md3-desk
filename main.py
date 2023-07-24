@@ -5,7 +5,7 @@ from PySide6.QtQml import QQmlApplicationEngine
 
 from devices import l807, agl, tlf1, klu, dmd_uzozm, tracts_prm_prd, plume
 from norms.checker import NormChecker
-from norms.norms import SmallPlumeNorm
+from norms.small_plume.small_plume import SmallPlumeNorm
 
 
 def register_devices(app_engine: QQmlApplicationEngine):

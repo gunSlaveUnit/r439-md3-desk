@@ -1,9 +1,5 @@
 from devices import l807, agl, tlf1, klu, dmd_uzozm, tracts_prm_prd, plume
-
-
-class Norm:
-    def check(self):
-        raise NotImplementedError()
+from norms.norm import Norm
 
 
 class SmallPlumeNorm(Norm):

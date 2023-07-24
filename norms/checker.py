@@ -1,6 +1,6 @@
 from PySide6.QtCore import QObject, Signal, Slot
 
-from norms.norms import Norm
+from norms.norm import Norm
 
 
 class NormChecker(QObject):
