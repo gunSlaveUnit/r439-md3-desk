@@ -9,7 +9,7 @@ import "./custom"
 Window {
 	minimumWidth: menu.implicitWidth + 2 * defaultMargin
 	minimumHeight: menu.implicitHeight + 2 * defaultMargin
-	title: qsTr("MD3Desk")
+	title: qsTr("MD3Desk - Station")
 	visible: true
 
   property double startTime: 0
