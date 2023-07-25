@@ -9,6 +9,8 @@ from norms.small_plume.components import L807SmallPlumeComponent, AGLSmallPlumeC
     KLUSmallPlumeComponent, DMDUZOZMSmallPlumeComponent, TractsPRMPRDSmallPlumeComponent, PlumeSmallPlumeComponent
 from norms.small_plume.small_plume import SmallPlumeNorm
 
+from settings import GUI_LAYOUTS_PATH
+
 
 def register_devices(app_engine: QQmlApplicationEngine):
     app_engine.rootContext().setContextProperty("l807", l807)
@@ -40,7 +42,7 @@ if __name__ == '__main__':
     checker = NormChecker(current_norm)
     engine.rootContext().setContextProperty("checker", checker)
 
-    start_location_filename = "gui/main.qml"
+    start_location_filename = GUI_LAYOUTS_PATH / 'main.qml'
     engine.load(start_location_filename)
 
     app.exec()
