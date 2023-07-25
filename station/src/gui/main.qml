@@ -1591,7 +1591,7 @@ Window {
 							Image {
 	              anchors.fill: parent
 	              anchors.margins: 8
-	              source: "../resources/up_triangle.png"
+	              source: "../../resources/up_triangle.png"
 	              mipmap: true
 	            }
 						}
@@ -1965,7 +1965,7 @@ Window {
 								Image {
 	                anchors.fill: parent
 	                anchors.margins: 16
-	                source: "../resources/clockwise.png"
+	                source: "../../resources/clockwise.png"
 	                mipmap: true
 	              }
 							}
@@ -1974,7 +1974,7 @@ Window {
 								Image {
 	                anchors.fill: parent
 	                anchors.margins: 16
-	                source: "../resources/unclockwise.png"
+	                source: "../../resources/unclockwise.png"
 	                mipmap: true
 	              }
 							}
@@ -1985,7 +1985,7 @@ Window {
 								Image {
 	                anchors.fill: parent
 	                anchors.margins: 16
-	                source: "../resources/left_arrow.png"
+	                source: "../../resources/left_arrow.png"
 	                mipmap: true
 	              }
 							}
@@ -1993,7 +1993,7 @@ Window {
 								Image {
 	                anchors.fill: parent
 	                anchors.margins: 16
-	                source: "../resources/up_arrow.png"
+	                source: "../../resources/up_arrow.png"
 	                mipmap: true
 	              }
 	            }
@@ -2001,7 +2001,7 @@ Window {
 								Image {
 	                anchors.fill: parent
 	                anchors.margins: 16
-	                source: "../resources/right_arrow.png"
+	                source: "../../resources/right_arrow.png"
 	                mipmap: true
 	              }
 							}
@@ -2010,7 +2010,7 @@ Window {
 								Image {
 	                anchors.fill: parent
 	                anchors.margins: 16
-	                source: "../resources/down_arrow.png"
+	                source: "../../resources/down_arrow.png"
 	                mipmap: true
 	              }
 							}
