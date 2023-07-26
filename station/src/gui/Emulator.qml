@@ -14,6 +14,18 @@ Window {
     property int choiceNormPageIndex: 0
     property int choiceTrainingOrExamPageIndex: 1
 
+    ColumnLayout {
+      Button {
+        text: qsTr("Free mode")
+        onClicked: emulatorMenuStack.currentIndex = emulatorMenuStack.choiceTrainingOrExamPageIndex
+      }
+
+      Button {
+        text: qsTr("Checking the station with a small loop in the direct relay mode")
+        onClicked: emulatorMenuStack.currentIndex = emulatorMenuStack.choiceTrainingOrExamPageIndex
+      }
+    }
+
 
   }
 }
