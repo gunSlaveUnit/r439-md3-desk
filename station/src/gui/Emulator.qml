@@ -26,6 +26,11 @@ Window {
       }
     }
 
-
+    ColumnLayout {
+      Button {
+        text: qsTr("Back")
+        onClicked: emulatorMenuStack.currentIndex = emulatorMenuStack.choiceNormPageIndex
+      }
+    }
   }
 }
