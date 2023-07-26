@@ -21,7 +21,7 @@ Window {
       }
 
       Button {
-        text: qsTr("Checking the station with a small loop in the direct relay mode")
+        text: qsTr("Small loop in the direct relay mode")
         onClicked: emulatorMenuStack.currentIndex = emulatorMenuStack.choiceTrainingOrExamPageIndex
       }
     }
