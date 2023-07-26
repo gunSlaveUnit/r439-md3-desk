@@ -28,6 +28,14 @@ Window {
 
     ColumnLayout {
       Button {
+        text: qsTr("Training")
+      }
+
+      Button {
+        text: qsTr("Exam")
+      }
+
+      Button {
         text: qsTr("Back")
         onClicked: emulatorMenuStack.currentIndex = emulatorMenuStack.choiceNormPageIndex
       }
