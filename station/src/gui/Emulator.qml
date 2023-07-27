@@ -19,7 +19,7 @@ Window {
         text: qsTr("Free mode")
         onClicked: {
           configuration.selected_norm = free_mode
-          emulatorMenuStack.currentIndex = emulatorMenuStack.choiceTrainingOrExamPageIndex
+          emulatorMenuStack.currentIndex = emulatorMenuStack.choiceTrainingOrExamPageIndex // TODO: don't move to next choice here
         }
       }
 
@@ -35,10 +35,12 @@ Window {
     ColumnLayout {
       Button {
         text: qsTr("Training")
+        onClicked: configuration.is_training = true
       }
 
       Button {
         text: qsTr("Exam")
+        onClicked: configuration.is_training = false
       }
 
       Button {
