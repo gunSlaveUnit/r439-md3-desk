@@ -4,7 +4,10 @@ from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
 
 from devices import l807, agl, tlf1, klu, dmd_uzozm, tracts_prm_prd, plume
+from logic.configuration import Configuration
 from norms.checker import NormChecker
+from norms.free_mode.components import FreeModeComponent
+from norms.free_mode.free_mode import FreeMode
 from norms.small_plume.components import L807SmallPlumeComponent, AGLSmallPlumeComponent, TLF1SmallPlumeComponent, \
     KLUSmallPlumeComponent, DMDUZOZMSmallPlumeComponent, TractsPRMPRDSmallPlumeComponent, PlumeSmallPlumeComponent
 from norms.small_plume.small_plume import SmallPlumeNorm
@@ -26,6 +29,9 @@ if __name__ == '__main__':
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
 
+    configuration = Configuration()
+    engine.rootContext().setContextProperty("configuration", configuration)
+
     # register_devices(engine)
     #
     # current_norm = SmallPlumeNorm(
@@ -41,6 +47,22 @@ if __name__ == '__main__':
     # )
     # checker = NormChecker(current_norm)
     # engine.rootContext().setContextProperty("checker", checker)
+
+    free_mode = FreeMode([FreeModeComponent()])
+    engine.rootContext().setContextProperty("free_mode", free_mode)
+
+    small_plume_norm = SmallPlumeNorm(
+        [
+            L807SmallPlumeComponent(l807),
+            AGLSmallPlumeComponent(agl),
+            TLF1SmallPlumeComponent(tlf1),
+            KLUSmallPlumeComponent(klu),
+            DMDUZOZMSmallPlumeComponent(dmd_uzozm),
+            TractsPRMPRDSmallPlumeComponent(tracts_prm_prd),
+            PlumeSmallPlumeComponent(plume)
+        ]
+    )
+    engine.rootContext().setContextProperty("small_plume_norm", small_plume_norm)
 
     start_location_filename = GUI_LAYOUTS_PATH / 'main.qml'
     engine.load(start_location_filename)
