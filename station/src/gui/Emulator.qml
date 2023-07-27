@@ -17,12 +17,18 @@ Window {
     ColumnLayout {
       Button {
         text: qsTr("Free mode")
-        onClicked: emulatorMenuStack.currentIndex = emulatorMenuStack.choiceTrainingOrExamPageIndex
+        onClicked: {
+          configuration.selected_norm = free_mode
+          emulatorMenuStack.currentIndex = emulatorMenuStack.choiceTrainingOrExamPageIndex
+        }
       }
 
       Button {
         text: qsTr("Small loop in the direct relay mode")
-        onClicked: emulatorMenuStack.currentIndex = emulatorMenuStack.choiceTrainingOrExamPageIndex
+        onClicked: {
+          configuration.selected_norm = small_plume_norm
+          emulatorMenuStack.currentIndex = emulatorMenuStack.choiceTrainingOrExamPageIndex
+        }
       }
     }
 
