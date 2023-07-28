@@ -20,7 +20,7 @@ Window {
         text: qsTr("Free mode")
         onClicked: {
           configuration.selected_norm = free_mode
-          emulatorMenuStack.currentIndex = emulatorMenuStack.choiceTrainingOrExamPageIndex // TODO: don't move to next choice here
+          emulatorMenuStack.currentIndex = emulatorMenuStack.emulatorPageIndex
         }
       }
 
