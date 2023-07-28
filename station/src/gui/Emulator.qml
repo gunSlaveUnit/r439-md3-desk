@@ -13,6 +13,7 @@ Window {
 
     property int choiceNormPageIndex: 0
     property int choiceTrainingOrExamPageIndex: 1
+    property int emulatorPageIndex: 2
 
     ColumnLayout {
       Button {
