@@ -36,7 +36,10 @@ Window {
     ColumnLayout {
       Button {
         text: qsTr("Training")
-        onClicked: configuration.is_training = true
+        onClicked: {
+          configuration.is_training = true
+          emulatorMenuStack.currentIndex = emulatorMenuStack.emulatorPageIndex
+        }
       }
 
       Button {
@@ -52,6 +55,7 @@ Window {
 
     GridLayout {
       // TODO: let's go to write an emulator
+      Text {text: "Yes"}
     }
   }
 }
