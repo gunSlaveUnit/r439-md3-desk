@@ -49,5 +49,9 @@ Window {
         onClicked: emulatorMenuStack.currentIndex = emulatorMenuStack.choiceNormPageIndex
       }
     }
+
+    GridLayout {
+      // TODO: let's go to write an emulator
+    }
   }
 }
