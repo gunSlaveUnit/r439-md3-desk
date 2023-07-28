@@ -8,10 +8,19 @@ Window {
   visible: true
   title: qsTr("R439-MD3 Desktop")
 
-  Button {
-    text: qsTr("Emulator")
-    onClicked: emulator.visible = true
+  ColumnLayout {
+    Button {
+      text: qsTr("Information")
+      onClicked: information.visible = true
+    }
+
+    Button {
+      text: qsTr("Emulator")
+      onClicked: emulator.visible = true
+    }
   }
+
+  Information {id: information}
 
   Emulator {id: emulator}
 }
