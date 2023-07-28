@@ -39,7 +39,6 @@ class Configuration(QObject):
     def is_training(self, new_value: bool):
         if self._is_training == new_value:
             return
-        print(new_value)
         self._is_training = new_value
         self.is_training_changed.emit()
 
