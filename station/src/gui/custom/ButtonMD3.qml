@@ -8,7 +8,6 @@ Button {
 	property bool hoverable: true
 
   contentItem: Text {
-    font.pointSize: 14
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     text: parent.text
