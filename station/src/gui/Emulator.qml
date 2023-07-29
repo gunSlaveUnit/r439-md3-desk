@@ -2,9 +2,15 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 
+import "./custom"
+
 Window {
-  width: 400
-  height: 300
+  property int defaultMargin: 8
+
+  width: 1000
+  height: 500
+  x: Screen.width / 2 - width / 2
+  y: Screen.height / 2 - height / 2
   visible: false
   title: qsTr("R439-MD3 Station Emulator")
 
@@ -63,8 +69,27 @@ Window {
     }
 
     GridLayout {
-      // TODO: let's go to write an emulator
-      Text {text: "Yes"}
+			anchors.fill: parent
+	    anchors.margins: defaultMargin
+
+	    rows: 2
+	    columns: 2
+
+	    Rectangle {
+	      width: 400
+	      height: 300
+	      color: "black"
+	      border.width: defaultMargin
+	      border.color: "#49494B"
+
+	      Rectangle {
+	        anchors.fill: parent
+	        anchors.margins: defaultMargin
+	        color: "transparent"
+	        border.width: defaultMargin / 2
+	        border.color: "#d4a009"
+	      }
+	    }
     }
   }
 }
