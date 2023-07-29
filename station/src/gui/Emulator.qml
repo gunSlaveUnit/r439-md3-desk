@@ -34,6 +34,12 @@ Window {
     }
 
     ColumnLayout {
+      id: choiceTrainingOrExamPage
+
+      function checkUserAuthorization() {
+        
+      }
+
       Button {
         text: qsTr("Training")
         onClicked: {
@@ -44,7 +50,10 @@ Window {
 
       Button {
         text: qsTr("Exam")
-        onClicked: configuration.is_training = false
+        onClicked: {
+          configuration.is_training = false
+          choiceTrainingOrExamPage.checkUserAuthorization()
+        }
       }
 
       Button {
