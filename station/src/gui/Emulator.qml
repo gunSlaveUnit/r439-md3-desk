@@ -2112,22 +2112,26 @@ Window {
 		      KeyboardButtonMD3 {
 			      backgroundColor: keyboard.redButtonColor
 			      text: qsTr("РУС")
+			      textVerticalAlignment: Text.AlignTop
 		      }
 
 		      KeyboardButtonMD3 {
 		        backgroundColor: keyboard.blueButtonColor
 		        text: qsTr("РУС")
+		        textVerticalAlignment: Text.AlignTop
 		      }
 
 		      KeyboardButtonMD3 {
 			      backgroundColor: keyboard.redButtonColor
 			      Layout.row: 1
 			      text: qsTr("ЛАТ")
+			      textVerticalAlignment: Text.AlignBottom
 		      }
 
 		      KeyboardButtonMD3 {
 			      backgroundColor: keyboard.blueButtonColor
 			      text: qsTr("ЛАТ")
+			      textVerticalAlignment: Text.AlignBottom
 		      }
 
 		      KeyboardButtonMD3 {
