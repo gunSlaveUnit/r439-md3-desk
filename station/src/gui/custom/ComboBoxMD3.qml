@@ -6,7 +6,6 @@ ComboBox {
   delegate: ItemDelegate {
     text: modelData
     width: parent.width
-    font.pointSize: 14
 
     contentItem: Text {
       text: modelData
@@ -24,7 +23,6 @@ ComboBox {
   }
 
   contentItem: Text {
-    font.pointSize: 14
     text: parent.displayText
     color: "#d4a009"
   }
