@@ -451,7 +451,7 @@ Window {
 
 		                changeKLU3Button.visible = true
 
-		                checker.check()
+		                checker.check(configuration.selected_norm)
 		              }
 		            }
 
@@ -600,7 +600,7 @@ Window {
 
 		                changeDMDUZOZM1Button.visible = true
 
-		                checker.check()
+		                checker.check(configuration.selected_norm)
 		              }
 		            }
 
@@ -726,7 +726,7 @@ Window {
 
 		                changeDMDUZOZM2Button.visible = true
 
-		                checker.check()
+		                checker.check(configuration.selected_norm)
 		              }
 		            }
 
@@ -835,7 +835,7 @@ Window {
 
 		                changeTractsPRMPRDButton1.visible = true
 
-		                checker.check()
+		                checker.check(configuration.selected_norm)
 		              }
 		            }
 
@@ -852,7 +852,7 @@ Window {
 
 		                changeTractsPRMPRDButton1.visible = true
 
-		                checker.check()
+		                checker.check(configuration.selected_norm)
 		              }
 		            }
 
@@ -997,7 +997,7 @@ Window {
 
 		                changeTractsPRMPRDButton2.visible = true
 
-		                checker.check()
+		                checker.check(configuration.selected_norm)
 		              }
 		            }
 
@@ -1087,7 +1087,7 @@ Window {
 
 		                changeL807Button.visible = true
 
-		                checker.check()
+		                checker.check(configuration.selected_norm)
 		              }
 		            }
 
@@ -1236,7 +1236,7 @@ Window {
 
 		                changeAGLButton.visible = true
 
-		                checker.check()
+		                checker.check(configuration.selected_norm)
 		              }
 		            }
 
@@ -1406,7 +1406,7 @@ Window {
 
 		                changeTLF1Button.visible = true
 
-		                checker.check()
+		                checker.check(configuration.selected_norm)
 		              }
 		            }
 
@@ -1521,7 +1521,7 @@ Window {
 
 		                changePlumeButton.visible = true
 
-		                checker.check()
+		                checker.check(configuration.selected_norm)
 		              }
 		            }
 
