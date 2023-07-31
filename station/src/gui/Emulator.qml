@@ -119,20 +119,19 @@ Window {
         ColumnLayout {
           id: display
 
-          GridLayout {
-		        id: displayHeader
-		        rows: 2
-		        columns: 3
+          // TODO: current date and time from config
 
-						// TODO: current date and time from config
-
-		        ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("(. Приборы - авария")}
+          RowLayout {
+            ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("(. Приборы - авария")}
 		        ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("15-02-2023")}
 		        ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("11:36:42")}
-		        ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("). Обмен")}
+          }
+
+          RowLayout {
+            ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("). Обмен")}
 		        ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("<. Запрет ПРД")}
 		        ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr(">. Тракт ПРМ - не норма")}
-		      }
+          }
 
 		      StackLayout {
 		        id: displayStackLayout
