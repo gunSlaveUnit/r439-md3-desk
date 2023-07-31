@@ -29,24 +29,7 @@ if __name__ == '__main__':
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
 
-    configuration = Configuration()
-    engine.rootContext().setContextProperty("configuration", configuration)
-
-    # register_devices(engine)
-    #
-    # current_norm = SmallPlumeNorm(
-    #     [
-    #         L807SmallPlumeComponent(l807),
-    #         AGLSmallPlumeComponent(agl),
-    #         TLF1SmallPlumeComponent(tlf1),
-    #         KLUSmallPlumeComponent(klu),
-    #         DMDUZOZMSmallPlumeComponent(dmd_uzozm),
-    #         TractsPRMPRDSmallPlumeComponent(tracts_prm_prd),
-    #         PlumeSmallPlumeComponent(plume)
-    #     ]
-    # )
-    # checker = NormChecker(current_norm)
-    # engine.rootContext().setContextProperty("checker", checker)
+    register_devices(engine)
 
     free_mode = FreeMode([FreeModeComponent()])
     engine.rootContext().setContextProperty("free_mode", free_mode)
@@ -63,6 +46,12 @@ if __name__ == '__main__':
         ]
     )
     engine.rootContext().setContextProperty("small_plume_norm", small_plume_norm)
+
+    checker = NormChecker()
+    engine.rootContext().setContextProperty("checker", checker)
+
+    configuration = Configuration()
+    engine.rootContext().setContextProperty("configuration", configuration)
 
     start_location_filename = GUI_LAYOUTS_PATH / 'main.qml'
     engine.load(start_location_filename)
