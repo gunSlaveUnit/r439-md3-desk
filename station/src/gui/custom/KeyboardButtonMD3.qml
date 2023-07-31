@@ -12,9 +12,7 @@ Button {
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment:textVerticalAlignment
     text: parent.text
-    font.pointSize: 10
     color: "#000"
-    anchors.margins: 8
   }
 
   background: Rectangle {
