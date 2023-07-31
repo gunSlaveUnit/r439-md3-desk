@@ -5,6 +5,7 @@ from PySide6.QtQml import QQmlApplicationEngine
 
 from devices import l807, agl, tlf1, klu, dmd_uzozm, tracts_prm_prd, plume
 from logic.configuration import Configuration
+from logic.timer import Timer
 from norms.checker import NormChecker
 from norms.free_mode.components import FreeModeComponent
 from norms.free_mode.free_mode import FreeMode
@@ -52,6 +53,9 @@ if __name__ == '__main__':
 
     configuration = Configuration()
     engine.rootContext().setContextProperty("configuration", configuration)
+
+    timer = Timer()
+    engine.rootContext().setContextProperty("timer", timer)
 
     start_location_filename = GUI_LAYOUTS_PATH / 'main.qml'
     engine.load(start_location_filename)
