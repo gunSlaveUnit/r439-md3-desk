@@ -42,7 +42,7 @@ if __name__ == '__main__':
             KLUSmallPlumeComponent(klu),
             DMDUZOZMSmallPlumeComponent(dmd_uzozm),
             TractsPRMPRDSmallPlumeComponent(tracts_prm_prd),
-            PlumeSmallPlumeComponent(plume)
+            PlumeSmallPlumeComponent(plume),
         ]
     )
     engine.rootContext().setContextProperty("small_plume_norm", small_plume_norm)
