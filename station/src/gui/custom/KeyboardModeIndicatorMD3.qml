@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 
 Rectangle {
-	property bool isSelected: false
+    property bool isSelected: false
 
 	anchors.centerIn: parent
 	width: parent.width / 4
