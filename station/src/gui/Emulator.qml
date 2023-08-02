@@ -356,7 +356,7 @@ Window {
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. АГ-Л")}
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. ПГ-Л")}
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. КЛ-У")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. ДМД, УЗОЗМ")}
+                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. ДМД, УЗОЗМ"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusDMDUZOZMPageIndex}
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. Тракты ПРД, ПРМ")}
                                 }
 
