@@ -341,6 +341,30 @@ Window {
                             }
 
                             /*
+                            *   Regulations status page
+                            */
+                            ColumnLayout {
+                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("СОСТОЯНИЕ ПРИБОРОВ СТАНЦИИ")}
+
+                                GridLayout {
+                                    rows: 4
+                                    columns: 2
+                                    flow: GridLayout.TopToBottom
+
+                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Общее")}
+                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. АГ-Л")}
+                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. ПГ-Л")}
+                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. КЛ-У")}
+                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. ДМД, УЗОЗМ")}
+                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. Тракты ПРД, ПРМ")}
+                                }
+
+                                Item {Layout.fillHeight: true}
+
+                                ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
+                            }
+
+                            /*
                             *   Regulations mode page
                             */
                             ColumnLayout {
