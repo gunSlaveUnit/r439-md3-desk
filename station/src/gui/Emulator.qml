@@ -1054,6 +1054,7 @@ Window {
                                     DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
                                     TextFieldMD3 {
                                         id: tractsPRDPRDPRDWaveNumber
+                                        implicitWidth: tractsPRDPRDOutputU205D.implicitWidth
                                         enabled: !changeTractsPRMPRDButton2.visible
                                         text: tracts_prm_prd.prd_wave_number
                                     }
@@ -1061,6 +1062,7 @@ Window {
                                     DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРМ:")}
                                     TextFieldMD3 {
                                         id: tractsPRDPRDPRMWaveNumber
+                                        implicitWidth: tractsPRDPRDOutputU205D.implicitWidth
                                         enabled: !changeTractsPRMPRDButton2.visible
                                         text: tracts_prm_prd.prm_wave_number
                                     }
