@@ -327,7 +327,7 @@ Window {
                                     columns: 2
                                     flow: GridLayout.TopToBottom
 
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Состояние")}
+                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Состояние"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusPageIndex}
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. Режим"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. Режим АГ-Л"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. Монитор")}
