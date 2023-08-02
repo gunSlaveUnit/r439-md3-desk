@@ -242,6 +242,77 @@ Window {
                             */
                             ColumnLayout {
                                 ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("МОНИТОР СТАНЦИИ")}
+
+                                RowLayout {
+                                    ColumnLayout {
+                                        GridLayout {
+                                            rows: 2
+                                            columns: 2
+
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приём ШПС:")}
+                                            DisplayTextMD3 {text: qsTr("Не задан")}
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Уровень:")}
+                                            DisplayTextMD3 {text: qsTr("282")}
+                                        }
+
+                                        RowLayout {
+                                            ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Тест")}
+                                            ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. Поиск")}
+                                        }
+                                    }
+
+                                    ColumnLayout {
+                                        GridLayout {
+                                            rows: 2
+                                            columns: 2
+
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приём УП:")}
+                                            DisplayTextMD3 {text: qsTr("Есть")}
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Уровень:")}
+                                            DisplayTextMD3 {text: qsTr("16526")}
+                                        }
+
+                                        RowLayout {
+                                            ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. Поиск")}
+                                        }
+                                    }
+                                }
+
+                                GridLayout {
+                                    rows: 3
+                                    columns: 2
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Качество ДМД:")}
+                                    DisplayTextMD3 {text: qsTr("Норма")}
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ГС 6 КБод:")}
+                                    DisplayTextMD3 {text: qsTr("Норма, ошибки: 0")}
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ГС доп.:")}
+                                    DisplayTextMD3 {text: qsTr("Не задан")}
+                                }
+
+                                RowLayout {
+                                    GridLayout {
+                                        rows: 2
+                                        columns: 2
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ППРЧ:")}
+                                        DisplayTextMD3 {text: qsTr("Не задан")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Мощность:")}
+                                        DisplayTextMD3 {text: qsTr("Запрет")}
+                                    }
+
+                                    Item {Layout.fillWidth: true}
+
+                                    GridLayout {
+                                        rows: 2
+                                        columns: 2
+
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. Пуск")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. АГ-Л")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. Стоп")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.mainPageIndex}
+                                    }
+                                }
                             }
 
                             /*
