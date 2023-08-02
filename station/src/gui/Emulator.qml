@@ -238,6 +238,13 @@ Window {
                             }
 
                             /*
+                            *   Monitor page
+                            */
+                            ColumnLayout {
+                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("МОНИТОР СТАНЦИИ")}
+                            }
+
+                            /*
                             *   Regulations page
                             */
                             ColumnLayout {
