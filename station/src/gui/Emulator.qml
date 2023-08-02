@@ -366,6 +366,46 @@ Window {
                             }
 
                             /*
+                            *   Regulations status DMD UZOZM page
+                            */
+                            ColumnLayout {
+                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("СОСТОЯНИЕ ДМД")}
+
+                                GridLayout {
+                                    rows: 8
+                                    columns: 2
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма УПЧ:")}
+                                    DisplayTextMD3 {text: qsTr("Есть")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма ДМД:")}
+                                    DisplayTextMD3 {text: qsTr("Есть")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Захват ПЧ:")}
+                                    DisplayTextMD3 {text: qsTr("Есть")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Захват ТЧ:")}
+                                    DisplayTextMD3 {text: qsTr("Есть")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Поиск:")}
+                                    DisplayTextMD3 {text: qsTr("Нет")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Качество сигнала:")}
+                                    DisplayTextMD3 {text: qsTr("Норма")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Расстройка, Гц:")}
+                                    DisplayTextMD3 {text: qsTr("-100")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Уровень ПРМ:")}
+                                    DisplayTextMD3 {text: qsTr("16513")}
+                                }
+
+                                Item {Layout.fillHeight: true}
+
+                                ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusPageIndex}
+                            }
+
+                            /*
                             *   Regulations mode page
                             */
                             ColumnLayout {
