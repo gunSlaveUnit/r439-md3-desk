@@ -270,6 +270,28 @@ Window {
                                 }
 
                                 /*
+                                *   Monitor no SHOS warning page
+                                */
+                                ColumnLayout {
+                                    DisplayTextMD3 {Layout.alignment: Qt.AlignHCenter; text: qsTr("ПРЕДУПРЕЖДЕНИЕ")}
+
+                                    Item {Layout.fillHeight: true}
+
+                                    DisplayTextMD3 {Layout.alignment: Qt.AlignHCenter; text: qsTr("Нет СХОС! Информация недостоверна!")}
+                                    DisplayTextMD3 {Layout.alignment: Qt.AlignHCenter; text: qsTr("Отобразить монитор станции?")}
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Да"); onClicked: displayStackLayout.currentIndex = displayStackLayout.monitorPageIndex}
+                                        Item {Layout.fillWidth: true}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. Нет"); onClicked: displayStackLayout.currentIndex = displayStackLayout.monitorPageIndex}
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+                                }
+
+                                /*
                                 *   Monitor page
                                 */
                                 ColumnLayout {
