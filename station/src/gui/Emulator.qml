@@ -177,7 +177,8 @@ Window {
                                 id: displayStackLayout
 
                                 property int mainPageIndex: 0
-                                property int monitorPageIndex: mainPageIndex + 1
+                                property int monitorNoSHOSWarningPageIndex: mainPageIndex + 1
+                                property int monitorPageIndex: monitorNoSHOSWarningPageIndex + 1
                                 property int regulationsPageIndex: monitorPageIndex + 1
                                 property int regulationsStatusPageIndex: regulationsPageIndex + 1
                                 property int regulationsStatusAGLPage1Index: regulationsStatusPageIndex + 1
