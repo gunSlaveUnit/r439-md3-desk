@@ -154,7 +154,8 @@ Window {
                             property int monitorPageIndex: mainPageIndex + 1
                             property int regulationsPageIndex: monitorPageIndex + 1
                             property int regulationsStatusPageIndex: regulationsPageIndex + 1
-                            property int regulationsStatusDMDUZOZMPageIndex: regulationsStatusPageIndex + 1
+                            property int regulationsAGLPageIndex: regulationsStatusPageIndex + 1
+                            property int regulationsStatusDMDUZOZMPageIndex: regulationsAGLPageIndex + 1
                             property int regulationsModePageIndex: regulationsStatusDMDUZOZMPageIndex + 1
                             property int regulationsModeKLUPage1Index: regulationsModePageIndex + 1
                             property int regulationsModeKLUPage2Index: regulationsModeKLUPage1Index + 1
