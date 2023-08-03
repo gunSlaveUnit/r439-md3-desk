@@ -226,7 +226,7 @@ Window {
 
                                                 // TODO: It would be possible to redo the calculation of the size of the buttons. I think it can be easier
                                                 ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("1. СХОС")}
-                                                ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("2. Монитор"); onClicked: displayStackLayout.currentIndex = displayStackLayout.monitorPageIndex}
+                                                ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("2. Монитор"); onClicked: displayStackLayout.currentIndex = displayStackLayout.monitorNoSHOSWarningPageIndex}
                                                 ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("3. Сл. связь")}
                                                 ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("4. Архив команд")}
                                                 ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("5. РАТС")}
