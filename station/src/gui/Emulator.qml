@@ -154,8 +154,8 @@ Window {
                             property int monitorPageIndex: mainPageIndex + 1
                             property int regulationsPageIndex: monitorPageIndex + 1
                             property int regulationsStatusPageIndex: regulationsPageIndex + 1
-                            property int regulationsStatusAGLPageIndex: regulationsStatusPageIndex + 1
-                            property int regulationsStatusDMDUZOZMPageIndex: regulationsStatusAGLPageIndex + 1
+                            property int regulationsStatusAGLPage1Index: regulationsStatusPageIndex + 1
+                            property int regulationsStatusDMDUZOZMPageIndex: regulationsStatusAGLPage1Index + 1
                             property int regulationsModePageIndex: regulationsStatusDMDUZOZMPageIndex + 1
                             property int regulationsModeKLUPage1Index: regulationsModePageIndex + 1
                             property int regulationsModeKLUPage2Index: regulationsModeKLUPage1Index + 1
@@ -354,7 +354,7 @@ Window {
                                     flow: GridLayout.TopToBottom
 
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Общее")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. АГ-Л"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPageIndex}
+                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. АГ-Л"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPage1Index}
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. ПГ-Л")}
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. КЛ-У")}
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. ДМД, УЗОЗМ"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusDMDUZOZMPageIndex}
@@ -364,6 +364,55 @@ Window {
                                 Item {Layout.fillHeight: true}
 
                                 ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
+                            }
+
+                            /*
+                            *   Regulations status AGL page 1
+                            */
+                            ColumnLayout {
+                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("СОСТОЯНИЕ АГ-Л, ССП И ГС")}
+
+                                GridLayout {
+                                    rows: 11
+                                    columns: 2
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма ТЭЗ АГ-БЛ:")}
+                                    DisplayTextMD3 {text: qsTr("Есть")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма ТЭЗ АГ-АЛ:")}
+                                    DisplayTextMD3 {text: qsTr("Есть")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Корректность режима:")}
+                                    DisplayTextMD3 {text: qsTr("Есть")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма каналов:")}
+                                    DisplayTextMD3 {text: qsTr("Есть")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Синхронизм с РТР:")}
+                                    DisplayTextMD3 {text: qsTr("")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Запрос КАУ ПРМ:")}
+                                    DisplayTextMD3 {text: qsTr("Нет")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Запрос РАТС:")}
+                                    DisplayTextMD3 {text: qsTr("Нет")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приём ГС основного:")}
+                                    DisplayTextMD3 {text: qsTr("Норма")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ошибки в ГС основном:")}
+                                    DisplayTextMD3 {text: qsTr("0")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приём ГС дополнительного:")}
+                                    DisplayTextMD3 {text: qsTr("Не задан")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ошибки в ГС дополнительном:")}
+                                    DisplayTextMD3 {text: qsTr("")}
+                                }
+
+                                Item {Layout.fillHeight: true}
+
+                                ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusPageIndex}
                             }
 
                             /*
