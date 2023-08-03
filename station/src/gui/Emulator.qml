@@ -464,6 +464,7 @@ Window {
                                 RowLayout {
                                     Item {Layout.fillWidth: true}
                                     ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPage1Index}
+                                    ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPage3Index}
                                     ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusPageIndex}
                                 }
                             }
