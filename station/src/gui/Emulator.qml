@@ -125,1717 +125,1743 @@ Window {
                     border.color: "#d4a009"
                     border.width: defaultMargin / 2
 
-                    ColumnLayout {
-                        id: display
+                    StackLayout {
+                        id: startWorkModeScreen
 
-                        anchors.fill: parent
-                        anchors.margins: defaultMargin
+                        property int selectIsWorkWithSaveDataPage: 0
+                        property int mainStationPages: selectIsWorkWithSaveDataPage + 1
 
-                        // TODO: current date and time from config
+                        /*
+                        *   Save data mode selection
+                        */
+                        ColumnLayout {
+                            anchors.fill: parent
+                            anchors.margins: defaultMargin
 
-                        RowLayout {
-                            ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("(. Приборы - авария")}
-                            ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("01-08-2023")}
-                            ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("11:36:42")}
+                            DisplayTextMD3 {Layout.alignment: Qt.AlignHCenter; text: qsTr("РАБОТА С СОХРАНЁННЫМИ ДАННЫМИ?")}
+
+                            Item {Layout.fillHeight: true}
+
+                            RowLayout {
+                                ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Да"); onClicked: startWorkModeScreen.currentIndex = startWorkModeScreen.mainStationPages}
+                                Item {Layout.fillWidth: true}
+                                ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. Нет"); onClicked: startWorkModeScreen.currentIndex = startWorkModeScreen.mainStationPages}
+                            }
+
+                            Item {Layout.fillHeight: true}
                         }
 
-                        RowLayout {
-                            id: stateButtons
+                        ColumnLayout {
+                            id: display
 
-                            ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("). Обмен")}
-                            ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("<. Запрет ПРД")}
-                            ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr(">. Тракт ПРМ - не норма")}
-                        }
+                            anchors.fill: parent
+                            anchors.margins: defaultMargin
 
-                        StackLayout {
-                            id: displayStackLayout
+                            // TODO: current date and time from config
 
-                            property int selectIsWorkWithSaveData: 0
-                            property int mainPageIndex: selectIsWorkWithSaveData + 1
-                            property int monitorPageIndex: mainPageIndex + 1
-                            property int regulationsPageIndex: monitorPageIndex + 1
-                            property int regulationsStatusPageIndex: regulationsPageIndex + 1
-                            property int regulationsStatusAGLPage1Index: regulationsStatusPageIndex + 1
-                            property int regulationsStatusAGLPage2Index: regulationsStatusAGLPage1Index + 1
-                            property int regulationsStatusAGLPage3Index: regulationsStatusAGLPage2Index + 1
-                            property int regulationsStatusDMDUZOZMPageIndex: regulationsStatusAGLPage3Index + 1
-                            property int regulationsModePageIndex: regulationsStatusDMDUZOZMPageIndex + 1
-                            property int regulationsModeKLUPage1Index: regulationsModePageIndex + 1
-                            property int regulationsModeKLUPage2Index: regulationsModeKLUPage1Index + 1
-                            property int regulationsModeKLUPage3Index: regulationsModeKLUPage2Index + 1
-                            property int regulationsModeDMDUZOZMPage1Index: regulationsModeKLUPage3Index + 1
-                            property int regulationsModeDMDUZOZMPage2Index: regulationsModeDMDUZOZMPage1Index + 1
-                            property int regulationsModeTractsPRMPRDPage1Index: regulationsModeDMDUZOZMPage2Index + 1
-                            property int regulationsModeTractsPRMPRDPage2Index: regulationsModeTractsPRMPRDPage1Index + 1
-                            property int regulationsModeL807PageIndex: regulationsModeTractsPRMPRDPage2Index + 1
-                            property int regulationsModeAGLPageIndex: regulationsModeL807PageIndex + 1
-                            property int regulationModeAGLDeviceModePageIndex: regulationsModeAGLPageIndex + 1
-                            property int regulationsModeAGLTLF1PageIndex: regulationModeAGLDeviceModePageIndex + 1
-                            property int regulationsPlumePageIndex: regulationsModeAGLTLF1PageIndex + 1
+                            RowLayout {
+                                ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("(. Приборы - авария")}
+                                ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("01-08-2023")}
+                                ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("11:36:42")}
+                            }
 
-                            /*
-                            *   Main menu page
-                            */
-                            ColumnLayout {
-                                id: mainMenuPage
+                            RowLayout {
+                                id: stateButtons
 
-                                // TODO: I don't like this for buttons group rectangle width
-                                property int screenWidth: 470
-                                property int screenWidthHalf: screenWidth / 2
+                                ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("). Обмен")}
+                                ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr("<. Запрет ПРД")}
+                                ButtonMD3 {hoverable: false; Layout.fillWidth: true; text: qsTr(">. Тракт ПРМ - не норма")}
+                            }
 
-                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("ГЛАВНОЕ")}
+                            StackLayout {
+                                id: displayStackLayout
 
-                                RowLayout {
-                                    Rectangle {
-                                        width: mainMenuPage.screenWidthHalf
-                                        height: leftMainMenuColumn.implicitHeight + 2 * defaultMargin
-                                        color: "transparent"
-                                        border.color: "#d4a009"
-                                        border.width: 1
+                                property int mainPageIndex: 0
+                                property int monitorPageIndex: mainPageIndex + 1
+                                property int regulationsPageIndex: monitorPageIndex + 1
+                                property int regulationsStatusPageIndex: regulationsPageIndex + 1
+                                property int regulationsStatusAGLPage1Index: regulationsStatusPageIndex + 1
+                                property int regulationsStatusAGLPage2Index: regulationsStatusAGLPage1Index + 1
+                                property int regulationsStatusAGLPage3Index: regulationsStatusAGLPage2Index + 1
+                                property int regulationsStatusDMDUZOZMPageIndex: regulationsStatusAGLPage3Index + 1
+                                property int regulationsModePageIndex: regulationsStatusDMDUZOZMPageIndex + 1
+                                property int regulationsModeKLUPage1Index: regulationsModePageIndex + 1
+                                property int regulationsModeKLUPage2Index: regulationsModeKLUPage1Index + 1
+                                property int regulationsModeKLUPage3Index: regulationsModeKLUPage2Index + 1
+                                property int regulationsModeDMDUZOZMPage1Index: regulationsModeKLUPage3Index + 1
+                                property int regulationsModeDMDUZOZMPage2Index: regulationsModeDMDUZOZMPage1Index + 1
+                                property int regulationsModeTractsPRMPRDPage1Index: regulationsModeDMDUZOZMPage2Index + 1
+                                property int regulationsModeTractsPRMPRDPage2Index: regulationsModeTractsPRMPRDPage1Index + 1
+                                property int regulationsModeL807PageIndex: regulationsModeTractsPRMPRDPage2Index + 1
+                                property int regulationsModeAGLPageIndex: regulationsModeL807PageIndex + 1
+                                property int regulationModeAGLDeviceModePageIndex: regulationsModeAGLPageIndex + 1
+                                property int regulationsModeAGLTLF1PageIndex: regulationModeAGLDeviceModePageIndex + 1
+                                property int regulationsPlumePageIndex: regulationsModeAGLTLF1PageIndex + 1
 
-                                        ColumnLayout {
-                                            id: leftMainMenuColumn
+                                /*
+                                *   Main menu page
+                                */
+                                ColumnLayout {
+                                    id: mainMenuPage
 
-                                            anchors.centerIn: parent
+                                    // TODO: I don't like this for buttons group rectangle width
+                                    property int screenWidth: 470
+                                    property int screenWidthHalf: screenWidth / 2
 
-                                            // TODO: It would be possible to redo the calculation of the size of the buttons. I think it can be easier
-                                            ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("1. СХОС")}
-                                            ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("2. Монитор"); onClicked: displayStackLayout.currentIndex = displayStackLayout.monitorPageIndex}
-                                            ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("3. Сл. связь")}
-                                            ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("4. Архив команд")}
-                                            ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("5. РАТС")}
-                                            ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("6. ПРД")}
-                                        }
-                                    }
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("ГЛАВНОЕ")}
 
-                                    ColumnLayout {
-                                        Layout.alignment: Qt.AlignTop
-
+                                    RowLayout {
                                         Rectangle {
                                             width: mainMenuPage.screenWidthHalf
-                                            height: rightMainMenuColumn.implicitHeight + 2 * defaultMargin
+                                            height: leftMainMenuColumn.implicitHeight + 2 * defaultMargin
                                             color: "transparent"
                                             border.color: "#d4a009"
                                             border.width: 1
 
                                             ColumnLayout {
-                                                id: rightMainMenuColumn
+                                                id: leftMainMenuColumn
 
-                                                Layout.fillWidth: true
                                                 anchors.centerIn: parent
 
-                                                ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("7. Установка")}
-                                                ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("8. Регламент"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
-                                                ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("9. Антенна")}
+                                                // TODO: It would be possible to redo the calculation of the size of the buttons. I think it can be easier
+                                                ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("1. СХОС")}
+                                                ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("2. Монитор"); onClicked: displayStackLayout.currentIndex = displayStackLayout.monitorPageIndex}
+                                                ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("3. Сл. связь")}
+                                                ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("4. Архив команд")}
+                                                ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("5. РАТС")}
+                                                ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("6. ПРД")}
                                             }
                                         }
 
-                                        Rectangle {
-                                            width: mainMenuPage.screenWidthHalf
-                                            height: endSessionButton.implicitHeight + 2 * defaultMargin
-                                            color: "transparent"
-                                            border.color: "#d4a009"
-                                            border.width: 1
+                                        ColumnLayout {
+                                            Layout.alignment: Qt.AlignTop
 
-                                            ButtonMD3 {id: endSessionButton; anchors.centerIn: parent; implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("0. Ок. сеанса")}
-                                        }
-                                    }
-                                }
-                            }
+                                            Rectangle {
+                                                width: mainMenuPage.screenWidthHalf
+                                                height: rightMainMenuColumn.implicitHeight + 2 * defaultMargin
+                                                color: "transparent"
+                                                border.color: "#d4a009"
+                                                border.width: 1
 
-                            /*
-                            *   Monitor page
-                            */
-                            ColumnLayout {
-                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("МОНИТОР СТАНЦИИ")}
+                                                ColumnLayout {
+                                                    id: rightMainMenuColumn
 
-                                RowLayout {
-                                    ColumnLayout {
-                                        GridLayout {
-                                            rows: 2
-                                            columns: 2
+                                                    Layout.fillWidth: true
+                                                    anchors.centerIn: parent
 
-                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приём ШПС:")}
-                                            DisplayTextMD3 {text: qsTr("Не задан")}
-                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Уровень:")}
-                                            DisplayTextMD3 {text: qsTr("282")}
-                                        }
+                                                    ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("7. Установка")}
+                                                    ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("8. Регламент"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
+                                                    ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("9. Антенна")}
+                                                }
+                                            }
 
-                                        RowLayout {
-                                            ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Тест")}
-                                            ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. Поиск")}
-                                        }
-                                    }
+                                            Rectangle {
+                                                width: mainMenuPage.screenWidthHalf
+                                                height: endSessionButton.implicitHeight + 2 * defaultMargin
+                                                color: "transparent"
+                                                border.color: "#d4a009"
+                                                border.width: 1
 
-                                    ColumnLayout {
-                                        GridLayout {
-                                            rows: 2
-                                            columns: 2
-
-                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приём УП:")}
-                                            DisplayTextMD3 {text: qsTr("Есть")}
-                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Уровень:")}
-                                            DisplayTextMD3 {text: qsTr("16526")}
-                                        }
-
-                                        RowLayout {
-                                            ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. Поиск")}
+                                                ButtonMD3 {id: endSessionButton; anchors.centerIn: parent; implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("0. Ок. сеанса")}
+                                            }
                                         }
                                     }
                                 }
 
-                                GridLayout {
-                                    rows: 3
-                                    columns: 2
+                                /*
+                                *   Monitor page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("МОНИТОР СТАНЦИИ")}
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Качество ДМД:")}
-                                    DisplayTextMD3 {text: qsTr("Норма")}
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ГС 6 КБод:")}
-                                    DisplayTextMD3 {text: qsTr("Норма, ошибки: 0")}
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ГС доп.:")}
-                                    DisplayTextMD3 {text: qsTr("Не задан")}
-                                }
+                                    RowLayout {
+                                        ColumnLayout {
+                                            GridLayout {
+                                                rows: 2
+                                                columns: 2
 
-                                RowLayout {
+                                                DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приём ШПС:")}
+                                                DisplayTextMD3 {text: qsTr("Не задан")}
+                                                DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Уровень:")}
+                                                DisplayTextMD3 {text: qsTr("282")}
+                                            }
+
+                                            RowLayout {
+                                                ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Тест")}
+                                                ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. Поиск")}
+                                            }
+                                        }
+
+                                        ColumnLayout {
+                                            GridLayout {
+                                                rows: 2
+                                                columns: 2
+
+                                                DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приём УП:")}
+                                                DisplayTextMD3 {text: qsTr("Есть")}
+                                                DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Уровень:")}
+                                                DisplayTextMD3 {text: qsTr("16526")}
+                                            }
+
+                                            RowLayout {
+                                                ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. Поиск")}
+                                            }
+                                        }
+                                    }
+
                                     GridLayout {
-                                        rows: 2
+                                        rows: 3
                                         columns: 2
 
-                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ППРЧ:")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Качество ДМД:")}
+                                        DisplayTextMD3 {text: qsTr("Норма")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ГС 6 КБод:")}
+                                        DisplayTextMD3 {text: qsTr("Норма, ошибки: 0")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ГС доп.:")}
                                         DisplayTextMD3 {text: qsTr("Не задан")}
-                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Мощность:")}
-                                        DisplayTextMD3 {text: qsTr("Запрет")}
                                     }
 
-                                    Item {Layout.fillWidth: true}
+                                    RowLayout {
+                                        GridLayout {
+                                            rows: 2
+                                            columns: 2
+
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ППРЧ:")}
+                                            DisplayTextMD3 {text: qsTr("Не задан")}
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Мощность:")}
+                                            DisplayTextMD3 {text: qsTr("Запрет")}
+                                        }
+
+                                        Item {Layout.fillWidth: true}
+
+                                        GridLayout {
+                                            rows: 2
+                                            columns: 2
+
+                                            ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. Пуск")}
+                                            ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. АГ-Л")}
+                                            ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. Стоп")}
+                                            ButtonMD3 {Layout.fillWidth: true; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.mainPageIndex}
+                                        }
+                                    }
+                                }
+
+                                /*
+                                *   Regulations page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("РЕГЛАМЕНТ")}
 
                                     GridLayout {
-                                        rows: 2
+                                        rows: 3
+                                        columns: 2
+                                        flow: GridLayout.TopToBottom
+
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Состояние"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusPageIndex}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. Режим"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. Режим АГ-Л"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. Монитор")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. Шлейф"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPlumePageIndex}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. Управление")}
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.mainPageIndex}
+                                }
+
+                                /*
+                                *   Regulations status page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("СОСТОЯНИЕ ПРИБОРОВ СТАНЦИИ")}
+
+                                    GridLayout {
+                                        rows: 4
+                                        columns: 2
+                                        flow: GridLayout.TopToBottom
+
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Общее")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. АГ-Л"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPage1Index}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. ПГ-Л")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. КЛ-У")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. ДМД, УЗОЗМ"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusDMDUZOZMPageIndex}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. Тракты ПРД, ПРМ")}
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
+                                }
+
+                                /*
+                                *   Regulations status AGL page 1
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("СОСТОЯНИЕ АГ-Л, ССП И ГС")}
+
+                                    GridLayout {
+                                        rows: 11
                                         columns: 2
 
-                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. Пуск")}
-                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. АГ-Л")}
-                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. Стоп")}
-                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.mainPageIndex}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма ТЭЗ АГ-БЛ:")}
+                                        DisplayTextMD3 {text: qsTr("Есть")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма ТЭЗ АГ-АЛ:")}
+                                        DisplayTextMD3 {text: qsTr("Есть")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Корректность режима:")}
+                                        DisplayTextMD3 {text: qsTr("Есть")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма каналов:")}
+                                        DisplayTextMD3 {text: qsTr("Есть")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Синхронизм с РТР:")}
+                                        DisplayTextMD3 {text: qsTr("")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Запрос КАУ ПРМ:")}
+                                        DisplayTextMD3 {text: qsTr("Нет")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Запрос РАТС:")}
+                                        DisplayTextMD3 {text: qsTr("Нет")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приём ГС основного:")}
+                                        DisplayTextMD3 {text: qsTr("Норма")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ошибки в ГС основном:")}
+                                        DisplayTextMD3 {text: qsTr("0")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приём ГС дополнительного:")}
+                                        DisplayTextMD3 {text: qsTr("Не задан")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ошибки в ГС дополнительном:")}
+                                        DisplayTextMD3 {text: qsTr("")}
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        Item {Layout.fillWidth: true}
+                                        ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPage2Index}
+                                        ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusPageIndex}
                                     }
                                 }
-                            }
 
-                            /*
-                            *   Regulations page
-                            */
-                            ColumnLayout {
-                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("РЕГЛАМЕНТ")}
+                                /*
+                                *   Regulations status AGL page 2
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("СОСТОЯНИЕ АГ-Л, ТЛФ1")}
 
-                                GridLayout {
-                                    rows: 3
-                                    columns: 2
-                                    flow: GridLayout.TopToBottom
+                                    GridLayout {
+                                        rows: 9
+                                        columns: 2
 
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Состояние"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusPageIndex}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. Режим"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. Режим АГ-Л"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. Монитор")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. Шлейф"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPlumePageIndex}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. Управление")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ПРМ:")}
+                                        DisplayTextMD3 {text: qsTr("Задан")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал на входе РТР:")}
+                                        DisplayTextMD3 {text: qsTr("Есть")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал абонента:")}
+                                        DisplayTextMD3 {text: qsTr("Есть")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Информация:")}
+                                        DisplayTextMD3 {text: qsTr("Есть")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ошибки:")}
+                                        DisplayTextMD3 {text: qsTr("0")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ПРД:")}
+                                        DisplayTextMD3 {text: qsTr("Задан")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Синхронизация:")}
+                                        DisplayTextMD3 {text: qsTr("Есть")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал на входе:")}
+                                        DisplayTextMD3 {text: qsTr("Есть")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Информация на входе:")}
+                                        DisplayTextMD3 {text: qsTr("Есть")}
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        Item {Layout.fillWidth: true}
+                                        ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPage1Index}
+                                        ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPage3Index}
+                                        ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusPageIndex}
+                                    }
                                 }
 
-                                Item {Layout.fillHeight: true}
+                                /*
+                                *   Regulations status AGL page 2
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("СОСТОЯНИЕ АГ-Л, ТЛФ2")}
 
-                                ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.mainPageIndex}
-                            }
+                                    GridLayout {
+                                        rows: 9
+                                        columns: 2
 
-                            /*
-                            *   Regulations status page
-                            */
-                            ColumnLayout {
-                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("СОСТОЯНИЕ ПРИБОРОВ СТАНЦИИ")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ПРМ:")}
+                                        DisplayTextMD3 {text: qsTr("Не задан")}
 
-                                GridLayout {
-                                    rows: 4
-                                    columns: 2
-                                    flow: GridLayout.TopToBottom
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал на входе РТР:")}
+                                        DisplayTextMD3 {text: qsTr("")}
 
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Общее")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. АГ-Л"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPage1Index}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. ПГ-Л")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. КЛ-У")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. ДМД, УЗОЗМ"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusDMDUZOZMPageIndex}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. Тракты ПРД, ПРМ")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал абонента:")}
+                                        DisplayTextMD3 {text: qsTr("")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Информация:")}
+                                        DisplayTextMD3 {text: qsTr("")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ошибки:")}
+                                        DisplayTextMD3 {text: qsTr("")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ПРД:")}
+                                        DisplayTextMD3 {text: qsTr("Не задан")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Синхронизация:")}
+                                        DisplayTextMD3 {text: qsTr("")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал на входе:")}
+                                        DisplayTextMD3 {text: qsTr("")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Информация на входе:")}
+                                        DisplayTextMD3 {text: qsTr("")}
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        Item {Layout.fillWidth: true}
+                                        ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPage2Index}
+                                        ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusPageIndex}
+                                    }
                                 }
 
-                                Item {Layout.fillHeight: true}
+                                /*
+                                *   Regulations status DMD UZOZM page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("СОСТОЯНИЕ ДМД")}
 
-                                ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
-                            }
+                                    GridLayout {
+                                        rows: 8
+                                        columns: 2
 
-                            /*
-                            *   Regulations status AGL page 1
-                            */
-                            ColumnLayout {
-                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("СОСТОЯНИЕ АГ-Л, ССП И ГС")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма УПЧ:")}
+                                        DisplayTextMD3 {text: qsTr("Есть")}
 
-                                GridLayout {
-                                    rows: 11
-                                    columns: 2
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма ДМД:")}
+                                        DisplayTextMD3 {text: qsTr("Есть")}
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма ТЭЗ АГ-БЛ:")}
-                                    DisplayTextMD3 {text: qsTr("Есть")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Захват ПЧ:")}
+                                        DisplayTextMD3 {text: qsTr("Есть")}
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма ТЭЗ АГ-АЛ:")}
-                                    DisplayTextMD3 {text: qsTr("Есть")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Захват ТЧ:")}
+                                        DisplayTextMD3 {text: qsTr("Есть")}
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Корректность режима:")}
-                                    DisplayTextMD3 {text: qsTr("Есть")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Поиск:")}
+                                        DisplayTextMD3 {text: qsTr("Нет")}
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма каналов:")}
-                                    DisplayTextMD3 {text: qsTr("Есть")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Качество сигнала:")}
+                                        DisplayTextMD3 {text: qsTr("Норма")}
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Синхронизм с РТР:")}
-                                    DisplayTextMD3 {text: qsTr("")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Расстройка, Гц:")}
+                                        DisplayTextMD3 {text: qsTr("-100")}
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Запрос КАУ ПРМ:")}
-                                    DisplayTextMD3 {text: qsTr("Нет")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Уровень ПРМ:")}
+                                        DisplayTextMD3 {text: qsTr("16513")}
+                                    }
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Запрос РАТС:")}
-                                    DisplayTextMD3 {text: qsTr("Нет")}
+                                    Item {Layout.fillHeight: true}
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приём ГС основного:")}
-                                    DisplayTextMD3 {text: qsTr("Норма")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ошибки в ГС основном:")}
-                                    DisplayTextMD3 {text: qsTr("0")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приём ГС дополнительного:")}
-                                    DisplayTextMD3 {text: qsTr("Не задан")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ошибки в ГС дополнительном:")}
-                                    DisplayTextMD3 {text: qsTr("")}
-                                }
-
-                                Item {Layout.fillHeight: true}
-
-                                RowLayout {
-                                    Item {Layout.fillWidth: true}
-                                    ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPage2Index}
                                     ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusPageIndex}
                                 }
-                            }
 
-                            /*
-                            *   Regulations status AGL page 2
-                            */
-                            ColumnLayout {
-                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("СОСТОЯНИЕ АГ-Л, ТЛФ1")}
+                                /*
+                                *   Regulations mode page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("ВВОД РЕЖИМНЫХ ПАРАМЕТРОВ")}
 
-                                GridLayout {
-                                    rows: 9
-                                    columns: 2
+                                    GridLayout {
+                                        rows: 6
+                                        columns: 3
+                                        flow: GridLayout.TopToBottom
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ПРМ:")}
-                                    DisplayTextMD3 {text: qsTr("Задан")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Общее")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. ПГ-Л")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. КЛ-У"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage1Index}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. ДМД, УЗОЗМ"); Layout.column: 1; onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage1Index}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. Тракты ПРД, ПРМ"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage1Index}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. Л807"); Layout.column: 2; onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeL807PageIndex}
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал на входе РТР:")}
-                                    DisplayTextMD3 {text: qsTr("Есть")}
+                                        ColumnLayout {
+                                            Layout.row: 2;
+                                            Layout.column: 1
+                                            Layout.rowSpan: 4;
+                                            Layout.columnSpan: 2
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал абонента:")}
-                                    DisplayTextMD3 {text: qsTr("Есть")}
+                                            DisplayTextMD3 {Layout.alignment: Qt.AlignHCenter; text: qsTr("Внимание!")}
+                                            DisplayTextMD3 {text: qsTr("Вы вошли в технологический режим\nуправления станцией.\nКоррекция режимных параметров\nможет привести к нарушению\nрабочего режима")}
+                                        }
+                                      }
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Информация:")}
-                                    DisplayTextMD3 {text: qsTr("Есть")}
+                                    Item {Layout.fillHeight: true}
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ошибки:")}
-                                    DisplayTextMD3 {text: qsTr("0")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ПРД:")}
-                                    DisplayTextMD3 {text: qsTr("Задан")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Синхронизация:")}
-                                    DisplayTextMD3 {text: qsTr("Есть")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал на входе:")}
-                                    DisplayTextMD3 {text: qsTr("Есть")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Информация на входе:")}
-                                    DisplayTextMD3 {text: qsTr("Есть")}
+                                    ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
                                 }
 
-                                Item {Layout.fillHeight: true}
-
-                                RowLayout {
-                                    Item {Layout.fillWidth: true}
-                                    ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPage1Index}
-                                    ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPage3Index}
-                                    ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusPageIndex}
-                                }
-                            }
-
-                            /*
-                            *   Regulations status AGL page 2
-                            */
-                            ColumnLayout {
-                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("СОСТОЯНИЕ АГ-Л, ТЛФ2")}
-
-                                GridLayout {
-                                    rows: 9
-                                    columns: 2
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ПРМ:")}
-                                    DisplayTextMD3 {text: qsTr("Не задан")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал на входе РТР:")}
-                                    DisplayTextMD3 {text: qsTr("")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал абонента:")}
-                                    DisplayTextMD3 {text: qsTr("")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Информация:")}
-                                    DisplayTextMD3 {text: qsTr("")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ошибки:")}
-                                    DisplayTextMD3 {text: qsTr("")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ПРД:")}
-                                    DisplayTextMD3 {text: qsTr("Не задан")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Синхронизация:")}
-                                    DisplayTextMD3 {text: qsTr("")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал на входе:")}
-                                    DisplayTextMD3 {text: qsTr("")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Информация на входе:")}
-                                    DisplayTextMD3 {text: qsTr("")}
-                                }
-
-                                Item {Layout.fillHeight: true}
-
-                                RowLayout {
-                                    Item {Layout.fillWidth: true}
-                                    ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPage2Index}
-                                    ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusPageIndex}
-                                }
-                            }
-
-                            /*
-                            *   Regulations status DMD UZOZM page
-                            */
-                            ColumnLayout {
-                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("СОСТОЯНИЕ ДМД")}
-
-                                GridLayout {
-                                    rows: 8
-                                    columns: 2
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма УПЧ:")}
-                                    DisplayTextMD3 {text: qsTr("Есть")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Норма ДМД:")}
-                                    DisplayTextMD3 {text: qsTr("Есть")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Захват ПЧ:")}
-                                    DisplayTextMD3 {text: qsTr("Есть")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Захват ТЧ:")}
-                                    DisplayTextMD3 {text: qsTr("Есть")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Поиск:")}
-                                    DisplayTextMD3 {text: qsTr("Нет")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Качество сигнала:")}
-                                    DisplayTextMD3 {text: qsTr("Норма")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Расстройка, Гц:")}
-                                    DisplayTextMD3 {text: qsTr("-100")}
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Уровень ПРМ:")}
-                                    DisplayTextMD3 {text: qsTr("16513")}
-                                }
-
-                                Item {Layout.fillHeight: true}
-
-                                ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusPageIndex}
-                            }
-
-                            /*
-                            *   Regulations mode page
-                            */
-                            ColumnLayout {
-		                        ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("ВВОД РЕЖИМНЫХ ПАРАМЕТРОВ")}
-
-                                GridLayout {
-                                    rows: 6
-                                    columns: 3
-                                    flow: GridLayout.TopToBottom
-
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Общее")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. ПГ-Л")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. КЛ-У"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage1Index}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. ДМД, УЗОЗМ"); Layout.column: 1; onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage1Index}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. Тракты ПРД, ПРМ"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage1Index}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. Л807"); Layout.column: 2; onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeL807PageIndex}
-
-                                    ColumnLayout {
-                                        Layout.row: 2;
-                                        Layout.column: 1
-                                        Layout.rowSpan: 4;
-                                        Layout.columnSpan: 2
-
-                                        DisplayTextMD3 {Layout.alignment: Qt.AlignHCenter; text: qsTr("Внимание!")}
-                                        DisplayTextMD3 {text: qsTr("Вы вошли в технологический режим\nуправления станцией.\nКоррекция режимных параметров\nможет привести к нарушению\nрабочего режима")}
-                                    }
-                                  }
-
-                                Item {Layout.fillHeight: true}
-
-                                ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
-                            }
-
-                            /*
-                            *   Regulations mode KLU page 1
-                            */
-                            ColumnLayout {
-                                // TODO: Very long KLU page 1. Can I make the combobox smaller?
-
-                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
-
-                                GridLayout {
-                                    rows: 8
-                                    columns: 2
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРМ:")}
-                                    ComboBoxMD3 {
-                                        model: ["Спец. ГС", "Спец. ГС и ГС"]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Код Баркера ПРМ:")}
-                                    ComboBoxMD3 {
-                                        model: ["Вкл.", "Откл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Инверсия кода Баркера:")}
-                                    ComboBoxMD3 {
-                                        model: ["Вкл.", "Откл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ДСЧ:")}
-                                    ComboBoxMD3 {
-                                        model: ["Вкл.", "Откл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер ключа ПРМ:")}
-                                    ComboBoxMD3 {
-                                        model: [
-                                            "0", "1", "2", "3",
-                                            "4", "5", "6", "7",
-                                            "8", "9", "10", "11",
-                                            "12", "13", "14", "15"
-                                        ]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер подключа ПРМ:")}
-                                    ComboBoxMD3 {
-                                        model: ["1", "2", "3", "4", "5", "6"]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Полоса поиска ПРМ, кГц:")}
-                                    ComboBoxMD3 {
-                                        model: ["+-1", "+-4", "+-8"]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРМ:")}
-                                    ComboBoxMD3 {
-                                        model: ["Fт1", "Fт2"]
-                                    }
-                                }
-
-                                Item {Layout.fillHeight: true}
-
-                                RowLayout {
-                                    ButtonMD3 {text: qsTr("1. Изм.")}
-                                    Item {Layout.fillWidth: true}
-                                    ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage2Index}
-                                    ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
-                                }
-                            }
-
-                            /*
-                            *   Regulations mode KLU page 2
-                            */
-                            ColumnLayout {
-                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
-
-                                GridLayout {
-                                    rows: 5
-                                    columns: 2
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРД:")}
-                                    ComboBoxMD3 {
-                                        model: ["Спец. ГС", "Спец. ГС и ГС"]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Код Баркера ПРД:")}
-                                    ComboBoxMD3 {
-                                        model: ["Вкл.", "Откл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер ключа ПРД:")}
-                                    ComboBoxMD3 {
-                                        model: [
-                                            "0", "1", "2", "3",
-                                            "4", "5", "6", "7",
-                                            "8", "9", "10", "11",
-                                            "12", "13", "14", "15"
-                                        ]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер подключа ПРД:")}
-                                    ComboBoxMD3 {
-                                        model: ["1", "2", "3", "4", "5", "6"]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРД:")}
-                                    ComboBoxMD3 {
-                                        model: ["Fт1", "Fт2"]
-                                    }
-                                }
-
-                                Item {Layout.fillHeight: true}
-
-                                RowLayout {
-                                    ButtonMD3 {text: qsTr("1. Изм.")}
-                                    Item {Layout.fillWidth: true}
-                                    ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage1Index}
-                                    ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage3Index}
-                                    ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
-                                }
-                            }
-
-                            /*
-                            *   Regulations mode KLU page 3
-                            */
-                            ColumnLayout {
-                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
-
-                                GridLayout {
-                                    rows: 8
-                                    columns: 2
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тестпроверка:")}
-                                    ComboBoxMD3 {
-                                        id: kluTestCheck
-                                        enabled: !changeKLU3Button.visible
-                                        currentIndex: klu.test_check
-                                        model: ["Вкл.", "Откл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим теста:")}
-                                    ComboBoxMD3 {
-                                        model: ["ПР", "ОСБ"]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ПРД 70:")}
-                                    ComboBoxMD3 {
-                                        id: kluPRD70
-                                        enabled: !changeKLU3Button.visible
-                                        currentIndex: klu.prd70
-                                        model: ["Вкл.", "Откл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сброс счетчика ошибок:")}
-                                    ComboBoxMD3 {
-                                        model: ["Вкл.", "Откл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный 1:")}
-                                    ComboBoxMD3 {
-                                        model: ["Вкл.", "Откл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный 2:")}
-                                    ComboBoxMD3 {
-                                        model: ["Вкл.", "Откл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД:")}
-                                    ComboBoxMD3 {
-                                        id: kluPRDSignalType
-                                        enabled: !changeKLU3Button.visible
-                                        currentIndex: klu.prd_signal_type
-                                        model: [
-                                            "УП (ППРЧ)",
-                                            "ШПС 1",
-                                            "ШПС 2",
-                                            "ШПС 3",
-                                            "Несущая 1",
-                                            "Несущая 2",
-                                            "Несущая 3",
-                                            "Несущая 4"
-                                        ]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ШПС ПРД:")}
-                                    ComboBoxMD3 {
-                                        model: ["Fт1", "Fт2"]
-                                    }
-                                }
-
-                                Item {Layout.fillHeight: true}
-
-                                RowLayout {
-                                    ButtonMD3 {
-                                        id: changeKLU3Button
-                                        text: qsTr("1. Изм.")
-                                        onClicked: visible = false
-                                    }
-
-                                    Item {Layout.fillWidth: true}
-
-                                    ButtonMD3 {
-                                        visible: !changeKLU3Button.visible
-                                        text: qsTr("2. Запись")
-                                        onClicked: {
-                                            klu.test_check = kluTestCheck.currentIndex
-                                            klu.prd70 = kluPRD70.currentIndex
-                                            klu.prd_signal_type = kluPRDSignalType.currentIndex
-
-                                            changeKLU3Button.visible = true
-
-                                            checker.check(configuration.selected_norm)
-                                        }
-                                    }
-
-                                    ButtonMD3 {
-                                        visible: !changeKLU3Button.visible
-                                        text: qsTr("3. Отмена")
-
-                                        onClicked: {
-                                            kluTestCheck.currentIndex = klu.test_check
-                                            kluPRD70.currentIndex = klu.prd70
-                                            kluPRDSignalType.currentIndex = klu.prd_signal_type
-
-                                            changeKLU3Button.visible = true
-                                        }
-                                    }
-
-                                    ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage2Index}
-                                    ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
-                                }
-                            }
-
-                            property int regulationsModePage1Index
-
-                            /*
-                            *   Regulations mode DMD UZOZM page 1
-                            */
-                            ColumnLayout {
-							    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ДМД, УЗОЗМ")}
-
-							    GridLayout {
-                                    rows: 7
-                                    columns: 2
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип радиосигнала ПРМ:")}
-                                    ComboBoxMD3 {
-                                        id: dmdUZOZMPRMSignalType
-                                        enabled: !changeDMDUZOZM1Button.visible
-                                        currentIndex: dmd_uzozm.prm_signal_type
-                                        model: ["ШПС", "УП"]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Декодер:")}
-                                    ComboBoxMD3 {
-                                        id: dmdUZOZMDecoder
-                                        enabled: !changeDMDUZOZM1Button.visible
-                                        currentIndex: dmd_uzozm.decoder
-                                        model: [
-                                            "K=5; R=1/2",
-                                            "K=7; R=1/2",
-                                            "K=7; R=3/4",
-                                            "K=7; R=3/4 инв.",
-                                            "Откл."
-                                        ]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ДМД, кбит/с:")}
-                                    ComboBoxMD3 {
-                                        id: dmdUZOZMDMDSpeed
-                                        enabled: !changeDMDUZOZM1Button.visible
-                                        currentIndex: dmd_uzozm.dmd_speed
-                                        model: [
-                                            "1.5", "3", "6", "12", "30",
-                                            "60", "120", "180", "300", "600",
-                                            "1.2", "2.4", "4.8", "9.6", "24",
-                                            "48", "96", "144", "240", "480"
-                                        ]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ДМД:")}
-                                    ComboBoxMD3 {
-                                        id: dmdUZOZMDMDMode
-                                        enabled: !changeDMDUZOZM1Button.visible
-                                        currentIndex: dmd_uzozm.dmd_mode
-                                        model: ["Работа", "Проверка"]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ПРД УЗОЗМ, кбит/с:")}
-                                    ComboBoxMD3 {
-                                        id: dmdUZOZMPRDUZOZMSpeed
-                                        enabled: false
-                                        currentIndex: dmd_uzozm.prd_uzozm_speed
-                                        model: ["1.5 ОФТ"]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим УЗОЗМ:")}
-                                    ComboBoxMD3 {
-                                        id: dmdUZOZMUZOZMMode
-                                        enabled: !changeDMDUZOZM1Button.visible
-                                        currentIndex: dmd_uzozm.uzozm_mode
-                                        model: ["Работа", "Проверка"]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный канал в ФТ4:")}
-                                    ComboBoxMD3 {
-                                        id: dmdUZOZMServiceChannelFT4
-                                        enabled: !changeDMDUZOZM1Button.visible
-                                        currentIndex: dmd_uzozm.service_channel_ft4
-                                        model: ["1.2 кБод", "4.8 кБод"]
-                                    }
-		                        }
-
-							    Item {Layout.fillHeight: true}
-
-                                RowLayout {
-                                    ButtonMD3 {
-                                        id: changeDMDUZOZM1Button
-                                        text: qsTr("1. Изм.")
-                                        onClicked: visible = false
-                                    }
-
-		                            Item {Layout.fillWidth: true}
-
-                                    ButtonMD3 {
-                                        visible: !changeDMDUZOZM1Button.visible
-                                        text: qsTr("2. Запись")
-                                        onClicked: {
-                                            dmd_uzozm.prm_signal_type = dmdUZOZMPRMSignalType.currentIndex
-                                            dmd_uzozm.decoder = dmdUZOZMDecoder.currentIndex
-                                            dmd_uzozm.dmd_speed = dmdUZOZMDMDSpeed.currentIndex
-                                            dmd_uzozm.dmd_mode = dmdUZOZMDMDMode.currentIndex
-                                            dmd_uzozm.prd_uzozm_speed = dmdUZOZMPRDUZOZMSpeed.currentIndex
-                                            dmd_uzozm.uzozm_mode = dmdUZOZMUZOZMMode.currentIndex
-                                            dmd_uzozm.service_channel_ft4 = dmdUZOZMServiceChannelFT4.currentIndex
-
-                                            changeDMDUZOZM1Button.visible = true
-
-                                            checker.check(configuration.selected_norm)
-                                        }
-                                    }
-
-                                    ButtonMD3 {
-                                        visible: !changeDMDUZOZM1Button.visible
-                                        text: qsTr("3. Отмена")
-
-                                        onClicked: {
-                                            dmdUZOZMPRMSignalType.currentIndex = dmd_uzozm.prm_signal_type
-                                            dmdUZOZMDecoder.currentIndex = dmd_uzozm.decoder
-                                            dmdUZOZMDMDSpeed.currentIndex = dmd_uzozm.dmd_speed
-                                            dmdUZOZMDMDMode.currentIndex = dmd_uzozm.dmd_mode
-                                            dmdUZOZMPRDUZOZMSpeed.currentIndex = dmd_uzozm.prd_uzozm_speed
-                                            dmdUZOZMUZOZMMode.currentIndex = dmd_uzozm.uzozm_mode
-                                            dmdUZOZMServiceChannelFT4.currentIndex = dmd_uzozm.service_channel_ft4
-
-                                            changeDMDUZOZM1Button.visible = true
-                                        }
-                                    }
-
-		                            ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage2Index}
-		                            ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
-		                        }
-		                    }
-
-                            /*
-                            *   Regulations mode DMD UZOZM page 2
-                            */
-		                    ColumnLayout {
-							    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ДМД")}
-
-							    GridLayout {
-                                    rows: 7
-                                    columns: 2
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер фильтра:")}
-                                    ComboBoxMD3 {
-                                        id: dmdUZOZMFilterNumber
-                                        enabled: !changeDMDUZOZM2Button.visible
-                                        currentIndex: dmd_uzozm.filter_number
-                                        model: ["1", "2", "3", "4", "5", "Не задан"]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("АРУ:")}
-                                    ComboBoxMD3 {
-                                        id: dmdUZOZMARU
-                                        enabled: !changeDMDUZOZM2Button.visible
-                                        currentIndex: dmd_uzozm.aru
-                                        model: ["АРУ", "РРУ"]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Автопоиск:")}
-                                    ComboBoxMD3 {
-                                        id: dmdUZOZMAutoSearch
-                                        enabled: !changeDMDUZOZM2Button.visible
-                                        currentIndex: dmd_uzozm.auto_search
-                                        model: ["Вкл.", "Откл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("АСЧ:")}
-                                    ComboBoxMD3 {
-                                        id: dmdUZOZMASCH
-                                        enabled: !changeDMDUZOZM2Button.visible
-                                        currentIndex: dmd_uzozm.asch
-                                        model: ["Вкл.", "Откл."]
-		                            }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Диф. декодер:")}
-                                    ComboBoxMD3 {
-                                        id: dmdUZOZMDifDecoder
-                                        enabled: !changeDMDUZOZM2Button.visible
-                                        currentIndex: dmd_uzozm.dif_decoder
-                                        model: ["Откл.", "Вкл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Полоса ДМД:")}
-                                    ComboBoxMD3 {
-                                        id: dmdUZOZMDMDBand
-                                        enabled: !changeDMDUZOZM2Button.visible
-                                        currentIndex: dmd_uzozm.dmd_band
-                                        model: ["Узкая", "Широкая"]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Корректор:")}
-                                    ComboBoxMD3 {
-                                        id: dmdUZOZMCorrector
-                                        enabled: !changeDMDUZOZM2Button.visible
-                                        currentIndex: dmd_uzozm.corrector
-                                        model: ["Вкл.", "Откл."]
-                                    }
-		                        }
-
-							    Item {Layout.fillHeight: true}
-
-                                RowLayout {
-                                    ButtonMD3 {
-                                        id: changeDMDUZOZM2Button
-                                        text: qsTr("1. Изм.")
-                                        onClicked: visible = false
-                                    }
-
-                                    Item {Layout.fillWidth: true}
-
-                                    ButtonMD3 {
-                                        visible: !changeDMDUZOZM2Button.visible
-                                        text: qsTr("2. Запись")
-                                        onClicked: {
-                                            dmd_uzozm.filter_number = dmdUZOZMFilterNumber.currentIndex
-                                            dmd_uzozm.aru = dmdUZOZMARU.currentIndex
-                                            dmd_uzozm.auto_search = dmdUZOZMAutoSearch.currentIndex
-                                            dmd_uzozm.asch = dmdUZOZMASCH.currentIndex
-                                            dmd_uzozm.dif_decoder = dmdUZOZMDifDecoder.currentIndex
-                                            dmd_uzozm.dmd_band = dmdUZOZMDMDBand.currentIndex
-                                            dmd_uzozm.corrector = dmdUZOZMCorrector.currentIndex
-
-                                            changeDMDUZOZM2Button.visible = true
-
-                                            checker.check(configuration.selected_norm)
-                                        }
-                                    }
-
-                                    ButtonMD3 {
-                                        visible: !changeDMDUZOZM2Button.visible
-                                        text: qsTr("3. Отмена")
-
-                                        onClicked: {
-                                            dmdUZOZMFilterNumber.currentIndex = dmd_uzozm.filter_number
-                                            dmdUZOZMARU.currentIndex = dmd_uzozm.aru
-                                            dmdUZOZMAutoSearch.currentIndex = dmd_uzozm.auto_search
-                                            dmdUZOZMASCH.currentIndex = dmd_uzozm.asch
-                                            dmdUZOZMDifDecoder.currentIndex = dmd_uzozm.dif_decoder
-                                            dmdUZOZMDMDBand.currentIndex = dmd_uzozm.dmd_band
-                                            dmdUZOZMCorrector.currentIndex = dmd_uzozm.corrector
-
-                                            changeDMDUZOZM2Button.visible = true
-                                        }
-                                    }
-
-                                    ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage1Index}
-                                    ButtonMD3 {text: qsTr(">")}
-                                    ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
-                                }
-                            }
-
-                            /*
-                            *   Regulations mode tracts PRM PRM page 1
-                            */
-                            ColumnLayout {
-							    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ПРМ, ПРД")}
-
-							    GridLayout {
-                                    rows: 5
-                                    columns: 2
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Автоконтроль CAN:")}
-                                    ComboBoxMD3 {
-                                        id: tractsPRDPRDAutoCheckCAN
-                                        enabled: !changeTractsPRMPRDButton1.visible
-                                        currentIndex: tracts_prm_prd.auto_check_can
-                                        model: ["Откл.", "Вкл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Поддиппазон приема:")}
-                                    ComboBoxMD3 {
-                                        id: tractsPRDPRDReceiveSubband
-                                        enabled: !changeTractsPRMPRDButton1.visible
-                                        currentIndex: tracts_prm_prd.receive_subband
-                                        model: [
-                                            "1", "2", "3", "4", "5", "6", "7", "8", "9",
-                                            "10", "11", "12", "13", "14", "15", "16", "18", "19",
-                                            "20", "21", "22", "23", "24", "25", "26", "27", "28",
-                                            "29", "30", "31", "32", "33", "34", "35", "36", "37",
-                                            "38", "39", "40", "41", "42", "43", "44", "45", "46"
-                                        ]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
-                                    ComboBoxMD3 {
-                                        id: tractsPRDPRDShiftGenerator
-                                        enabled: !changeTractsPRMPRDButton1.visible
-                                        currentIndex: tracts_prm_prd.shift_generator
-                                        model: ["Откл.", "Вкл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ствольный фильтр:")}
-                                    ComboBoxMD3 {
-                                        id: tractsPRDPRDBarrelFilter
-                                        enabled: !changeTractsPRMPRDButton1.visible
-                                        currentIndex: tracts_prm_prd.barrel_filter
-                                        model: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
-                                    ComboBoxMD3 {
-                                        id: tractsPRDPRDAmplifier
-                                        enabled: !changeTractsPRMPRDButton1.visible
-                                        currentIndex: tracts_prm_prd.amplifier
-                                        model: ["Откл.", "Вкл."]
-                                    }
-		                        }
-
-							    Item {Layout.fillHeight: true}
-
-                                RowLayout {
-                                    ButtonMD3 {
-                                        id: changeTractsPRMPRDButton1
-                                        text: qsTr("1. Изм.")
-                                        onClicked: visible = false
-                                    }
-
-                                    Item {Layout.fillWidth: true}
-
-                                    ButtonMD3 {
-                                        visible: !changeTractsPRMPRDButton1.visible
-                                        text: qsTr("2. Запись")
-                                        onClicked: {
-                                            tracts_prm_prd.auto_check_can = tractsPRDPRDAutoCheckCAN.currentIndex
-                                            tracts_prm_prd.receive_subband = tractsPRDPRDReceiveSubband.currentIndex
-                                            tracts_prm_prd.shift_generator = tractsPRDPRDShiftGenerator.currentIndex
-                                            tracts_prm_prd.barrel_filter = tractsPRDPRDBarrelFilter.currentIndex
-                                            tracts_prm_prd.amplifier = tractsPRDPRDAmplifier.currentIndex
-
-                                            changeTractsPRMPRDButton1.visible = true
-
-                                            checker.check(configuration.selected_norm)
-                                        }
-                                    }
-
-                                    ButtonMD3 {
-                                        visible: !changeTractsPRMPRDButton1.visible
-                                        text: qsTr("3. Отмена")
-
-                                        onClicked: {
-                                            tractsPRDPRDAutoCheckCAN.currentIndex = tracts_prm_prd.auto_check_can
-                                            tractsPRDPRDReceiveSubband.currentIndex = tracts_prm_prd.receive_subband
-                                            tractsPRDPRDShiftGenerator.currentIndex = tracts_prm_prd.shift_generator
-                                            tractsPRDPRDBarrelFilter.currentIndex = tracts_prm_prd.barrel_filter
-                                            tractsPRDPRDAmplifier.currentIndex = tracts_prm_prd.amplifier
-
-                                            changeTractsPRMPRDButton1.visible = true
-
-                                            checker.check(configuration.selected_norm)
-                                        }
-                                    }
-
-                                    ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage2Index}
-                                    ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
-		                        }
-						    }
-
-						    /*
-                            *   Regulations mode tracts PRM PRM page 2
-                            */
-                            ColumnLayout {
-							    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ПРМ, ПРД")}
-
-							    GridLayout {
-                                    rows: 6
-                                    columns: 2
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип радиосигнала:")}
-                                    ComboBoxMD3 {
-                                        id: tractsPRDPRDRadioSignalType
-                                        enabled: !changeTractsPRMPRDButton2.visible
-                                        currentIndex: tracts_prm_prd.radio_signal
-                                        model: [
-                                            "УП",
-                                            "ППРЧ", // TODO: if this next value is empty
-                                            "ШПС"
-                                        ]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ОФТ:")}
-                                    ComboBoxMD3 {
-                                        id: tractsPRDPRDOFTSignalType
-                                        enabled: !changeTractsPRMPRDButton2.visible
-                                        currentIndex: tracts_prm_prd.signal_type
-                                        model: [
-                                            "ОФТ",
-                                            "K=5; R=1/2",
-                                            "K=7; R=1/2",
-                                            "K=7; R=3/4",
-                                        ]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ЗС:")}
-                                    ComboBoxMD3 {
-                                        id: tractsPRDPRDZSSpeed
-                                        enabled: !changeTractsPRMPRDButton2.visible
-                                        currentIndex: tracts_prm_prd.zs_speed
-                                        model: (tractsPRDPRDOFTSignalType.currentIndex === 0  || tractsPRDPRDOFTSignalType.currentIndex === 1) ? [
-                                            "1.5",
-                                            "3",
-                                            "6",
-                                            "12",
-                                            "30",
-                                            "60",
-                                            "1.2",
-                                            "2.4",
-                                            "4.8",
-                                            "9.6",
-                                            "48"
-                                        ] : tractsPRDPRDOFTSignalType.currentIndex === 2 ? [
-                                            "16 MX",
-                                            "32 MX",
-                                            "48 MX",
-                                            "64 MX",
-                                            "64 MX",
-                                            "64 HDB СНС",
-                                            "64 HDB ПНС",
-                                            "128 HDB",
-                                            "256 HDB",
-                                            "144 HDB",
-                                            "48 RS232",
-                                            "64 RS232",
-                                            "128 RS232",
-                                            "144 RS232",
-                                        ] : tractsPRDPRDOFTSignalType.currentIndex === 2 ? [
-                                            "64 HDB СНС",
-                                            "64 HDB ПНС",
-                                            "128 HDB",
-                                            "256 HDB",
-                                            "384 HDB",
-                                            "512 HDB",
-                                            "1024 HDB",
-                                            "2048 HDB",
-                                            "256 RS422/530",
-                                            "384 RS422/530",
-                                            "512 RS422/530",
-                                        ] : []
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
-                                    ComboBoxMD3 {
-                                        id: tractsPRDPRDOutputU205D
-                                        enabled: !changeTractsPRMPRDButton2.visible
-                                        currentIndex: tracts_prm_prd.output_u205d
-                                        model: ["Вкл.", "Откл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
-                                    TextFieldMD3 {
-                                        id: tractsPRDPRDPRDWaveNumber
-                                        implicitWidth: tractsPRDPRDOutputU205D.implicitWidth
-                                        enabled: !changeTractsPRMPRDButton2.visible
-                                        text: tracts_prm_prd.prd_wave_number
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРМ:")}
-                                    TextFieldMD3 {
-                                        id: tractsPRDPRDPRMWaveNumber
-                                        implicitWidth: tractsPRDPRDOutputU205D.implicitWidth
-                                        enabled: !changeTractsPRMPRDButton2.visible
-                                        text: tracts_prm_prd.prm_wave_number
-                                    }
-                                }
-
-							        Item {Layout.fillHeight: true}
-
-                                RowLayout {
-                                    ButtonMD3 {
-                                        id: changeTractsPRMPRDButton2
-                                        text: qsTr("1. Изм.")
-                                        onClicked: visible = false
-                                    }
-
-                                    Item {Layout.fillWidth: true}
-
-                                    ButtonMD3 {
-                                        visible: !changeTractsPRMPRDButton2.visible
-                                        text: qsTr("2. Запись")
-                                        onClicked: {
-                                            tracts_prm_prd.radio_signal = tractsPRDPRDRadioSignalType.currentIndex
-                                            tracts_prm_prd.signal_type = tractsPRDPRDOFTSignalType.currentIndex
-                                            tracts_prm_prd.zs_speed = tractsPRDPRDZSSpeed.currentIndex
-                                            tracts_prm_prd.output_u205d = tractsPRDPRDOutputU205D.currentIndex
-                                            tracts_prm_prd.prd_wave_number = tractsPRDPRDPRDWaveNumber.text
-                                            tracts_prm_prd.prm_wave_number = tractsPRDPRDPRMWaveNumber.text
-
-                                            changeTractsPRMPRDButton2.visible = true
-
-                                            checker.check(configuration.selected_norm)
-                                        }
-                                    }
-
-                                    ButtonMD3 {
-                                        visible: !changeTractsPRMPRDButton2.visible
-                                        text: qsTr("3. Отмена")
-
-                                        onClicked: {
-                                            tractsPRDPRDRadioSignalType.currentIndex = tracts_prm_prd.radio_signal
-                                            tractsPRDPRDOFTSignalType.currentIndex = tracts_prm_prd.signal_type
-                                            tractsPRDPRDZSSpeed.currentIndex = tracts_prm_prd.zs_speed
-                                            tractsPRDPRDOutputU205D.currentIndex = tracts_prm_prd.output_u205d
-                                            tractsPRDPRDPRDWaveNumber.text = tracts_prm_prd.prd_wave_number
-                                            tractsPRDPRDPRMWaveNumber.text = tracts_prm_prd.prm_wave_number
-
-                                            changeTractsPRMPRDButton2.visible = true
-                                        }
-                                    }
-
-                                    ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage1Index}
-                                    ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
-		                        }
-                            }
-
-                            /*
-                            *   Regulations mode L807 page
-                            */
-                            ColumnLayout {
-		                        ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Л807")}
-
-                                DisplayTextMD3 {Layout.alignment: Qt.AlignHCenter; text: qsTr("Установленные интерфейсы:")}
-                                DisplayTextMD3 {Layout.alignment: Qt.AlignHCenter; text: qsTr("Интерфейс не обеспечивается")}
-
-                                GridLayout {
-                                    rows: 2
-                                    columns: 2
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Стык Л807:")}
-                                    ComboBoxMD3 {
-                                        id: l807Joint
-                                        enabled: !changeL807Button.visible
-		                                currentIndex: l807.joint
-                                        model: [
-                                            qsTr("Выключен"),
-                                            qsTr("ОЦК СН"),
-                                            qsTr("ОЦК ПН"),
-                                            qsTr("Т1"),
-                                            qsTr("Е1"),
-                                            qsTr("С1-ФЛ-КИ"),
-                                            qsTr("RS-232"),
-                                            qsTr("RS-422/530"),
-                                            qsTr("V-35"),
-                                            qsTr("RS-232 синхр."),
-                                            qsTr("Выключен"),
-                                        ]
-		                            }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Источник сигнала: ")}
-                                    ComboBoxMD3 {
-                                        id: l807SignalSource
-                                        enabled: !changeL807Button.visible
-                                        currentIndex: l807.signal_source
-                                        model: [qsTr("Л807"), qsTr("АГ-Л")]
-                                    }
-		                        }
-
-		                        Item {Layout.fillHeight: true}
-
-                                RowLayout {
-                                    ButtonMD3 {
-                                        id: changeL807Button
-                                        text: qsTr("1. Изм.")
-                                        onClicked: visible = false
-                                    }
-
-                                    Item {Layout.fillWidth: true}
-
-                                    ButtonMD3 {
-                                        visible: !changeL807Button.visible
-                                        text: qsTr("2. Запись")
-                                        onClicked: {
-                                            l807.joint = l807Joint.currentIndex
-                                            l807.signal_source = l807SignalSource.currentIndex
-
-                                            changeL807Button.visible = true
-
-                                            checker.check(configuration.selected_norm)
-                                        }
-                                    }
-
-                                    ButtonMD3 {
-                                        visible: !changeL807Button.visible
-                                        text: qsTr("3. Отмена")
-
-                                        onClicked: {
-                                            l807Joint.currentIndex = l807.joint
-                                            l807SignalSource.currentIndex = l807.signal_source
-
-                                            changeL807Button.visible = true
-                                        }
-                                    }
-
-		                            ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
-		                        }
-		                    }
-
-		                    /*
-                            *   Regulations mode AGL page
-                            */
-                            ColumnLayout {
-		                        ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("РЕЖИМ АГ-Л")}
-
-                                GridLayout {
-                                    rows: 6
-                                    columns: 3
-                                    flow: GridLayout.TopToBottom
-
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Режим прибора"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationModeAGLDeviceModePageIndex}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. ТЛФ1"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLTLF1PageIndex}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. ТЛФ2")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. ТЛФ3")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. ТЛФ4")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. ТЛФ5")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("7. КАУ1")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("8. КАУ2")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("9. КАУ3")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("10. КАУ4")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("11. КАУ5")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("12. ТЛГ1")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("13. ТЛГ2")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("14. ТЛГ3")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("15. ТЛГ4")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("16. Синх. вход")}
-                                }
-
-		                        Item {Layout.fillHeight: true}
-
-		                        ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
-		                    }
-
-		                    /*
-                            *   Regulations mode AGL device mode page
-                            */
-                            ColumnLayout {
-		                        ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режим прибора АГ-Л")}
-
-		                        GridLayout {
-                                    rows: 4
-                                    columns: 2
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим работы ЗС")}
-                                    ComboBoxMD3 {
-                                        id: aglZSOperatingMode
-                                        enabled: !changeAGLButton.visible
-                                        currentIndex: agl.zs_operating_mode
-                                        model: [
-                                            qsTr("ПР"),
-                                            qsTr("ОСБ без ППРЧ"),
-                                            qsTr("ППРЧ непрерывный"),
-                                            qsTr("ОСБ ШПС"),
-                                            qsTr("Транзит ТЛФ")
-                                        ]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скор ГС ПРМ, кбит/c")}
-                                    ComboBoxMD3 {
-                                        id: aglGSPRMSpeed
-                                        enabled: !changeAGLButton.visible
-                                        currentIndex: agl.speed_gs_prm
-                                        model: [
-                                            qsTr("Нет ГС"),
-                                            qsTr("1.5"),
-                                            qsTr("3"),
-                                            qsTr("6"),
-                                            qsTr("12"),
-                                            qsTr("30"),
-                                            qsTr("60"),
-                                            qsTr("120"),
-                                            qsTr("180"),
-                                            qsTr("300"),
-                                            qsTr("600")
-                                        ]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скор ГС ПРД, кбит/c")}
-                                    ComboBoxMD3 {
-                                        id: aglGSPRDSpeed
-                                        enabled: !changeAGLButton.visible
-                                        currentIndex: agl.speed_gs_prd
-                                        model: [
-                                            qsTr("Нет ГС"),
-                                            qsTr("1.5"),
-                                            qsTr("3"),
-                                            qsTr("6"),
-                                            qsTr("12")
-                                        ]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим РАТС")}
-                                    ComboBoxMD3 {
-                                        id: aglRATSMode
-                                        enabled: !changeAGLButton.visible
-                                        currentIndex: agl.rats_mode
-                                        model: [
-                                            qsTr("Отсутствует"),
-                                            qsTr("Закрепл. напр."),
-                                            qsTr("Незакрепл. напр.")
-                                        ]
-                                    }
-		                        }
-
-		                        Item {Layout.fillHeight: true}
-
-                                RowLayout {
-                                    ButtonMD3 {
-                                        id: changeAGLButton
-                                        text: qsTr("1. Изм.")
-                                        onClicked: visible = false
-                                    }
-
-                                    Item {Layout.fillWidth: true}
-
-                                    ButtonMD3 {
-                                        visible: !changeAGLButton.visible
-                                        text: qsTr("2. Запись")
-                                        onClicked: {
-                                            agl.zs_operating_mode = aglZSOperatingMode.currentIndex
-                                            agl.speed_gs_prm = aglGSPRMSpeed.currentIndex
-                                            agl.speed_gs_prd = aglGSPRDSpeed.currentIndex
-                                            agl.rats_mode = aglRATSMode.currentIndex
-
-                                            changeAGLButton.visible = true
-
-                                            checker.check(configuration.selected_norm)
-                                        }
-                                    }
-
-                                    ButtonMD3 {
-                                        visible: !changeAGLButton.visible
-                                        text: qsTr("3. Отмена")
-
-                                        onClicked: {
-                                            aglZSOperatingMode.currentIndex = agl.zs_operating_mode
-                                            aglGSPRMSpeed.currentIndex = agl.speed_gs_prm
-                                            aglGSPRDSpeed.currentIndex = agl.speed_gs_prd
-                                            aglRATSMode.currentIndex = agl.rats_mode
-
-                                            changeAGLButton.visible = true
-                                        }
-                                    }
-
-		                            ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
-		                        }
-		                    }
-
-		                    /*
-                            *   Regulations mode AGL TLF1 page
-                            */
-                            ColumnLayout {
-		                        ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режим ТЛФ1")}
-
-		                        GridLayout {
-		                            columns: 2
-
-                                    Column {
-                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРМ")}
+                                /*
+                                *   Regulations mode KLU page 1
+                                */
+                                ColumnLayout {
+                                    // TODO: Very long KLU page 1. Can I make the combobox smaller?
+
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
+
+                                    GridLayout {
+                                        rows: 8
+                                        columns: 2
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРМ:")}
                                         ComboBoxMD3 {
-                                            id: tlf1SignalPRMType
-                                            enabled: !changeTLF1Button.visible
-                                            currentIndex: tlf1.signal_prm_type
+                                            model: ["Спец. ГС", "Спец. ГС и ГС"]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Код Баркера ПРМ:")}
+                                        ComboBoxMD3 {
+                                            model: ["Вкл.", "Откл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Инверсия кода Баркера:")}
+                                        ComboBoxMD3 {
+                                            model: ["Вкл.", "Откл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ДСЧ:")}
+                                        ComboBoxMD3 {
+                                            model: ["Вкл.", "Откл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер ключа ПРМ:")}
+                                        ComboBoxMD3 {
                                             model: [
-                                                "Канал не задан",
-                                                "РАТС", // TODO: this changes one field
-                                                "Закреп. непрер.",
-                                                "Из спец. ГС"
+                                                "0", "1", "2", "3",
+                                                "4", "5", "6", "7",
+                                                "8", "9", "10", "11",
+                                                "12", "13", "14", "15"
                                             ]
                                         }
 
-                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер подключа ПРМ:")}
                                         ComboBoxMD3 {
-                                            id: tlf1PRMSpeed
-                                            enabled: !changeTLF1Button.visible
-                                            currentIndex: tlf1.prm_speed
+                                            model: ["1", "2", "3", "4", "5", "6"]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Полоса поиска ПРМ, кГц:")}
+                                        ComboBoxMD3 {
+                                            model: ["+-1", "+-4", "+-8"]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРМ:")}
+                                        ComboBoxMD3 {
+                                            model: ["Fт1", "Fт2"]
+                                        }
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {text: qsTr("1. Изм.")}
+                                        Item {Layout.fillWidth: true}
+                                        ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage2Index}
+                                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+                                    }
+                                }
+
+                                /*
+                                *   Regulations mode KLU page 2
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
+
+                                    GridLayout {
+                                        rows: 5
+                                        columns: 2
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ПРД:")}
+                                        ComboBoxMD3 {
+                                            model: ["Спец. ГС", "Спец. ГС и ГС"]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Код Баркера ПРД:")}
+                                        ComboBoxMD3 {
+                                            model: ["Вкл.", "Откл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер ключа ПРД:")}
+                                        ComboBoxMD3 {
                                             model: [
-                                                "9.6",
-                                                "4.8",
-                                                "2.4",
-                                                "1.2"
+                                                "0", "1", "2", "3",
+                                                "4", "5", "6", "7",
+                                                "8", "9", "10", "11",
+                                                "12", "13", "14", "15"
                                             ]
                                         }
 
-		                                DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
-
-                                        RowLayout {
-                                            ComboBoxMD3 {
-                                                id: tlf1PRMAddressOne
-                                                enabled: !changeTLF1Button.visible
-                                                currentIndex: tlf1.prm_address_one
-                                                model: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-                                            }
-
-                                            ComboBoxMD3 {
-                                                id: tlf1PRMAddressTwo
-                                                enabled: !changeTLF1Button.visible
-                                                currentIndex: tlf1.prm_address_two
-                                                model: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-                                            }
-
-                                            ComboBoxMD3 {
-                                                id: tlf1PRMAddressThree
-                                                enabled: !changeTLF1Button.visible
-                                                currentIndex: tlf1.prm_address_three
-                                                model: ["1", "2", "3", "4"]
-                                            }
-		                                }
-		                            }
-
-                                    Column {
-                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер подключа ПРД:")}
                                         ComboBoxMD3 {
-                                            id: tlf1SignalPRDType
-                                            enabled: !changeTLF1Button.visible
-                                            currentIndex: tlf1.signal_prd_type
+                                            model: ["1", "2", "3", "4", "5", "6"]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ПРД:")}
+                                        ComboBoxMD3 {
+                                            model: ["Fт1", "Fт2"]
+                                        }
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {text: qsTr("1. Изм.")}
+                                        Item {Layout.fillWidth: true}
+                                        ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage1Index}
+                                        ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage3Index}
+                                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+                                    }
+                                }
+
+                                /*
+                                *   Regulations mode KLU page 3
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры КЛ-У")}
+
+                                    GridLayout {
+                                        rows: 8
+                                        columns: 2
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тестпроверка:")}
+                                        ComboBoxMD3 {
+                                            id: kluTestCheck
+                                            enabled: !changeKLU3Button.visible
+                                            currentIndex: klu.test_check
+                                            model: ["Вкл.", "Откл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим теста:")}
+                                        ComboBoxMD3 {
+                                            model: ["ПР", "ОСБ"]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ПРД 70:")}
+                                        ComboBoxMD3 {
+                                            id: kluPRD70
+                                            enabled: !changeKLU3Button.visible
+                                            currentIndex: klu.prd70
+                                            model: ["Вкл.", "Откл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сброс счетчика ошибок:")}
+                                        ComboBoxMD3 {
+                                            model: ["Вкл.", "Откл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный 1:")}
+                                        ComboBoxMD3 {
+                                            model: ["Вкл.", "Откл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный 2:")}
+                                        ComboBoxMD3 {
+                                            model: ["Вкл.", "Откл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД:")}
+                                        ComboBoxMD3 {
+                                            id: kluPRDSignalType
+                                            enabled: !changeKLU3Button.visible
+                                            currentIndex: klu.prd_signal_type
                                             model: [
-                                                "Канал не задан",
-                                                "РАТС",
-                                                "Закреп. непрер."
+                                                "УП (ППРЧ)",
+                                                "ШПС 1",
+                                                "ШПС 2",
+                                                "ШПС 3",
+                                                "Несущая 1",
+                                                "Несущая 2",
+                                                "Несущая 3",
+                                                "Несущая 4"
                                             ]
                                         }
 
-                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ft ПСП ШПС ПРД:")}
                                         ComboBoxMD3 {
-                                            id: tlf1PRDSpeed
-                                            enabled: !changeTLF1Button.visible
-                                            currentIndex: tlf1.prd_speed
+                                            model: ["Fт1", "Fт2"]
+                                        }
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {
+                                            id: changeKLU3Button
+                                            text: qsTr("1. Изм.")
+                                            onClicked: visible = false
+                                        }
+
+                                        Item {Layout.fillWidth: true}
+
+                                        ButtonMD3 {
+                                            visible: !changeKLU3Button.visible
+                                            text: qsTr("2. Запись")
+                                            onClicked: {
+                                                klu.test_check = kluTestCheck.currentIndex
+                                                klu.prd70 = kluPRD70.currentIndex
+                                                klu.prd_signal_type = kluPRDSignalType.currentIndex
+
+                                                changeKLU3Button.visible = true
+
+                                                checker.check(configuration.selected_norm)
+                                            }
+                                        }
+
+                                        ButtonMD3 {
+                                            visible: !changeKLU3Button.visible
+                                            text: qsTr("3. Отмена")
+
+                                            onClicked: {
+                                                kluTestCheck.currentIndex = klu.test_check
+                                                kluPRD70.currentIndex = klu.prd70
+                                                kluPRDSignalType.currentIndex = klu.prd_signal_type
+
+                                                changeKLU3Button.visible = true
+                                            }
+                                        }
+
+                                        ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeKLUPage2Index}
+                                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+                                    }
+                                }
+
+                                property int regulationsModePage1Index
+
+                                /*
+                                *   Regulations mode DMD UZOZM page 1
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ДМД, УЗОЗМ")}
+
+                                    GridLayout {
+                                        rows: 7
+                                        columns: 2
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип радиосигнала ПРМ:")}
+                                        ComboBoxMD3 {
+                                            id: dmdUZOZMPRMSignalType
+                                            enabled: !changeDMDUZOZM1Button.visible
+                                            currentIndex: dmd_uzozm.prm_signal_type
+                                            model: ["ШПС", "УП"]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Декодер:")}
+                                        ComboBoxMD3 {
+                                            id: dmdUZOZMDecoder
+                                            enabled: !changeDMDUZOZM1Button.visible
+                                            currentIndex: dmd_uzozm.decoder
                                             model: [
-                                                "9.6",
-                                                "4.8",
-                                                "2.4",
-                                                "1.2",
-                                                "1.2 СБД",
+                                                "K=5; R=1/2",
+                                                "K=7; R=1/2",
+                                                "K=7; R=3/4",
+                                                "K=7; R=3/4 инв.",
+                                                "Откл."
+                                            ]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ДМД, кбит/с:")}
+                                        ComboBoxMD3 {
+                                            id: dmdUZOZMDMDSpeed
+                                            enabled: !changeDMDUZOZM1Button.visible
+                                            currentIndex: dmd_uzozm.dmd_speed
+                                            model: [
+                                                "1.5", "3", "6", "12", "30",
+                                                "60", "120", "180", "300", "600",
+                                                "1.2", "2.4", "4.8", "9.6", "24",
+                                                "48", "96", "144", "240", "480"
+                                            ]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ДМД:")}
+                                        ComboBoxMD3 {
+                                            id: dmdUZOZMDMDMode
+                                            enabled: !changeDMDUZOZM1Button.visible
+                                            currentIndex: dmd_uzozm.dmd_mode
+                                            model: ["Работа", "Проверка"]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ПРД УЗОЗМ, кбит/с:")}
+                                        ComboBoxMD3 {
+                                            id: dmdUZOZMPRDUZOZMSpeed
+                                            enabled: false
+                                            currentIndex: dmd_uzozm.prd_uzozm_speed
+                                            model: ["1.5 ОФТ"]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим УЗОЗМ:")}
+                                        ComboBoxMD3 {
+                                            id: dmdUZOZMUZOZMMode
+                                            enabled: !changeDMDUZOZM1Button.visible
+                                            currentIndex: dmd_uzozm.uzozm_mode
+                                            model: ["Работа", "Проверка"]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Служебный канал в ФТ4:")}
+                                        ComboBoxMD3 {
+                                            id: dmdUZOZMServiceChannelFT4
+                                            enabled: !changeDMDUZOZM1Button.visible
+                                            currentIndex: dmd_uzozm.service_channel_ft4
+                                            model: ["1.2 кБод", "4.8 кБод"]
+                                        }
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {
+                                            id: changeDMDUZOZM1Button
+                                            text: qsTr("1. Изм.")
+                                            onClicked: visible = false
+                                        }
+
+                                        Item {Layout.fillWidth: true}
+
+                                        ButtonMD3 {
+                                            visible: !changeDMDUZOZM1Button.visible
+                                            text: qsTr("2. Запись")
+                                            onClicked: {
+                                                dmd_uzozm.prm_signal_type = dmdUZOZMPRMSignalType.currentIndex
+                                                dmd_uzozm.decoder = dmdUZOZMDecoder.currentIndex
+                                                dmd_uzozm.dmd_speed = dmdUZOZMDMDSpeed.currentIndex
+                                                dmd_uzozm.dmd_mode = dmdUZOZMDMDMode.currentIndex
+                                                dmd_uzozm.prd_uzozm_speed = dmdUZOZMPRDUZOZMSpeed.currentIndex
+                                                dmd_uzozm.uzozm_mode = dmdUZOZMUZOZMMode.currentIndex
+                                                dmd_uzozm.service_channel_ft4 = dmdUZOZMServiceChannelFT4.currentIndex
+
+                                                changeDMDUZOZM1Button.visible = true
+
+                                                checker.check(configuration.selected_norm)
+                                            }
+                                        }
+
+                                        ButtonMD3 {
+                                            visible: !changeDMDUZOZM1Button.visible
+                                            text: qsTr("3. Отмена")
+
+                                            onClicked: {
+                                                dmdUZOZMPRMSignalType.currentIndex = dmd_uzozm.prm_signal_type
+                                                dmdUZOZMDecoder.currentIndex = dmd_uzozm.decoder
+                                                dmdUZOZMDMDSpeed.currentIndex = dmd_uzozm.dmd_speed
+                                                dmdUZOZMDMDMode.currentIndex = dmd_uzozm.dmd_mode
+                                                dmdUZOZMPRDUZOZMSpeed.currentIndex = dmd_uzozm.prd_uzozm_speed
+                                                dmdUZOZMUZOZMMode.currentIndex = dmd_uzozm.uzozm_mode
+                                                dmdUZOZMServiceChannelFT4.currentIndex = dmd_uzozm.service_channel_ft4
+
+                                                changeDMDUZOZM1Button.visible = true
+                                            }
+                                        }
+
+                                        ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage2Index}
+                                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+                                    }
+                                }
+
+                                /*
+                                *   Regulations mode DMD UZOZM page 2
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ДМД")}
+
+                                    GridLayout {
+                                        rows: 7
+                                        columns: 2
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер фильтра:")}
+                                        ComboBoxMD3 {
+                                            id: dmdUZOZMFilterNumber
+                                            enabled: !changeDMDUZOZM2Button.visible
+                                            currentIndex: dmd_uzozm.filter_number
+                                            model: ["1", "2", "3", "4", "5", "Не задан"]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("АРУ:")}
+                                        ComboBoxMD3 {
+                                            id: dmdUZOZMARU
+                                            enabled: !changeDMDUZOZM2Button.visible
+                                            currentIndex: dmd_uzozm.aru
+                                            model: ["АРУ", "РРУ"]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Автопоиск:")}
+                                        ComboBoxMD3 {
+                                            id: dmdUZOZMAutoSearch
+                                            enabled: !changeDMDUZOZM2Button.visible
+                                            currentIndex: dmd_uzozm.auto_search
+                                            model: ["Вкл.", "Откл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("АСЧ:")}
+                                        ComboBoxMD3 {
+                                            id: dmdUZOZMASCH
+                                            enabled: !changeDMDUZOZM2Button.visible
+                                            currentIndex: dmd_uzozm.asch
+                                            model: ["Вкл.", "Откл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Диф. декодер:")}
+                                        ComboBoxMD3 {
+                                            id: dmdUZOZMDifDecoder
+                                            enabled: !changeDMDUZOZM2Button.visible
+                                            currentIndex: dmd_uzozm.dif_decoder
+                                            model: ["Откл.", "Вкл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Полоса ДМД:")}
+                                        ComboBoxMD3 {
+                                            id: dmdUZOZMDMDBand
+                                            enabled: !changeDMDUZOZM2Button.visible
+                                            currentIndex: dmd_uzozm.dmd_band
+                                            model: ["Узкая", "Широкая"]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Корректор:")}
+                                        ComboBoxMD3 {
+                                            id: dmdUZOZMCorrector
+                                            enabled: !changeDMDUZOZM2Button.visible
+                                            currentIndex: dmd_uzozm.corrector
+                                            model: ["Вкл.", "Откл."]
+                                        }
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {
+                                            id: changeDMDUZOZM2Button
+                                            text: qsTr("1. Изм.")
+                                            onClicked: visible = false
+                                        }
+
+                                        Item {Layout.fillWidth: true}
+
+                                        ButtonMD3 {
+                                            visible: !changeDMDUZOZM2Button.visible
+                                            text: qsTr("2. Запись")
+                                            onClicked: {
+                                                dmd_uzozm.filter_number = dmdUZOZMFilterNumber.currentIndex
+                                                dmd_uzozm.aru = dmdUZOZMARU.currentIndex
+                                                dmd_uzozm.auto_search = dmdUZOZMAutoSearch.currentIndex
+                                                dmd_uzozm.asch = dmdUZOZMASCH.currentIndex
+                                                dmd_uzozm.dif_decoder = dmdUZOZMDifDecoder.currentIndex
+                                                dmd_uzozm.dmd_band = dmdUZOZMDMDBand.currentIndex
+                                                dmd_uzozm.corrector = dmdUZOZMCorrector.currentIndex
+
+                                                changeDMDUZOZM2Button.visible = true
+
+                                                checker.check(configuration.selected_norm)
+                                            }
+                                        }
+
+                                        ButtonMD3 {
+                                            visible: !changeDMDUZOZM2Button.visible
+                                            text: qsTr("3. Отмена")
+
+                                            onClicked: {
+                                                dmdUZOZMFilterNumber.currentIndex = dmd_uzozm.filter_number
+                                                dmdUZOZMARU.currentIndex = dmd_uzozm.aru
+                                                dmdUZOZMAutoSearch.currentIndex = dmd_uzozm.auto_search
+                                                dmdUZOZMASCH.currentIndex = dmd_uzozm.asch
+                                                dmdUZOZMDifDecoder.currentIndex = dmd_uzozm.dif_decoder
+                                                dmdUZOZMDMDBand.currentIndex = dmd_uzozm.dmd_band
+                                                dmdUZOZMCorrector.currentIndex = dmd_uzozm.corrector
+
+                                                changeDMDUZOZM2Button.visible = true
+                                            }
+                                        }
+
+                                        ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeDMDUZOZMPage1Index}
+                                        ButtonMD3 {text: qsTr(">")}
+                                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+                                    }
+                                }
+
+                                /*
+                                *   Regulations mode tracts PRM PRM page 1
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ПРМ, ПРД")}
+
+                                    GridLayout {
+                                        rows: 5
+                                        columns: 2
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Автоконтроль CAN:")}
+                                        ComboBoxMD3 {
+                                            id: tractsPRDPRDAutoCheckCAN
+                                            enabled: !changeTractsPRMPRDButton1.visible
+                                            currentIndex: tracts_prm_prd.auto_check_can
+                                            model: ["Откл.", "Вкл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Поддиппазон приема:")}
+                                        ComboBoxMD3 {
+                                            id: tractsPRDPRDReceiveSubband
+                                            enabled: !changeTractsPRMPRDButton1.visible
+                                            currentIndex: tracts_prm_prd.receive_subband
+                                            model: [
+                                                "1", "2", "3", "4", "5", "6", "7", "8", "9",
+                                                "10", "11", "12", "13", "14", "15", "16", "18", "19",
+                                                "20", "21", "22", "23", "24", "25", "26", "27", "28",
+                                                "29", "30", "31", "32", "33", "34", "35", "36", "37",
+                                                "38", "39", "40", "41", "42", "43", "44", "45", "46"
+                                            ]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
+                                        ComboBoxMD3 {
+                                            id: tractsPRDPRDShiftGenerator
+                                            enabled: !changeTractsPRMPRDButton1.visible
+                                            currentIndex: tracts_prm_prd.shift_generator
+                                            model: ["Откл.", "Вкл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ствольный фильтр:")}
+                                        ComboBoxMD3 {
+                                            id: tractsPRDPRDBarrelFilter
+                                            enabled: !changeTractsPRMPRDButton1.visible
+                                            currentIndex: tracts_prm_prd.barrel_filter
+                                            model: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
+                                        ComboBoxMD3 {
+                                            id: tractsPRDPRDAmplifier
+                                            enabled: !changeTractsPRMPRDButton1.visible
+                                            currentIndex: tracts_prm_prd.amplifier
+                                            model: ["Откл.", "Вкл."]
+                                        }
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {
+                                            id: changeTractsPRMPRDButton1
+                                            text: qsTr("1. Изм.")
+                                            onClicked: visible = false
+                                        }
+
+                                        Item {Layout.fillWidth: true}
+
+                                        ButtonMD3 {
+                                            visible: !changeTractsPRMPRDButton1.visible
+                                            text: qsTr("2. Запись")
+                                            onClicked: {
+                                                tracts_prm_prd.auto_check_can = tractsPRDPRDAutoCheckCAN.currentIndex
+                                                tracts_prm_prd.receive_subband = tractsPRDPRDReceiveSubband.currentIndex
+                                                tracts_prm_prd.shift_generator = tractsPRDPRDShiftGenerator.currentIndex
+                                                tracts_prm_prd.barrel_filter = tractsPRDPRDBarrelFilter.currentIndex
+                                                tracts_prm_prd.amplifier = tractsPRDPRDAmplifier.currentIndex
+
+                                                changeTractsPRMPRDButton1.visible = true
+
+                                                checker.check(configuration.selected_norm)
+                                            }
+                                        }
+
+                                        ButtonMD3 {
+                                            visible: !changeTractsPRMPRDButton1.visible
+                                            text: qsTr("3. Отмена")
+
+                                            onClicked: {
+                                                tractsPRDPRDAutoCheckCAN.currentIndex = tracts_prm_prd.auto_check_can
+                                                tractsPRDPRDReceiveSubband.currentIndex = tracts_prm_prd.receive_subband
+                                                tractsPRDPRDShiftGenerator.currentIndex = tracts_prm_prd.shift_generator
+                                                tractsPRDPRDBarrelFilter.currentIndex = tracts_prm_prd.barrel_filter
+                                                tractsPRDPRDAmplifier.currentIndex = tracts_prm_prd.amplifier
+
+                                                changeTractsPRMPRDButton1.visible = true
+
+                                                checker.check(configuration.selected_norm)
+                                            }
+                                        }
+
+                                        ButtonMD3 {text: qsTr(">"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage2Index}
+                                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+                                    }
+                                }
+
+                                /*
+                                *   Regulations mode tracts PRM PRM page 2
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режимные параметры ПРМ, ПРД")}
+
+                                    GridLayout {
+                                        rows: 6
+                                        columns: 2
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип радиосигнала:")}
+                                        ComboBoxMD3 {
+                                            id: tractsPRDPRDRadioSignalType
+                                            enabled: !changeTractsPRMPRDButton2.visible
+                                            currentIndex: tracts_prm_prd.radio_signal
+                                            model: [
+                                                "УП",
+                                                "ППРЧ", // TODO: if this next value is empty
+                                                "ШПС"
+                                            ]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Вид сигнала ОФТ:")}
+                                        ComboBoxMD3 {
+                                            id: tractsPRDPRDOFTSignalType
+                                            enabled: !changeTractsPRMPRDButton2.visible
+                                            currentIndex: tracts_prm_prd.signal_type
+                                            model: [
+                                                "ОФТ",
+                                                "K=5; R=1/2",
+                                                "K=7; R=1/2",
+                                                "K=7; R=3/4",
+                                            ]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость ЗС:")}
+                                        ComboBoxMD3 {
+                                            id: tractsPRDPRDZSSpeed
+                                            enabled: !changeTractsPRMPRDButton2.visible
+                                            currentIndex: tracts_prm_prd.zs_speed
+                                            model: (tractsPRDPRDOFTSignalType.currentIndex === 0  || tractsPRDPRDOFTSignalType.currentIndex === 1) ? [
                                                 "1.5",
                                                 "3",
+                                                "6",
+                                                "12",
+                                                "30",
+                                                "60",
+                                                "1.2",
+                                                "2.4",
+                                                "4.8",
+                                                "9.6",
+                                                "48"
+                                            ] : tractsPRDPRDOFTSignalType.currentIndex === 2 ? [
+                                                "16 MX",
+                                                "32 MX",
+                                                "48 MX",
+                                                "64 MX",
+                                                "64 MX",
+                                                "64 HDB СНС",
+                                                "64 HDB ПНС",
+                                                "128 HDB",
+                                                "256 HDB",
+                                                "144 HDB",
+                                                "48 RS232",
+                                                "64 RS232",
+                                                "128 RS232",
+                                                "144 RS232",
+                                            ] : tractsPRDPRDOFTSignalType.currentIndex === 2 ? [
+                                                "64 HDB СНС",
+                                                "64 HDB ПНС",
+                                                "128 HDB",
+                                                "256 HDB",
+                                                "384 HDB",
+                                                "512 HDB",
+                                                "1024 HDB",
+                                                "2048 HDB",
+                                                "256 RS422/530",
+                                                "384 RS422/530",
+                                                "512 RS422/530",
+                                            ] : []
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
+                                        ComboBoxMD3 {
+                                            id: tractsPRDPRDOutputU205D
+                                            enabled: !changeTractsPRMPRDButton2.visible
+                                            currentIndex: tracts_prm_prd.output_u205d
+                                            model: ["Вкл.", "Откл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
+                                        TextFieldMD3 {
+                                            id: tractsPRDPRDPRDWaveNumber
+                                            implicitWidth: tractsPRDPRDOutputU205D.implicitWidth
+                                            enabled: !changeTractsPRMPRDButton2.visible
+                                            text: tracts_prm_prd.prd_wave_number
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРМ:")}
+                                        TextFieldMD3 {
+                                            id: tractsPRDPRDPRMWaveNumber
+                                            implicitWidth: tractsPRDPRDOutputU205D.implicitWidth
+                                            enabled: !changeTractsPRMPRDButton2.visible
+                                            text: tracts_prm_prd.prm_wave_number
+                                        }
+                                    }
+
+                                        Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {
+                                            id: changeTractsPRMPRDButton2
+                                            text: qsTr("1. Изм.")
+                                            onClicked: visible = false
+                                        }
+
+                                        Item {Layout.fillWidth: true}
+
+                                        ButtonMD3 {
+                                            visible: !changeTractsPRMPRDButton2.visible
+                                            text: qsTr("2. Запись")
+                                            onClicked: {
+                                                tracts_prm_prd.radio_signal = tractsPRDPRDRadioSignalType.currentIndex
+                                                tracts_prm_prd.signal_type = tractsPRDPRDOFTSignalType.currentIndex
+                                                tracts_prm_prd.zs_speed = tractsPRDPRDZSSpeed.currentIndex
+                                                tracts_prm_prd.output_u205d = tractsPRDPRDOutputU205D.currentIndex
+                                                tracts_prm_prd.prd_wave_number = tractsPRDPRDPRDWaveNumber.text
+                                                tracts_prm_prd.prm_wave_number = tractsPRDPRDPRMWaveNumber.text
+
+                                                changeTractsPRMPRDButton2.visible = true
+
+                                                checker.check(configuration.selected_norm)
+                                            }
+                                        }
+
+                                        ButtonMD3 {
+                                            visible: !changeTractsPRMPRDButton2.visible
+                                            text: qsTr("3. Отмена")
+
+                                            onClicked: {
+                                                tractsPRDPRDRadioSignalType.currentIndex = tracts_prm_prd.radio_signal
+                                                tractsPRDPRDOFTSignalType.currentIndex = tracts_prm_prd.signal_type
+                                                tractsPRDPRDZSSpeed.currentIndex = tracts_prm_prd.zs_speed
+                                                tractsPRDPRDOutputU205D.currentIndex = tracts_prm_prd.output_u205d
+                                                tractsPRDPRDPRDWaveNumber.text = tracts_prm_prd.prd_wave_number
+                                                tractsPRDPRDPRMWaveNumber.text = tracts_prm_prd.prm_wave_number
+
+                                                changeTractsPRMPRDButton2.visible = true
+                                            }
+                                        }
+
+                                        ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeTractsPRMPRDPage1Index}
+                                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
+                                    }
+                                }
+
+                                /*
+                                *   Regulations mode L807 page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Л807")}
+
+                                    DisplayTextMD3 {Layout.alignment: Qt.AlignHCenter; text: qsTr("Установленные интерфейсы:")}
+                                    DisplayTextMD3 {Layout.alignment: Qt.AlignHCenter; text: qsTr("Интерфейс не обеспечивается")}
+
+                                    GridLayout {
+                                        rows: 2
+                                        columns: 2
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Стык Л807:")}
+                                        ComboBoxMD3 {
+                                            id: l807Joint
+                                            enabled: !changeL807Button.visible
+                                            currentIndex: l807.joint
+                                            model: [
+                                                qsTr("Выключен"),
+                                                qsTr("ОЦК СН"),
+                                                qsTr("ОЦК ПН"),
+                                                qsTr("Т1"),
+                                                qsTr("Е1"),
+                                                qsTr("С1-ФЛ-КИ"),
+                                                qsTr("RS-232"),
+                                                qsTr("RS-422/530"),
+                                                qsTr("V-35"),
+                                                qsTr("RS-232 синхр."),
+                                                qsTr("Выключен"),
                                             ]
                                         }
 
-		                                DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Источник сигнала: ")}
+                                        ComboBoxMD3 {
+                                            id: l807SignalSource
+                                            enabled: !changeL807Button.visible
+                                            currentIndex: l807.signal_source
+                                            model: [qsTr("Л807"), qsTr("АГ-Л")]
+                                        }
+                                    }
 
-                                        RowLayout {
-                                            ComboBoxMD3 {
-                                                id: tlf1PRDAddressOne
-                                                enabled: !changeTLF1Button.visible
-                                                currentIndex: tlf1.prd_address_one
-                                                model: ["0", "1", "2"]
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {
+                                            id: changeL807Button
+                                            text: qsTr("1. Изм.")
+                                            onClicked: visible = false
+                                        }
+
+                                        Item {Layout.fillWidth: true}
+
+                                        ButtonMD3 {
+                                            visible: !changeL807Button.visible
+                                            text: qsTr("2. Запись")
+                                            onClicked: {
+                                                l807.joint = l807Joint.currentIndex
+                                                l807.signal_source = l807SignalSource.currentIndex
+
+                                                changeL807Button.visible = true
+
+                                                checker.check(configuration.selected_norm)
                                             }
+                                        }
 
-                                            ComboBoxMD3 {
-                                                id: tlf1PRDAddressTwo
-                                                enabled: !changeTLF1Button.visible
-                                                currentIndex: tlf1.prd_address_two
-                                                model: ["1", "2", "3", "4"]
+                                        ButtonMD3 {
+                                            visible: !changeL807Button.visible
+                                            text: qsTr("3. Отмена")
+
+                                            onClicked: {
+                                                l807Joint.currentIndex = l807.joint
+                                                l807SignalSource.currentIndex = l807.signal_source
+
+                                                changeL807Button.visible = true
                                             }
                                         }
-		                            }
-		                        }
 
-							    Item {Layout.fillHeight: true}
-
-		                        RowLayout {
-                                    ButtonMD3 {
-                                        id: changeTLF1Button
-                                        text: qsTr("1. Изм.")
-                                        onClicked: visible = false
-                                    }
-
-                                    Item {Layout.fillWidth: true}
-
-                                    ButtonMD3 {
-                                        visible: !changeTLF1Button.visible
-                                        text: qsTr("2. Запись")
-                                        onClicked: {
-                                            tlf1.signal_prm_type = tlf1SignalPRMType.currentIndex
-                                            tlf1.prm_speed = tlf1PRMSpeed.currentIndex
-                                            tlf1.prm_address_one = tlf1PRMAddressOne.currentIndex
-                                            tlf1.prm_address_two = tlf1PRMAddressTwo.currentIndex
-                                            tlf1.prm_address_three = tlf1PRMAddressThree.currentIndex
-                                            tlf1.signal_prd_type = tlf1SignalPRDType.currentIndex
-                                            tlf1.prd_speed = tlf1PRDSpeed.currentIndex
-                                            tlf1.prd_address_one = tlf1PRDAddressOne.currentIndex
-                                            tlf1.prd_address_two = tlf1PRDAddressTwo.currentIndex
-
-                                            changeTLF1Button.visible = true
-
-                                            checker.check(configuration.selected_norm)
-                                        }
-                                    }
-
-                                    ButtonMD3 {
-                                        visible: !changeTLF1Button.visible
-                                        text: qsTr("3. Отмена")
-
-                                        onClicked: {
-                                            tlf1SignalPRMType.currentIndex = tlf1.signal_prm_type
-                                            tlf1PRMSpeed.currentIndex = tlf1.prm_speed
-                                            tlf1PRMAddressOne.currentIndex = tlf1.prm_address_one
-                                            tlf1PRMAddressTwo.currentIndex = tlf1.prm_address_two
-                                            tlf1PRMAddressThree.currentIndex = tlf1.prm_address_three
-                                            tlf1SignalPRDType.currentIndex = tlf1.signal_prd_type
-                                            tlf1PRDSpeed.currentIndex = tlf1.prd_speed
-                                            tlf1PRDAddressOne.currentIndex = tlf1.prd_address_one
-                                            tlf1PRDAddressTwo.currentIndex = tlf1.prd_address_two
-
-                                            changeTLF1Button.visible = true
-                                        }
-                                    }
-
-		                            ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
-		                        }
-		                    }
-
-		                    /*
-                            *   Regulations plume page
-                            */
-                            ColumnLayout {
-							    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Шлейф ПР")}
-
-							    GridLayout {
-                                    rows: 4
-                                    columns: 2
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
-                                    ComboBoxMD3 {
-                                        id: plumeShiftGenerator
-                                        enabled: !changePlumeButton.visible
-                                        currentIndex: plume.shift_generator
-                                        model: ["Откл.", "Вкл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
-                                    ComboBoxMD3 {
-                                        id: plumeAmplifier
-                                        enabled: !changePlumeButton.visible
-                                        currentIndex: plume.amplifier
-                                        model: ["Откл.", "Вкл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
-                                    ComboBoxMD3 {
-                                        id: plumeOutputU205D
-                                        enabled: !changePlumeButton.visible
-                                        currentIndex: plume.output_u205d
-                                        model: ["Откл.", "Вкл."]
-                                    }
-
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
-                                    TextFieldMD3 {
-                                        id: plumePRDWaveNumber
-                                        implicitWidth: plumeOutputU205D.implicitWidth
-                                        enabled: !changePlumeButton.visible
-                                        text: plume.prd_wave_number
+                                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModePageIndex}
                                     }
                                 }
 
-                                GridLayout {
-                                    rows: 2
-                                    columns: 4
+                                /*
+                                *   Regulations mode AGL page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("РЕЖИМ АГ-Л")}
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ствол. фильтр:")}
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: plume.stem_filter}
+                                    GridLayout {
+                                        rows: 6
+                                        columns: 3
+                                        flow: GridLayout.TopToBottom
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("№ волны ПРМ:")}
-                                    DisplayTextMD3 {Layout.fillWidth: true; text:  plume.prm_wave_number}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Режим прибора"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationModeAGLDeviceModePageIndex}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. ТЛФ1"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLTLF1PageIndex}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. ТЛФ2")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. ТЛФ3")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. ТЛФ4")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("6. ТЛФ5")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("7. КАУ1")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("8. КАУ2")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("9. КАУ3")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("10. КАУ4")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("11. КАУ5")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("12. ТЛГ1")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("13. ТЛГ2")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("14. ТЛГ3")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("15. ТЛГ4")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("16. Синх. вход")}
+                                    }
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Поддиап. приема:")}
-                                    DisplayTextMD3 {Layout.fillWidth: true; text:  plume.receive_subband}
+                                    Item {Layout.fillHeight: true}
 
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("№ фильтра ДМД:")}
-                                    DisplayTextMD3 {Layout.fillWidth: true; text: plume.dmd_filter_number}
+                                    ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
                                 }
 
-							    Item {Layout.fillHeight: true}
+                                /*
+                                *   Regulations mode AGL device mode page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режим прибора АГ-Л")}
 
-                                RowLayout {
-                                    ButtonMD3 {
-                                        id: changePlumeButton
-                                        text: qsTr("1. Изм.")
-                                        onClicked: visible = false
-                                    }
+                                    GridLayout {
+                                        rows: 4
+                                        columns: 2
 
-		                            Item {Layout.fillWidth: true}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим работы ЗС")}
+                                        ComboBoxMD3 {
+                                            id: aglZSOperatingMode
+                                            enabled: !changeAGLButton.visible
+                                            currentIndex: agl.zs_operating_mode
+                                            model: [
+                                                qsTr("ПР"),
+                                                qsTr("ОСБ без ППРЧ"),
+                                                qsTr("ППРЧ непрерывный"),
+                                                qsTr("ОСБ ШПС"),
+                                                qsTr("Транзит ТЛФ")
+                                            ]
+                                        }
 
-                                    ButtonMD3 {
-                                        visible: !changePlumeButton.visible
-                                        text: qsTr("2. Запись")
-                                        onClicked: {
-                                            plume.shift_generator = plumeShiftGenerator.currentIndex
-                                            plume.amplifier = plumeAmplifier.currentIndex
-                                            plume.output_u205d = plumeOutputU205D.currentIndex
-                                            plume.prd_wave_number = plumePRDWaveNumber.text
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скор ГС ПРМ, кбит/c")}
+                                        ComboBoxMD3 {
+                                            id: aglGSPRMSpeed
+                                            enabled: !changeAGLButton.visible
+                                            currentIndex: agl.speed_gs_prm
+                                            model: [
+                                                qsTr("Нет ГС"),
+                                                qsTr("1.5"),
+                                                qsTr("3"),
+                                                qsTr("6"),
+                                                qsTr("12"),
+                                                qsTr("30"),
+                                                qsTr("60"),
+                                                qsTr("120"),
+                                                qsTr("180"),
+                                                qsTr("300"),
+                                                qsTr("600")
+                                            ]
+                                        }
 
-                                            plume.calculate_parameters()
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скор ГС ПРД, кбит/c")}
+                                        ComboBoxMD3 {
+                                            id: aglGSPRDSpeed
+                                            enabled: !changeAGLButton.visible
+                                            currentIndex: agl.speed_gs_prd
+                                            model: [
+                                                qsTr("Нет ГС"),
+                                                qsTr("1.5"),
+                                                qsTr("3"),
+                                                qsTr("6"),
+                                                qsTr("12")
+                                            ]
+                                        }
 
-                                            changePlumeButton.visible = true
-
-                                            checker.check(configuration.selected_norm)
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим РАТС")}
+                                        ComboBoxMD3 {
+                                            id: aglRATSMode
+                                            enabled: !changeAGLButton.visible
+                                            currentIndex: agl.rats_mode
+                                            model: [
+                                                qsTr("Отсутствует"),
+                                                qsTr("Закрепл. напр."),
+                                                qsTr("Незакрепл. напр.")
+                                            ]
                                         }
                                     }
 
-                                    ButtonMD3 {
-                                        visible: !changePlumeButton.visible
-                                        text: qsTr("3. Отмена")
+                                    Item {Layout.fillHeight: true}
 
-                                        onClicked: {
-                                            plumeShiftGenerator.currentIndex = plume.shift_generator
-                                            plumeAmplifier.currentIndex = plume.amplifier
-                                            plumeOutputU205D.currentIndex = plume.output_u205d
-                                            plumePRDWaveNumber.text = plume.prd_wave_number
+                                    RowLayout {
+                                        ButtonMD3 {
+                                            id: changeAGLButton
+                                            text: qsTr("1. Изм.")
+                                            onClicked: visible = false
+                                        }
 
-                                            changePlumeButton.visible = true
+                                        Item {Layout.fillWidth: true}
+
+                                        ButtonMD3 {
+                                            visible: !changeAGLButton.visible
+                                            text: qsTr("2. Запись")
+                                            onClicked: {
+                                                agl.zs_operating_mode = aglZSOperatingMode.currentIndex
+                                                agl.speed_gs_prm = aglGSPRMSpeed.currentIndex
+                                                agl.speed_gs_prd = aglGSPRDSpeed.currentIndex
+                                                agl.rats_mode = aglRATSMode.currentIndex
+
+                                                changeAGLButton.visible = true
+
+                                                checker.check(configuration.selected_norm)
+                                            }
+                                        }
+
+                                        ButtonMD3 {
+                                            visible: !changeAGLButton.visible
+                                            text: qsTr("3. Отмена")
+
+                                            onClicked: {
+                                                aglZSOperatingMode.currentIndex = agl.zs_operating_mode
+                                                aglGSPRMSpeed.currentIndex = agl.speed_gs_prm
+                                                aglGSPRDSpeed.currentIndex = agl.speed_gs_prd
+                                                aglRATSMode.currentIndex = agl.rats_mode
+
+                                                changeAGLButton.visible = true
+                                            }
+                                        }
+
+                                        ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
+                                    }
+                                }
+
+                                /*
+                                *   Regulations mode AGL TLF1 page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Режим ТЛФ1")}
+
+                                    GridLayout {
+                                        columns: 2
+
+                                        Column {
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРМ")}
+                                            ComboBoxMD3 {
+                                                id: tlf1SignalPRMType
+                                                enabled: !changeTLF1Button.visible
+                                                currentIndex: tlf1.signal_prm_type
+                                                model: [
+                                                    "Канал не задан",
+                                                    "РАТС", // TODO: this changes one field
+                                                    "Закреп. непрер.",
+                                                    "Из спец. ГС"
+                                                ]
+                                            }
+
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость")}
+                                            ComboBoxMD3 {
+                                                id: tlf1PRMSpeed
+                                                enabled: !changeTLF1Button.visible
+                                                currentIndex: tlf1.prm_speed
+                                                model: [
+                                                    "9.6",
+                                                    "4.8",
+                                                    "2.4",
+                                                    "1.2"
+                                                ]
+                                            }
+
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
+
+                                            RowLayout {
+                                                ComboBoxMD3 {
+                                                    id: tlf1PRMAddressOne
+                                                    enabled: !changeTLF1Button.visible
+                                                    currentIndex: tlf1.prm_address_one
+                                                    model: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+                                                }
+
+                                                ComboBoxMD3 {
+                                                    id: tlf1PRMAddressTwo
+                                                    enabled: !changeTLF1Button.visible
+                                                    currentIndex: tlf1.prm_address_two
+                                                    model: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+                                                }
+
+                                                ComboBoxMD3 {
+                                                    id: tlf1PRMAddressThree
+                                                    enabled: !changeTLF1Button.visible
+                                                    currentIndex: tlf1.prm_address_three
+                                                    model: ["1", "2", "3", "4"]
+                                                }
+                                            }
+                                        }
+
+                                        Column {
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип сигнала ПРД")}
+                                            ComboBoxMD3 {
+                                                id: tlf1SignalPRDType
+                                                enabled: !changeTLF1Button.visible
+                                                currentIndex: tlf1.signal_prd_type
+                                                model: [
+                                                    "Канал не задан",
+                                                    "РАТС",
+                                                    "Закреп. непрер."
+                                                ]
+                                            }
+
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Скорость")}
+                                            ComboBoxMD3 {
+                                                id: tlf1PRDSpeed
+                                                enabled: !changeTLF1Button.visible
+                                                currentIndex: tlf1.prd_speed
+                                                model: [
+                                                    "9.6",
+                                                    "4.8",
+                                                    "2.4",
+                                                    "1.2",
+                                                    "1.2 СБД",
+                                                    "1.5",
+                                                    "3",
+                                                ]
+                                            }
+
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Адрес в ГС")}
+
+                                            RowLayout {
+                                                ComboBoxMD3 {
+                                                    id: tlf1PRDAddressOne
+                                                    enabled: !changeTLF1Button.visible
+                                                    currentIndex: tlf1.prd_address_one
+                                                    model: ["0", "1", "2"]
+                                                }
+
+                                                ComboBoxMD3 {
+                                                    id: tlf1PRDAddressTwo
+                                                    enabled: !changeTLF1Button.visible
+                                                    currentIndex: tlf1.prd_address_two
+                                                    model: ["1", "2", "3", "4"]
+                                                }
+                                            }
                                         }
                                     }
 
-		                            ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
-		                        }
-						    }
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {
+                                            id: changeTLF1Button
+                                            text: qsTr("1. Изм.")
+                                            onClicked: visible = false
+                                        }
+
+                                        Item {Layout.fillWidth: true}
+
+                                        ButtonMD3 {
+                                            visible: !changeTLF1Button.visible
+                                            text: qsTr("2. Запись")
+                                            onClicked: {
+                                                tlf1.signal_prm_type = tlf1SignalPRMType.currentIndex
+                                                tlf1.prm_speed = tlf1PRMSpeed.currentIndex
+                                                tlf1.prm_address_one = tlf1PRMAddressOne.currentIndex
+                                                tlf1.prm_address_two = tlf1PRMAddressTwo.currentIndex
+                                                tlf1.prm_address_three = tlf1PRMAddressThree.currentIndex
+                                                tlf1.signal_prd_type = tlf1SignalPRDType.currentIndex
+                                                tlf1.prd_speed = tlf1PRDSpeed.currentIndex
+                                                tlf1.prd_address_one = tlf1PRDAddressOne.currentIndex
+                                                tlf1.prd_address_two = tlf1PRDAddressTwo.currentIndex
+
+                                                changeTLF1Button.visible = true
+
+                                                checker.check(configuration.selected_norm)
+                                            }
+                                        }
+
+                                        ButtonMD3 {
+                                            visible: !changeTLF1Button.visible
+                                            text: qsTr("3. Отмена")
+
+                                            onClicked: {
+                                                tlf1SignalPRMType.currentIndex = tlf1.signal_prm_type
+                                                tlf1PRMSpeed.currentIndex = tlf1.prm_speed
+                                                tlf1PRMAddressOne.currentIndex = tlf1.prm_address_one
+                                                tlf1PRMAddressTwo.currentIndex = tlf1.prm_address_two
+                                                tlf1PRMAddressThree.currentIndex = tlf1.prm_address_three
+                                                tlf1SignalPRDType.currentIndex = tlf1.signal_prd_type
+                                                tlf1PRDSpeed.currentIndex = tlf1.prd_speed
+                                                tlf1PRDAddressOne.currentIndex = tlf1.prd_address_one
+                                                tlf1PRDAddressTwo.currentIndex = tlf1.prd_address_two
+
+                                                changeTLF1Button.visible = true
+                                            }
+                                        }
+
+                                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsModeAGLPageIndex}
+                                    }
+                                }
+
+                                /*
+                                *   Regulations plume page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Шлейф ПР")}
+
+                                    GridLayout {
+                                        rows: 4
+                                        columns: 2
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Генератор сдвига:")}
+                                        ComboBoxMD3 {
+                                            id: plumeShiftGenerator
+                                            enabled: !changePlumeButton.visible
+                                            currentIndex: plume.shift_generator
+                                            model: ["Откл.", "Вкл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Усилитель мощности:")}
+                                        ComboBoxMD3 {
+                                            id: plumeAmplifier
+                                            enabled: !changePlumeButton.visible
+                                            currentIndex: plume.amplifier
+                                            model: ["Откл.", "Вкл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Выход У205Д:")}
+                                        ComboBoxMD3 {
+                                            id: plumeOutputU205D
+                                            enabled: !changePlumeButton.visible
+                                            currentIndex: plume.output_u205d
+                                            model: ["Откл.", "Вкл."]
+                                        }
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Номер волны ПРД:")}
+                                        TextFieldMD3 {
+                                            id: plumePRDWaveNumber
+                                            implicitWidth: plumeOutputU205D.implicitWidth
+                                            enabled: !changePlumeButton.visible
+                                            text: plume.prd_wave_number
+                                        }
+                                    }
+
+                                    GridLayout {
+                                        rows: 2
+                                        columns: 4
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ствол. фильтр:")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: plume.stem_filter}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("№ волны ПРМ:")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text:  plume.prm_wave_number}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Поддиап. приема:")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text:  plume.receive_subband}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("№ фильтра ДМД:")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: plume.dmd_filter_number}
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {
+                                            id: changePlumeButton
+                                            text: qsTr("1. Изм.")
+                                            onClicked: visible = false
+                                        }
+
+                                        Item {Layout.fillWidth: true}
+
+                                        ButtonMD3 {
+                                            visible: !changePlumeButton.visible
+                                            text: qsTr("2. Запись")
+                                            onClicked: {
+                                                plume.shift_generator = plumeShiftGenerator.currentIndex
+                                                plume.amplifier = plumeAmplifier.currentIndex
+                                                plume.output_u205d = plumeOutputU205D.currentIndex
+                                                plume.prd_wave_number = plumePRDWaveNumber.text
+
+                                                plume.calculate_parameters()
+
+                                                changePlumeButton.visible = true
+
+                                                checker.check(configuration.selected_norm)
+                                            }
+                                        }
+
+                                        ButtonMD3 {
+                                            visible: !changePlumeButton.visible
+                                            text: qsTr("3. Отмена")
+
+                                            onClicked: {
+                                                plumeShiftGenerator.currentIndex = plume.shift_generator
+                                                plumeAmplifier.currentIndex = plume.amplifier
+                                                plumeOutputU205D.currentIndex = plume.output_u205d
+                                                plumePRDWaveNumber.text = plume.prd_wave_number
+
+                                                changePlumeButton.visible = true
+                                            }
+                                        }
+
+                                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
+                                    }
+                                }
+                            }
                         }
                     }
                 }
