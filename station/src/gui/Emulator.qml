@@ -354,7 +354,7 @@ Window {
                                     flow: GridLayout.TopToBottom
 
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Общее")}
-                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. АГ-Л")}
+                                    ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. АГ-Л"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPageIndex}
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. ПГ-Л")}
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. КЛ-У")}
                                     ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. ДМД, УЗОЗМ"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusDMDUZOZMPageIndex}
