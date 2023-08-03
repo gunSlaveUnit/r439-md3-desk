@@ -470,6 +470,53 @@ Window {
                             }
 
                             /*
+                            *   Regulations status AGL page 2
+                            */
+                            ColumnLayout {
+                                ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("СОСТОЯНИЕ АГ-Л, ТЛФ2")}
+
+                                GridLayout {
+                                    rows: 9
+                                    columns: 2
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ПРМ:")}
+                                    DisplayTextMD3 {text: qsTr("Не задан")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал на входе РТР:")}
+                                    DisplayTextMD3 {text: qsTr("")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал абонента:")}
+                                    DisplayTextMD3 {text: qsTr("")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Информация:")}
+                                    DisplayTextMD3 {text: qsTr("")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Ошибки:")}
+                                    DisplayTextMD3 {text: qsTr("")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Режим ПРД:")}
+                                    DisplayTextMD3 {text: qsTr("Не задан")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Синхронизация:")}
+                                    DisplayTextMD3 {text: qsTr("")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Сигнал на входе:")}
+                                    DisplayTextMD3 {text: qsTr("")}
+
+                                    DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Информация на входе:")}
+                                    DisplayTextMD3 {text: qsTr("")}
+                                }
+
+                                Item {Layout.fillHeight: true}
+
+                                RowLayout {
+                                    Item {Layout.fillWidth: true}
+                                    ButtonMD3 {text: qsTr("<"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusAGLPage2Index}
+                                    ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsStatusPageIndex}
+                                }
+                            }
+
+                            /*
                             *   Regulations status DMD UZOZM page
                             */
                             ColumnLayout {
