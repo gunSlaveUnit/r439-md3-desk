@@ -150,7 +150,8 @@ Window {
                         StackLayout {
                             id: displayStackLayout
 
-                            property int mainPageIndex: 0
+                            property int selectIsWorkWithSaveData: 0
+                            property int mainPageIndex: selectIsWorkWithSaveData + 1
                             property int monitorPageIndex: mainPageIndex + 1
                             property int regulationsPageIndex: monitorPageIndex + 1
                             property int regulationsStatusPageIndex: regulationsPageIndex + 1
