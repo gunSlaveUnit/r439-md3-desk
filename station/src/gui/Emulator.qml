@@ -353,6 +353,7 @@ Window {
 
                                             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("ППРЧ:")}
                                             DisplayTextMD3 {text: qsTr("Не задан")}
+
                                             DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Мощность:")}
                                             DisplayTextMD3 {text: qsTr("Запрет")}
                                         }
@@ -388,6 +389,73 @@ Window {
                                     Item {Layout.fillHeight: true}
 
                                     ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.mainPageIndex}
+                                }
+
+                                /*
+                                *   Common settings page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("ОБЩИЕ УСТАНОВКИ")}
+
+                                    GridLayout {
+                                        rows: 2
+                                        columns: 2
+
+                                        flow: GridLayout.TopToBottom
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Наработка станции")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("1865 час.")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Р-439-МД3")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Версия ПО от 13-11-2010")}
+                                    }
+
+                                    GridLayout {
+                                        rows: 2
+                                        columns: 2
+
+                                        flow: GridLayout.TopToBottom
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Диапазон")}
+                                        ComboBoxMD3 {Layout.fillWidth: true; model: ["1"]}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Интервал интерг. АС")}
+                                        ComboBoxMD3 {Layout.fillWidth: true; model: ["1"]}
+                                    }
+
+                                    GridLayout {
+                                        rows: 4
+                                        columns: 4
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Долгота ЗС:")}
+                                        TextFieldMD3 {Layout.fillWidth: true; text: qsTr("40.00")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Азимут:")}
+                                        TextFieldMD3 {Layout.fillWidth: true; text: qsTr("186.02")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Широта ЗС:")}
+                                        TextFieldMD3 {Layout.fillWidth: true; text: qsTr("56.00")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Угол места:")}
+                                        TextFieldMD3 {Layout.fillWidth: true; text: qsTr("26.09")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Долгота КА:")}
+                                        TextFieldMD3 {Layout.fillWidth: true; text: qsTr("35.00")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Дальность:")}
+                                        TextFieldMD3 {Layout.fillWidth: true; text: qsTr("0")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Аттенюатор ПРД:")}
+                                        ComboBoxMD3 {Layout.fillWidth: true; model: ["0"]}
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {text: qsTr("1. Изм.")}
+                                        Item {Layout.fillWidth: true}
+                                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.settingPageIndex}
+                                    }
                                 }
 
                                 /*
