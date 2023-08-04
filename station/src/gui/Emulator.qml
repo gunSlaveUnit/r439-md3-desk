@@ -498,6 +498,63 @@ Window {
                                 }
 
                                 /*
+                                *   MMO settings page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("УСТАНОВКИ ММО")}
+
+                                    GridLayout {
+                                        rows: 2
+                                        columns: 2
+
+                                        flow: GridLayout.TopToBottom
+
+                                        DisplayTextMD3 {text: qsTr("ПУА:")}
+                                        TextFieldMD3 {text: qsTr("111")}
+
+                                        DisplayTextMD3 {text: qsTr("Ключ маскиратора:")}
+                                        TextFieldMD3 {Layout.fillWidth: true; text: qsTr("")}
+                                    }
+
+                                    GridLayout {
+                                        rows: 5
+                                        columns: 4
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Направление:")}
+                                        ComboBoxMD3 {Layout.fillWidth: true; model: ["1"]}
+
+                                        DisplayTextMD3 {Layout.row: 1; Layout.column: 0; Layout.fillWidth: true; text: qsTr("ПУА:")}
+                                        TextFieldMD3 {Layout.fillWidth: true; text: qsTr("111")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приём:")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Нет")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приоритет:")}
+                                        ComboBoxMD3 {Layout.fillWidth: true; model: ["3"]}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Передача:")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Нет")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Маскирация:")}
+                                        ComboBoxMD3 {Layout.fillWidth: true; model: ["Есть"]}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("РАТС:")}
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Нет")}
+
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Станция-корреспондент:")}
+                                        ComboBoxMD3 {Layout.fillWidth: true; model: ["Новый парк"]}
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {text: qsTr("1. Изм.")}
+                                        Item {Layout.fillWidth: true}
+                                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.settingPageIndex}
+                                    }
+                                }
+
+                                /*
                                 *   Regulations page
                                 */
                                 ColumnLayout {
