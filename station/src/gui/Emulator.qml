@@ -371,6 +371,25 @@ Window {
                                 }
 
                                 /*
+                                *   Setting page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Установка")}
+
+                                    ColumnLayout {
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Общая")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. Дата и время")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. ММО")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. ММО НК")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. ИД СХОС")}
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    ButtonMD3 {Layout.alignment: Qt.AlignBottom | Qt.AlignRight; text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.mainPageIndex}
+                                }
+
+                                /*
                                 *   Regulations page
                                 */
                                 ColumnLayout {
