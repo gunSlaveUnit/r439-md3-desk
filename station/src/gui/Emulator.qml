@@ -460,6 +460,43 @@ Window {
                                 }
 
                                 /*
+                                *   Date and time settings page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("УСТАНОВКА ДАТЫ И ВРЕМЕНИ")}
+
+                                    GridLayout {
+                                        rows: 2
+                                        columns: 5
+
+                                        flow: GridLayout.TopToBottom
+
+                                        DisplayTextMD3 {text: qsTr("Год:")}
+                                        ComboBoxMD3 {model: [""]}
+
+                                        DisplayTextMD3 {text: qsTr("Месяц:")}
+                                        ComboBoxMD3 {model: [""]}
+
+                                        DisplayTextMD3 {text: qsTr("День:")}
+                                        ComboBoxMD3 {model: [""]}
+
+                                        DisplayTextMD3 {text: qsTr("Час:")}
+                                        ComboBoxMD3 {model: [""]}
+
+                                        DisplayTextMD3 {text: qsTr("Минута:")}
+                                        ComboBoxMD3 {model: [""]}
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {text: qsTr("1. Изм.")}
+                                        Item {Layout.fillWidth: true}
+                                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.settingPageIndex}
+                                    }
+                                }
+
+                                /*
                                 *   Regulations page
                                 */
                                 ColumnLayout {
