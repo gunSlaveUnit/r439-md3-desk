@@ -180,7 +180,8 @@ Window {
                                 property int monitorNoSHOSWarningPageIndex: mainPageIndex + 1
                                 property int monitorPageIndex: monitorNoSHOSWarningPageIndex + 1
                                 property int settingPageIndex: monitorPageIndex + 1
-                                property int regulationsPageIndex: settingPageIndex + 1
+                                property int settingCommonPageIndex: settingPageIndex + 1
+                                property int regulationsPageIndex: settingCommonPageIndex + 1
                                 property int regulationsStatusPageIndex: regulationsPageIndex + 1
                                 property int regulationsStatusAGLPage1Index: regulationsStatusPageIndex + 1
                                 property int regulationsStatusAGLPage2Index: regulationsStatusAGLPage1Index + 1
