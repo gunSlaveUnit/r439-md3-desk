@@ -251,7 +251,7 @@ Window {
                                                     Layout.fillWidth: true
                                                     anchors.centerIn: parent
 
-                                                    ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("7. Установка")}
+                                                    ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("7. Установка"); onClicked: displayStackLayout.currentIndex = displayStackLayout.settingPageIndex}
                                                     ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("8. Регламент"); onClicked: displayStackLayout.currentIndex = displayStackLayout.regulationsPageIndex}
                                                     ButtonMD3 {implicitWidth: mainMenuPage.screenWidthHalf - 2 * defaultMargin; text: qsTr("9. Антенна")}
                                                 }
