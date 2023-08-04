@@ -383,7 +383,7 @@ Window {
                                     ColumnLayout {
                                         ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Общая"); onClicked: displayStackLayout.currentIndex = displayStackLayout.settingCommonPageIndex}
                                         ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. Дата и время"); onClicked: displayStackLayout.currentIndex = displayStackLayout.settingDateTimePageIndex}
-                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. ММО")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. ММО"); onClicked: displayStackLayout.currentIndex = displayStackLayout.settingMMOPageIndex}
                                         ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. ММО НК")}
                                         ButtonMD3 {Layout.fillWidth: true; text: qsTr("5. ИД СХОС")}
                                     }
