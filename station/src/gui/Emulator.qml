@@ -378,7 +378,7 @@ Window {
                                     ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("Установка")}
 
                                     ColumnLayout {
-                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Общая")}
+                                        ButtonMD3 {Layout.fillWidth: true; text: qsTr("1. Общая"); onClicked: displayStackLayout.currentIndex = displayStackLayout.settingCommonPageIndex}
                                         ButtonMD3 {Layout.fillWidth: true; text: qsTr("2. Дата и время")}
                                         ButtonMD3 {Layout.fillWidth: true; text: qsTr("3. ММО")}
                                         ButtonMD3 {Layout.fillWidth: true; text: qsTr("4. ММО НК")}
