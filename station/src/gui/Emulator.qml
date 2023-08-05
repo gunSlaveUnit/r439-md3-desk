@@ -539,7 +539,10 @@ Window {
                                         columns: 4
 
                                         DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Направление:")}
-                                        ComboBoxMD3 {Layout.fillWidth: true; model: ["1"]}
+                                        ComboBoxMD3 {
+                                            Layout.fillWidth: true
+                                            model: ["1", "2", "3", "4", qsTr("КУ-1")]
+                                        }
 
                                         DisplayTextMD3 {Layout.row: 1; Layout.column: 0; Layout.fillWidth: true; text: qsTr("ПУА:")}
                                         TextFieldMD3 {Layout.fillWidth: true; text: qsTr("111")}
@@ -554,13 +557,13 @@ Window {
                                         DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Нет")}
 
                                         DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Маскирация:")}
-                                        ComboBoxMD3 {Layout.fillWidth: true; model: ["Есть"]}
+                                        ComboBoxMD3 {Layout.fillWidth: true; model: ["Есть", "Нет"]}
 
                                         DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("РАТС:")}
                                         DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Нет")}
 
                                         DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Станция-корреспондент:")}
-                                        ComboBoxMD3 {Layout.fillWidth: true; model: ["Новый парк"]}
+                                        ComboBoxMD3 {Layout.fillWidth: true; model: ["Новый парк", "Старый парк"]}
                                     }
 
                                     Item {Layout.fillHeight: true}
