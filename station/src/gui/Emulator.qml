@@ -482,7 +482,16 @@ Window {
                                         ComboBoxMD3 {model: [""]}
 
                                         DisplayTextMD3 {text: qsTr("Час:")}
-                                        ComboBoxMD3 {model: [""]}
+                                        ComboBoxMD3 {
+                                            model: [
+                                                "0", "1", "2", "3",
+                                                "4", "5", "6", "7",
+                                                "8", "9", "10", "11",
+                                                "12", "13", "14", "15",
+                                                "16", "17", "18", "19",
+                                                "20", "21", "22", "23"
+                                            ]
+                                        }
 
                                         DisplayTextMD3 {text: qsTr("Минута:")}
                                         ComboBoxMD3 {model: [""]}
