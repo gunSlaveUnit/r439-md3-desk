@@ -577,6 +577,69 @@ Window {
                                 }
 
                                 /*
+                                *   MMO NK settings page
+                                */
+                                ColumnLayout {
+                                    ButtonMD3 {hoverable: false; Layout.alignment: Qt.AlignHCenter; text: qsTr("УСТАНОВКИ ММО НК")}
+
+                                    RowLayout {
+                                        DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Тип канала УК-2:")}
+                                        ComboBoxMD3 {
+                                            Layout.fillWidth: true
+                                            model: [
+                                                qsTr("Не задан"),
+                                                qsTr("ПУ системы"),
+                                                qsTr("ПУ узла связи"),
+                                                qsTr("ИСК"),
+                                                qsTr("ИСК симплексный"),
+                                            ]
+                                        }
+                                    }
+
+                                    RowLayout {
+                                        GridLayout {
+                                            rows: 5
+                                            columns: 2
+
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Приоритет:")}
+                                            ComboBoxMD3 {Layout.fillWidth: true; model: [qsTr("Есть"), qsTr("Нет")]}
+
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Число перезапросов:")}
+                                            TextFieldMD3 {Layout.fillWidth: true; text: qsTr("1")}
+
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Длина пакетов:")}
+                                            TextFieldMD3 {Layout.fillWidth: true; text: qsTr("50")}
+
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Задержка квитанции:")}
+                                            TextFieldMD3 {Layout.fillWidth: true; text: qsTr("5000")}
+
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Задержка пакета:")}
+                                            TextFieldMD3 {Layout.fillWidth: true; text: qsTr("5000")}
+                                        }
+
+                                        // TODO: rectangle
+                                        ColumnLayout {
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("COM-порт:")}
+                                            ComboBoxMD3 {Layout.fillWidth: true; model: [qsTr("COM 2")]}
+
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Число синхробайт:")}
+                                            ComboBoxMD3 {Layout.fillWidth: true; model: [0, 1, 2, 3, 4]}
+
+                                            DisplayTextMD3 {Layout.fillWidth: true; text: qsTr("Архив сообщений:")}
+                                            ComboBoxMD3 {Layout.fillWidth: true; model: [qsTr("Есть"), qsTr("Нет")]}
+                                        }
+                                    }
+
+                                    Item {Layout.fillHeight: true}
+
+                                    RowLayout {
+                                        ButtonMD3 {text: qsTr("1. Изм.")}
+                                        Item {Layout.fillWidth: true}
+                                        ButtonMD3 {text: qsTr("0. Выход"); onClicked: displayStackLayout.currentIndex = displayStackLayout.settingPageIndex}
+                                    }
+                                }
+
+                                /*
                                 *   Regulations page
                                 */
                                 ColumnLayout {
