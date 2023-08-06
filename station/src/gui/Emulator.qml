@@ -183,7 +183,8 @@ Window {
                                 property int settingCommonPageIndex: settingPageIndex + 1
                                 property int settingDateTimePageIndex: settingCommonPageIndex + 1
                                 property int settingMMOPageIndex: settingDateTimePageIndex + 1
-                                property int regulationsPageIndex: settingMMOPageIndex + 1
+                                property int settingMMONKPageIndex: settingMMOPageIndex + 1
+                                property int regulationsPageIndex: settingMMONKPageIndex + 1
                                 property int regulationsStatusPageIndex: regulationsPageIndex + 1
                                 property int regulationsStatusAGLPage1Index: regulationsStatusPageIndex + 1
                                 property int regulationsStatusAGLPage2Index: regulationsStatusAGLPage1Index + 1
