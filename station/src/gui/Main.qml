@@ -33,7 +33,7 @@ Window {
             Button {
                 Layout.fillWidth: true
                 text: qsTr("Информация")
-                onClicked: information.visible = true
+                onClicked: information.show()
             }
 
             Text {text: qsTr("Назначение, ТТХ, состав")}
@@ -41,7 +41,7 @@ Window {
             Button {
                 Layout.fillWidth: true
                 text: qsTr("Эмулятор")
-                onClicked: emulator.visible = true
+                onClicked: emulator.show()
             }
 
             Text {text: qsTr("Тренажер и среда для сдачи нормативов")}
@@ -49,7 +49,7 @@ Window {
             Button {
                 Layout.fillWidth: true
                 text: qsTr("Настройки")
-                onClicked: settings.visible = true
+                onClicked: settings.show()
             }
 
             Text {text: qsTr("Изменить опции приложения")}
@@ -57,7 +57,7 @@ Window {
             Button {
                 Layout.fillWidth: true
                 text: qsTr("Справка")
-                onClicked: reference.visible = true
+                onClicked: reference.show()
             }
 
             Text {text: qsTr("О приложении")}
