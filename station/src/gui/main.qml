@@ -8,16 +8,25 @@ Window {
     visible: true
     title: qsTr("R439-MD3 Desktop")
 
-    ColumnLayout {
+    GridLayout {
+        rows: 2
+        columns: 2
+
         Button {
-            text: qsTr("Information")
+            Layout.fillWidth: true
+            text: qsTr("Информация")
             onClicked: information.visible = true
         }
 
+        Text {text: qsTr("Назначение, ТТХ, состав")}
+
         Button {
-            text: qsTr("Emulator")
+            Layout.fillWidth: true
+            text: qsTr("Эмулятор")
             onClicked: emulator.visible = true
         }
+
+        Text {text: qsTr("Тренажер и среда для сдачи нормативов")}
     }
 
     Information {id: information}
