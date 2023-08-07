@@ -63,7 +63,7 @@ if __name__ == '__main__':
     timer = Timer()
     engine.rootContext().setContextProperty("timer", timer)
 
-    start_location_filename = GUI_LAYOUTS_PATH / 'Auth.qml'
+    start_location_filename = GUI_LAYOUTS_PATH / 'main.qml'
     engine.load(start_location_filename)
 
     app.exec()
