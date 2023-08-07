@@ -34,26 +34,60 @@ Window {
         property int signInPageIndex: 0
         property int signUpPageIndex: 1
 
+        anchors.centerIn: parent
+
         /*
         *   Sign in page
         */
         ColumnLayout {
-            Button {
-                text: "Try";
-                onClicked: {
-                    mainWindow.show()
-                    authWindow.hide()
+            GridLayout {
+                rows: 3
+                columns: 2
+
+                Text {Layout.alignment: Qt.AlignRight; text: qsTr("ФИО")}
+                TextField {
+                    id: fullNameField
+                    focus: true
+                    Layout.fillWidth: true
                 }
+
+                Text {Layout.alignment: Qt.AlignRight; text: qsTr("Курс")}
+                TextField {Layout.fillWidth: true}
+
+                Text {Layout.alignment: Qt.AlignRight; text: qsTr("Взвод")}
+                TextField {Layout.fillWidth: true}
             }
 
-            GridLayout {
+            RowLayout {
+                Layout.alignment: Qt.AlignHCenter
 
+                Button {
+                    text: "Войти"
+                    onClicked: {
+                        mainWindow.show()
+                        authWindow.hide()
+                    }
+                }
+
+                Button {
+                    text: "Отмена"
+                    onClicked: {
+                        authWindow.close()
+                    }
+                }
             }
 
             Separator {}
 
             GridLayout {
+                rows: 1
+                columns: 2
 
+                Text {text: qsTr("Еще нет аккаунта?")}
+                Button {
+                    text: "Создать новый аккаунт"
+                    onClicked: authWindowLayout.currentIndex = authWindowLayout.signUpPageIndex
+                }
             }
         }
 
