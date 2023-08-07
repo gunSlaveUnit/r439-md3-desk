@@ -15,7 +15,7 @@ Window {
     maximumWidth: minimumWidth
     maximumHeight: minimumHeight
     visible: true
-    title: qsTr("R439-MD3 Desktop")
+    title: qsTr("Р439-МД3")
 
     ColumnLayout {
         id: mainLayout
