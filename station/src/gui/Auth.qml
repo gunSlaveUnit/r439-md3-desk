@@ -19,6 +19,15 @@ Window {
     visible: true
     title: qsTr("Р439-МД3 Вход")
 
+    // TODO: Should the auth window ideally close after the main window closes?
+    Connections {
+        target: mainWindow
+
+        function onClosing() {
+            authWindow.show()
+        }
+    }
+
     StackLayout {
         id: authWindowLayout
 
@@ -32,8 +41,8 @@ Window {
             Button {
                 text: "Try";
                 onClicked: {
-                    mainWindow.visible = true
-                    authWindow.visible = false
+                    mainWindow.show()
+                    authWindow.hide()
                 }
             }
 
