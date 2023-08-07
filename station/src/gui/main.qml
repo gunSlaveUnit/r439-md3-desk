@@ -27,9 +27,19 @@ Window {
         }
 
         Text {text: qsTr("Тренажер и среда для сдачи нормативов")}
+
+        Button {
+            Layout.fillWidth: true
+            text: qsTr("Настройки")
+            onClicked: settings.visible = true
+        }
+
+        Text {text: qsTr("Изменить опции приложения")}
     }
 
     Information {id: information}
 
     Emulator {id: emulator}
+
+    Settings {id: settings}
 }
