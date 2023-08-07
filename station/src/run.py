@@ -1,7 +1,7 @@
 import ctypes
 import sys
 
-from PySide6.QtGui import QGuiApplication
+from PySide6.QtGui import QGuiApplication, QIcon
 from PySide6.QtQml import QQmlApplicationEngine
 
 from devices import l807, agl, tlf1, klu, dmd_uzozm, tracts_prm_prd, plume
@@ -14,7 +14,7 @@ from norms.small_plume.components import L807SmallPlumeComponent, AGLSmallPlumeC
     KLUSmallPlumeComponent, DMDUZOZMSmallPlumeComponent, TractsPRMPRDSmallPlumeComponent, PlumeSmallPlumeComponent
 from norms.small_plume.small_plume import SmallPlumeNorm
 
-from settings import GUI_LAYOUTS_PATH, APP_ID
+from settings import GUI_LAYOUTS_PATH, APP_ID, RESOURCES_PATH
 
 
 def register_devices(app_engine: QQmlApplicationEngine):
@@ -32,6 +32,8 @@ if __name__ == '__main__':
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(APP_ID)
 
     app = QGuiApplication(sys.argv)
+    icon_file_path = RESOURCES_PATH / 'AppLogo.png'
+    app.setWindowIcon(QIcon(str(icon_file_path)))
     engine = QQmlApplicationEngine()
 
     register_devices(engine)
