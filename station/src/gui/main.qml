@@ -5,6 +5,8 @@ import QtQuick.Controls
 import "./custom"
 
 Window {
+    id: mainWindow
+
     property int defaultMargin: 8
     property int doubleDefaultMargin: 2 * defaultMargin
 
