@@ -2,39 +2,64 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 
+import "./custom"
+
 Window {
-    width: 400
-    height: 300
+    property int defaultMargin: 8
+    property int doubleDefaultMargin: 2 * defaultMargin
+
+    minimumWidth: mainLayout.implicitWidth + doubleDefaultMargin
+    minimumHeight: mainLayout.implicitHeight + doubleDefaultMargin
+    width: minimumWidth
+    height: minimumHeight
+    maximumWidth: minimumWidth
+    maximumHeight: minimumHeight
     visible: true
     title: qsTr("R439-MD3 Desktop")
 
-    GridLayout {
-        rows: 2
-        columns: 2
+    ColumnLayout {
+        id: mainLayout
 
-        Button {
-            Layout.fillWidth: true
-            text: qsTr("Информация")
-            onClicked: information.visible = true
+        anchors.centerIn: parent
+
+        GridLayout {
+            id: startButtonsLayout
+
+            rows: 2
+            columns: 2
+
+            Button {
+                Layout.fillWidth: true
+                text: qsTr("Информация")
+                onClicked: information.visible = true
+            }
+
+            Text {text: qsTr("Назначение, ТТХ, состав")}
+
+            Button {
+                Layout.fillWidth: true
+                text: qsTr("Эмулятор")
+                onClicked: emulator.visible = true
+            }
+
+            Text {text: qsTr("Тренажер и среда для сдачи нормативов")}
+
+            Button {
+                Layout.fillWidth: true
+                text: qsTr("Настройки")
+                onClicked: settings.visible = true
+            }
+
+            Text {text: qsTr("Изменить опции приложения")}
         }
 
-        Text {text: qsTr("Назначение, ТТХ, состав")}
+        Separator {}
 
-        Button {
-            Layout.fillWidth: true
-            text: qsTr("Эмулятор")
-            onClicked: emulator.visible = true
+        RowLayout {
+            Text {text: qsTr("ВУЦ ИГЭУ")}
+            Item {Layout.fillWidth: true}
+            Button {text: qsTr("Закрыть")}
         }
-
-        Text {text: qsTr("Тренажер и среда для сдачи нормативов")}
-
-        Button {
-            Layout.fillWidth: true
-            text: qsTr("Настройки")
-            onClicked: settings.visible = true
-        }
-
-        Text {text: qsTr("Изменить опции приложения")}
     }
 
     Information {id: information}
