@@ -79,4 +79,6 @@ Window {
     Emulator {id: emulator}
 
     Settings {id: settings}
+
+    Reference {id: reference}
 }
