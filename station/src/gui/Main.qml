@@ -16,7 +16,7 @@ Window {
     height: minimumHeight
     maximumWidth: minimumWidth
     maximumHeight: minimumHeight
-    visible: true
+    visible: false
     title: qsTr("Р439-МД3")
 
     ColumnLayout {
