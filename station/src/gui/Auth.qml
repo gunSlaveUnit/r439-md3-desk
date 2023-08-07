@@ -5,7 +5,7 @@ import QtQuick.Controls
 import "./custom"
 
 Window {
-    id: mainWindow
+    id: authWindow
 
     property int defaultMargin: 8
     property int doubleDefaultMargin: 2 * defaultMargin
@@ -29,6 +29,14 @@ Window {
         *   Sign in page
         */
         ColumnLayout {
+            Button {
+                text: "Try";
+                onClicked: {
+                    mainWindow.visible = true
+                    authWindow.visible = false
+                }
+            }
+
             GridLayout {
 
             }
@@ -55,4 +63,6 @@ Window {
             }
         }
     }
+
+    Main {id: mainWindow}
 }
