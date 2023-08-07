@@ -60,7 +60,7 @@ Window {
                 onClicked: reference.show()
             }
 
-            Text {text: qsTr("О приложении")}
+            Text {text: qsTr("О программе")}
         }
 
         Separator {}
