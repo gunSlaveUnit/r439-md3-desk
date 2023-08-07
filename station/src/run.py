@@ -1,3 +1,4 @@
+import ctypes
 import sys
 
 from PySide6.QtGui import QGuiApplication
@@ -13,7 +14,7 @@ from norms.small_plume.components import L807SmallPlumeComponent, AGLSmallPlumeC
     KLUSmallPlumeComponent, DMDUZOZMSmallPlumeComponent, TractsPRMPRDSmallPlumeComponent, PlumeSmallPlumeComponent
 from norms.small_plume.small_plume import SmallPlumeNorm
 
-from settings import GUI_LAYOUTS_PATH
+from settings import GUI_LAYOUTS_PATH, APP_ID
 
 
 def register_devices(app_engine: QQmlApplicationEngine):
@@ -27,6 +28,9 @@ def register_devices(app_engine: QQmlApplicationEngine):
 
 
 if __name__ == '__main__':
+    if sys.platform == 'win32':
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(APP_ID)
+
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
 
