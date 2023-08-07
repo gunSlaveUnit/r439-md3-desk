@@ -56,8 +56,18 @@ Window {
         Separator {}
 
         RowLayout {
+            Image {
+                Layout.preferredWidth: parent.implicitHeight
+                Layout.preferredHeight: parent.implicitHeight
+                fillMode: Image.PreserveAspectFit
+                mipmap: true
+                source: "../../resources/VUCLogo.png"
+            }
+
             Text {text: qsTr("ВУЦ ИГЭУ")}
+
             Item {Layout.fillWidth: true}
+
             Button {text: qsTr("Закрыть")}
         }
     }
