@@ -70,7 +70,7 @@ Window {
 
             Item {Layout.fillWidth: true}
 
-            Button {text: qsTr("Закрыть")}
+            Button {text: qsTr("Закрыть"); onClicked: mainWindow.close()}
         }
     }
 
