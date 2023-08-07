@@ -53,6 +53,14 @@ Window {
             }
 
             Text {text: qsTr("Изменить опции приложения")}
+
+            Button {
+                Layout.fillWidth: true
+                text: qsTr("Справка")
+                onClicked: reference.visible = true
+            }
+
+            Text {text: qsTr("О приложении")}
         }
 
         Separator {}
