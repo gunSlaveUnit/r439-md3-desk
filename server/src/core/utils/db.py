@@ -7,3 +7,11 @@ from core.settings import CONNECTION_STRING, redis_config
 engine = create_engine(CONNECTION_STRING)
 local_session = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 Base = declarative_base()
+
+
+def get_db():
+    db = local_session()
+    try:
+        yield db
+    finally:
+        db.close()
