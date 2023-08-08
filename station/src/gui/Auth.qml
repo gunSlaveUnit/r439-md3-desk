@@ -158,6 +158,7 @@ Window {
                 Button {
                     text: qsTr("Войти в существующий аккаунт")
                     onClicked: {
+                        authWindow.title = loginWindowTitle
                         authWindowLayout.currentIndex = authWindowLayout.signInPageIndex
                         signInAccountNameField.focus = true
                     }
