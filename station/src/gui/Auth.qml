@@ -91,6 +91,7 @@ Window {
                     text: qsTr("Создать новый аккаунт")
                     // TODO: also reset forms when navigates from sign in to sign up forms
                     onClicked: {
+                        authWindow.title = registerWindowTitle
                         authWindowLayout.currentIndex = authWindowLayout.signUpPageIndex
                         fullNameField.focus = true
                     }
