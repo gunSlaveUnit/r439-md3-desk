@@ -15,3 +15,15 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+def get_session_storage():
+    storage = redis.Redis(
+        host=redis_config["HOST"],
+        port=int(redis_config["PORT"]),
+        db=redis_config["DB"]
+    )
+    try:
+        yield storage
+    finally:
+        storage.quit()
