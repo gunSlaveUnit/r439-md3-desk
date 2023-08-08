@@ -14,6 +14,8 @@ Window {
     minimumHeight: mainLayout.implicitHeight + 2 * defaultMargin
     width: minimumWidth
     height: minimumHeight
+    maximumWidth: minimumWidth
+    maximumHeight: minimumHeight
     visible: false
     title: qsTr("R439-MD3 Station Emulator")
 
