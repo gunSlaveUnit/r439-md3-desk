@@ -9,6 +9,8 @@ Window {
 
     property int defaultMargin: 8
     property int doubleDefaultMargin: 2 * defaultMargin
+    property string loginWindowTitle: qsTr("Р439-МД3 Вход")
+    property string registerWindowTitle: qsTr("Р439-МД3 Регистрация")
 
     minimumWidth: authWindowLayout.implicitWidth + doubleDefaultMargin
     minimumHeight: authWindowLayout.implicitHeight + doubleDefaultMargin
@@ -17,7 +19,7 @@ Window {
     maximumWidth: minimumWidth
     maximumHeight: minimumHeight
     visible: true
-    title: qsTr("Р439-МД3 Вход")
+    title: loginWindowTitle
 
     // TODO: Should the auth window ideally close after the main window closes?
     Connections {
