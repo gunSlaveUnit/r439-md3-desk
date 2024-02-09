@@ -6,4 +6,4 @@ This application is a prototype for practicing skills in working at a satellite 
 
 The server for taking exams for students is in its infancy. 
 
-The basis is the desktop application; At this point, he is able to understand whether the station devices are configured to a certain standard.
+The basis is the desktop application. At this point, it's able to understand whether the station devices are configured to a certain standard.
